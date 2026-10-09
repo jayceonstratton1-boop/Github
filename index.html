@@ -200,8 +200,8 @@
             <div><strong>Location</strong><span id="address"></span></div>
           </div>
           <div class="row">
-            <div class="icon">📞</div>
-            <div><strong>Phone</strong><span id="phone"></span></div>
+            <div class="icon">📱</div>
+            <div><strong>Order Ahead</strong><span id="phone"></span></div>
           </div>
           <div class="row">
             <div class="icon">🕒</div>
@@ -241,11 +241,12 @@
 <script>
   // ---- Edit these to match the store ----
   const STORE = {
-    // TODO: replace with the exact street address once confirmed
-    address: "Road 68, Pasco, WA 99301",
-    // TODO: replace with the store's phone number
-    phone: "Call the store via the Dutch Bros app",
-    // 24-hour times, "HH:MM". Use null for closed days. TODO: confirm real hours.
+    // Listed by Dutch Bros as its Burden Blvd store, near Road 68.
+    address: "6609 Burden Blvd, Pasco, WA 99301",
+    // Dutch Bros shops don't take phone calls; ordering ahead goes through the app.
+    phone: "No phone — order ahead in the Dutch Bros app",
+    // 24-hour times, "HH:MM". Use null for closed days.
+    // TODO: these are placeholders; replace with the hours shown in the Dutch Bros app.
     hours: {
       Sunday:    ["05:00", "23:00"],
       Monday:    ["05:00", "23:00"],
