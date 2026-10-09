@@ -206,6 +206,10 @@ a { color: inherit; }
 .card-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: auto; }
 .hours-note { color: var(--mocha); font-size: 0.95rem; }
 .contact a { color: var(--cream); font-weight: 600; }
+
+/* Gallery */
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr)); gap: 1rem; }
+.gallery img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: var(--radius); box-shadow: var(--shadow); }
 </style>
 </head>
 <body>
@@ -327,6 +331,22 @@ a { color: inherit; }
           <div class="menu-item"><div><h3>Chocolate Milk</h3></div><span class="price">$4.65</span></div>
         </div>
         <p class="note">Prices and availability may vary by location.</p>
+      </div>
+    </section>
+
+    <!-- Gallery: drop photos into images/ as photo1.jpg ... photo6.jpg; missing ones are hidden -->
+    <section id="gallery" class="section gallery-section" hidden>
+      <div class="container">
+        <p class="eyebrow">Fresh from the shop</p>
+        <h2>Sip &amp; see</h2>
+        <div class="gallery">
+          <img src="images/photo1.jpg" alt="Drinks at Sip &amp; Co.">
+          <img src="images/photo2.jpg" alt="Drinks at Sip &amp; Co.">
+          <img src="images/photo3.jpg" alt="Drinks at Sip &amp; Co.">
+          <img src="images/photo4.jpg" alt="Drinks at Sip &amp; Co.">
+          <img src="images/photo5.jpg" alt="Drinks at Sip &amp; Co.">
+          <img src="images/photo6.jpg" alt="Drinks at Sip &amp; Co.">
+        </div>
       </div>
     </section>
 
@@ -466,6 +486,14 @@ document.getElementById("contact-form").addEventListener("submit", async (e) => 
   } catch {
     status.textContent = "Sorry, something went wrong. Please call or try again.";
   }
+});
+
+// Gallery: hide photos that aren't there yet; show the section once any photo loads
+document.querySelectorAll(".gallery img").forEach((img) => {
+  const show = () => document.getElementById("gallery").removeAttribute("hidden");
+  const hide = () => img.remove();
+  if (img.complete) (img.naturalWidth ? show : hide)();
+  else { img.addEventListener("load", show); img.addEventListener("error", hide); }
 });
 
 document.getElementById("year").textContent = new Date().getFullYear();

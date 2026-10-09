@@ -44,4 +44,12 @@ document.getElementById("contact-form").addEventListener("submit", async (e) => 
   }
 });
 
+// Gallery: hide photos that aren't there yet; show the section once any photo loads
+document.querySelectorAll(".gallery img").forEach((img) => {
+  const show = () => document.getElementById("gallery").removeAttribute("hidden");
+  const hide = () => img.remove();
+  if (img.complete) (img.naturalWidth ? show : hide)();
+  else { img.addEventListener("load", show); img.addEventListener("error", hide); }
+});
+
 document.getElementById("year").textContent = new Date().getFullYear();
