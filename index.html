@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sip &amp; Co</title>
+  <meta name="description" content="Sip & Co — handcrafted drinks and good company. Now serving at two locations, including our newest shop in Richland.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container">
+      <a href="#top" class="logo">Sip <span>&amp;</span> Co</a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#locations">Locations</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact" class="btn btn-small">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <p class="eyebrow">Now open in Richland</p>
+        <h1>Good drinks.<br>Better company.</h1>
+        <p class="lead">Handcrafted coffee, tea, and refreshers made with care — served at two locations and always with a smile.</p>
+        <div class="hero-actions">
+          <a href="#locations" class="btn">Find a location</a>
+          <a href="#menu" class="btn btn-ghost">See the menu</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Announcement -->
+    <section class="banner">
+      <div class="container banner-inner">
+        <strong>New!</strong> Our second shop is now open in Richland. Come say hi.
+        <a href="#richland">Get directions &rarr;</a>
+      </div>
+    </section>
+
+    <!-- Menu -->
+    <section id="menu" class="section">
+      <div class="container">
+        <p class="eyebrow">What we pour</p>
+        <h2>Menu favorites</h2>
+        <div class="menu-tabs" role="tablist">
+          <button class="tab active" role="tab" aria-selected="true" data-tab="coffee">Coffee</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="tea">Tea</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="refreshers">Refreshers</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="bites">Bites</button>
+        </div>
+
+        <div class="menu-panel active" data-panel="coffee">
+          <div class="menu-item"><div><h3>House Latte</h3><p>Espresso, steamed milk, your choice of syrup.</p></div><span class="price">$5.25</span></div>
+          <div class="menu-item"><div><h3>Honey Lavender Latte</h3><p>Local honey, lavender, oat milk.</p></div><span class="price">$5.75</span></div>
+          <div class="menu-item"><div><h3>Cold Brew</h3><p>Steeped 18 hours. Smooth and bold.</p></div><span class="price">$4.75</span></div>
+          <div class="menu-item"><div><h3>Caramel Macchiato</h3><p>Vanilla, milk, espresso, caramel drizzle.</p></div><span class="price">$5.50</span></div>
+        </div>
+        <div class="menu-panel" data-panel="tea">
+          <div class="menu-item"><div><h3>Chai Latte</h3><p>Spiced black tea with steamed milk.</p></div><span class="price">$5.00</span></div>
+          <div class="menu-item"><div><h3>Matcha Latte</h3><p>Ceremonial-grade matcha, hot or iced.</p></div><span class="price">$5.50</span></div>
+          <div class="menu-item"><div><h3>London Fog</h3><p>Earl grey, vanilla, steamed milk.</p></div><span class="price">$4.75</span></div>
+        </div>
+        <div class="menu-panel" data-panel="refreshers">
+          <div class="menu-item"><div><h3>Strawberry Lemonade</h3><p>Fresh lemonade with real strawberry.</p></div><span class="price">$4.50</span></div>
+          <div class="menu-item"><div><h3>Mango Sunrise</h3><p>Mango, passionfruit, a splash of sparkle.</p></div><span class="price">$4.95</span></div>
+          <div class="menu-item"><div><h3>Blue Raspberry Energy</h3><p>Our house energy drink, customizable.</p></div><span class="price">$5.25</span></div>
+        </div>
+        <div class="menu-panel" data-panel="bites">
+          <div class="menu-item"><div><h3>Breakfast Burrito</h3><p>Egg, cheese, potato, choice of bacon or sausage.</p></div><span class="price">$7.50</span></div>
+          <div class="menu-item"><div><h3>Blueberry Muffin</h3><p>Baked fresh every morning.</p></div><span class="price">$3.50</span></div>
+          <div class="menu-item"><div><h3>Cookie of the Day</h3><p>Ask your barista what's fresh.</p></div><span class="price">$2.75</span></div>
+        </div>
+        <p class="note">Menu and prices may vary by location.</p>
+      </div>
+    </section>
+
+    <!-- Locations -->
+    <section id="locations" class="section section-alt">
+      <div class="container">
+        <p class="eyebrow">Visit us</p>
+        <h2>Two locations, same great sips</h2>
+        <div class="locations">
+          <article class="location-card">
+            <span class="tag">The original</span>
+            <h3>Sip &amp; Co — [Original City]</h3>
+            <address>
+              [Street address]<br>
+              [City, State ZIP]
+            </address>
+            <ul class="hours">
+              <li><span>Mon – Fri</span><span>6:00am – 6:00pm</span></li>
+              <li><span>Saturday</span><span>7:00am – 6:00pm</span></li>
+              <li><span>Sunday</span><span>8:00am – 4:00pm</span></li>
+            </ul>
+            <p class="phone"><a href="tel:+10000000000">(000) 000-0000</a></p>
+            <a class="btn btn-outline" href="https://www.google.com/maps/search/?api=1&query=Sip+and+Co" target="_blank" rel="noopener">Get directions</a>
+          </article>
+
+          <article class="location-card featured" id="richland">
+            <span class="tag tag-new">Now open</span>
+            <h3>Sip &amp; Co — Richland</h3>
+            <address>
+              [Street address]<br>
+              Richland, [State ZIP]
+            </address>
+            <ul class="hours">
+              <li><span>Mon – Fri</span><span>6:00am – 6:00pm</span></li>
+              <li><span>Saturday</span><span>7:00am – 6:00pm</span></li>
+              <li><span>Sunday</span><span>8:00am – 4:00pm</span></li>
+            </ul>
+            <p class="phone"><a href="tel:+10000000000">(000) 000-0000</a></p>
+            <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Sip+and+Co+Richland" target="_blank" rel="noopener">Get directions</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section">
+      <div class="container about">
+        <div>
+          <p class="eyebrow">Our story</p>
+          <h2>Made for slowing down</h2>
+          <p>Sip &amp; Co started with a simple idea: a great drink tastes even better when it's shared. What began as one neighborhood shop has grown into a second home in Richland — same recipes, same friendly faces, more room to gather.</p>
+          <p>Whether you're grabbing a quick cold brew on the way to work or settling in with friends, we're glad you're here.</p>
+        </div>
+        <div class="stats">
+          <div><strong>2</strong><span>Locations</span></div>
+          <div><strong>30+</strong><span>Drinks on the menu</span></div>
+          <div><strong>&infin;</strong><span>Good conversations</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section section-dark">
+      <div class="container contact">
+        <div>
+          <h2>Say hello</h2>
+          <p>Questions, catering, or event bookings? Drop us a note and we'll get back to you.</p>
+          <p class="socials">
+            <a href="#" aria-label="Instagram">Instagram</a> ·
+            <a href="#" aria-label="Facebook">Facebook</a> ·
+            <a href="#" aria-label="TikTok">TikTok</a>
+          </p>
+        </div>
+        <form class="contact-form" id="contact-form">
+          <label>Name<input type="text" name="name" required></label>
+          <label>Email<input type="email" name="email" required></label>
+          <label>Location
+            <select name="location">
+              <option>Original location</option>
+              <option>Richland</option>
+            </select>
+          </label>
+          <label>Message<textarea name="message" rows="4" required></textarea></label>
+          <button type="submit" class="btn">Send message</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span class="logo">Sip <span>&amp;</span> Co</span>
+      <span>&copy; <span id="year"></span> Sip &amp; Co. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
