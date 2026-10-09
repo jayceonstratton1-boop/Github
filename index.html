@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dutch Bros Road 68</title>
+  <meta name="description" content="Unofficial local guide to the Dutch Bros coffee stand on Road 68 in Pasco, Washington — menu favorites, hours and directions.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue: #0b2d6b;
+      --blue-2: #133f91;
+      --sky: #e8f0ff;
+      --accent: #f5b301;
+      --ink: #14181f;
+      --muted: #5b6474;
+      --bg: #ffffff;
+      --card: #ffffff;
+      --line: #e3e7ef;
+      --radius: 18px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ink: #eef2f8;
+        --muted: #a6b0c2;
+        --bg: #0d1220;
+        --card: #161d30;
+        --line: #26304a;
+        --sky: #121a2e;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.55;
+    }
+    a { color: inherit; }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+
+    /* Nav */
+    header.nav {
+      position: sticky; top: 0; z-index: 10;
+      background: var(--blue); color: #fff;
+    }
+    header.nav .wrap {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px; gap: 12px;
+    }
+    .brand { font-family: "Bebas Neue", sans-serif; font-size: 28px; letter-spacing: 1px; text-decoration: none; }
+    .brand span { color: var(--accent); }
+    nav ul { list-style: none; display: flex; gap: 20px; margin: 0; padding: 0; }
+    nav a { text-decoration: none; font-weight: 600; font-size: 15px; opacity: .9; }
+    nav a:hover { opacity: 1; color: var(--accent); }
+    @media (max-width: 640px) { nav ul { gap: 12px; } nav a { font-size: 13px; } }
+    @media (max-width: 420px) { nav li.hide-sm { display: none; } }
+
+    /* Hero */
+    .hero {
+      background:
+        radial-gradient(circle at 80% 20%, rgba(245,179,1,.25), transparent 45%),
+        linear-gradient(160deg, var(--blue) 0%, var(--blue-2) 100%);
+      color: #fff;
+      padding: 88px 0 96px;
+      text-align: center;
+    }
+    .hero .eyebrow {
+      display: inline-block; font-weight: 600; font-size: 13px; letter-spacing: 2px;
+      text-transform: uppercase; background: rgba(255,255,255,.12);
+      padding: 6px 14px; border-radius: 999px;
+    }
+    .hero h1 {
+      font-family: "Bebas Neue", sans-serif; font-weight: 400;
+      font-size: clamp(52px, 11vw, 112px); line-height: .95; margin: 18px 0 12px;
+      letter-spacing: 1px;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero p { font-size: clamp(16px, 2.4vw, 20px); max-width: 620px; margin: 0 auto 28px; opacity: .92; }
+    .btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 14px 24px; border-radius: 999px;
+      font-weight: 800; text-decoration: none; font-size: 15px;
+      transition: transform .15s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn.primary { background: var(--accent); color: #1b1300; }
+    .btn.ghost { border: 2px solid rgba(255,255,255,.7); color: #fff; }
+
+    /* Sections */
+    section { padding: 72px 0; }
+    section.alt { background: var(--sky); }
+    h2 {
+      font-family: "Bebas Neue", sans-serif; font-weight: 400;
+      font-size: clamp(38px, 6vw, 56px); margin: 0 0 8px; letter-spacing: 1px;
+    }
+    .lead { color: var(--muted); margin: 0 0 32px; max-width: 640px; }
+
+    /* Menu */
+    .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+    .tab {
+      border: 2px solid var(--line); background: var(--card); color: var(--ink);
+      padding: 8px 16px; border-radius: 999px; font: inherit; font-weight: 600; cursor: pointer;
+    }
+    .tab[aria-selected="true"] { background: var(--blue); border-color: var(--blue); color: #fff; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 16px; }
+    .card {
+      background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 20px; display: flex; flex-direction: column; gap: 6px;
+    }
+    .card .emoji { font-size: 30px; }
+    .card h3 { margin: 4px 0 0; font-size: 18px; }
+    .card p { margin: 0; color: var(--muted); font-size: 14px; }
+    .tag {
+      align-self: flex-start; margin-top: 8px; font-size: 12px; font-weight: 700;
+      background: rgba(245,179,1,.18); color: #8a6200; padding: 3px 10px; border-radius: 999px;
+    }
+    @media (prefers-color-scheme: dark) { .tag { color: var(--accent); } }
+
+    /* Visit */
+    .visit { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    @media (max-width: 760px) { .visit { grid-template-columns: 1fr; } }
+    .info { display: grid; gap: 16px; }
+    .info .row { display: flex; gap: 14px; align-items: flex-start; }
+    .info .icon {
+      flex: none; width: 42px; height: 42px; border-radius: 12px;
+      display: grid; place-items: center; background: var(--blue); color: #fff; font-size: 20px;
+    }
+    .info strong { display: block; }
+    .info span { color: var(--muted); }
+    table.hours { width: 100%; border-collapse: collapse; }
+    table.hours td { padding: 8px 0; border-bottom: 1px solid var(--line); }
+    table.hours td:last-child { text-align: right; color: var(--muted); }
+    table.hours tr.today td { font-weight: 800; color: var(--ink); }
+    .status { display: inline-block; margin-top: 12px; font-weight: 700; font-size: 14px; }
+    .map {
+      width: 100%; min-height: 320px; border: 0; border-radius: var(--radius);
+      background: var(--line);
+    }
+
+    /* About */
+    .perks { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+
+    footer {
+      background: var(--blue); color: #fff; padding: 36px 0; font-size: 14px;
+    }
+    footer .wrap { display: flex; flex-direction: column; gap: 8px; }
+    footer .disclaimer { opacity: .75; max-width: 720px; }
+  </style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">Road 68 <span>Bros</span></a>
+    <nav>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#visit">Visit</a></li>
+        <li class="hide-sm"><a href="#about">About</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow">Pasco, Washington</span>
+      <h1>Dutch Bros<br><span>Road 68</span></h1>
+      <p>Your West Pasco drive-thru stop for Rebels, Golden Eagles, cold brew and a whole lot of good vibes.</p>
+      <div class="btns">
+        <a class="btn primary" href="#menu">See the Menu</a>
+        <a class="btn ghost" id="directions-btn" href="#" target="_blank" rel="noopener">Get Directions</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="menu">
+    <div class="wrap">
+      <h2>Fan Favorites</h2>
+      <p class="lead">A few drinks the locals keep coming back for. Ask your broista about secret menu items and seasonal specials.</p>
+      <div class="tabs" role="tablist" id="tabs"></div>
+      <div class="grid" id="menu-grid"></div>
+    </div>
+  </section>
+
+  <section id="visit" class="alt">
+    <div class="wrap">
+      <h2>Come Say Hi</h2>
+      <p class="lead">Swing through the drive-thru or walk up to the window.</p>
+      <div class="visit">
+        <div class="info">
+          <div class="row">
+            <div class="icon">📍</div>
+            <div><strong>Location</strong><span id="address"></span></div>
+          </div>
+          <div class="row">
+            <div class="icon">📱</div>
+            <div><strong>Order Ahead</strong><span id="phone"></span></div>
+          </div>
+          <div class="row">
+            <div class="icon">🕒</div>
+            <div style="flex:1">
+              <strong>Hours</strong>
+              <table class="hours" id="hours"></table>
+              <span class="status" id="status"></span>
+            </div>
+          </div>
+        </div>
+        <iframe class="map" id="map" title="Map of Dutch Bros on Road 68 in Pasco" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <h2>Why We Love It</h2>
+      <p class="lead">Quick service, friendly broistas and drinks made exactly how you like them.</p>
+      <div class="perks">
+        <div class="card"><div class="emoji">🚗</div><h3>Fast Drive-Thru</h3><p>Broistas walk the line to take orders so you're back on the road quick.</p></div>
+        <div class="card"><div class="emoji">📱</div><h3>Order Ahead</h3><p>Use the Dutch Bros app to order ahead and earn rewards on every drink.</p></div>
+        <div class="card"><div class="emoji">🐶</div><h3>Pup Cups</h3><p>Bring your dog along — ask for a free whipped cream pup cup.</p></div>
+        <div class="card"><div class="emoji">💙</div><h3>Community</h3><p>Proud to be part of the Tri-Cities and the West Pasco neighborhood.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <strong>Dutch Bros · Road 68 · Pasco, WA</strong>
+    <p class="disclaimer">Unofficial community page — not affiliated with or endorsed by Dutch Bros Inc. Hours, menu and prices may change; check the official Dutch Bros app or dutchbros.com before you visit.</p>
+  </div>
+</footer>
+
+<script>
+  // ---- Edit these to match the store ----
+  const STORE = {
+    // Listed by Dutch Bros as its Burden Blvd store, near Road 68.
+    address: "6609 Burden Blvd, Pasco, WA 99301",
+    // Dutch Bros shops don't take phone calls; ordering ahead goes through the app.
+    phone: "No phone — order ahead in the Dutch Bros app",
+    // 24-hour times, "HH:MM". Use null for closed days.
+    // TODO: these are placeholders; replace with the hours shown in the Dutch Bros app.
+    hours: {
+      Sunday:    ["05:00", "23:00"],
+      Monday:    ["05:00", "23:00"],
+      Tuesday:   ["05:00", "23:00"],
+      Wednesday: ["05:00", "23:00"],
+      Thursday:  ["05:00", "23:00"],
+      Friday:    ["05:00", "24:00"],
+      Saturday:  ["05:00", "24:00"],
+    },
+  };
+
+  const MENU = {
+    "Energy": [
+      { emoji: "⚡", name: "Rebel", desc: "The signature energy drink, mixed with your choice of flavors.", tag: "Most popular" },
+      { emoji: "🌊", name: "Blue Rebel", desc: "Blue raspberry Rebel — a cult classic." },
+      { emoji: "🍑", name: "Peach Rebel", desc: "Peach and Rebel, blended or iced." },
+      { emoji: "🦄", name: "Unicorn Blood", desc: "Strawberry, white chocolate & almond Rebel.", tag: "Secret menu" },
+    ],
+    "Coffee": [
+      { emoji: "🦅", name: "Golden Eagle", desc: "Vanilla, caramel drizzle and soft top.", tag: "Fan favorite" },
+      { emoji: "🍫", name: "Annihilator", desc: "Chocolate macadamia nut breve." },
+      { emoji: "🍯", name: "Caramelizer", desc: "Chocolate milk and caramel sauce espresso drink." },
+      { emoji: "🧊", name: "Cold Brew", desc: "Smooth, slow-steeped and topped with soft top." },
+    ],
+    "No Caffeine": [
+      { emoji: "🍓", name: "Strawberry Smoothie", desc: "Blended and fruity." },
+      { emoji: "🥛", name: "Kicker-Free Mocha", desc: "Creamy chocolate milk drink, no espresso." },
+      { emoji: "🍋", name: "Lemonade", desc: "Classic or flavored — try it with strawberry." },
+      { emoji: "🐾", name: "Pup Cup", desc: "Whipped cream for your four-legged friend.", tag: "Free" },
+    ],
+  };
+
+  // ---- Render ----
+  const $ = (id) => document.getElementById(id);
+  const mapsQuery = encodeURIComponent("Dutch Bros " + STORE.address);
+
+  $("address").textContent = STORE.address;
+  $("phone").textContent = STORE.phone;
+  $("directions-btn").href = "https://www.google.com/maps/search/?api=1&query=" + mapsQuery;
+  $("map").src = "https://www.google.com/maps?q=" + mapsQuery + "&output=embed";
+
+  // Menu tabs
+  const tabs = $("tabs"), grid = $("menu-grid");
+  function showCategory(cat) {
+    [...tabs.children].forEach(b => b.setAttribute("aria-selected", b.dataset.cat === cat));
+    grid.innerHTML = "";
+    MENU[cat].forEach(item => {
+      const el = document.createElement("div");
+      el.className = "card";
+      el.innerHTML = `<div class="emoji">${item.emoji}</div><h3></h3><p></p>`;
+      el.querySelector("h3").textContent = item.name;
+      el.querySelector("p").textContent = item.desc;
+      if (item.tag) {
+        const t = document.createElement("span");
+        t.className = "tag"; t.textContent = item.tag; el.appendChild(t);
+      }
+      grid.appendChild(el);
+    });
+  }
+  Object.keys(MENU).forEach((cat, i) => {
+    const b = document.createElement("button");
+    b.className = "tab"; b.role = "tab"; b.dataset.cat = cat; b.textContent = cat;
+    b.addEventListener("click", () => showCategory(cat));
+    tabs.appendChild(b);
+  });
+  showCategory(Object.keys(MENU)[0]);
+
+  // Hours + open/closed status (uses visitor's local clock)
+  const fmt = (hm) => {
+    let [h, m] = hm.split(":").map(Number);
+    if (h === 24) return "Midnight";
+    const ampm = h >= 12 ? "PM" : "AM";
+    h = h % 12 || 12;
+    return `${h}:${String(m).padStart(2, "0")} ${ampm}`;
+  };
+  const toMin = (hm) => { const [h, m] = hm.split(":").map(Number); return h * 60 + m; };
+  const now = new Date();
+  const today = now.toLocaleDateString("en-US", { weekday: "long" });
+  Object.entries(STORE.hours).forEach(([day, range]) => {
+    const tr = document.createElement("tr");
+    if (day === today) tr.className = "today";
+    tr.innerHTML = `<td>${day}</td><td>${range ? fmt(range[0]) + " – " + fmt(range[1]) : "Closed"}</td>`;
+    $("hours").appendChild(tr);
+  });
+  const r = STORE.hours[today];
+  const mins = now.getHours() * 60 + now.getMinutes();
+  const open = r && mins >= toMin(r[0]) && mins < toMin(r[1]);
+  $("status").textContent = open ? "🟢 Open now" : "🔴 Closed right now";
+</script>
+</body>
+</html>
