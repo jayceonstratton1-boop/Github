@@ -44,12 +44,46 @@ document.getElementById("contact-form").addEventListener("submit", async (e) => 
   }
 });
 
-// Gallery: hide photos that aren't there yet; show the section once any photo loads
-document.querySelectorAll(".gallery img").forEach((img) => {
-  const show = () => document.getElementById("gallery").removeAttribute("hidden");
-  const hide = () => img.remove();
-  if (img.complete) (img.naturalWidth ? show : hide)();
-  else { img.addEventListener("load", show); img.addEventListener("error", hide); }
+// Drink picker: pulls drinks straight from the menu so it never goes stale
+const drinks = [...document.querySelectorAll(".menu-panel")].flatMap((panel) =>
+  [...panel.querySelectorAll(".menu-item")].map((item) => ({
+    cat: panel.dataset.panel,
+    name: item.querySelector("h3").textContent,
+    desc: item.querySelector("p")?.textContent || "A Sip & Co. favorite.",
+    price: item.querySelector(".price").textContent,
+  }))
+);
+const canColors = {
+  redbulls: ["#ff6b8b", "#ffb36b", "#fff1e0"],
+  matcha: ["#b58ee0", "#a9cf7f", "#e6f2d2"],
+  coffee: ["#6b4a35", "#d9b48f", "#f6ead9"],
+  caffeinefree: ["#ff9a76", "#ffd36e", "#fff6dc"],
+};
+const can = document.getElementById("can");
+const chips = document.querySelectorAll(".chip");
+let filter = "all";
+chips.forEach((chip) =>
+  chip.addEventListener("click", () => {
+    filter = chip.dataset.filter;
+    chips.forEach((c) => c.classList.toggle("active", c === chip));
+  })
+);
+document.getElementById("shake").addEventListener("click", () => {
+  const pool = drinks.filter((d) => filter === "all" || d.cat === filter);
+  const pick = pool[Math.floor(Math.random() * pool.length)];
+  can.classList.remove("landed");
+  can.classList.add("shaking");
+  setTimeout(() => {
+    const [top, mid, bot] = canColors[pick.cat];
+    can.style.setProperty("--can-top", top);
+    can.style.setProperty("--can-mid", mid);
+    can.style.setProperty("--can-bot", bot);
+    document.getElementById("pick-name").textContent = pick.name;
+    document.getElementById("pick-desc").textContent = pick.desc;
+    document.getElementById("pick-price").textContent = pick.price;
+    can.classList.remove("shaking");
+    can.classList.add("landed");
+  }, 900);
 });
 
 document.getElementById("year").textContent = new Date().getFullYear();
