@@ -8,7 +8,7 @@ Static website for Sip & Co: a home page, menu, both locations (including the ne
 - `script.js` – mobile nav, menu tabs, contact form
 
 ## Still to confirm
-- Photos in `images/` are cropped from screenshots, so they are low resolution. Swap in the originals from Sip & Co. (same file names) for a sharper site.
+- Photos in `images/` were cropped from screenshots and AI-upscaled 4x (Real-ESRGAN). Original files from Sip & Co. (same file names) would still be sharper.
 - Prices: coffee, specialty coffee and most matcha prices come from the in-store menu board. Energy drinks, caffeine-free drinks and a few matchas show "Ask in store" because their prices were cut off in the board photo.
 - Pasco hours and phone number (not shown yet)
 - Social media links (none on the site yet)
