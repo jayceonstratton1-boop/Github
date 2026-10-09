@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sip &amp; Co</title>
+  <meta name="description" content="Sip & Co — handcrafted drinks and good company. Now serving at two locations, including our newest shop in Richland.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+:root {
+  --cream: #faf5ee;
+  --sand: #f1e6d6;
+  --espresso: #2b1d14;
+  --mocha: #6b4a35;
+  --accent: #c8693f;
+  --accent-dark: #a9532d;
+  --sage: #7c8f6b;
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(43, 29, 20, 0.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  background: var(--cream);
+  color: var(--espresso);
+  line-height: 1.6;
+}
+
+h1, h2, h3, .logo { font-family: "Fraunces", Georgia, serif; line-height: 1.15; }
+h1 { font-size: clamp(2.5rem, 7vw, 4.5rem); }
+h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); margin-bottom: 1.5rem; }
+h3 { font-size: 1.2rem; }
+
+a { color: inherit; }
+
+.container { width: min(1100px, 100% - 2rem); margin-inline: auto; }
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  border: 2px solid var(--accent);
+  padding: 0.8rem 1.5rem;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.2s;
+}
+.btn:hover { background: var(--accent-dark); border-color: var(--accent-dark); transform: translateY(-1px); }
+.btn-ghost { background: transparent; color: var(--espresso); border-color: var(--espresso); }
+.btn-ghost:hover { background: var(--espresso); color: var(--cream); border-color: var(--espresso); }
+.btn-outline { background: transparent; color: var(--accent); }
+.btn-outline:hover { color: #fff; }
+.btn-small { padding: 0.45rem 1.1rem; }
+
+/* Header */
+.site-header {
+  position: sticky; top: 0; z-index: 10;
+  background: rgba(250, 245, 238, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(43, 29, 20, 0.08);
+}
+.nav { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+.logo { font-size: 1.6rem; font-weight: 700; text-decoration: none; }
+.logo span { color: var(--accent); font-style: italic; }
+.nav-links { list-style: none; display: flex; gap: 1.75rem; align-items: center; }
+.nav-links a:not(.btn) { text-decoration: none; font-weight: 500; }
+.nav-links a:not(.btn):hover { color: var(--accent); }
+.nav-toggle { display: none; background: none; border: 0; cursor: pointer; padding: 0.5rem; }
+.nav-toggle span { display: block; width: 24px; height: 2px; background: var(--espresso); margin: 5px 0; }
+
+/* Hero */
+.hero {
+  background:
+    radial-gradient(circle at 85% 20%, rgba(200, 105, 63, 0.25), transparent 45%),
+    radial-gradient(circle at 10% 90%, rgba(124, 143, 107, 0.25), transparent 40%),
+    var(--sand);
+  padding: clamp(4rem, 12vw, 8rem) 0;
+}
+.hero-inner { max-width: 720px; }
+.lead { font-size: 1.2rem; color: var(--mocha); margin: 1.25rem 0 2rem; max-width: 560px; }
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+/* Banner */
+.banner { background: var(--espresso); color: var(--cream); padding: 0.9rem 0; font-size: 0.95rem; }
+.banner-inner { display: flex; gap: 0.6rem; flex-wrap: wrap; justify-content: center; text-align: center; }
+.banner strong { color: var(--accent); }
+.banner a { color: var(--cream); font-weight: 600; }
+
+/* Sections */
+.section { padding: clamp(3.5rem, 8vw, 6rem) 0; }
+.section-alt { background: var(--sand); }
+.section-dark { background: var(--espresso); color: var(--cream); }
+
+/* Menu */
+.menu-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
+.tab {
+  font: inherit; font-weight: 500;
+  background: transparent; border: 1px solid rgba(43, 29, 20, 0.2);
+  padding: 0.5rem 1.2rem; border-radius: 999px; cursor: pointer; color: var(--espresso);
+}
+.tab.active { background: var(--espresso); color: var(--cream); border-color: var(--espresso); }
+.menu-panel { display: none; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 1rem 2.5rem; }
+.menu-panel.active { display: grid; }
+.menu-item {
+  display: flex; justify-content: space-between; gap: 1rem;
+  padding: 1rem 0; border-bottom: 1px dashed rgba(43, 29, 20, 0.2);
+}
+.menu-item p { color: var(--mocha); font-size: 0.95rem; }
+.price { font-weight: 600; color: var(--accent); white-space: nowrap; }
+.note { margin-top: 1.5rem; font-size: 0.85rem; color: var(--mocha); }
+
+/* Locations */
+.locations { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 1.5rem; }
+.location-card {
+  background: #fff; border-radius: var(--radius); padding: 2rem;
+  box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 1rem; align-items: flex-start;
+}
+.location-card.featured { outline: 3px solid var(--accent); }
+.location-card address { font-style: normal; color: var(--mocha); }
+.tag {
+  font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
+  background: var(--sand); color: var(--mocha); padding: 0.3rem 0.75rem; border-radius: 999px;
+}
+.tag-new { background: var(--accent); color: #fff; }
+.hours { list-style: none; width: 100%; }
+.hours li { display: flex; justify-content: space-between; padding: 0.35rem 0; border-bottom: 1px solid var(--sand); font-size: 0.95rem; }
+.phone a { font-weight: 600; text-decoration: none; }
+.location-card .btn { margin-top: auto; }
+
+/* About */
+.about { display: grid; grid-template-columns: 1.3fr 1fr; gap: 3rem; align-items: center; }
+.about p + p { margin-top: 1rem; }
+.about p { color: var(--mocha); }
+.stats { display: grid; gap: 1rem; }
+.stats div { background: var(--sand); border-radius: var(--radius); padding: 1.5rem; }
+.stats strong { display: block; font-family: "Fraunces", serif; font-size: 2.4rem; color: var(--accent); line-height: 1; }
+.stats span { color: var(--mocha); }
+
+/* Contact */
+.contact { display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; }
+.contact p { color: rgba(250, 245, 238, 0.8); }
+.socials { margin-top: 1.5rem; }
+.socials a { color: var(--cream); }
+.contact-form { display: grid; gap: 1rem; }
+.contact-form label { display: grid; gap: 0.35rem; font-size: 0.9rem; font-weight: 500; }
+.contact-form input, .contact-form select, .contact-form textarea {
+  font: inherit; padding: 0.75rem 1rem; border-radius: 10px;
+  border: 1px solid rgba(250, 245, 238, 0.25); background: rgba(250, 245, 238, 0.06); color: var(--cream);
+}
+.contact-form select option { color: var(--espresso); }
+.contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus { outline: 2px solid var(--accent); border-color: transparent; }
+.contact-form .btn { justify-self: start; }
+.form-status { min-height: 1.5em; color: var(--accent); }
+
+/* Footer */
+.site-footer { background: #1f140e; color: rgba(250, 245, 238, 0.7); padding: 1.5rem 0; font-size: 0.9rem; }
+.footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+.site-footer .logo { color: var(--cream); font-size: 1.3rem; }
+
+/* Mobile */
+@media (max-width: 760px) {
+  .nav-toggle { display: block; }
+  .nav-links {
+    position: absolute; top: 68px; left: 0; right: 0;
+    flex-direction: column; gap: 0; padding: 0.5rem 1rem 1rem;
+    background: var(--cream); border-bottom: 1px solid rgba(43, 29, 20, 0.08);
+    display: none;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links li { width: 100%; padding: 0.6rem 0; }
+  .about, .contact { grid-template-columns: 1fr; }
+  .menu-panel { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container">
+      <a href="#top" class="logo">Sip <span>&amp;</span> Co</a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#locations">Locations</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact" class="btn btn-small">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <p class="eyebrow">Now open in Richland</p>
+        <h1>Good drinks.<br>Better company.</h1>
+        <p class="lead">Handcrafted coffee, tea, and refreshers made with care — served at two locations and always with a smile.</p>
+        <div class="hero-actions">
+          <a href="#locations" class="btn">Find a location</a>
+          <a href="#menu" class="btn btn-ghost">See the menu</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Announcement -->
+    <section class="banner">
+      <div class="container banner-inner">
+        <strong>New!</strong> Our second shop is now open in Richland. Come say hi.
+        <a href="#richland">Get directions &rarr;</a>
+      </div>
+    </section>
+
+    <!-- Menu -->
+    <section id="menu" class="section">
+      <div class="container">
+        <p class="eyebrow">What we pour</p>
+        <h2>Menu favorites</h2>
+        <div class="menu-tabs" role="tablist">
+          <button class="tab active" role="tab" aria-selected="true" data-tab="coffee">Coffee</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="tea">Tea</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="refreshers">Refreshers</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="bites">Bites</button>
+        </div>
+
+        <div class="menu-panel active" data-panel="coffee">
+          <div class="menu-item"><div><h3>House Latte</h3><p>Espresso, steamed milk, your choice of syrup.</p></div><span class="price">$5.25</span></div>
+          <div class="menu-item"><div><h3>Honey Lavender Latte</h3><p>Local honey, lavender, oat milk.</p></div><span class="price">$5.75</span></div>
+          <div class="menu-item"><div><h3>Cold Brew</h3><p>Steeped 18 hours. Smooth and bold.</p></div><span class="price">$4.75</span></div>
+          <div class="menu-item"><div><h3>Caramel Macchiato</h3><p>Vanilla, milk, espresso, caramel drizzle.</p></div><span class="price">$5.50</span></div>
+        </div>
+        <div class="menu-panel" data-panel="tea">
+          <div class="menu-item"><div><h3>Chai Latte</h3><p>Spiced black tea with steamed milk.</p></div><span class="price">$5.00</span></div>
+          <div class="menu-item"><div><h3>Matcha Latte</h3><p>Ceremonial-grade matcha, hot or iced.</p></div><span class="price">$5.50</span></div>
+          <div class="menu-item"><div><h3>London Fog</h3><p>Earl grey, vanilla, steamed milk.</p></div><span class="price">$4.75</span></div>
+        </div>
+        <div class="menu-panel" data-panel="refreshers">
+          <div class="menu-item"><div><h3>Strawberry Lemonade</h3><p>Fresh lemonade with real strawberry.</p></div><span class="price">$4.50</span></div>
+          <div class="menu-item"><div><h3>Mango Sunrise</h3><p>Mango, passionfruit, a splash of sparkle.</p></div><span class="price">$4.95</span></div>
+          <div class="menu-item"><div><h3>Blue Raspberry Energy</h3><p>Our house energy drink, customizable.</p></div><span class="price">$5.25</span></div>
+        </div>
+        <div class="menu-panel" data-panel="bites">
+          <div class="menu-item"><div><h3>Breakfast Burrito</h3><p>Egg, cheese, potato, choice of bacon or sausage.</p></div><span class="price">$7.50</span></div>
+          <div class="menu-item"><div><h3>Blueberry Muffin</h3><p>Baked fresh every morning.</p></div><span class="price">$3.50</span></div>
+          <div class="menu-item"><div><h3>Cookie of the Day</h3><p>Ask your barista what's fresh.</p></div><span class="price">$2.75</span></div>
+        </div>
+        <p class="note">Menu and prices may vary by location.</p>
+      </div>
+    </section>
+
+    <!-- Locations -->
+    <section id="locations" class="section section-alt">
+      <div class="container">
+        <p class="eyebrow">Visit us</p>
+        <h2>Two locations, same great sips</h2>
+        <div class="locations">
+          <article class="location-card">
+            <span class="tag">The original</span>
+            <h3>Sip &amp; Co — [Original City]</h3>
+            <address>
+              [Street address]<br>
+              [City, State ZIP]
+            </address>
+            <ul class="hours">
+              <li><span>Mon – Fri</span><span>6:00am – 6:00pm</span></li>
+              <li><span>Saturday</span><span>7:00am – 6:00pm</span></li>
+              <li><span>Sunday</span><span>8:00am – 4:00pm</span></li>
+            </ul>
+            <p class="phone"><a href="tel:+10000000000">(000) 000-0000</a></p>
+            <a class="btn btn-outline" href="https://www.google.com/maps/search/?api=1&query=Sip+and+Co" target="_blank" rel="noopener">Get directions</a>
+          </article>
+
+          <article class="location-card featured" id="richland">
+            <span class="tag tag-new">Now open</span>
+            <h3>Sip &amp; Co — Richland</h3>
+            <address>
+              [Street address]<br>
+              Richland, [State ZIP]
+            </address>
+            <ul class="hours">
+              <li><span>Mon – Fri</span><span>6:00am – 6:00pm</span></li>
+              <li><span>Saturday</span><span>7:00am – 6:00pm</span></li>
+              <li><span>Sunday</span><span>8:00am – 4:00pm</span></li>
+            </ul>
+            <p class="phone"><a href="tel:+10000000000">(000) 000-0000</a></p>
+            <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Sip+and+Co+Richland" target="_blank" rel="noopener">Get directions</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section">
+      <div class="container about">
+        <div>
+          <p class="eyebrow">Our story</p>
+          <h2>Made for slowing down</h2>
+          <p>Sip &amp; Co started with a simple idea: a great drink tastes even better when it's shared. What began as one neighborhood shop has grown into a second home in Richland — same recipes, same friendly faces, more room to gather.</p>
+          <p>Whether you're grabbing a quick cold brew on the way to work or settling in with friends, we're glad you're here.</p>
+        </div>
+        <div class="stats">
+          <div><strong>2</strong><span>Locations</span></div>
+          <div><strong>30+</strong><span>Drinks on the menu</span></div>
+          <div><strong>&infin;</strong><span>Good conversations</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section section-dark">
+      <div class="container contact">
+        <div>
+          <h2>Say hello</h2>
+          <p>Questions, catering, or event bookings? Drop us a note and we'll get back to you.</p>
+          <p class="socials">
+            <a href="#" aria-label="Instagram">Instagram</a> ·
+            <a href="#" aria-label="Facebook">Facebook</a> ·
+            <a href="#" aria-label="TikTok">TikTok</a>
+          </p>
+        </div>
+        <form class="contact-form" id="contact-form">
+          <label>Name<input type="text" name="name" required></label>
+          <label>Email<input type="email" name="email" required></label>
+          <label>Location
+            <select name="location">
+              <option>Original location</option>
+              <option>Richland</option>
+            </select>
+          </label>
+          <label>Message<textarea name="message" rows="4" required></textarea></label>
+          <button type="submit" class="btn">Send message</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span class="logo">Sip <span>&amp;</span> Co</span>
+      <span>&copy; <span id="year"></span> Sip &amp; Co. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+// Mobile nav toggle
+const toggle = document.querySelector(".nav-toggle");
+const links = document.querySelector(".nav-links");
+toggle.addEventListener("click", () => {
+  const open = links.classList.toggle("open");
+  toggle.setAttribute("aria-expanded", open);
+});
+links.querySelectorAll("a").forEach((a) =>
+  a.addEventListener("click", () => {
+    links.classList.remove("open");
+    toggle.setAttribute("aria-expanded", "false");
+  })
+);
+
+// Menu tabs
+const tabs = document.querySelectorAll(".tab");
+const panels = document.querySelectorAll(".menu-panel");
+tabs.forEach((tab) =>
+  tab.addEventListener("click", () => {
+    tabs.forEach((t) => {
+      t.classList.toggle("active", t === tab);
+      t.setAttribute("aria-selected", t === tab);
+    });
+    panels.forEach((p) => p.classList.toggle("active", p.dataset.panel === tab.dataset.tab));
+  })
+);
+
+// Contact form (front-end only — connect to a form service to receive messages)
+document.getElementById("contact-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  e.target.reset();
+  e.target.querySelector(".form-status").textContent = "Thanks! We'll be in touch soon.";
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

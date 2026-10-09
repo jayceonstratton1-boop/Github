@@ -17,3 +17,5 @@ Search `index.html` for `[` placeholders and `(000) 000-0000`:
 
 ## Preview
 Open `index.html` in a browser. It can be hosted as-is on GitHub Pages, Netlify or similar.
+
+`sip-and-co.html` is a single-file copy of the site (styles and script built in) for easy sharing. It's generated from the three files above, so make edits there and regenerate it.
