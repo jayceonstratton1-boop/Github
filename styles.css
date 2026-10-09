@@ -302,3 +302,4 @@ a { color: inherit; }
   .stats div { padding: 0.9rem; }
   .stats strong { font-size: 1.7rem; }
 }
+.price-ask { font-weight: 500; font-size: 0.8rem; color: var(--mocha); opacity: 0.8; }
