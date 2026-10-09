@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sip &amp; Co</title>
-  <meta name="description" content="Sip & Co — handcrafted drinks and good company. Now serving at two locations, including our newest shop in Richland.">
+  <title>Sip &amp; Co. | Freshly Canned Coffee, Energy &amp; Matcha in Pasco and Richland</title>
+  <meta name="description" content="Sip & Co. serves iced coffee, Red Bull energy blends and matcha, freshly sealed in a can. Visit us in Pasco and at our new Richland location.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -145,7 +145,7 @@ a { color: inherit; }
 .hours { list-style: none; width: 100%; }
 .hours li { display: flex; justify-content: space-between; padding: 0.35rem 0; border-bottom: 1px solid var(--sand); font-size: 0.95rem; }
 .phone a { font-weight: 600; text-decoration: none; }
-.location-card .btn { margin-top: auto; }
+
 
 /* About */
 .about { display: grid; grid-template-columns: 1.3fr 1fr; gap: 3rem; align-items: center; }
@@ -191,19 +191,34 @@ a { color: inherit; }
   .about, .contact { grid-template-columns: 1fr; }
   .menu-panel { grid-template-columns: 1fr; }
 }
+
+/* How it works */
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 1.5rem; }
+.step { background: #fff; border-radius: var(--radius); padding: 1.75rem; box-shadow: var(--shadow); }
+.step span {
+  display: inline-grid; place-items: center; width: 2.2rem; height: 2.2rem; border-radius: 50%;
+  background: var(--accent); color: #fff; font-weight: 600; margin-bottom: 0.75rem;
+}
+.step h3 { margin-bottom: 0.4rem; }
+.step p { color: var(--mocha); }
+
+.section-alt .stats div { background: #fff; }
+.card-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: auto; }
+.hours-note { color: var(--mocha); font-size: 0.95rem; }
+.contact a { color: var(--cream); font-weight: 600; }
 </style>
 </head>
 <body>
   <header class="site-header">
     <nav class="nav container">
-      <a href="#top" class="logo">Sip <span>&amp;</span> Co</a>
+      <a href="#top" class="logo">Sip <span>&amp;</span> Co.</a>
       <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
       <ul class="nav-links">
         <li><a href="#menu">Menu</a></li>
         <li><a href="#locations">Locations</a></li>
-        <li><a href="#about">About</a></li>
+        <li><a href="#about">Our Story</a></li>
         <li><a href="#contact" class="btn btn-small">Contact</a></li>
       </ul>
     </nav>
@@ -214,8 +229,8 @@ a { color: inherit; }
     <section class="hero">
       <div class="container hero-inner">
         <p class="eyebrow">Now open in Richland</p>
-        <h1>Good drinks.<br>Better company.</h1>
-        <p class="lead">Handcrafted coffee, tea, and refreshers made with care — served at two locations and always with a smile.</p>
+        <h1>Sealed fresh.<br>Made to go.</h1>
+        <p class="lead">Iced coffee, Red Bull blends and matcha, made to order and sealed in a can so you can grab it and go. Visit us in Pasco and Richland.</p>
         <div class="hero-actions">
           <a href="#locations" class="btn">Find a location</a>
           <a href="#menu" class="btn btn-ghost">See the menu</a>
@@ -226,102 +241,148 @@ a { color: inherit; }
     <!-- Announcement -->
     <section class="banner">
       <div class="container banner-inner">
-        <strong>New!</strong> Our second shop is now open in Richland. Come say hi.
-        <a href="#richland">Get directions &rarr;</a>
+        <strong>New!</strong> Our second shop is now open at 2588 Queensgate Dr in Richland.
+        <a href="#richland">Hours &amp; directions &rarr;</a>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="section how">
+      <div class="container">
+        <p class="eyebrow">The Sip &amp; Co. difference</p>
+        <h2>Your drink, in a can</h2>
+        <div class="steps">
+          <div class="step"><span>1</span><h3>Pick your drink</h3><p>Choose from our Red Bull blends, matcha lattes, coffee and caffeine-free drinks.</p></div>
+          <div class="step"><span>2</span><h3>Made fresh</h3><p>We mix it to order and pour it into a clear 12 oz or 16 oz Sip &amp; Co. can-style cup.</p></div>
+          <div class="step"><span>3</span><h3>Sealed &amp; ready</h3><p>An aluminum lid seals it tight, so no spills on your commute. Pop it open when you're ready.</p></div>
+        </div>
       </div>
     </section>
 
     <!-- Menu -->
-    <section id="menu" class="section">
+    <section id="menu" class="section section-alt">
       <div class="container">
         <p class="eyebrow">What we pour</p>
-        <h2>Menu favorites</h2>
+        <h2>Our menu</h2>
         <div class="menu-tabs" role="tablist">
-          <button class="tab active" role="tab" aria-selected="true" data-tab="coffee">Coffee</button>
-          <button class="tab" role="tab" aria-selected="false" data-tab="tea">Tea</button>
-          <button class="tab" role="tab" aria-selected="false" data-tab="refreshers">Refreshers</button>
-          <button class="tab" role="tab" aria-selected="false" data-tab="bites">Bites</button>
+          <button class="tab active" role="tab" aria-selected="true" data-tab="redbulls">Red Bulls</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="matcha">Matcha</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="coffee">Coffee</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="caffeinefree">Caffeine-Free</button>
         </div>
 
-        <div class="menu-panel active" data-panel="coffee">
-          <div class="menu-item"><div><h3>House Latte</h3><p>Espresso, steamed milk, your choice of syrup.</p></div><span class="price">$5.25</span></div>
-          <div class="menu-item"><div><h3>Honey Lavender Latte</h3><p>Local honey, lavender, oat milk.</p></div><span class="price">$5.75</span></div>
-          <div class="menu-item"><div><h3>Cold Brew</h3><p>Steeped 18 hours. Smooth and bold.</p></div><span class="price">$4.75</span></div>
-          <div class="menu-item"><div><h3>Caramel Macchiato</h3><p>Vanilla, milk, espresso, caramel drizzle.</p></div><span class="price">$5.50</span></div>
+        <div class="menu-panel active" data-panel="redbulls">
+          <div class="menu-item"><div><h3>Pink Wave</h3><p>Red Bull, creamy layers and pink hues, garnished with red fruit bits.</p></div><span class="price">$8.35</span></div>
+          <div class="menu-item"><div><h3>Neon Crush</h3><p>Blue curaçao, mango and cream with fruit.</p></div><span class="price">$8.65</span></div>
+          <div class="menu-item"><div><h3>The Cloud</h3><p>Red Bull and coconut milk, topped with a light foam.</p></div><span class="price">$8.35</span></div>
+          <div class="menu-item"><div><h3>Fresh Fix</h3><p>Layered green and yellow hues with a refreshing mix of flavors.</p></div><span class="price">$8.05</span></div>
+          <div class="menu-item"><div><h3>The Fiesta</h3><p>Red Bull with a splash of fruit juice and diced fruit.</p></div><span class="price">$8.65</span></div>
+          <div class="menu-item"><div><h3>The Howitzer</h3><p>Caramel and green apple.</p></div><span class="price">$8.05</span></div>
+          <div class="menu-item"><div><h3>The Firecracker</h3><p>Zesty Red Bull with chunks of fresh fruit and a hint of spice.</p></div><span class="price">$8.65</span></div>
+          <div class="menu-item"><div><h3>The Tropic</h3><p>Tropical fruit flavors layered in a striking gradient.</p></div><span class="price">$8.05</span></div>
+          <div class="menu-item"><div><h3>The Playa</h3><p>Blue raspberry, coconut and lime.</p></div><span class="price">$8.05</span></div>
+          <div class="menu-item"><div><h3>The Alfa</h3></div><span class="price">$8.35</span></div>
+          <div class="menu-item"><div><h3>Pink Gummy Bear</h3></div><span class="price">$8.35</span></div>
+          <div class="menu-item"><div><h3>Sunset</h3><p>Red Bull and dragon fruit for an exotic twist.</p></div><span class="price">$8.65</span></div>
+          <div class="menu-item"><div><h3>The Nova</h3><p>Dragon fruit and Red Bull: a smooth, striking pink drink.</p></div><span class="price">$8.65</span></div>
+          <div class="menu-item"><div><h3>Jolly Rancher</h3></div><span class="price">$8.05</span></div>
+          <div class="menu-item"><div><h3>Customized Energy Drink</h3><p>Build your own blend from our flavors and add-ins.</p></div><span class="price">$8.05</span></div>
         </div>
-        <div class="menu-panel" data-panel="tea">
-          <div class="menu-item"><div><h3>Chai Latte</h3><p>Spiced black tea with steamed milk.</p></div><span class="price">$5.00</span></div>
-          <div class="menu-item"><div><h3>Matcha Latte</h3><p>Ceremonial-grade matcha, hot or iced.</p></div><span class="price">$5.50</span></div>
-          <div class="menu-item"><div><h3>London Fog</h3><p>Earl grey, vanilla, steamed milk.</p></div><span class="price">$4.75</span></div>
+        <div class="menu-panel" data-panel="matcha">
+          <div class="menu-item"><div><h3>Strawberry Matcha</h3></div><span class="price">$8.65</span></div>
+          <div class="menu-item"><div><h3>Coconut Matcha</h3><p>Rich matcha blended with creamy coconut milk.</p></div><span class="price">$8.65</span></div>
+          <div class="menu-item"><div><h3>Mango Matcha</h3><p>Layers of matcha, milk and mango chunks.</p></div><span class="price">$8.65</span></div>
+          <div class="menu-item"><div><h3>Vanilla Matcha</h3><p>Creamy matcha latte infused with vanilla.</p></div><span class="price">$8.05</span></div>
+          <div class="menu-item"><div><h3>Banana Matcha</h3><p>Creamy banana and matcha with a scattering of blueberries.</p></div><span class="price">$8.65</span></div>
+          <div class="menu-item"><div><h3>Brown Sugar Matcha</h3></div><span class="price">$8.65</span></div>
+          <div class="menu-item"><div><h3>Blueberry Matcha</h3></div><span class="price">$8.65</span></div>
+          <div class="menu-item"><div><h3>Ube Matcha</h3><p>Earthy matcha and sweet ube in vibrant green and purple layers.</p></div><span class="price">$9.25</span></div>
         </div>
-        <div class="menu-panel" data-panel="refreshers">
-          <div class="menu-item"><div><h3>Strawberry Lemonade</h3><p>Fresh lemonade with real strawberry.</p></div><span class="price">$4.50</span></div>
-          <div class="menu-item"><div><h3>Mango Sunrise</h3><p>Mango, passionfruit, a splash of sparkle.</p></div><span class="price">$4.95</span></div>
-          <div class="menu-item"><div><h3>Blue Raspberry Energy</h3><p>Our house energy drink, customizable.</p></div><span class="price">$5.25</span></div>
+        <div class="menu-panel" data-panel="coffee">
+          <div class="menu-item"><div><h3>Americano</h3><p>Double shot of espresso with hot water.</p></div><span class="price">$4.65</span></div>
+          <div class="menu-item"><div><h3>Americano w/ Cream</h3><p>Double shot of espresso, hot water and a splash of cream.</p></div><span class="price">$5.55</span></div>
+          <div class="menu-item"><div><h3>Americano w/ Cream &amp; Flavor</h3><p>With cream and your choice of syrup.</p></div><span class="price">$6.05</span></div>
+          <div class="menu-item"><div><h3>Latte</h3><p>Espresso and milk.</p></div><span class="price">$7.55</span></div>
+          <div class="menu-item"><div><h3>Cold Brew</h3><p>Steeped low and slow, served over ice. Smooth and robust.</p></div><span class="price">$6.65</span></div>
+          <div class="menu-item"><div><h3>Mocha</h3><p>Espresso with chocolate and steamed milk.</p></div><span class="price">$6.05</span></div>
+          <div class="menu-item"><div><h3>Caramel Macchiato</h3><p>Steamed milk, vanilla, espresso and caramel drizzle.</p></div><span class="price">$7.55</span></div>
+          <div class="menu-item"><div><h3>Dulce de Leche</h3><p>Fan favorite: creamy dulce de leche coffee with caramel drizzle.</p></div><span class="price">$8.35</span></div>
+          <div class="menu-item"><div><h3>Cloud Nine</h3><p>Creamy breve with white chocolate and crumbled graham cracker.</p></div><span class="price">$8.05</span></div>
+          <div class="menu-item"><div><h3>S&#x27;more Delight</h3><p>Breve with rich chocolate, toasted marshmallow and graham cracker.</p></div><span class="price">$8.35</span></div>
+          <div class="menu-item"><div><h3>Pistachio Breve</h3><p>Espresso and steamed half-and-half with pistachio and a touch of chocolate.</p></div><span class="price">$8.65</span></div>
+          <div class="menu-item"><div><h3>The Veaa</h3></div><span class="price">$8.35</span></div>
+          <div class="menu-item"><div><h3>The Cinnabon</h3><p>Sweet breve coffee infused with cinnamon.</p></div><span class="price">$8.35</span></div>
+          <div class="menu-item"><div><h3>Cloudy Mocha</h3><p>Espresso, chocolate and 2% milk: creamy and smooth.</p></div><span class="price">$8.35</span></div>
         </div>
-        <div class="menu-panel" data-panel="bites">
-          <div class="menu-item"><div><h3>Breakfast Burrito</h3><p>Egg, cheese, potato, choice of bacon or sausage.</p></div><span class="price">$7.50</span></div>
-          <div class="menu-item"><div><h3>Blueberry Muffin</h3><p>Baked fresh every morning.</p></div><span class="price">$3.50</span></div>
-          <div class="menu-item"><div><h3>Cookie of the Day</h3><p>Ask your barista what's fresh.</p></div><span class="price">$2.75</span></div>
+        <div class="menu-panel" data-panel="caffeinefree">
+          <div class="menu-item"><div><h3>Water in a Can</h3></div><span class="price">$7.55</span></div>
+          <div class="menu-item"><div><h3>Refreshers / Lemonades</h3></div><span class="price">$6.35</span></div>
+          <div class="menu-item"><div><h3>Italian Soda</h3><p>Sparkling water and sweet syrup, topped with cream.</p></div><span class="price">$6.05</span></div>
+          <div class="menu-item"><div><h3>Chai</h3></div><span class="price">$7.55</span></div>
+          <div class="menu-item"><div><h3>Sugar Cookie Chai</h3></div><span class="price">$7.55</span></div>
+          <div class="menu-item"><div><h3>Barbie Chai</h3><p>Spiced black tea with steamed milk.</p></div><span class="price">$7.55</span></div>
+          <div class="menu-item"><div><h3>Marshmallow Chai</h3></div><span class="price">$7.55</span></div>
+          <div class="menu-item"><div><h3>Mangonada</h3></div><span class="price">$7.55</span></div>
+          <div class="menu-item"><div><h3>Mangonada w/ Red Bull</h3></div><span class="price">$8.65</span></div>
+          <div class="menu-item"><div><h3>Chocolate Milk</h3></div><span class="price">$4.65</span></div>
         </div>
-        <p class="note">Menu and prices may vary by location.</p>
+        <p class="note">Prices and availability may vary by location.</p>
       </div>
     </section>
 
     <!-- Locations -->
-    <section id="locations" class="section section-alt">
+    <section id="locations" class="section">
       <div class="container">
         <p class="eyebrow">Visit us</p>
-        <h2>Two locations, same great sips</h2>
+        <h2>Two locations in the Tri-Cities</h2>
         <div class="locations">
           <article class="location-card">
             <span class="tag">The original</span>
-            <h3>Sip &amp; Co — [Original City]</h3>
+            <h3>Sip &amp; Co. Pasco</h3>
             <address>
-              [Street address]<br>
-              [City, State ZIP]
+              8921 Sandifur Pkwy<br>
+              Pasco, WA 99301
             </address>
-            <ul class="hours">
-              <li><span>Mon – Fri</span><span>6:00am – 6:00pm</span></li>
-              <li><span>Saturday</span><span>7:00am – 6:00pm</span></li>
-              <li><span>Sunday</span><span>8:00am – 4:00pm</span></li>
-            </ul>
-            <p class="phone"><a href="tel:+10000000000">(000) 000-0000</a></p>
-            <a class="btn btn-outline" href="https://www.google.com/maps/search/?api=1&query=Sip+and+Co" target="_blank" rel="noopener">Get directions</a>
+            <p class="hours-note">Call or visit us for current hours.</p>
+            <div class="card-actions">
+              <a class="btn btn-outline" href="https://www.google.com/maps/search/?api=1&query=Sip+%26+Co+8921+Sandifur+Pkwy+Pasco+WA" target="_blank" rel="noopener">Get directions</a>
+              <a class="btn btn-outline" href="https://www.doordash.com/store/sip&co---8921-sandifur-pkwy-pasco-35644571/" target="_blank" rel="noopener">Order on DoorDash</a>
+            </div>
           </article>
 
           <article class="location-card featured" id="richland">
             <span class="tag tag-new">Now open</span>
-            <h3>Sip &amp; Co — Richland</h3>
+            <h3>Sip &amp; Co. Richland</h3>
             <address>
-              [Street address]<br>
-              Richland, [State ZIP]
+              2588 Queensgate Dr<br>
+              Richland, WA 99352
             </address>
             <ul class="hours">
-              <li><span>Mon – Fri</span><span>6:00am – 6:00pm</span></li>
-              <li><span>Saturday</span><span>7:00am – 6:00pm</span></li>
-              <li><span>Sunday</span><span>8:00am – 4:00pm</span></li>
+              <li><span>Mon – Fri</span><span>5:00am – 7:00pm</span></li>
+              <li><span>Sat – Sun</span><span>7:00am – 6:00pm</span></li>
             </ul>
-            <p class="phone"><a href="tel:+10000000000">(000) 000-0000</a></p>
-            <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Sip+and+Co+Richland" target="_blank" rel="noopener">Get directions</a>
+            <p class="phone"><a href="tel:+15092229090">(509) 222-9090</a></p>
+            <div class="card-actions">
+              <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Sip+%26+Co+2588+Queensgate+Dr+Richland+WA" target="_blank" rel="noopener">Get directions</a>
+            </div>
           </article>
         </div>
       </div>
     </section>
 
     <!-- About -->
-    <section id="about" class="section">
+    <section id="about" class="section section-alt">
       <div class="container about">
         <div>
           <p class="eyebrow">Our story</p>
-          <h2>Made for slowing down</h2>
-          <p>Sip &amp; Co started with a simple idea: a great drink tastes even better when it's shared. What began as one neighborhood shop has grown into a second home in Richland — same recipes, same friendly faces, more room to gather.</p>
-          <p>Whether you're grabbing a quick cold brew on the way to work or settling in with friends, we're glad you're here.</p>
+          <h2>Local, family-run, and always fresh</h2>
+          <p>Sip &amp; Co. is owned by husband-and-wife team Emilio Avila, a Marine Corps Reserve veteran, and Veronica Gonzalez. They wanted drinks that look as good as they taste and travel as well as you do, so every drink is made fresh and sealed in a can.</p>
+          <p>We started on Sandifur Parkway in Pasco. Now we've opened a second home on Queensgate Drive in Richland. We're a local business, not a franchise, and we're glad you're here.</p>
         </div>
         <div class="stats">
-          <div><strong>2</strong><span>Locations</span></div>
-          <div><strong>30+</strong><span>Drinks on the menu</span></div>
-          <div><strong>&infin;</strong><span>Good conversations</span></div>
+          <div><strong>2</strong><span>Tri-Cities locations</span></div>
+          <div><strong>45+</strong><span>Drinks on the menu</span></div>
+          <div><strong>100%</strong><span>Locally owned</span></div>
         </div>
       </div>
     </section>
@@ -331,12 +392,8 @@ a { color: inherit; }
       <div class="container contact">
         <div>
           <h2>Say hello</h2>
-          <p>Questions, catering, or event bookings? Drop us a note and we'll get back to you.</p>
-          <p class="socials">
-            <a href="#" aria-label="Instagram">Instagram</a> ·
-            <a href="#" aria-label="Facebook">Facebook</a> ·
-            <a href="#" aria-label="TikTok">TikTok</a>
-          </p>
+          <p>Questions, catering or a big group order? Send us a note and we'll get back to you.</p>
+          <p>Richland: <a href="tel:+15092229090">(509) 222-9090</a></p>
         </div>
         <form class="contact-form" id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
           <input type="hidden" name="form-name" value="contact">
@@ -345,7 +402,7 @@ a { color: inherit; }
           <label>Email<input type="email" name="email" required></label>
           <label>Location
             <select name="location">
-              <option>Original location</option>
+              <option>Pasco</option>
               <option>Richland</option>
             </select>
           </label>
@@ -359,8 +416,8 @@ a { color: inherit; }
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <span class="logo">Sip <span>&amp;</span> Co</span>
-      <span>&copy; <span id="year"></span> Sip &amp; Co. All rights reserved.</span>
+      <span class="logo">Sip <span>&amp;</span> Co.</span>
+      <span>Pasco &amp; Richland, WA · &copy; <span id="year"></span> Sip &amp; Co.</span>
     </div>
   </footer>
 

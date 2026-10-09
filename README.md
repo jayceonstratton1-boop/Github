@@ -7,13 +7,11 @@ Static website for Sip & Co: a home page, menu, both locations (including the ne
 - `styles.css` – styling (responsive, mobile menu)
 - `script.js` – mobile nav, menu tabs, contact form
 
-## To fill in
-Search `index.html` for `[` placeholders and `(000) 000-0000`:
-- Original location: city, street address, ZIP, phone
-- Richland location: street address, state/ZIP, phone
-- Hours, menu items and prices
-- Social links (`href="#"`)
-- Contact form: wired to Netlify Forms: submissions show up in the Netlify dashboard under Forms.
+## Still to confirm
+- Pasco hours and phone number (not shown yet)
+- Social media links (none on the site yet)
+- Menu prices: taken from the online menu, so check them against the in-store menu
+- Contact form is wired to Netlify Forms: submissions show up in the Netlify dashboard under Forms.
 
 ## Preview
 Open `index.html` in a browser. It can be hosted as-is on GitHub Pages, Netlify or similar.
