@@ -13,7 +13,7 @@ Search `index.html` for `[` placeholders and `(000) 000-0000`:
 - Richland location: street address, state/ZIP, phone
 - Hours, menu items and prices
 - Social links (`href="#"`)
-- Contact form: currently front-end only. Connect it to a service such as Formspree or Netlify Forms to receive messages.
+- Contact form: wired to Netlify Forms: submissions show up in the Netlify dashboard under Forms.
 
 ## Preview
 Open `index.html` in a browser. It can be hosted as-is on GitHub Pages, Netlify or similar.

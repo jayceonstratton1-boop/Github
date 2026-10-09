@@ -25,11 +25,23 @@ tabs.forEach((tab) =>
   })
 );
 
-// Contact form (front-end only — connect to a form service to receive messages)
-document.getElementById("contact-form").addEventListener("submit", (e) => {
+// Contact form: submits to Netlify Forms without leaving the page
+document.getElementById("contact-form").addEventListener("submit", async (e) => {
   e.preventDefault();
-  e.target.reset();
-  e.target.querySelector(".form-status").textContent = "Thanks! We'll be in touch soon.";
+  const form = e.target;
+  const status = form.querySelector(".form-status");
+  try {
+    const res = await fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(new FormData(form)).toString(),
+    });
+    if (!res.ok) throw new Error(res.status);
+    form.reset();
+    status.textContent = "Thanks! We'll be in touch soon.";
+  } catch {
+    status.textContent = "Sorry, something went wrong. Please call or try again.";
+  }
 });
 
 document.getElementById("year").textContent = new Date().getFullYear();
