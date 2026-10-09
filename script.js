@@ -50,7 +50,7 @@ const drinks = [...document.querySelectorAll(".menu-panel")].flatMap((panel) =>
     cat: panel.dataset.panel,
     name: item.querySelector("h3").textContent,
     desc: item.querySelector("p")?.textContent || "A Sip & Co. favorite.",
-    price: item.querySelector(".price").textContent,
+    price: item.querySelector(".price")?.textContent || "",
   }))
 );
 const canColors = {
