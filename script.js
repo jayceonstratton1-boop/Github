@@ -30,6 +30,11 @@ document.getElementById("contact-form").addEventListener("submit", async (e) => 
   e.preventDefault();
   const form = e.target;
   const status = form.querySelector(".form-status");
+  // Opened as a local file (demo preview): there's no server to send to yet
+  if (location.protocol === "file:") {
+    status.textContent = "Preview only: messages will send once the site is live.";
+    return;
+  }
   try {
     const res = await fetch("/", {
       method: "POST",
@@ -45,14 +50,15 @@ document.getElementById("contact-form").addEventListener("submit", async (e) => 
 });
 
 // Drink picker: pulls drinks straight from the menu so it never goes stale
+const skipInPicker = ["Water in a Can", "Refreshers / Lemonades", "Chocolate Milk", "Customized Energy Drink"];
 const drinks = [...document.querySelectorAll(".menu-panel")].flatMap((panel) =>
   [...panel.querySelectorAll(".menu-item")].map((item) => ({
     cat: panel.dataset.panel,
     name: item.querySelector("h3").textContent,
-    desc: item.querySelector("p")?.textContent || "A Sip & Co. favorite.",
+    desc: item.querySelector("p")?.textContent || "A fan favorite. Ask for it at the window!",
     price: item.querySelector(".price")?.textContent || "",
   }))
-);
+).filter((d) => !skipInPicker.includes(d.name));
 const canColors = {
   redbulls: ["#ff6b8b", "#ffb36b", "#fff1e0"],
   matcha: ["#b58ee0", "#a9cf7f", "#e6f2d2"],

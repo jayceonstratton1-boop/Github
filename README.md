@@ -12,7 +12,6 @@ Static website for Sip & Co: a home page, menu, both locations (including the ne
 - Prices: coffee, specialty coffee and most matcha prices come from the in-store menu board. Energy drinks, caffeine-free drinks and a few matchas show no price because their prices were cut off in the board photo.
 - Pasco hours and phone number (not shown yet)
 - Social media links (none on the site yet)
-- Menu prices: taken from the online menu, so check them against the in-store menu
 - Contact form is wired to Netlify Forms: submissions show up in the Netlify dashboard under Forms.
 
 ## Preview
