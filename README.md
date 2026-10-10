@@ -20,5 +20,5 @@ Static website for Sip & Co, in English and Spanish (ES/EN button in the header)
 - Pasco phone number, whether catering is offered. (Instagram: @sip.co__, linked in the fall section, contact section and footer.)
 
 ## Before launch
-- The link-preview tags and Google business details in `site/index.html` use `https://sip-and-co-bcym.netlify.app/`. If the site gets its own domain, replace that URL.
+- The link-preview tags and Google business details in `site/index.html` use `https://sip-and-co-web.netlify.app/`. If the site gets its own domain, replace that URL.
 - Contact form uses Netlify Forms: after the first deploy, turn on form detection (Project configuration > Forms), redeploy, add an email notification to the owners' address, and send a test message.
