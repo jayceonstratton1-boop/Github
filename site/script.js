@@ -165,7 +165,18 @@ chips.forEach((chip) =>
 );
 let lastPick = null;
 document.getElementById("pick-menu").addEventListener("click", () => lastPick && goToTab(lastPick.cat));
-document.getElementById("shake").addEventListener("click", () => {
+let shaking = false;
+function shakeCan() {
+  if (shaking) return;
+  shaking = true;
+  // On phones the can sits below the button: bring it into view so the shake is visible
+  const bar = document.querySelector(".mobile-bar");
+  const barHeight = bar && getComputedStyle(bar).display !== "none" ? bar.offsetHeight : 0;
+  const box = can.getBoundingClientRect();
+  if (box.top < 70 || box.bottom > innerHeight - barHeight) {
+    const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    can.scrollIntoView({ block: "center", behavior: calm ? "auto" : "smooth" });
+  }
   const pool = drinks.filter((d) => filter === "all" || d.cat === filter);
   const pick = pool[Math.floor(Math.random() * pool.length)];
   can.classList.remove("landed");
@@ -181,7 +192,60 @@ document.getElementById("shake").addEventListener("click", () => {
     can.classList.add("landed");
     lastPick = pick;
     document.getElementById("pick-actions").hidden = false;
+    shaking = false;
   }, 900);
+}
+document.getElementById("shake").addEventListener("click", shakeCan);
+can.addEventListener("click", shakeCan);
+can.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" || e.key === " ") {
+    e.preventDefault();
+    shakeCan();
+  }
 });
+
+// Shake your phone to shake the can (only while the drink picker is on screen)
+const motionBtn = document.getElementById("motion-btn");
+const shakeHint = document.getElementById("shake-hint");
+let pickerOnScreen = false;
+new IntersectionObserver(([entry]) => (pickerOnScreen = entry.isIntersecting), { threshold: 0.3 })
+  .observe(document.getElementById("picker"));
+
+let lastMotion = null;
+let lastShakeAt = 0;
+function onMotion(e) {
+  const a = e.accelerationIncludingGravity;
+  if (!a || a.x == null) return;
+  if (lastMotion) {
+    const jolt = Math.abs(a.x - lastMotion.x) + Math.abs(a.y - lastMotion.y) + Math.abs(a.z - lastMotion.z);
+    if (jolt > 22 && pickerOnScreen && e.timeStamp - lastShakeAt > 1500) {
+      lastShakeAt = e.timeStamp;
+      shakeCan();
+    }
+  }
+  lastMotion = { x: a.x, y: a.y, z: a.z };
+}
+function enablePhoneShake() {
+  window.addEventListener("devicemotion", onMotion);
+  motionBtn.hidden = true;
+  shakeHint.textContent = "📳 Or shake your phone!";
+  shakeHint.hidden = false;
+}
+if ("DeviceMotionEvent" in window && matchMedia("(pointer: coarse)").matches) {
+  if (typeof DeviceMotionEvent.requestPermission === "function") {
+    // iPhone: motion needs the visitor's OK, asked from a tap
+    motionBtn.hidden = false;
+    motionBtn.addEventListener("click", async () => {
+      try {
+        if ((await DeviceMotionEvent.requestPermission()) === "granted") return enablePhoneShake();
+      } catch {}
+      motionBtn.hidden = true;
+      shakeHint.textContent = "Phone shake is off. Tap the can instead!";
+      shakeHint.hidden = false;
+    });
+  } else {
+    enablePhoneShake();
+  }
+}
 
 document.getElementById("year").textContent = new Date().getFullYear();

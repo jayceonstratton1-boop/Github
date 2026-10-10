@@ -430,3 +430,13 @@ a[href^="tel:"] { white-space: nowrap; }
 .fall .mini-can, .favorites .mini-can { width: 76px; }
 .fall .mini-can-body, .favorites .mini-can-body { height: 124px; display: grid; place-items: center; overflow: hidden; }
 .can-logo { width: 72%; height: auto; opacity: 0.85; transform: rotate(-8deg); }
+
+/* The can itself is tappable */
+.can { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.can:focus-visible { outline: 3px solid var(--espresso); outline-offset: 6px; border-radius: 12px; }
+
+/* Phone shake */
+.motion-btn { margin-left: 0.5rem; }
+.motion-btn[hidden], .shake-hint[hidden] { display: none; }
+.shake-hint { margin-top: 0.75rem; font-weight: 600; color: var(--espresso); }
+@media (max-width: 420px) { .motion-btn { margin: 0.75rem 0 0; } }

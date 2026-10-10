@@ -362,14 +362,16 @@
             <button class="chip" data-filter="fall">Fall 🎃</button>
           </div>
           <button class="btn btn-big" id="shake">Shake the can</button>
+          <button class="btn btn-ghost btn-small motion-btn" id="motion-btn" hidden>📳 Turn on phone shake</button>
+          <p class="shake-hint" id="shake-hint" hidden></p>
         </div>
         <div class="can-wrap">
-          <div class="can" id="can" aria-live="polite">
+          <div class="can" id="can" role="button" tabindex="0" aria-label="Shake the can">
             <div class="can-lid"></div>
             <div class="can-body">
               <span class="can-label">Your sip</span>
-              <strong class="can-name" id="pick-name">?</strong>
-              <span class="can-desc" id="pick-desc">Tap "Shake the can"</span>
+              <strong class="can-name" id="pick-name" aria-live="polite">?</strong>
+              <span class="can-desc" id="pick-desc">Tap the can to shake it</span>
             </div>
           </div>
           <div class="pick-actions" id="pick-actions" hidden>
