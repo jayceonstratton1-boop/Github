@@ -145,7 +145,6 @@ const drinks = [...document.querySelectorAll(".menu-panel")].flatMap((panel) =>
     cat: panel.dataset.panel,
     name: item.querySelector("h3").textContent,
     desc: item.querySelector("p")?.textContent || "A fan favorite. Ask for it at the window!",
-    price: item.querySelector(".price")?.textContent || "",
   }))
 ).filter((d) => !skipInPicker.includes(d.name));
 const canColors = {
@@ -178,7 +177,6 @@ document.getElementById("shake").addEventListener("click", () => {
     can.style.setProperty("--can-bot", bot);
     document.getElementById("pick-name").textContent = pick.name;
     document.getElementById("pick-desc").textContent = pick.desc;
-    document.getElementById("pick-price").textContent = pick.price;
     can.classList.remove("shaking");
     can.classList.add("landed");
     lastPick = pick;

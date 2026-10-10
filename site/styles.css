@@ -256,7 +256,6 @@ a { color: inherit; }
 .can-label { font-family: "Fraunces", serif; font-style: italic; color: var(--espresso); opacity: 0.7; }
 .can-name { font-family: "Fraunces", serif; font-size: 1.7rem; line-height: 1.1; color: var(--espresso); }
 .can-desc { font-size: 0.85rem; color: var(--espresso); opacity: 0.8; }
-.can-price { font-weight: 700; color: var(--espresso); font-size: 1.1rem; }
 .can.shaking { animation: shake 0.9s ease-in-out; }
 @keyframes shake {
   0%, 100% { transform: rotate(0); }

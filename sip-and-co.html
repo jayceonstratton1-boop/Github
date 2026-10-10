@@ -365,7 +365,6 @@ a { color: inherit; }
 .can-label { font-family: "Fraunces", serif; font-style: italic; color: var(--espresso); opacity: 0.7; }
 .can-name { font-family: "Fraunces", serif; font-size: 1.7rem; line-height: 1.1; color: var(--espresso); }
 .can-desc { font-size: 0.85rem; color: var(--espresso); opacity: 0.8; }
-.can-price { font-weight: 700; color: var(--espresso); font-size: 1.1rem; }
 .can.shaking { animation: shake 0.9s ease-in-out; }
 @keyframes shake {
   0%, 100% { transform: rotate(0); }
@@ -799,7 +798,6 @@ a[href^="tel:"] { white-space: nowrap; }
               <span class="can-label">Your sip</span>
               <strong class="can-name" id="pick-name">?</strong>
               <span class="can-desc" id="pick-desc">Tap "Shake the can"</span>
-              <span class="can-price" id="pick-price"></span>
             </div>
           </div>
           <div class="pick-actions" id="pick-actions" hidden>
@@ -1104,7 +1102,6 @@ const drinks = [...document.querySelectorAll(".menu-panel")].flatMap((panel) =>
     cat: panel.dataset.panel,
     name: item.querySelector("h3").textContent,
     desc: item.querySelector("p")?.textContent || "A fan favorite. Ask for it at the window!",
-    price: item.querySelector(".price")?.textContent || "",
   }))
 ).filter((d) => !skipInPicker.includes(d.name));
 const canColors = {
@@ -1137,7 +1134,6 @@ document.getElementById("shake").addEventListener("click", () => {
     can.style.setProperty("--can-bot", bot);
     document.getElementById("pick-name").textContent = pick.name;
     document.getElementById("pick-desc").textContent = pick.desc;
-    document.getElementById("pick-price").textContent = pick.price;
     can.classList.remove("shaking");
     can.classList.add("landed");
     lastPick = pick;
