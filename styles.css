@@ -369,3 +369,13 @@ a { color: inherit; }
   .mobile-bar a:first-child { background: #fff; color: #141414; border-color: #fff; }
   body { padding-bottom: calc(62px + env(safe-area-inset-bottom)); }
 }
+
+/* Location switch */
+.loc-switch { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.75rem; }
+.loc-switch-label { font-size: 0.9rem; color: var(--mocha); margin-right: 0.25rem; }
+.loc-btn {
+  font: inherit; font-size: 0.95rem; font-weight: 600; cursor: pointer; min-height: 44px; padding: 0.5rem 1.25rem;
+  border-radius: 999px; border: 1px solid rgba(20, 20, 20, 0.25); background: rgba(255, 255, 255, 0.7); color: var(--espresso);
+}
+.loc-btn.active { background: var(--espresso); color: #fff; border-color: var(--espresso); }
+.loc-switch + .open-status { margin-top: 1rem; }

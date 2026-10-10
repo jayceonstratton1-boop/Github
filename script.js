@@ -34,35 +34,67 @@ document.querySelectorAll("[data-goto-tab]").forEach((el) =>
   el.addEventListener("click", () => goToTab(el.dataset.gotoTab))
 );
 
-// Richland open/closed status, in Pacific time
-const richlandHours = { weekday: [5, 19], weekend: [7, 18] };
+// Locations: open/closed status (Pacific time) and the visitor's chosen shop
+const locations = {
+  pasco: {
+    name: "Pasco",
+    hours: { weekday: [5, 19], weekend: [7, 18] },
+    map: "https://www.google.com/maps/search/?api=1&query=Sip+%26+Co+8921+Sandifur+Pkwy+Pasco+WA",
+  },
+  richland: {
+    name: "Richland",
+    hours: { weekday: [5, 19], weekend: [7, 18] },
+    map: "https://www.google.com/maps/search/?api=1&query=Sip+%26+Co+2588+Queensgate+Dr+Richland+WA",
+  },
+};
+let chosen = "richland";
+try {
+  if (locations[localStorage.getItem("sipco-location")]) chosen = localStorage.getItem("sipco-location");
+} catch {}
+
 function fmtHour(h) {
   return h === 12 ? "12pm" : h > 12 ? `${h - 12}pm` : `${h}am`;
 }
-function richlandStatus() {
+function openStatus(key) {
+  const { name, hours } = locations[key];
   const parts = Object.fromEntries(
     new Intl.DateTimeFormat("en-US", {
       timeZone: "America/Los_Angeles", weekday: "short", hour: "numeric", minute: "numeric", hourCycle: "h23",
     }).formatToParts(new Date()).map((p) => [p.type, p.value])
   );
-  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  const day = days.indexOf(parts.weekday);
+  const day = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].indexOf(parts.weekday);
   const now = Number(parts.hour) + Number(parts.minute) / 60;
-  const hoursFor = (d) => (d === 0 || d === 6 ? richlandHours.weekend : richlandHours.weekday);
+  const hoursFor = (d) => (d === 0 || d === 6 ? hours.weekend : hours.weekday);
   const [open, close] = hoursFor(day);
-  if (now >= open && now < close) return { open: true, text: `Richland is open now · until ${fmtHour(close)}` };
-  if (now < open) return { open: false, text: `Richland opens today at ${fmtHour(open)}` };
-  return { open: false, text: `Richland opens tomorrow at ${fmtHour(hoursFor((day + 1) % 7)[0])}` };
+  if (now >= open && now < close) return { open: true, text: `${name} is open now · until ${fmtHour(close)}` };
+  if (now < open) return { open: false, text: `${name} opens today at ${fmtHour(open)}` };
+  return { open: false, text: `${name} opens tomorrow at ${fmtHour(hoursFor((day + 1) % 7)[0])}` };
 }
 function showStatus() {
-  const { open, text } = richlandStatus();
   document.querySelectorAll("[data-open-status]").forEach((el) => {
+    const key = el.dataset.openStatus === "chosen" ? chosen : el.dataset.openStatus;
+    const { open, text } = openStatus(key);
     el.textContent = text;
     el.classList.toggle("is-open", open);
     el.hidden = false;
   });
 }
-showStatus();
+function chooseLocation(key) {
+  chosen = key;
+  try { localStorage.setItem("sipco-location", key); } catch {}
+  document.querySelectorAll("[data-choose-location]").forEach((btn) => {
+    const on = btn.dataset.chooseLocation === key;
+    btn.classList.toggle("active", on);
+    btn.setAttribute("aria-pressed", on);
+  });
+  document.querySelectorAll("[data-directions]").forEach((a) => (a.href = locations[key].map));
+  document.querySelectorAll("[data-location-name]").forEach((el) => (el.textContent = locations[key].name));
+  showStatus();
+}
+document.querySelectorAll("[data-choose-location]").forEach((btn) =>
+  btn.addEventListener("click", () => chooseLocation(btn.dataset.chooseLocation))
+);
+chooseLocation(chosen);
 setInterval(showStatus, 60000);
 
 // Contact form: submits to Netlify Forms without leaving the page

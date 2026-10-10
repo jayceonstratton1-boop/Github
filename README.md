@@ -10,7 +10,7 @@ Static website for Sip & Co: a home page, menu, both locations (including the ne
 ## Still to confirm
 - Photos in `images/` were cropped from screenshots and AI-upscaled 4x (Real-ESRGAN). Original files from Sip & Co. (same file names) would still be sharper.
 - Prices: coffee, specialty coffee and most matcha prices come from the in-store menu board. Energy drinks, caffeine-free drinks and a few matchas show no price because their prices were cut off in the board photo.
-- Pasco hours and phone number (not shown yet)
+- Pasco phone number (hours now shown: Mon–Fri 5am–7pm, Sat–Sun 7am–6pm, from Joe Coffee, Apple Maps and Yelp listings; confirm with the owners)
 - Social media links (none on the site yet)
 - Contact form is wired to Netlify Forms: submissions show up in the Netlify dashboard under Forms.
 

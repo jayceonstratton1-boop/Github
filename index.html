@@ -38,7 +38,12 @@
           <a href="#locations" class="btn">Find a location</a>
           <a href="#menu" class="btn btn-ghost">See the menu</a>
         </div>
-        <p class="open-status" data-open-status hidden></p>
+        <div class="loc-switch" role="group" aria-label="Choose your location">
+          <span class="loc-switch-label">Your shop:</span>
+          <button class="loc-btn" data-choose-location="pasco" aria-pressed="false">Pasco</button>
+          <button class="loc-btn active" data-choose-location="richland" aria-pressed="true">Richland</button>
+        </div>
+        <p class="open-status" data-open-status="chosen" hidden></p>
       </div>
       <figure class="hero-media">
         <img src="images/ube-matcha-can.jpg" alt="Ube Matcha in a sealed Sip &amp; Co. can">
@@ -201,10 +206,15 @@
             <span class="tag">The original</span>
             <h3>Sip &amp; Co. Pasco</h3>
             <address>
-              8921 Sandifur Pkwy<br>
+              8921 Sandifur Pkwy, Bldg B<br>
               Pasco, WA 99301
             </address>
-            <p class="hours-note">Hours coming soon. Questions? Call our Richland shop at <a href="tel:+15092229090">(509) 222-9090</a>.</p>
+            <ul class="hours">
+              <li><span>Mon – Fri</span><span>5:00am – 7:00pm</span></li>
+              <li><span>Sat – Sun</span><span>7:00am – 6:00pm</span></li>
+            </ul>
+            <p class="open-status" data-open-status="pasco" hidden></p>
+            <p class="hours-note">Questions? Call our Richland shop at <a href="tel:+15092229090">(509) 222-9090</a>.</p>
             <div class="card-actions">
               <a class="btn btn-outline" href="https://www.google.com/maps/search/?api=1&query=Sip+%26+Co+8921+Sandifur+Pkwy+Pasco+WA" target="_blank" rel="noopener">Get directions</a>
               <a class="btn btn-outline" href="https://www.doordash.com/store/sip&co---8921-sandifur-pkwy-pasco-35644571/" target="_blank" rel="noopener">Order on DoorDash</a>
@@ -222,7 +232,7 @@
               <li><span>Mon – Fri</span><span>5:00am – 7:00pm</span></li>
               <li><span>Sat – Sun</span><span>7:00am – 6:00pm</span></li>
             </ul>
-            <p class="open-status" data-open-status hidden></p>
+            <p class="open-status" data-open-status="richland" hidden></p>
             <p class="phone"><a href="tel:+15092229090">(509) 222-9090</a></p>
             <div class="card-actions">
               <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Sip+%26+Co+2588+Queensgate+Dr+Richland+WA" target="_blank" rel="noopener">Get directions</a>
@@ -281,7 +291,7 @@
             </div>
           </div>
           <div class="pick-actions" id="pick-actions" hidden>
-            <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Sip+%26+Co+2588+Queensgate+Dr+Richland+WA" target="_blank" rel="noopener">Get it in Richland &rarr;</a>
+            <a class="btn" data-directions href="https://www.google.com/maps/search/?api=1&query=Sip+%26+Co+2588+Queensgate+Dr+Richland+WA" target="_blank" rel="noopener">Get it in <span data-location-name>Richland</span> &rarr;</a>
             <button class="btn btn-ghost" id="pick-menu">See it on the menu</button>
           </div>
         </div>
@@ -328,7 +338,7 @@
         </div>
         <div>
           <h4>Pasco</h4>
-          <p>8921 Sandifur Pkwy<br>Pasco, WA 99301</p>
+          <p>8921 Sandifur Pkwy, Bldg B<br>Pasco, WA 99301<br>Mon–Fri 5am–7pm · Sat–Sun 7am–6pm</p>
           <a href="https://www.doordash.com/store/sip&co---8921-sandifur-pkwy-pasco-35644571/" target="_blank" rel="noopener">Order on DoorDash &rarr;</a>
         </div>
         <div>
@@ -355,7 +365,7 @@
 
   <nav class="mobile-bar" aria-label="Quick actions">
     <a href="tel:+15092229090">Call</a>
-    <a href="https://www.google.com/maps/search/?api=1&query=Sip+%26+Co+2588+Queensgate+Dr+Richland+WA" target="_blank" rel="noopener">Directions</a>
+    <a data-directions href="https://www.google.com/maps/search/?api=1&query=Sip+%26+Co+2588+Queensgate+Dr+Richland+WA" target="_blank" rel="noopener">Directions</a>
     <a href="https://www.doordash.com/store/sip&co---8921-sandifur-pkwy-pasco-35644571/" target="_blank" rel="noopener">Order online</a>
   </nav>
 
