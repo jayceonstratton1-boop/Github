@@ -38,6 +38,7 @@
           <a href="#locations" class="btn">Find a location</a>
           <a href="#menu" class="btn btn-ghost">See the menu</a>
         </div>
+        <p class="open-status" data-open-status hidden></p>
       </div>
       <figure class="hero-media">
         <img src="images/ube-matcha-can.jpg" alt="Ube Matcha in a sealed Sip &amp; Co. can">
@@ -51,6 +52,40 @@
       <div class="container banner-inner">
         <strong>New!</strong> Our second shop is now open at 2588 Queensgate Dr in Richland.
         <a href="#richland">Hours &amp; directions &rarr;</a>
+      </div>
+    </section>
+
+    <!-- Fan favorites -->
+    <section class="section favorites" id="favorites">
+      <div class="container">
+        <p class="eyebrow">Fan favorites</p>
+        <h2>Not sure what to get? Start here.</h2>
+        <div class="fav-grid">
+          <article class="fav-card">
+            <div class="mini-can" style="--can-top: #9b6fd6; --can-mid: #a9cf7f; --can-bot: #e6f2d2;"><div class="can-lid"></div><div class="mini-can-body"></div></div>
+            <h3>Ube Matcha</h3>
+            <p>Earthy matcha and sweet ube in purple and green layers.</p>
+            <div class="fav-foot"><span class="fav-price">$8.00</span><button class="fav-link" data-goto-tab="matcha">See on menu &rarr;</button></div>
+          </article>
+          <article class="fav-card">
+            <div class="mini-can" style="--can-top: #6b4a35; --can-mid: #d9b48f; --can-bot: #f6ead9;"><div class="can-lid"></div><div class="mini-can-body"></div></div>
+            <h3>Dulce de Leche</h3>
+            <p>Our fan favorite: creamy dulce de leche coffee with caramel drizzle.</p>
+            <div class="fav-foot"><span class="fav-price">$7.25</span><button class="fav-link" data-goto-tab="coffee">See on menu &rarr;</button></div>
+          </article>
+          <article class="fav-card">
+            <div class="mini-can" style="--can-top: #ff6b8b; --can-mid: #ffb3c4; --can-bot: #fff1f3;"><div class="can-lid"></div><div class="mini-can-body"></div></div>
+            <h3>Pink Wave</h3>
+            <p>Red Bull, creamy layers and pink hues with red fruit bits.</p>
+            <div class="fav-foot"><span class="fav-price">Energy</span><button class="fav-link" data-goto-tab="redbulls">See on menu &rarr;</button></div>
+          </article>
+          <article class="fav-card">
+            <div class="mini-can" style="--can-top: #ff8fa3; --can-mid: #a9cf7f; --can-bot: #eef5e3;"><div class="can-lid"></div><div class="mini-can-body"></div></div>
+            <h3>Strawberry Matcha</h3>
+            <p>Strawberry and matcha, layered and sealed.</p>
+            <div class="fav-foot"><span class="fav-price">$7.50</span><button class="fav-link" data-goto-tab="matcha">See on menu &rarr;</button></div>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -187,6 +222,7 @@
               <li><span>Mon – Fri</span><span>5:00am – 7:00pm</span></li>
               <li><span>Sat – Sun</span><span>7:00am – 6:00pm</span></li>
             </ul>
+            <p class="open-status" data-open-status hidden></p>
             <p class="phone"><a href="tel:+15092229090">(509) 222-9090</a></p>
             <div class="card-actions">
               <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Sip+%26+Co+2588+Queensgate+Dr+Richland+WA" target="_blank" rel="noopener">Get directions</a>
@@ -243,6 +279,10 @@
               <span class="can-desc" id="pick-desc">Tap "Shake the can"</span>
               <span class="can-price" id="pick-price"></span>
             </div>
+          </div>
+          <div class="pick-actions" id="pick-actions" hidden>
+            <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Sip+%26+Co+2588+Queensgate+Dr+Richland+WA" target="_blank" rel="noopener">Get it in Richland &rarr;</a>
+            <button class="btn btn-ghost" id="pick-menu">See it on the menu</button>
           </div>
         </div>
       </div>
@@ -312,6 +352,12 @@
       </div>
     </div>
   </footer>
+
+  <nav class="mobile-bar" aria-label="Quick actions">
+    <a href="tel:+15092229090">Call</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=Sip+%26+Co+2588+Queensgate+Dr+Richland+WA" target="_blank" rel="noopener">Directions</a>
+    <a href="https://www.doordash.com/store/sip&co---8921-sandifur-pkwy-pasco-35644571/" target="_blank" rel="noopener">Order online</a>
+  </nav>
 
   <script src="script.js"></script>
 </body>
