@@ -1,6 +1,6 @@
 # Sip & Co Website
 
-Static website for Sip & Co: a home page, fan favorites, menu, drink picker, both locations (Pasco and the newer Richland shop) with live open/closed status, the company story and a contact form.
+Static website for Sip & Co, in English and Spanish (ES/EN button in the header): a home page, fall menu with a Halloween countdown, fan favorites, menu, drink picker, both locations (Pasco and the newer Richland shop) with maps and live open/closed status, the company story and a contact form.
 
 ## Files
 - `site/` – the website itself (this is the only folder Netlify publishes)
@@ -16,6 +16,7 @@ Static website for Sip & Co: a home page, fan favorites, menu, drink picker, bot
 - Photos in `site/images/` were cropped from screenshots and AI-upscaled 4x (Real-ESRGAN). Original files from Sip & Co. (same file names) would be sharper. A staff member is visible in `cans-counter.jpg`.
 - Prices: the menu section shows no prices (the fall drinks had none, so all were removed for consistency). Known in-store prices: board photo for coffee/specialty/most matcha, Pink Wave $7.50; Fan favorites cards and the hero tag still show prices. Cup size unknown.
 - Hours (both shops: Mon–Fri 5am–7pm, Sat–Sun 7am–6pm) come from Joe Coffee, Apple Maps and Yelp listings; confirm with the owners. The open/closed status uses these hours.
+- Richland drive-thru (from a TikTok post), Mini Coffee/Mini Matcha and add-ons (from the menu board photo). Spanish text was translated by Claude; a native speaker should proofread.
 - Pasco phone number, whether catering is offered. (Instagram: @sip.co__, linked in the fall section, contact section and footer.)
 
 ## Before launch

@@ -1,3 +1,32 @@
+// Language: English / Español. Page text swaps via data-es attributes; text written by this script uses t()
+const strings = {
+  en: {
+    openNow: "{name} is open now · until {time}", opensToday: "{name} opens today at {time}", opensTomorrow: "{name} opens tomorrow at {time}",
+    preview: "Preview only: messages will send once the site is live.", sending: "Sending...", send: "Send message",
+    thanks: "Thanks! We'll be in touch soon.", error: "Sorry, something went wrong. Please call or try again.",
+    tapCan: "Tap the can to shake it", favorite: "A fan favorite. Ask for it at the window!",
+    shakeHint: "📳 Or shake your phone!", shakeOff: "Phone shake is off. Tap the can instead!",
+    daysLeft: "🎃 {n} days until Halloween · Today's spooky sip: {drink}", oneDay: "🎃 1 day until Halloween · Today's spooky sip: {drink}",
+    halloween: "🎃 Happy Halloween! Today's spooky sip: {drink}", fallPick: "🍂 Today's fall pick: {drink}",
+    langBtn: "ES", langLabel: "Ver en español", langAttr: "es",
+  },
+  es: {
+    openNow: "{name} está abierto ahora · hasta las {time}", opensToday: "{name} abre hoy a las {time}", opensTomorrow: "{name} abre mañana a las {time}",
+    preview: "Vista previa: los mensajes se enviarán cuando el sitio esté en línea.", sending: "Enviando...", send: "Enviar mensaje",
+    thanks: "¡Gracias! Te responderemos pronto.", error: "Lo sentimos, algo salió mal. Llámanos o inténtalo de nuevo.",
+    tapCan: "Toca la lata para agitarla", favorite: "Un favorito de nuestros clientes. ¡Pídelo en la ventanilla!",
+    shakeHint: "📳 ¡O agita tu teléfono!", shakeOff: "Agitar el teléfono está desactivado. ¡Toca la lata!",
+    daysLeft: "🎃 Faltan {n} días para Halloween · Bebida espeluznante del día: {drink}", oneDay: "🎃 Falta 1 día para Halloween · Bebida espeluznante del día: {drink}",
+    halloween: "🎃 ¡Feliz Halloween! Bebida espeluznante del día: {drink}", fallPick: "🍂 Bebida de otoño del día: {drink}",
+    langBtn: "EN", langLabel: "View in English", langAttr: "en",
+  },
+};
+let lang = "en";
+try {
+  if (localStorage.getItem("sipco-lang") === "es") lang = "es";
+} catch {}
+const t = (key, vars = {}) => strings[lang][key].replace(/\{(\w+)\}/g, (_, k) => vars[k]);
+
 // Mobile nav toggle
 const toggle = document.querySelector(".nav-toggle");
 const links = document.querySelector(".nav-links");
@@ -60,20 +89,25 @@ try {
 function fmtHour(h) {
   return h === 12 ? "12pm" : h > 12 ? `${h - 12}pm` : `${h}am`;
 }
-function openStatus(key) {
-  const { name, hours } = locations[key];
-  const parts = Object.fromEntries(
+// Today's date parts in Pacific time
+function pacificNow() {
+  return Object.fromEntries(
     new Intl.DateTimeFormat("en-US", {
-      timeZone: "America/Los_Angeles", weekday: "short", hour: "numeric", minute: "numeric", hourCycle: "h23",
+      timeZone: "America/Los_Angeles", weekday: "short", month: "numeric", day: "numeric", year: "numeric",
+      hour: "numeric", minute: "numeric", hourCycle: "h23",
     }).formatToParts(new Date()).map((p) => [p.type, p.value])
   );
+}
+function openStatus(key) {
+  const { name, hours } = locations[key];
+  const parts = pacificNow();
   const day = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].indexOf(parts.weekday);
   const now = Number(parts.hour) + Number(parts.minute) / 60;
   const hoursFor = (d) => (d === 0 || d === 6 ? hours.weekend : hours.weekday);
   const [open, close] = hoursFor(day);
-  if (now >= open && now < close) return { open: true, text: `${name} is open now · until ${fmtHour(close)}` };
-  if (now < open) return { open: false, text: `${name} opens today at ${fmtHour(open)}` };
-  return { open: false, text: `${name} opens tomorrow at ${fmtHour(hoursFor((day + 1) % 7)[0])}` };
+  if (now >= open && now < close) return { open: true, text: t("openNow", { name, time: fmtHour(close) }) };
+  if (now < open) return { open: false, text: t("opensToday", { name, time: fmtHour(open) }) };
+  return { open: false, text: t("opensTomorrow", { name, time: fmtHour(hoursFor((day + 1) % 7)[0]) }) };
 }
 function showStatus() {
   document.querySelectorAll("[data-open-status]").forEach((el) => {
@@ -115,12 +149,12 @@ document.getElementById("contact-form").addEventListener("submit", async (e) => 
   const status = form.querySelector(".form-status");
   // Opened as a local file (demo preview): there's no server to send to yet
   if (location.protocol === "file:") {
-    status.textContent = "Preview only: messages will send once the site is live.";
+    status.textContent = t("preview");
     return;
   }
   const button = form.querySelector('button[type="submit"]');
   button.disabled = true;
-  button.textContent = "Sending...";
+  button.textContent = t("sending");
   try {
     const res = await fetch("/", {
       method: "POST",
@@ -129,12 +163,12 @@ document.getElementById("contact-form").addEventListener("submit", async (e) => 
     });
     if (!res.ok) throw new Error(res.status);
     form.reset();
-    status.textContent = "Thanks! We'll be in touch soon.";
+    status.textContent = t("thanks");
   } catch {
-    status.textContent = "Sorry, something went wrong. Please call or try again.";
+    status.textContent = t("error");
   } finally {
     button.disabled = false;
-    button.textContent = "Send message";
+    button.textContent = t("send");
   }
 });
 
@@ -144,7 +178,7 @@ const drinks = [...document.querySelectorAll(".menu-panel")].flatMap((panel) =>
   [...panel.querySelectorAll(".menu-item")].map((item) => ({
     cat: panel.dataset.panel,
     name: item.querySelector("h3").textContent,
-    desc: item.querySelector("p")?.textContent || "A fan favorite. Ask for it at the window!",
+    item,
   }))
 ).filter((d) => !skipInPicker.includes(d.name));
 const canColors = {
@@ -164,6 +198,7 @@ chips.forEach((chip) =>
   })
 );
 let lastPick = null;
+const pickDesc = (pick) => pick.item.querySelector("p")?.textContent || t("favorite");
 document.getElementById("pick-menu").addEventListener("click", () => lastPick && goToTab(lastPick.cat));
 let shaking = false;
 function shakeCan() {
@@ -187,7 +222,7 @@ function shakeCan() {
     can.style.setProperty("--can-mid", mid);
     can.style.setProperty("--can-bot", bot);
     document.getElementById("pick-name").textContent = pick.name;
-    document.getElementById("pick-desc").textContent = pick.desc;
+    document.getElementById("pick-desc").textContent = pickDesc(pick);
     can.classList.remove("shaking");
     can.classList.add("landed");
     lastPick = pick;
@@ -228,7 +263,8 @@ function onMotion(e) {
 function enablePhoneShake() {
   window.addEventListener("devicemotion", onMotion);
   motionBtn.hidden = true;
-  shakeHint.textContent = "📳 Or shake your phone!";
+  shakeHint.textContent = t("shakeHint");
+  shakeHint.dataset.msg = "shakeHint";
   shakeHint.hidden = false;
 }
 if ("DeviceMotionEvent" in window && matchMedia("(pointer: coarse)").matches) {
@@ -240,12 +276,54 @@ if ("DeviceMotionEvent" in window && matchMedia("(pointer: coarse)").matches) {
         if ((await DeviceMotionEvent.requestPermission()) === "granted") return enablePhoneShake();
       } catch {}
       motionBtn.hidden = true;
-      shakeHint.textContent = "Phone shake is off. Tap the can instead!";
+      shakeHint.textContent = t("shakeOff");
+      shakeHint.dataset.msg = "shakeOff";
       shakeHint.hidden = false;
     });
   } else {
     enablePhoneShake();
   }
 }
+
+// Halloween countdown and a "spooky sip" that changes daily
+function showCountdown() {
+  const el = document.getElementById("fall-countdown");
+  const names = [...document.querySelectorAll('.menu-panel[data-panel="fall"] h3')].map((h) => h.textContent);
+  if (!el || !names.length) return;
+  const { year, month, day } = pacificNow();
+  const today = Date.UTC(year, month - 1, day);
+  const dayOfYear = Math.round((today - Date.UTC(year, 0, 1)) / 86400000);
+  const drink = names[dayOfYear % names.length];
+  const daysLeft = Math.round((Date.UTC(year, 9, 31) - today) / 86400000);
+  el.textContent =
+    daysLeft > 1 && daysLeft <= 31 ? t("daysLeft", { n: daysLeft, drink }) :
+    daysLeft === 1 ? t("oneDay", { drink }) :
+    daysLeft === 0 ? t("halloween", { drink }) :
+    t("fallPick", { drink });
+  el.hidden = false;
+}
+
+const langBtn = document.getElementById("lang-btn");
+function applyLang() {
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-es]").forEach((el) => {
+    if (el.dataset.en === undefined) el.dataset.en = el.innerHTML;
+    el.innerHTML = lang === "es" ? el.dataset.es : el.dataset.en;
+  });
+  langBtn.textContent = t("langBtn");
+  langBtn.setAttribute("aria-label", t("langLabel"));
+  langBtn.lang = t("langAttr");
+  // Refresh text this script writes
+  chooseLocation(chosen);
+  showCountdown();
+  document.getElementById("pick-desc").textContent = lastPick ? pickDesc(lastPick) : t("tapCan");
+  if (shakeHint.dataset.msg) shakeHint.textContent = t(shakeHint.dataset.msg);
+}
+langBtn.addEventListener("click", () => {
+  lang = lang === "en" ? "es" : "en";
+  try { localStorage.setItem("sipco-lang", lang); } catch {}
+  applyLang();
+});
+applyLang();
 
 document.getElementById("year").textContent = new Date().getFullYear();

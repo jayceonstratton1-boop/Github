@@ -445,3 +445,30 @@ a[href^="tel:"] { white-space: nowrap; }
 .price sup { font-size: 0.7em; margin-left: 1px; }
 .note sup { font-size: 0.8em; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* Location extras */
+.card-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.map { width: 100%; height: 180px; border: 0; border-radius: 10px; background: var(--sand); }
+
+/* Fall countdown */
+.fall-countdown { display: inline-block; margin: -1rem 0 2rem; padding: 0.5rem 1rem; border-radius: 999px; background: rgba(233, 139, 58, 0.15); border: 1px solid rgba(233, 139, 58, 0.45); color: #fff; font-weight: 600; }
+.fall-countdown[hidden] { display: none; }
+
+/* Add-ons note */
+.menu-dark .note.addons { color: rgba(250, 250, 250, 0.85); margin-top: 1.5rem; }
+.menu-dark .note.addons + .note { margin-top: 0.25rem; }
+.menu-dark .note strong { color: #fff; }
+
+/* Language switch */
+.logo-link { order: 0; }
+.nav-links { order: 1; margin-left: auto; }
+.lang-btn {
+  order: 2; margin-left: 1.25rem; font: inherit; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.05em; cursor: pointer;
+  min-width: 44px; min-height: 40px; padding: 0 0.75rem; border-radius: 999px; border: 1px solid rgba(20, 20, 20, 0.25);
+  background: transparent; color: var(--espresso);
+}
+.lang-btn:hover { border-color: var(--espresso); }
+.nav-toggle { order: 3; }
+@media (max-width: 760px) {
+  .lang-btn { margin-left: auto; margin-right: 0.5rem; }
+}

@@ -112,14 +112,15 @@
   <header class="site-header">
     <nav class="nav container">
       <a href="#top" class="logo-link"><img src="images/logo.png" alt="Sip &amp; Co." class="logo-img"></a>
+      <button class="lang-btn" id="lang-btn" type="button" lang="es" aria-label="Ver en español">ES</button>
       <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="site-nav">
         <span></span><span></span><span></span>
       </button>
       <ul class="nav-links" id="site-nav">
-        <li><a href="#menu">Menu</a></li>
-        <li><a href="#locations">Locations</a></li>
-        <li><a href="#about">Our Story</a></li>
-        <li><a href="#contact" class="btn btn-small">Contact</a></li>
+        <li><a href="#menu" data-es="Menú">Menu</a></li>
+        <li><a href="#locations" data-es="Ubicaciones">Locations</a></li>
+        <li><a href="#about" data-es="Nuestra historia">Our Story</a></li>
+        <li><a href="#contact" class="btn btn-small" data-es="Contacto">Contact</a></li>
       </ul>
     </nav>
   </header>
@@ -130,14 +131,14 @@
       <div class="container hero-grid">
       <div class="hero-inner">
         <p class="eyebrow">Pasco · Richland · Tri&#8209;Cities, WA</p>
-        <h1>Sealed fresh.<br>Made to go.</h1>
-        <p class="lead">Iced coffee, Red Bull blends and matcha, made to order and sealed in a can so you can grab it and go. Visit us in Pasco and Richland.</p>
+        <h1 data-es="Sellado fresco.&lt;br&gt;Listo para llevar.">Sealed fresh.<br>Made to go.</h1>
+        <p class="lead" data-es="Café helado, mezclas con Red Bull y matcha, preparados al momento y sellados en lata para llevar. Visítanos en Pasco y Richland.">Iced coffee, Red Bull blends and matcha, made to order and sealed in a can so you can grab it and go. Visit us in Pasco and Richland.</p>
         <div class="hero-actions">
-          <a href="#locations" class="btn">Find a location</a>
-          <a href="#menu" class="btn btn-ghost">See the menu</a>
+          <a href="#locations" class="btn" data-es="Encuentra una tienda">Find a location</a>
+          <a href="#menu" class="btn btn-ghost" data-es="Ver el menú">See the menu</a>
         </div>
         <div class="loc-switch" role="group" aria-label="Choose your location">
-          <span class="loc-switch-label">Your shop:</span>
+          <span class="loc-switch-label" data-es="Tu tienda:">Your shop:</span>
           <button class="loc-btn" data-choose-location="pasco" aria-pressed="false">Pasco</button>
           <button class="loc-btn active" data-choose-location="richland" aria-pressed="true">Richland</button>
         </div>
@@ -153,17 +154,18 @@
     <!-- Announcement -->
     <section class="banner">
       <div class="container banner-inner">
-        <strong>New!</strong> Our second shop is now open at 2588 Queensgate Dr in Richland.
-        <a href="#richland">Hours &amp; directions &rarr;</a>
+        <span data-es="&lt;strong&gt;¡Nuevo!&lt;/strong&gt; Llegó nuestro menú de otoño: 7 bebidas de temporada por tiempo limitado."><strong>New!</strong> Our fall menu is here: 7 seasonal drinks for a limited time.</span>
+        <a href="#fall" data-es="Ver el menú de otoño &amp;rarr;">See the fall menu &rarr;</a>
       </div>
     </section>
 
     <!-- Fall / Halloween seasonal menu -->
     <section class="section fall" id="fall">
       <div class="container">
-        <p class="eyebrow">Limited time · Fall menu</p>
-        <h2>Fall has officially entered the chat. <span aria-hidden="true">🍂</span></h2>
-        <p class="fall-lead">Seven new seasonal favorites made for sweater weather, crisp mornings and your daily Sip &amp; Co. run, just in time for Halloween.</p>
+        <p class="eyebrow" data-es="Por tiempo limitado · Menú de otoño">Limited time · Fall menu</p>
+        <h2 data-es="El otoño ya llegó oficialmente. &lt;span aria-hidden=&quot;true&quot;&gt;🍂&lt;/span&gt;">Fall has officially entered the chat. <span aria-hidden="true">🍂</span></h2>
+        <p class="fall-lead" data-es="Siete nuevas bebidas de temporada para el clima de suéter, las mañanas frescas y tu visita diaria a Sip &amp;amp; Co., justo a tiempo para Halloween.">Seven new seasonal favorites made for sweater weather, crisp mornings and your daily Sip &amp; Co. run, just in time for Halloween.</p>
+        <p class="fall-countdown" id="fall-countdown" hidden></p>
         <div class="fall-grid">
           <div class="fall-card">
             <div class="mini-can" style="--can-top: #c9772b; --can-mid: #e9b77a; --can-bot: #f6e3c8;"><div class="can-lid"></div><div class="mini-can-body"><img class="can-logo" src="images/logo.png" alt=""></div></div>
@@ -195,8 +197,8 @@
           </div>
         </div>
         <div class="fall-actions">
-          <button class="btn fall-btn" data-goto-tab="fall">See the fall menu &rarr;</button>
-          <a class="ig-link ig-link-light" href="https://www.instagram.com/sip.co__/" target="_blank" rel="noopener"><svg class="ig-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.3" fill="currentColor"/></svg><span>See it on Instagram</span></a>
+          <button class="btn fall-btn" data-goto-tab="fall" data-es="Ver el menú de otoño &amp;rarr;">See the fall menu &rarr;</button>
+          <a class="ig-link ig-link-light" href="https://www.instagram.com/sip.co__/" target="_blank" rel="noopener"><svg class="ig-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.3" fill="currentColor"/></svg><span data-es="Míralo en Instagram">See it on Instagram</span></a>
         </div>
       </div>
     </section>
@@ -204,32 +206,32 @@
     <!-- Fan favorites -->
     <section class="section favorites" id="favorites">
       <div class="container">
-        <p class="eyebrow">Fan favorites</p>
-        <h2>Not sure what to get? Start here.</h2>
+        <p class="eyebrow" data-es="Los favoritos">Fan favorites</p>
+        <h2 data-es="¿No sabes qué pedir? Empieza aquí.">Not sure what to get? Start here.</h2>
         <div class="fav-grid">
           <article class="fav-card">
             <div class="mini-can" style="--can-top: #9b6fd6; --can-mid: #a9cf7f; --can-bot: #e6f2d2;"><div class="can-lid"></div><div class="mini-can-body"><img class="can-logo" src="images/logo.png" alt=""></div></div>
             <h3>Ube Matcha</h3>
-            <p>Earthy matcha and sweet ube in purple and green layers.</p>
-            <div class="fav-foot"><span class="fav-price">$8.00</span><button class="fav-link" data-goto-tab="matcha">See on menu &rarr;</button></div>
+            <p data-es="Matcha terroso y ube dulce en capas moradas y verdes.">Earthy matcha and sweet ube in purple and green layers.</p>
+            <div class="fav-foot"><span class="fav-price">$8.00</span><button class="fav-link" data-goto-tab="matcha" data-es="Ver en el menú &amp;rarr;">See on menu &rarr;</button></div>
           </article>
           <article class="fav-card">
             <div class="mini-can" style="--can-top: #6b4a35; --can-mid: #d9b48f; --can-bot: #f6ead9;"><div class="can-lid"></div><div class="mini-can-body"><img class="can-logo" src="images/logo.png" alt=""></div></div>
             <h3>Dulce de Leche</h3>
-            <p>Our fan favorite: creamy dulce de leche coffee with caramel drizzle.</p>
-            <div class="fav-foot"><span class="fav-price">$7.25</span><button class="fav-link" data-goto-tab="coffee">See on menu &rarr;</button></div>
+            <p data-es="El favorito de nuestros clientes: café cremoso de dulce de leche con chorrito de caramelo.">Our fan favorite: creamy dulce de leche coffee with caramel drizzle.</p>
+            <div class="fav-foot"><span class="fav-price">$7.25</span><button class="fav-link" data-goto-tab="coffee" data-es="Ver en el menú &amp;rarr;">See on menu &rarr;</button></div>
           </article>
           <article class="fav-card">
             <div class="mini-can" style="--can-top: #ff6b8b; --can-mid: #ffb3c4; --can-bot: #fff1f3;"><div class="can-lid"></div><div class="mini-can-body"><img class="can-logo" src="images/logo.png" alt=""></div></div>
             <h3>Pink Wave</h3>
-            <p>Red Bull with strawberry and watermelon, creamy layers and red fruit bits.</p>
-            <div class="fav-foot"><span class="fav-price">$7.50</span><button class="fav-link" data-goto-tab="redbulls">See on menu &rarr;</button></div>
+            <p data-es="Red Bull con fresa y sandía, capas cremosas y trocitos de fruta roja.">Red Bull with strawberry and watermelon, creamy layers and red fruit bits.</p>
+            <div class="fav-foot"><span class="fav-price">$7.50</span><button class="fav-link" data-goto-tab="redbulls" data-es="Ver en el menú &amp;rarr;">See on menu &rarr;</button></div>
           </article>
           <article class="fav-card">
             <div class="mini-can" style="--can-top: #ff8fa3; --can-mid: #a9cf7f; --can-bot: #eef5e3;"><div class="can-lid"></div><div class="mini-can-body"><img class="can-logo" src="images/logo.png" alt=""></div></div>
             <h3>Strawberry Matcha</h3>
-            <p>Strawberry and matcha, layered and sealed.</p>
-            <div class="fav-foot"><span class="fav-price">$7.50</span><button class="fav-link" data-goto-tab="matcha">See on menu &rarr;</button></div>
+            <p data-es="Fresa y matcha, en capas y sellado.">Strawberry and matcha, layered and sealed.</p>
+            <div class="fav-foot"><span class="fav-price">$7.50</span><button class="fav-link" data-goto-tab="matcha" data-es="Ver en el menú &amp;rarr;">See on menu &rarr;</button></div>
           </article>
         </div>
       </div>
@@ -238,14 +240,14 @@
     <!-- How it works -->
     <section class="section how">
       <div class="container">
-        <p class="eyebrow">The Sip &amp; Co. difference</p>
-        <h2>Your drink, in a can</h2>
+        <p class="eyebrow" data-es="Lo que nos hace diferentes">The Sip &amp; Co. difference</p>
+        <h2 data-es="Tu bebida, en lata">Your drink, in a can</h2>
         <div class="how-grid">
         <img class="how-photo" src="images/cans-counter.jpg" alt="Three freshly sealed Sip &amp; Co. drinks on the counter">
         <div class="steps">
-          <div class="step"><span>1</span><h3>Pick your drink</h3><p>Choose from our Red Bull blends, matcha lattes, coffee and non-coffee drinks.</p></div>
-          <div class="step"><span>2</span><h3>Made fresh</h3><p>We mix it to order and pour it into a clear 12 oz or 16 oz Sip &amp; Co. can-style cup.</p></div>
-          <div class="step"><span>3</span><h3>Sealed &amp; ready</h3><p>An aluminum lid seals it tight, so no spills on your commute. Pop it open when you're ready.</p></div>
+          <div class="step"><span>1</span><h3 data-es="Elige tu bebida">Pick your drink</h3><p data-es="Elige entre nuestras mezclas con Red Bull, lattes de matcha, café y bebidas sin café.">Choose from our Red Bull blends, matcha lattes, coffee and non-coffee drinks.</p></div>
+          <div class="step"><span>2</span><h3 data-es="Hecho al momento">Made fresh</h3><p data-es="La preparamos al momento y la servimos en un vaso transparente tipo lata Sip &amp;amp; Co. de 12 o 16 oz.">We mix it to order and pour it into a clear 12 oz or 16 oz Sip &amp; Co. can-style cup.</p></div>
+          <div class="step"><span>3</span><h3 data-es="Sellado y listo">Sealed &amp; ready</h3><p data-es="Una tapa de aluminio la sella bien, así no se derrama en el camino. Ábrela cuando estés listo.">An aluminum lid seals it tight, so no spills on your commute. Pop it open when you're ready.</p></div>
         </div>
         </div>
       </div>
@@ -254,82 +256,85 @@
     <!-- Menu -->
     <section id="menu" class="section section-dark menu-dark">
       <div class="container">
-        <p class="eyebrow">What we pour</p>
-        <h2>Our menu</h2>
+        <p class="eyebrow" data-es="Lo que servimos">What we pour</p>
+        <h2 data-es="Nuestro menú">Our menu</h2>
         <div class="menu-tabs" role="tablist">
-          <button class="tab active" role="tab" aria-selected="true" data-tab="coffee">Coffee</button>
+          <button class="tab active" role="tab" aria-selected="true" data-tab="coffee" data-es="Café">Coffee</button>
           <button class="tab" role="tab" aria-selected="false" data-tab="matcha">Matcha</button>
           <button class="tab" role="tab" aria-selected="false" data-tab="redbulls">Red Bulls</button>
-          <button class="tab" role="tab" aria-selected="false" data-tab="caffeinefree">Non-Coffee</button>
-          <button class="tab tab-fall" role="tab" aria-selected="false" data-tab="fall">Fall 🎃</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="caffeinefree" data-es="Sin café">Non-Coffee</button>
+          <button class="tab tab-fall" role="tab" aria-selected="false" data-tab="fall" data-es="Otoño 🎃">Fall 🎃</button>
         </div>
 
         <div class="menu-panel" data-panel="redbulls">
-          <div class="menu-item"><div><h3>Pink Wave</h3><p>Red Bull with strawberry and watermelon, creamy layers and red fruit bits.</p></div></div>
-          <div class="menu-item"><div><h3>Neon Crush</h3><p>Red Bull with blue curaçao and mango, topped with cream and fruit.</p></div></div>
-          <div class="menu-item"><div><h3>The Cloud</h3><p>Red Bull with white peach and coconut milk, topped with a light foam.</p></div></div>
-          <div class="menu-item"><div><h3>Fresh Fix</h3><p>Red Bull layered in green and yellow with a refreshing fruit blend.</p></div></div>
-          <div class="menu-item"><div><h3>The Fiesta</h3><p>Red Bull with strawberry and peach, chamoy and diced fruit.</p></div></div>
-          <div class="menu-item"><div><h3>The Howitzer</h3><p>Red Bull with caramel and green apple.</p></div></div>
-          <div class="menu-item"><div><h3>The Firecracker</h3><p>Red Bull with pomegranate, fresh fruit chunks and a hint of spice.</p></div></div>
-          <div class="menu-item"><div><h3>The Tropic</h3><p>Red Bull with cucumber and passion fruit in a tropical gradient.</p></div></div>
-          <div class="menu-item"><div><h3>The Playa</h3><p>Red Bull with blue raspberry, coconut and lime.</p></div></div>
-          <div class="menu-item"><div><h3>The Alfa</h3><p>Red Bull with a house blend of fruity flavors.</p></div></div>
-          <div class="menu-item"><div><h3>Pink Gummy Bear</h3><p>Red Bull with sweet pink gummy bear flavor.</p></div></div>
-          <div class="menu-item"><div><h3>Sunset</h3><p>Red Bull with dragon fruit for an exotic twist.</p></div></div>
-          <div class="menu-item"><div><h3>The Nova</h3><p>Red Bull with dragon fruit: a smooth, striking pink drink.</p></div></div>
-          <div class="menu-item"><div><h3>Jolly Rancher</h3><p>Red Bull with sweet and sour Jolly Rancher candy flavors.</p></div></div>
-          <div class="menu-item"><div><h3>Mangonada w/ Red Bull</h3><p>Red Bull with mango, chamoy and Tajín.</p></div></div>
-          <div class="menu-item"><div><h3>Customized Energy Drink</h3><p>Red Bull with your choice of flavors and add-ins.</p></div></div>
+          <div class="menu-item"><div><h3>Pink Wave</h3><p data-es="Red Bull con fresa y sandía, capas cremosas y trocitos de fruta roja.">Red Bull with strawberry and watermelon, creamy layers and red fruit bits.</p></div></div>
+          <div class="menu-item"><div><h3>Neon Crush</h3><p data-es="Red Bull con blue curaçao y mango, con crema y fruta encima.">Red Bull with blue curaçao and mango, topped with cream and fruit.</p></div></div>
+          <div class="menu-item"><div><h3>The Cloud</h3><p data-es="Red Bull con durazno blanco y leche de coco, con una espuma ligera.">Red Bull with white peach and coconut milk, topped with a light foam.</p></div></div>
+          <div class="menu-item"><div><h3>Fresh Fix</h3><p data-es="Red Bull en capas verdes y amarillas con una refrescante mezcla de frutas.">Red Bull layered in green and yellow with a refreshing fruit blend.</p></div></div>
+          <div class="menu-item"><div><h3>The Fiesta</h3><p data-es="Red Bull con fresa y durazno, chamoy y fruta picada.">Red Bull with strawberry and peach, chamoy and diced fruit.</p></div></div>
+          <div class="menu-item"><div><h3>The Howitzer</h3><p data-es="Red Bull con caramelo y manzana verde.">Red Bull with caramel and green apple.</p></div></div>
+          <div class="menu-item"><div><h3>The Firecracker</h3><p data-es="Red Bull con granada, trozos de fruta fresca y un toque picante.">Red Bull with pomegranate, fresh fruit chunks and a hint of spice.</p></div></div>
+          <div class="menu-item"><div><h3>The Tropic</h3><p data-es="Red Bull con pepino y maracuyá en un degradado tropical.">Red Bull with cucumber and passion fruit in a tropical gradient.</p></div></div>
+          <div class="menu-item"><div><h3>The Playa</h3><p data-es="Red Bull con frambuesa azul, coco y limón.">Red Bull with blue raspberry, coconut and lime.</p></div></div>
+          <div class="menu-item"><div><h3>The Alfa</h3><p data-es="Red Bull con una mezcla de sabores frutales de la casa.">Red Bull with a house blend of fruity flavors.</p></div></div>
+          <div class="menu-item"><div><h3>Pink Gummy Bear</h3><p data-es="Red Bull con sabor dulce a ositos de goma rosas.">Red Bull with sweet pink gummy bear flavor.</p></div></div>
+          <div class="menu-item"><div><h3>Sunset</h3><p data-es="Red Bull con pitaya para un toque exótico.">Red Bull with dragon fruit for an exotic twist.</p></div></div>
+          <div class="menu-item"><div><h3>The Nova</h3><p data-es="Red Bull con pitaya: una bebida rosa, suave y llamativa.">Red Bull with dragon fruit: a smooth, striking pink drink.</p></div></div>
+          <div class="menu-item"><div><h3>Jolly Rancher</h3><p data-es="Red Bull con sabores agridulces de dulces Jolly Rancher.">Red Bull with sweet and sour Jolly Rancher candy flavors.</p></div></div>
+          <div class="menu-item"><div><h3>Mangonada w/ Red Bull</h3><p data-es="Red Bull con mango, chamoy y Tajín.">Red Bull with mango, chamoy and Tajín.</p></div></div>
+          <div class="menu-item"><div><h3>Customized Energy Drink</h3><p data-es="Red Bull con los sabores y extras que tú elijas.">Red Bull with your choice of flavors and add-ins.</p></div></div>
         </div>
         <div class="menu-panel" data-panel="matcha">
-          <div class="menu-item"><div><h3>Strawberry Matcha</h3><p>Matcha and milk layered with strawberry.</p></div></div>
-          <div class="menu-item"><div><h3>Coconut Matcha</h3><p>Matcha with creamy coconut milk.</p></div></div>
-          <div class="menu-item"><div><h3>Mango Matcha</h3><p>Matcha and milk layered with mango chunks.</p></div></div>
-          <div class="menu-item"><div><h3>Vanilla Matcha</h3><p>Matcha and milk with vanilla.</p></div></div>
-          <div class="menu-item"><div><h3>Banana Matcha</h3><p>Matcha and milk with creamy banana and a few blueberries.</p></div></div>
-          <div class="menu-item"><div><h3>Brown Sugar Matcha</h3><p>Matcha and milk sweetened with brown sugar.</p></div></div>
-          <div class="menu-item"><div><h3>Blueberry Matcha</h3><p>Matcha and milk layered with blueberry.</p></div></div>
-          <div class="menu-item"><div><h3>Ube Matcha</h3><p>Matcha and milk with sweet ube, in purple and green layers.</p></div></div>
+          <div class="menu-item"><div><h3>Strawberry Matcha</h3><p data-es="Matcha y leche en capas con fresa.">Matcha and milk layered with strawberry.</p></div></div>
+          <div class="menu-item"><div><h3>Coconut Matcha</h3><p data-es="Matcha con cremosa leche de coco.">Matcha with creamy coconut milk.</p></div></div>
+          <div class="menu-item"><div><h3>Mango Matcha</h3><p data-es="Matcha y leche en capas con trozos de mango.">Matcha and milk layered with mango chunks.</p></div></div>
+          <div class="menu-item"><div><h3>Vanilla Matcha</h3><p data-es="Matcha y leche con vainilla.">Matcha and milk with vanilla.</p></div></div>
+          <div class="menu-item"><div><h3>Banana Matcha</h3><p data-es="Matcha y leche con plátano cremoso y unos arándanos.">Matcha and milk with creamy banana and a few blueberries.</p></div></div>
+          <div class="menu-item"><div><h3>Brown Sugar Matcha</h3><p data-es="Matcha y leche endulzados con azúcar morena.">Matcha and milk sweetened with brown sugar.</p></div></div>
+          <div class="menu-item"><div><h3>Blueberry Matcha</h3><p data-es="Matcha y leche en capas con arándano.">Matcha and milk layered with blueberry.</p></div></div>
+          <div class="menu-item"><div><h3>Mini Matcha</h3><p data-es="Cualquier matcha en tamaño pequeño.">Any matcha in a smaller size.</p></div></div>
+          <div class="menu-item"><div><h3>Ube Matcha</h3><p data-es="Matcha y leche con ube dulce, en capas moradas y verdes.">Matcha and milk with sweet ube, in purple and green layers.</p></div></div>
         </div>
         <div class="menu-panel active" data-panel="coffee">
-          <div class="menu-item"><div><h3>Americano</h3><p>Double shot of espresso and water.</p></div></div>
-          <div class="menu-item"><div><h3>Americano w/ Cream</h3><p>Double shot of espresso, water and a splash of cream.</p></div></div>
-          <div class="menu-item"><div><h3>Americano w/ Cream &amp; Flavor</h3><p>With cream and your choice of syrup.</p></div></div>
-          <div class="menu-item"><div><h3>Latte</h3><p>Espresso and milk.</p></div></div>
-          <div class="menu-item"><div><h3>Frapp</h3><p>Coffee blended with milk and ice.</p></div></div>
-          <div class="menu-item"><div><h3>Cold Brew</h3><p>Steeped low and slow, served over ice. Smooth and robust.</p></div></div>
-          <div class="menu-item"><div><h3>Mocha</h3><p>Espresso, chocolate and milk.</p></div></div>
-          <div class="menu-item"><div><h3>Caramel Macchiato</h3><p>Milk, vanilla, espresso and caramel drizzle.</p></div></div>
-          <div class="menu-item"><div><h3>Dulce de Leche</h3><p>Fan favorite: creamy dulce de leche coffee with caramel drizzle.</p></div></div>
-          <div class="menu-item"><div><h3>Cloud Nine</h3><p>Creamy breve with white chocolate and crumbled graham cracker.</p></div></div>
-          <div class="menu-item"><div><h3>S&#x27;more Delight</h3><p>Breve with rich chocolate, toasted marshmallow and graham cracker.</p></div></div>
-          <div class="menu-item"><div><h3>Pistachio Breve</h3><p>Espresso and half-and-half with pistachio and a touch of chocolate.</p></div></div>
-          <div class="menu-item"><div><h3>The Veaa</h3><p>House specialty breve: espresso and half-and-half with a signature flavor.</p></div></div>
-          <div class="menu-item"><div><h3>The Cinnabon</h3><p>Sweet breve coffee infused with cinnamon.</p></div></div>
-          <div class="menu-item"><div><h3>Cloudy Mocha</h3><p>Espresso, chocolate and 2% milk: creamy and smooth.</p></div></div>
+          <div class="menu-item"><div><h3>Americano</h3><p data-es="Doble shot de espresso y agua.">Double shot of espresso and water.</p></div></div>
+          <div class="menu-item"><div><h3>Americano w/ Cream</h3><p data-es="Doble shot de espresso, agua y un toque de crema.">Double shot of espresso, water and a splash of cream.</p></div></div>
+          <div class="menu-item"><div><h3>Americano w/ Cream &amp; Flavor</h3><p data-es="Con crema y el jarabe que elijas.">With cream and your choice of syrup.</p></div></div>
+          <div class="menu-item"><div><h3>Latte</h3><p data-es="Espresso y leche.">Espresso and milk.</p></div></div>
+          <div class="menu-item"><div><h3>Frapp</h3><p data-es="Café licuado con leche y hielo.">Coffee blended with milk and ice.</p></div></div>
+          <div class="menu-item"><div><h3>Cold Brew</h3><p data-es="Reposado en frío lentamente y servido con hielo. Suave e intenso.">Steeped low and slow, served over ice. Smooth and robust.</p></div></div>
+          <div class="menu-item"><div><h3>Mocha</h3><p data-es="Espresso, chocolate y leche.">Espresso, chocolate and milk.</p></div></div>
+          <div class="menu-item"><div><h3>Caramel Macchiato</h3><p data-es="Leche, vainilla, espresso y chorrito de caramelo.">Milk, vanilla, espresso and caramel drizzle.</p></div></div>
+          <div class="menu-item"><div><h3>Dulce de Leche</h3><p data-es="Favorito de los clientes: café cremoso de dulce de leche con chorrito de caramelo.">Fan favorite: creamy dulce de leche coffee with caramel drizzle.</p></div></div>
+          <div class="menu-item"><div><h3>Cloud Nine</h3><p data-es="Breve cremoso con chocolate blanco y galleta graham desmoronada.">Creamy breve with white chocolate and crumbled graham cracker.</p></div></div>
+          <div class="menu-item"><div><h3>S&#x27;more Delight</h3><p data-es="Breve con chocolate, malvavisco tostado y galleta graham.">Breve with rich chocolate, toasted marshmallow and graham cracker.</p></div></div>
+          <div class="menu-item"><div><h3>Pistachio Breve</h3><p data-es="Espresso y half-and-half con pistache y un toque de chocolate.">Espresso and half-and-half with pistachio and a touch of chocolate.</p></div></div>
+          <div class="menu-item"><div><h3>The Veaa</h3><p data-es="Breve especial de la casa: espresso y half-and-half con un sabor exclusivo.">House specialty breve: espresso and half-and-half with a signature flavor.</p></div></div>
+          <div class="menu-item"><div><h3>The Cinnabon</h3><p data-es="Café breve dulce con canela.">Sweet breve coffee infused with cinnamon.</p></div></div>
+          <div class="menu-item"><div><h3>Cloudy Mocha</h3><p data-es="Espresso, chocolate y leche 2%: cremoso y suave.">Espresso, chocolate and 2% milk: creamy and smooth.</p></div></div>
+          <div class="menu-item"><div><h3>Mini Coffee</h3><p data-es="Cualquier café en tamaño pequeño.">Any coffee in a smaller size.</p></div></div>
         </div>
         <div class="menu-panel" data-panel="fall">
-          <div class="menu-item"><div><h3>Pumpkin Brûlée</h3><p>Espresso and milk with pumpkin and crème brûlée.</p></div></div>
-          <div class="menu-item"><div><h3>Pumpkin Churro</h3><p>Espresso and milk with pumpkin and cinnamon-sugar churro.</p></div></div>
-          <div class="menu-item"><div><h3>Autumn Brew</h3><p>Cold brew with warm fall spices.</p></div></div>
-          <div class="menu-item"><div><h3>Cookie Butter</h3><p>Espresso and milk with cookie butter.</p></div></div>
-          <div class="menu-item"><div><h3>Matcha Boo</h3><p>Matcha and milk with a spooky seasonal twist.</p></div></div>
-          <div class="menu-item"><div><h3>Harvest Glow</h3><p>A bright orange fall blend with warm harvest flavors.</p></div></div>
-          <div class="menu-item"><div><h3>Pumpkin Haze</h3><p>Espresso and milk with pumpkin and cream.</p></div></div>
+          <div class="menu-item"><div><h3>Pumpkin Brûlée</h3><p data-es="Espresso y leche con calabaza y crème brûlée.">Espresso and milk with pumpkin and crème brûlée.</p></div></div>
+          <div class="menu-item"><div><h3>Pumpkin Churro</h3><p data-es="Espresso y leche con calabaza y churro de canela y azúcar.">Espresso and milk with pumpkin and cinnamon-sugar churro.</p></div></div>
+          <div class="menu-item"><div><h3>Autumn Brew</h3><p data-es="Cold brew con cálidas especias de otoño.">Cold brew with warm fall spices.</p></div></div>
+          <div class="menu-item"><div><h3>Cookie Butter</h3><p data-es="Espresso y leche con crema de galleta (cookie butter).">Espresso and milk with cookie butter.</p></div></div>
+          <div class="menu-item"><div><h3>Matcha Boo</h3><p data-es="Matcha y leche con un toque espeluznante de temporada.">Matcha and milk with a spooky seasonal twist.</p></div></div>
+          <div class="menu-item"><div><h3>Harvest Glow</h3><p data-es="Una mezcla otoñal naranja brillante con cálidos sabores de cosecha.">A bright orange fall blend with warm harvest flavors.</p></div></div>
+          <div class="menu-item"><div><h3>Pumpkin Haze</h3><p data-es="Espresso y leche con calabaza y crema.">Espresso and milk with pumpkin and cream.</p></div></div>
         </div>
         <div class="menu-panel" data-panel="caffeinefree">
-          <div class="menu-item"><div><h3>Water in a Can</h3><p>Cold water, sealed fresh in a can.</p></div></div>
-          <div class="menu-item"><div><h3>Refreshers / Lemonades</h3><p>Lemonade or a fruit refresher in your choice of flavor.</p></div></div>
-          <div class="menu-item"><div><h3>Italian Soda</h3><p>Sparkling water and sweet syrup, topped with cream.</p></div></div>
-          <div class="menu-item"><div><h3>Chai</h3><p>Spiced black tea with milk.</p></div></div>
-          <div class="menu-item"><div><h3>Sugar Cookie Chai</h3><p>Spiced chai and milk with sugar cookie flavor.</p></div></div>
-          <div class="menu-item"><div><h3>Barbie Chai</h3><p>Strawberry chai: spiced black tea, strawberry and milk.</p></div></div>
-          <div class="menu-item"><div><h3>Marshmallow Chai</h3><p>Spiced chai and milk with toasted marshmallow.</p></div></div>
-          <div class="menu-item"><div><h3>Mangonada</h3><p>Mango with chamoy and Tajín.</p></div></div>
-          <div class="menu-item"><div><h3>Chocolate Milk</h3><p>Cold milk and chocolate.</p></div></div>
+          <div class="menu-item"><div><h3>Water in a Can</h3><p data-es="Agua fría, sellada en lata.">Cold water, sealed fresh in a can.</p></div></div>
+          <div class="menu-item"><div><h3>Refreshers / Lemonades</h3><p data-es="Limonada o refresco de fruta del sabor que elijas.">Lemonade or a fruit refresher in your choice of flavor.</p></div></div>
+          <div class="menu-item"><div><h3>Italian Soda</h3><p data-es="Agua mineral y jarabe dulce, con crema encima.">Sparkling water and sweet syrup, topped with cream.</p></div></div>
+          <div class="menu-item"><div><h3>Chai</h3><p data-es="Té negro especiado con leche.">Spiced black tea with milk.</p></div></div>
+          <div class="menu-item"><div><h3>Sugar Cookie Chai</h3><p data-es="Chai especiado y leche con sabor a galleta de azúcar.">Spiced chai and milk with sugar cookie flavor.</p></div></div>
+          <div class="menu-item"><div><h3>Barbie Chai</h3><p data-es="Chai de fresa: té negro especiado, fresa y leche.">Strawberry chai: spiced black tea, strawberry and milk.</p></div></div>
+          <div class="menu-item"><div><h3>Marshmallow Chai</h3><p data-es="Chai especiado y leche con malvavisco tostado.">Spiced chai and milk with toasted marshmallow.</p></div></div>
+          <div class="menu-item"><div><h3>Mangonada</h3><p data-es="Mango con chamoy y Tajín.">Mango with chamoy and Tajín.</p></div></div>
+          <div class="menu-item"><div><h3>Chocolate Milk</h3><p data-es="Leche fría con chocolate.">Cold milk and chocolate.</p></div></div>
         </div>
-        <p class="note">Ask at the window for current prices. Availability may vary by location.</p>
+        <p class="note addons" data-es="&lt;strong&gt;Extras:&lt;/strong&gt; leche alternativa, fruta extra y más. ¡Solo pregunta!"><strong>Add-ons:</strong> alternative milk, extra fruit and more. Just ask!</p>
+        <p class="note" data-es="Pregunta en la ventanilla por los precios actuales. La disponibilidad puede variar según la tienda.">Ask at the window for current prices. Availability may vary by location.</p>
       </div>
     </section>
 
@@ -337,10 +342,10 @@
     <section class="photo-banner">
       <div class="container photo-banner-inner">
         <div>
-          <p class="eyebrow">Every color, every mood</p>
-          <h2>Which can are you?</h2>
-          <p>Bright Red Bull blends, layered matcha, creamy breves. Every drink is sealed up and ready to go.</p>
-          <a href="#picker" class="btn">Find out &darr;</a>
+          <p class="eyebrow" data-es="Cada color, cada antojo">Every color, every mood</p>
+          <h2 data-es="¿Qué lata eres tú?">Which can are you?</h2>
+          <p data-es="Mezclas brillantes con Red Bull, matcha en capas, breves cremosos. Cada bebida va sellada y lista para llevar.">Bright Red Bull blends, layered matcha, creamy breves. Every drink is sealed up and ready to go.</p>
+          <a href="#picker" class="btn" data-es="Descúbrelo &amp;darr;">Find out &darr;</a>
         </div>
         <img class="photo-banner-card" src="images/cans-lineup.jpg" alt="A rainbow row of sealed Sip &amp; Co. drinks">
       </div>
@@ -350,33 +355,33 @@
     <section id="picker" class="section picker">
       <div class="container picker-inner">
         <div>
-          <p class="eyebrow">Can't decide?</p>
-          <h2>Let the can choose.</h2>
-          <p>45+ drinks and no idea where to start? Shake the can and we'll pick your next order. Screenshot it and show us at the window.</p>
+          <p class="eyebrow" data-es="¿No te decides?">Can't decide?</p>
+          <h2 data-es="Deja que la lata elija.">Let the can choose.</h2>
+          <p data-es="¿Más de 45 bebidas y no sabes por dónde empezar? Agita la lata y elegiremos tu próximo pedido. Toma una captura y muéstranosla en la ventanilla.">45+ drinks and no idea where to start? Shake the can and we'll pick your next order. Screenshot it and show us at the window.</p>
           <div class="picker-filters" role="group" aria-label="Pick from">
-            <button class="chip active" data-filter="all">Surprise me</button>
-            <button class="chip" data-filter="redbulls">Energy</button>
+            <button class="chip active" data-filter="all" data-es="Sorpréndeme">Surprise me</button>
+            <button class="chip" data-filter="redbulls" data-es="Energía">Energy</button>
             <button class="chip" data-filter="matcha">Matcha</button>
-            <button class="chip" data-filter="coffee">Coffee</button>
-            <button class="chip" data-filter="caffeinefree">Non-coffee</button>
-            <button class="chip" data-filter="fall">Fall 🎃</button>
+            <button class="chip" data-filter="coffee" data-es="Café">Coffee</button>
+            <button class="chip" data-filter="caffeinefree" data-es="Sin café">Non-coffee</button>
+            <button class="chip" data-filter="fall" data-es="Otoño 🎃">Fall 🎃</button>
           </div>
-          <button class="btn btn-big" id="shake">Shake the can</button>
-          <button class="btn btn-ghost btn-small motion-btn" id="motion-btn" hidden>📳 Turn on phone shake</button>
+          <button class="btn btn-big" id="shake" data-es="Agita la lata">Shake the can</button>
+          <button class="btn btn-ghost btn-small motion-btn" id="motion-btn" hidden data-es="📳 Activar agitar el teléfono">📳 Turn on phone shake</button>
           <p class="shake-hint" id="shake-hint" hidden></p>
         </div>
         <div class="can-wrap">
           <div class="can" id="can" role="button" tabindex="0" aria-label="Shake the can">
             <div class="can-lid"></div>
             <div class="can-body">
-              <span class="can-label">Your sip</span>
+              <span class="can-label" data-es="Tu bebida">Your sip</span>
               <strong class="can-name" id="pick-name" aria-live="polite">?</strong>
               <span class="can-desc" id="pick-desc">Tap the can to shake it</span>
             </div>
           </div>
           <div class="pick-actions" id="pick-actions" hidden>
-            <a class="btn" data-directions href="https://www.google.com/maps/search/?api=1&query=Sip+%26+Co+2588+Queensgate+Dr+Richland+WA" target="_blank" rel="noopener">Get it in <span data-location-name>Richland</span> &rarr;</a>
-            <button class="btn btn-ghost" id="pick-menu">See it on the menu</button>
+            <a class="btn" data-directions href="https://www.google.com/maps/search/?api=1&query=Sip+%26+Co+2588+Queensgate+Dr+Richland+WA" target="_blank" rel="noopener" data-es="Pídelo en &lt;span data-location-name&gt;Richland&lt;/span&gt; &amp;rarr;">Get it in <span data-location-name>Richland</span> &rarr;</a>
+            <button class="btn btn-ghost" id="pick-menu" data-es="Verlo en el menú">See it on the menu</button>
           </div>
         </div>
       </div>
@@ -385,44 +390,46 @@
     <!-- Locations -->
     <section id="locations" class="section">
       <div class="container">
-        <p class="eyebrow">Visit us</p>
-        <h2>Two locations in the Tri&#8209;Cities</h2>
+        <p class="eyebrow" data-es="Visítanos">Visit us</p>
+        <h2 data-es="Dos tiendas en los Tri&amp;#8209;Cities">Two locations in the Tri&#8209;Cities</h2>
         <div class="locations">
           <article class="location-card">
-            <span class="tag">The original</span>
+            <span class="tag" data-es="La original">The original</span>
             <h3>Sip &amp; Co. Pasco</h3>
             <address>
               8921 Sandifur Pkwy, Bldg B<br>
               Pasco, WA 99301
             </address>
+            <iframe class="map" src="https://www.google.com/maps?q=Sip+%26+Co+8921+Sandifur+Pkwy+Pasco+WA+99301&amp;output=embed" title="Map: Sip &amp; Co. Pasco" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             <ul class="hours">
-              <li><span>Mon – Fri</span><span>5:00am – 7:00pm</span></li>
-              <li><span>Sat – Sun</span><span>7:00am – 6:00pm</span></li>
+              <li><span data-es="Lun – Vie">Mon – Fri</span><span>5:00am – 7:00pm</span></li>
+              <li><span data-es="Sáb – Dom">Sat – Sun</span><span>7:00am – 6:00pm</span></li>
             </ul>
             <p class="open-status" data-open-status="pasco" hidden></p>
-            <p class="hours-note">Questions? Call our Richland shop at <a href="tel:+15092229090">(509) 222-9090</a>.</p>
+            <p class="hours-note" data-es="¿Preguntas? Llama a nuestra tienda de Richland al &lt;a href=&quot;tel:+15092229090&quot;&gt;(509) 222-9090&lt;/a&gt;.">Questions? Call our Richland shop at <a href="tel:+15092229090">(509) 222-9090</a>.</p>
             <div class="card-actions">
-              <a class="btn btn-outline" href="https://www.google.com/maps/search/?api=1&query=Sip+%26+Co+8921+Sandifur+Pkwy+Pasco+WA" target="_blank" rel="noopener">Get directions</a>
-              <a class="btn btn-outline" href="https://www.doordash.com/store/sip&co---8921-sandifur-pkwy-pasco-35644571/" target="_blank" rel="noopener">Order on DoorDash</a>
+              <a class="btn btn-outline" href="https://www.google.com/maps/search/?api=1&query=Sip+%26+Co+8921+Sandifur+Pkwy+Pasco+WA" target="_blank" rel="noopener" data-es="Cómo llegar">Get directions</a>
+              <a class="btn btn-outline" href="https://www.doordash.com/store/sip&co---8921-sandifur-pkwy-pasco-35644571/" target="_blank" rel="noopener" data-es="Pedir en DoorDash">Order on DoorDash</a>
             </div>
           </article>
 
           <article class="location-card featured" id="richland">
-            <span class="tag tag-new">Newest shop</span>
+            <div class="card-tags"><span class="tag tag-new" data-es="La más nueva">Newest shop</span><span class="tag" data-es="Autoservicio">Drive-thru</span></div>
             <h3>Sip &amp; Co. Richland</h3>
             <address>
               2588 Queensgate Dr<br>
               Richland, WA 99352
             </address>
+            <iframe class="map" src="https://www.google.com/maps?q=Sip+%26+Co+2588+Queensgate+Dr+Richland+WA+99352&amp;output=embed" title="Map: Sip &amp; Co. Richland" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             <ul class="hours">
-              <li><span>Mon – Fri</span><span>5:00am – 7:00pm</span></li>
-              <li><span>Sat – Sun</span><span>7:00am – 6:00pm</span></li>
+              <li><span data-es="Lun – Vie">Mon – Fri</span><span>5:00am – 7:00pm</span></li>
+              <li><span data-es="Sáb – Dom">Sat – Sun</span><span>7:00am – 6:00pm</span></li>
             </ul>
             <p class="open-status" data-open-status="richland" hidden></p>
             <p class="phone"><a href="tel:+15092229090">(509) 222-9090</a></p>
             <div class="card-actions">
-              <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Sip+%26+Co+2588+Queensgate+Dr+Richland+WA" target="_blank" rel="noopener">Get directions</a>
-              <a class="btn btn-outline" href="tel:+15092229090">Call</a>
+              <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Sip+%26+Co+2588+Queensgate+Dr+Richland+WA" target="_blank" rel="noopener" data-es="Cómo llegar">Get directions</a>
+              <a class="btn btn-outline" href="tel:+15092229090" data-es="Llamar">Call</a>
             </div>
           </article>
         </div>
@@ -434,17 +441,17 @@
       <div class="container story-grid">
         <figure class="story-photo">
           <img src="images/storefront-pasco.jpg" alt="The Sip &amp; Co. shop on Sandifur Parkway in Pasco">
-          <figcaption>Getting ready to open on Sandifur Pkwy in Pasco</figcaption>
+          <figcaption data-es="Preparándonos para abrir en Sandifur Pkwy en Pasco">Getting ready to open on Sandifur Pkwy in Pasco</figcaption>
         </figure>
         <div>
-          <p class="eyebrow">Our story</p>
-          <h2>From Pasco to two shops in the Tri&#8209;Cities</h2>
-          <p>We're <strong>Emilio Avila</strong>, a Marine Corps Reserve veteran, and <strong>Veronica Gonzalez</strong>, the husband-and-wife team behind Sip &amp; Co. Our idea was simple: drinks that look as good as they taste and travel as well as you do.</p>
-          <p>When we opened on Sandifur Parkway in Pasco, the cans flew out so fast we ran out. Now we've opened a second home on Queensgate Drive in Richland. We're still local, still family-run, and not a franchise.</p>
+          <p class="eyebrow" data-es="Nuestra historia">Our story</p>
+          <h2 data-es="De Pasco a dos tiendas en los Tri&amp;#8209;Cities">From Pasco to two shops in the Tri&#8209;Cities</h2>
+          <p data-es="Somos &lt;strong&gt;Emilio Avila&lt;/strong&gt;, veterano de la Reserva del Cuerpo de Marines, y &lt;strong&gt;Veronica Gonzalez&lt;/strong&gt;, el matrimonio detrás de Sip &amp;amp; Co. Nuestra idea era sencilla: bebidas que se vean tan bien como saben y que viajen tan bien como tú.">We're <strong>Emilio Avila</strong>, a Marine Corps Reserve veteran, and <strong>Veronica Gonzalez</strong>, the husband-and-wife team behind Sip &amp; Co. Our idea was simple: drinks that look as good as they taste and travel as well as you do.</p>
+          <p data-es="Cuando abrimos en Sandifur Parkway en Pasco, las latas se vendieron tan rápido que se nos acabaron. Ahora abrimos un segundo hogar en Queensgate Drive en Richland. Seguimos siendo un negocio local y familiar, no una franquicia.">When we opened on Sandifur Parkway in Pasco, the cans flew out so fast we ran out. Now we've opened a second home on Queensgate Drive in Richland. We're still local, still family-run, and not a franchise.</p>
           <div class="stats">
-            <div><strong>2</strong><span>Tri&#8209;Cities shops</span></div>
-            <div><strong>45+</strong><span>Drinks to try</span></div>
-            <div><strong>1</strong><span>Seal on every can</span></div>
+            <div><strong>2</strong><span data-es="Tiendas en Tri&amp;#8209;Cities">Tri&#8209;Cities shops</span></div>
+            <div><strong>45+</strong><span data-es="Bebidas por probar">Drinks to try</span></div>
+            <div><strong>1</strong><span data-es="Sello en cada lata">Seal on every can</span></div>
           </div>
         </div>
       </div>
@@ -454,31 +461,31 @@
     <section id="contact" class="section section-dark">
       <div class="container contact">
         <div>
-          <p class="eyebrow">Get in touch</p>
-          <h2>Say hello</h2>
-          <p>If you have any questions, feel free to put them here and we'll get back to you.</p>
+          <p class="eyebrow" data-es="Contáctanos">Get in touch</p>
+          <h2 data-es="Salúdanos">Say hello</h2>
+          <p data-es="Si tienes alguna pregunta, escríbela aquí y te responderemos.">If you have any questions, feel free to put them here and we'll get back to you.</p>
           <p class="contact-phone">Richland: <a href="tel:+15092229090">(509) 222-9090</a></p>
-          <p><a class="ig-link ig-link-light" href="https://www.instagram.com/sip.co__/" target="_blank" rel="noopener"><svg class="ig-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.3" fill="currentColor"/></svg><span>Follow us @sip.co__</span></a></p>
+          <p><a class="ig-link ig-link-light" href="https://www.instagram.com/sip.co__/" target="_blank" rel="noopener"><svg class="ig-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.3" fill="currentColor"/></svg><span data-es="Síguenos en @sip.co__">Follow us @sip.co__</span></a></p>
         </div>
         <form class="contact-form" id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
           <input type="hidden" name="form-name" value="contact">
           <p hidden><label>Leave blank<input name="bot-field"></label></p>
           <div class="form-row">
-            <label>Name<input type="text" name="name" autocomplete="name" required></label>
-            <label>Email<input type="email" name="email" autocomplete="email" required></label>
+            <label><span data-es="Nombre">Name</span><input type="text" name="name" autocomplete="name" required></label>
+            <label><span data-es="Correo electrónico">Email</span><input type="email" name="email" autocomplete="email" required></label>
           </div>
           <div class="form-row">
-            <label>Location
+            <label><span data-es="Tienda">Location</span>
               <select name="location" required>
-                <option value="">Choose a shop</option>
+                <option value="" data-es="Elige una tienda">Choose a shop</option>
                 <option value="Pasco">Pasco</option>
                 <option value="Richland">Richland</option>
               </select>
             </label>
-            <label>Phone (optional)<input type="tel" name="phone" autocomplete="tel"></label>
+            <label><span data-es="Teléfono (opcional)">Phone (optional)</span><input type="tel" name="phone" autocomplete="tel"></label>
           </div>
-          <label>Message<textarea name="message" rows="4" required></textarea></label>
-          <button type="submit" class="btn">Send message</button>
+          <label><span data-es="Mensaje">Message</span><textarea name="message" rows="4" required></textarea></label>
+          <button type="submit" class="btn" data-es="Enviar mensaje">Send message</button>
           <p class="form-status" role="status" aria-live="polite"></p>
         </form>
       </div>
@@ -487,45 +494,45 @@
 
   <footer class="site-footer">
     <div class="container">
-      <p class="footer-tagline">Sealed fresh.<br>Made to go.</p>
+      <p class="footer-tagline" data-es="Sellado fresco.&lt;br&gt;Listo para llevar.">Sealed fresh.<br>Made to go.</p>
       <div class="footer-grid">
         <div>
           <img src="images/logo.png" alt="Sip &amp; Co." class="footer-logo">
-          <p>Iced coffee, energy blends and matcha, sealed in a can. Locally owned in the Tri&#8209;Cities.</p>
+          <p data-es="Café helado, mezclas energéticas y matcha, sellados en lata. Negocio local en los Tri&amp;#8209;Cities.">Iced coffee, energy blends and matcha, sealed in a can. Locally owned in the Tri&#8209;Cities.</p>
           <a class="ig-link ig-link-light" href="https://www.instagram.com/sip.co__/" target="_blank" rel="noopener"><svg class="ig-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.3" fill="currentColor"/></svg><span>@sip.co__</span></a>
         </div>
         <div>
           <h4>Pasco</h4>
-          <p>8921 Sandifur Pkwy, Bldg B<br>Pasco, WA 99301<br>Mon–Fri 5am–7pm · Sat–Sun 7am–6pm</p>
-          <a href="https://www.doordash.com/store/sip&co---8921-sandifur-pkwy-pasco-35644571/" target="_blank" rel="noopener">Order on DoorDash &rarr;</a>
+          <p data-es="8921 Sandifur Pkwy, Bldg B&lt;br&gt;Pasco, WA 99301&lt;br&gt;Lun–Vie 5am–7pm · Sáb–Dom 7am–6pm">8921 Sandifur Pkwy, Bldg B<br>Pasco, WA 99301<br>Mon–Fri 5am–7pm · Sat–Sun 7am–6pm</p>
+          <a href="https://www.doordash.com/store/sip&co---8921-sandifur-pkwy-pasco-35644571/" target="_blank" rel="noopener" data-es="Pedir en DoorDash &amp;rarr;">Order on DoorDash &rarr;</a>
         </div>
         <div>
-          <h4>Richland <span class="badge">New</span></h4>
-          <p>2588 Queensgate Dr<br>Richland, WA 99352<br>Mon–Fri 5am–7pm · Sat–Sun 7am–6pm</p>
+          <h4>Richland <span class="badge" data-es="Nueva">New</span></h4>
+          <p data-es="2588 Queensgate Dr&lt;br&gt;Richland, WA 99352&lt;br&gt;Lun–Vie 5am–7pm · Sáb–Dom 7am–6pm">2588 Queensgate Dr<br>Richland, WA 99352<br>Mon–Fri 5am–7pm · Sat–Sun 7am–6pm</p>
           <a href="tel:+15092229090">(509) 222-9090</a>
         </div>
         <div>
-          <h4>Explore</h4>
+          <h4 data-es="Explora">Explore</h4>
           <ul>
-            <li><a href="#menu">Menu</a></li>
-            <li><a href="#picker">Drink picker</a></li>
-            <li><a href="#locations">Locations</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#menu" data-es="Menú">Menu</a></li>
+            <li><a href="#picker" data-es="Elige tu bebida">Drink picker</a></li>
+            <li><a href="#locations" data-es="Ubicaciones">Locations</a></li>
+            <li><a href="#contact" data-es="Contacto">Contact</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
         <span>&copy; <span id="year"></span> Sip &amp; Co. · Pasco &amp; Richland, WA</span>
-        <a href="#top">Back to top &uarr;</a>
+        <a href="#top" data-es="Volver arriba &amp;uarr;">Back to top &uarr;</a>
       </div>
     </div>
   </footer>
 
   <nav class="mobile-bar" aria-label="Quick actions">
-    <a href="tel:+15092229090" data-for-location="richland">Call</a>
-    <a data-directions href="https://www.google.com/maps/search/?api=1&query=Sip+%26+Co+2588+Queensgate+Dr+Richland+WA" target="_blank" rel="noopener">Directions</a>
-    <a href="https://www.doordash.com/store/sip&co---8921-sandifur-pkwy-pasco-35644571/" target="_blank" rel="noopener" data-for-location="pasco">Order online</a>
-    <a href="#menu">Menu</a>
+    <a href="tel:+15092229090" data-for-location="richland" data-es="Llamar">Call</a>
+    <a data-directions href="https://www.google.com/maps/search/?api=1&query=Sip+%26+Co+2588+Queensgate+Dr+Richland+WA" target="_blank" rel="noopener" data-es="Cómo llegar">Directions</a>
+    <a href="https://www.doordash.com/store/sip&co---8921-sandifur-pkwy-pasco-35644571/" target="_blank" rel="noopener" data-for-location="pasco" data-es="Pedir en línea">Order online</a>
+    <a href="#menu" data-es="Menú">Menu</a>
   </nav>
 
   <script src="script.js"></script>
