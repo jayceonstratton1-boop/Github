@@ -153,6 +153,7 @@ const canColors = {
   matcha: ["#b58ee0", "#a9cf7f", "#e6f2d2"],
   coffee: ["#6b4a35", "#d9b48f", "#f6ead9"],
   caffeinefree: ["#ff9a76", "#ffd36e", "#fff6dc"],
+  fall: ["#c9772b", "#e9b77a", "#f6e3c8"],
 };
 const can = document.getElementById("can");
 const chips = document.querySelectorAll(".chip");

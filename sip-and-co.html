@@ -504,6 +504,28 @@ a[href^="tel:"] { white-space: nowrap; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }
+
+/* Fall / Halloween seasonal section */
+.fall {
+  color: #fff;
+  background:
+    radial-gradient(circle at 85% 15%, rgba(233, 139, 58, 0.35), transparent 45%),
+    radial-gradient(circle at 10% 90%, rgba(120, 70, 170, 0.35), transparent 45%),
+    #0b0b0b;
+}
+.fall .eyebrow { color: #f4a65a; }
+.fall h2 { color: #fff; }
+.fall-lead { color: rgba(255, 255, 255, 0.8); max-width: 560px; margin: -0.5rem 0 2rem; }
+.fall-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(130px, 100%), 1fr)); gap: 1rem; margin-bottom: 2rem; }
+.fall-card {
+  background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: var(--radius);
+  padding: 1.25rem 1rem; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.25rem;
+}
+.fall-card h3 { font-size: 1rem; color: #fff; }
+.fall .btn { background: #e98b3a; border-color: #e98b3a; color: #141414; }
+.fall .btn:hover { background: #f4a65a; border-color: #f4a65a; }
+.menu-dark .tab-fall { border-color: rgba(233, 139, 58, 0.7); }
+.menu-dark .tab-fall.active { background: #e98b3a; border-color: #e98b3a; color: #141414; }
 </style>
 </head>
 <body>
@@ -553,6 +575,46 @@ a[href^="tel:"] { white-space: nowrap; }
       <div class="container banner-inner">
         <strong>New!</strong> Our second shop is now open at 2588 Queensgate Dr in Richland.
         <a href="#richland">Hours &amp; directions &rarr;</a>
+      </div>
+    </section>
+
+    <!-- Fall / Halloween seasonal menu -->
+    <section class="section fall" id="fall">
+      <div class="container">
+        <p class="eyebrow">Limited time · Fall menu</p>
+        <h2>Fall has officially entered the chat. <span aria-hidden="true">🍂</span></h2>
+        <p class="fall-lead">Seven new seasonal favorites made for sweater weather, crisp mornings and your daily Sip &amp; Co. run, just in time for Halloween.</p>
+        <div class="fall-grid">
+          <div class="fall-card">
+            <div class="mini-can" style="--can-top: #c9772b; --can-mid: #e9b77a; --can-bot: #f6e3c8;"><div class="can-lid"></div><div class="mini-can-body"></div></div>
+            <h3><span aria-hidden="true">🎃</span> Pumpkin Brûlée</h3>
+          </div>
+          <div class="fall-card">
+            <div class="mini-can" style="--can-top: #b98a5e; --can-mid: #ead7c0; --can-bot: #faf3ea;"><div class="can-lid"></div><div class="mini-can-body"></div></div>
+            <h3><span aria-hidden="true">🥛</span> Pumpkin Churro</h3>
+          </div>
+          <div class="fall-card">
+            <div class="mini-can" style="--can-top: #5a3a26; --can-mid: #8a5a3c; --can-bot: #d9b48f;"><div class="can-lid"></div><div class="mini-can-body"></div></div>
+            <h3><span aria-hidden="true">🍁</span> Autumn Brew</h3>
+          </div>
+          <div class="fall-card">
+            <div class="mini-can" style="--can-top: #a8784e; --can-mid: #e2c6a6; --can-bot: #f7ece0;"><div class="can-lid"></div><div class="mini-can-body"></div></div>
+            <h3><span aria-hidden="true">🍪</span> Cookie Butter</h3>
+          </div>
+          <div class="fall-card">
+            <div class="mini-can" style="--can-top: #7fa95a; --can-mid: #b8d68f; --can-bot: #eef5e3;"><div class="can-lid"></div><div class="mini-can-body"></div></div>
+            <h3><span aria-hidden="true">🍵</span> Matcha Boo</h3>
+          </div>
+          <div class="fall-card">
+            <div class="mini-can" style="--can-top: #e98b3a; --can-mid: #f4b77a; --can-bot: #fde6cc;"><div class="can-lid"></div><div class="mini-can-body"></div></div>
+            <h3><span aria-hidden="true">✨</span> Harvest Glow</h3>
+          </div>
+          <div class="fall-card">
+            <div class="mini-can" style="--can-top: #c79a6a; --can-mid: #e8d2b8; --can-bot: #f8efe4;"><div class="can-lid"></div><div class="mini-can-body"></div></div>
+            <h3><span aria-hidden="true">🎃</span> Pumpkin Haze</h3>
+          </div>
+        </div>
+        <button class="btn fall-btn" data-goto-tab="fall">See the fall menu &rarr;</button>
       </div>
     </section>
 
@@ -616,6 +678,7 @@ a[href^="tel:"] { white-space: nowrap; }
           <button class="tab" role="tab" aria-selected="false" data-tab="matcha">Matcha</button>
           <button class="tab" role="tab" aria-selected="false" data-tab="redbulls">Red Bulls</button>
           <button class="tab" role="tab" aria-selected="false" data-tab="caffeinefree">Non-Coffee</button>
+          <button class="tab tab-fall" role="tab" aria-selected="false" data-tab="fall">Fall 🎃</button>
         </div>
 
         <div class="menu-panel" data-panel="redbulls">
@@ -663,6 +726,15 @@ a[href^="tel:"] { white-space: nowrap; }
           <div class="menu-item"><div><h3>The Cinnabon</h3><p>Sweet breve coffee infused with cinnamon.</p></div><span class="price">$7.25</span></div>
           <div class="menu-item"><div><h3>Cloudy Mocha</h3><p>Espresso, chocolate and 2% milk: creamy and smooth.</p></div><span class="price">$7.25</span></div>
         </div>
+        <div class="menu-panel" data-panel="fall">
+          <div class="menu-item"><div><h3>Pumpkin Brûlée</h3><p>Fall menu, limited time.</p></div></div>
+          <div class="menu-item"><div><h3>Pumpkin Churro</h3><p>Fall menu, limited time.</p></div></div>
+          <div class="menu-item"><div><h3>Autumn Brew</h3><p>Fall menu, limited time.</p></div></div>
+          <div class="menu-item"><div><h3>Cookie Butter</h3><p>Fall menu, limited time.</p></div></div>
+          <div class="menu-item"><div><h3>Matcha Boo</h3><p>Fall menu, limited time.</p></div></div>
+          <div class="menu-item"><div><h3>Harvest Glow</h3><p>Fall menu, limited time.</p></div></div>
+          <div class="menu-item"><div><h3>Pumpkin Haze</h3><p>Fall menu, limited time.</p></div></div>
+        </div>
         <div class="menu-panel" data-panel="caffeinefree">
           <div class="menu-item"><div><h3>Water in a Can</h3></div></div>
           <div class="menu-item"><div><h3>Refreshers / Lemonades</h3></div></div>
@@ -704,6 +776,7 @@ a[href^="tel:"] { white-space: nowrap; }
             <button class="chip" data-filter="matcha">Matcha</button>
             <button class="chip" data-filter="coffee">Coffee</button>
             <button class="chip" data-filter="caffeinefree">Non-coffee</button>
+            <button class="chip" data-filter="fall">Fall 🎃</button>
           </div>
           <button class="btn btn-big" id="shake">Shake the can</button>
         </div>
@@ -1025,6 +1098,7 @@ const canColors = {
   matcha: ["#b58ee0", "#a9cf7f", "#e6f2d2"],
   coffee: ["#6b4a35", "#d9b48f", "#f6ead9"],
   caffeinefree: ["#ff9a76", "#ffd36e", "#fff6dc"],
+  fall: ["#c9772b", "#e9b77a", "#f6e3c8"],
 };
 const can = document.getElementById("can");
 const chips = document.querySelectorAll(".chip");
