@@ -206,7 +206,6 @@ a { color: inherit; }
 
 /* Photo banner: blurred backdrop + sharp photo card (source photo is small) */
 .photo-banner { position: relative; overflow: hidden; background: #0b0b0b; padding: clamp(3.5rem, 8vw, 5.5rem) 0; }
-.photo-banner-bg { position: absolute; inset: -40px; width: calc(100% + 80px); height: calc(100% + 80px); object-fit: cover; filter: blur(18px) saturate(1.3); opacity: 0.55; }
 .photo-banner-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1.1fr; gap: 3rem; align-items: center; color: #fff; }
 .photo-banner-inner .eyebrow { color: rgba(255, 255, 255, 0.75); }
 .photo-banner-inner h2 { font-size: clamp(2.4rem, 5vw, 3.6rem); margin-bottom: 1rem; }
@@ -346,7 +345,7 @@ a { color: inherit; }
   background: linear-gradient(180deg, var(--can-top) 0%, var(--can-mid) 55%, var(--can-bot) 100%);
   box-shadow: inset -8px 0 12px rgba(255,255,255,0.35), inset 6px 0 10px rgba(0,0,0,0.08), 0 12px 20px rgba(20,20,20,0.15);
 }
-.fav-foot { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; margin-top: 0.5rem; }
+.fav-foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.25rem 0.75rem; margin-top: 0.5rem; }
 .fav-price { font-weight: 700; white-space: nowrap; }
 .fav-link { white-space: nowrap; }
 .fav-link { font: inherit; font-size: 0.9rem; font-weight: 600; background: none; border: 0; padding: 0.5rem 0; cursor: pointer; color: var(--espresso); text-decoration: underline; text-underline-offset: 3px; }
@@ -379,3 +378,22 @@ a { color: inherit; }
 }
 .loc-btn.active { background: var(--espresso); color: #fff; border-color: var(--espresso); }
 .loc-switch + .open-status { margin-top: 1rem; }
+
+/* Photo banner: solid black backdrop */
+.photo-banner { background: #0b0b0b; }
+
+/* Phone bar shows only what applies to the chosen shop */
+.mobile-bar a[hidden] { display: none; }
+
+/* Layout polish: balanced headings, no sideways scroll with large text, tablet contact layout */
+h1, h2 { text-wrap: balance; }
+a[href^="tel:"] { white-space: nowrap; }
+.contact-form input, .contact-form select, .contact-form textarea { width: 100%; min-width: 0; }
+.form-row > label { min-width: 0; }
+.stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 860px) {
+  .contact { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}

@@ -5,12 +5,17 @@ toggle.addEventListener("click", () => {
   const open = links.classList.toggle("open");
   toggle.setAttribute("aria-expanded", open);
 });
-links.querySelectorAll("a").forEach((a) =>
-  a.addEventListener("click", () => {
-    links.classList.remove("open");
-    toggle.setAttribute("aria-expanded", "false");
-  })
-);
+function closeNav() {
+  links.classList.remove("open");
+  toggle.setAttribute("aria-expanded", "false");
+}
+links.querySelectorAll("a").forEach((a) => a.addEventListener("click", closeNav));
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && links.classList.contains("open")) {
+    closeNav();
+    toggle.focus();
+  }
+});
 
 // Menu tabs
 const tabs = document.querySelectorAll(".tab");
@@ -89,6 +94,9 @@ function chooseLocation(key) {
   });
   document.querySelectorAll("[data-directions]").forEach((a) => (a.href = locations[key].map));
   document.querySelectorAll("[data-location-name]").forEach((el) => (el.textContent = locations[key].name));
+  document.querySelectorAll("[data-for-location]").forEach((el) => (el.hidden = el.dataset.forLocation !== key));
+  const shopSelect = document.querySelector('#contact-form select[name="location"]');
+  if (shopSelect && !shopSelect.dataset.touched) shopSelect.value = locations[key].name;
   showStatus();
 }
 document.querySelectorAll("[data-choose-location]").forEach((btn) =>
@@ -96,6 +104,9 @@ document.querySelectorAll("[data-choose-location]").forEach((btn) =>
 );
 chooseLocation(chosen);
 setInterval(showStatus, 60000);
+
+document.querySelector('#contact-form select[name="location"]')
+  .addEventListener("change", (e) => (e.target.dataset.touched = "1"));
 
 // Contact form: submits to Netlify Forms without leaving the page
 document.getElementById("contact-form").addEventListener("submit", async (e) => {
@@ -107,6 +118,9 @@ document.getElementById("contact-form").addEventListener("submit", async (e) => 
     status.textContent = "Preview only: messages will send once the site is live.";
     return;
   }
+  const button = form.querySelector('button[type="submit"]');
+  button.disabled = true;
+  button.textContent = "Sending...";
   try {
     const res = await fetch("/", {
       method: "POST",
@@ -118,6 +132,9 @@ document.getElementById("contact-form").addEventListener("submit", async (e) => 
     status.textContent = "Thanks! We'll be in touch soon.";
   } catch {
     status.textContent = "Sorry, something went wrong. Please call or try again.";
+  } finally {
+    button.disabled = false;
+    button.textContent = "Send message";
   }
 });
 

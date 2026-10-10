@@ -1,20 +1,23 @@
 # Sip & Co Website
 
-Static website for Sip & Co: a home page, menu, both locations (including the newer Richland shop), the company story and a contact form.
+Static website for Sip & Co: a home page, fan favorites, menu, drink picker, both locations (Pasco and the newer Richland shop) with live open/closed status, the company story and a contact form.
 
 ## Files
-- `index.html` – page content
-- `styles.css` – styling (responsive, mobile menu)
-- `script.js` – mobile nav, menu tabs, contact form
+- `site/` – the website itself (this is the only folder Netlify publishes)
+  - `index.html` – page content
+  - `styles.css` – styling (responsive, mobile menu, phone quick-action bar)
+  - `script.js` – mobile nav, menu tabs, location switch and open status, drink picker, contact form
+  - `images/` – photos, logo, favicon and the link-preview image (`og-image.jpg`)
+- `netlify.toml` – tells Netlify to publish `site/`
+- `build-demo.py` – run `python3 build-demo.py` to regenerate `sip-and-co.html`
+- `sip-and-co.html` – single-file copy of the site (styles, script and photos built in) for previewing or sharing. Edit `site/`, then regenerate.
 
 ## Still to confirm
-- Photos in `images/` were cropped from screenshots and AI-upscaled 4x (Real-ESRGAN). Original files from Sip & Co. (same file names) would still be sharper.
-- Prices: coffee, specialty coffee and most matcha prices come from the in-store menu board. Energy drinks, caffeine-free drinks and a few matchas show no price because their prices were cut off in the board photo.
-- Pasco phone number (hours now shown: Mon–Fri 5am–7pm, Sat–Sun 7am–6pm, from Joe Coffee, Apple Maps and Yelp listings; confirm with the owners)
-- Social media links (none on the site yet)
-- Contact form is wired to Netlify Forms: submissions show up in the Netlify dashboard under Forms.
+- Photos in `site/images/` were cropped from screenshots and AI-upscaled 4x (Real-ESRGAN). Original files from Sip & Co. (same file names) would be sharper. A staff member is visible in `cans-counter.jpg`.
+- Prices: coffee, specialty coffee and most matcha prices come from the in-store menu board. Energy drinks, non-coffee drinks and a few matchas show no price because they were cut off in the board photo. Cup size for the prices is unknown.
+- Hours (both shops: Mon–Fri 5am–7pm, Sat–Sun 7am–6pm) come from Joe Coffee, Apple Maps and Yelp listings; confirm with the owners. The open/closed status uses these hours.
+- Pasco phone number, social media links, whether catering is offered.
 
-## Preview
-Open `index.html` in a browser. It can be hosted as-is on GitHub Pages, Netlify or similar.
-
-`sip-and-co.html` is a single-file copy of the site (styles, script and photos built in) for easy sharing. It's generated from the three files above, so make edits there and regenerate it.
+## Before launch
+- The link-preview tags and Google business details in `site/index.html` use `https://sip-and-co-bcym.netlify.app/`. If the site gets its own domain, replace that URL.
+- Contact form uses Netlify Forms: after the first deploy, turn on form detection (Project configuration > Forms), redeploy, add an email notification to the owners' address, and send a test message.

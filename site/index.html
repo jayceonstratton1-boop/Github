@@ -5,19 +5,115 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sip &amp; Co. | Freshly Canned Coffee, Energy &amp; Matcha in Pasco and Richland</title>
   <meta name="description" content="Sip & Co. serves iced coffee, Red Bull energy blends and matcha, freshly sealed in a can. Visit us in Pasco and at our new Richland location.">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+  <meta name="theme-color" content="#141414">
+  <link rel="canonical" href="https://sip-and-co-bcym.netlify.app/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Sip &amp; Co.">
+  <meta property="og:title" content="Sip &amp; Co. | Freshly sealed drinks in Pasco &amp; Richland">
+  <meta property="og:description" content="Iced coffee, Red Bull blends and matcha, made to order and sealed in a can. Two shops in the Tri&#8209;Cities.">
+  <meta property="og:url" content="https://sip-and-co-bcym.netlify.app/">
+  <meta property="og:image" content="https://sip-and-co-bcym.netlify.app/images/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "CafeOrCoffeeShop",
+    "name": "Sip & Co. Pasco",
+    "url": "https://sip-and-co-bcym.netlify.app/",
+    "image": "https://sip-and-co-bcym.netlify.app/images/og-image.jpg",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "8921 Sandifur Pkwy, Bldg B",
+      "addressLocality": "Pasco",
+      "addressRegion": "WA",
+      "postalCode": "99301",
+      "addressCountry": "US"
+    },
+    "servesCuisine": "Coffee, energy drinks, matcha",
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "05:00",
+        "closes": "19:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "07:00",
+        "closes": "18:00"
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "CafeOrCoffeeShop",
+    "name": "Sip & Co. Richland",
+    "url": "https://sip-and-co-bcym.netlify.app/",
+    "image": "https://sip-and-co-bcym.netlify.app/images/og-image.jpg",
+    "telephone": "+1-509-222-9090",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "2588 Queensgate Dr",
+      "addressLocality": "Richland",
+      "addressRegion": "WA",
+      "postalCode": "99352",
+      "addressCountry": "US"
+    },
+    "servesCuisine": "Coffee, energy drinks, matcha",
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "05:00",
+        "closes": "19:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "07:00",
+        "closes": "18:00"
+      }
+    ]
+  }
+]
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header class="site-header">
     <nav class="nav container">
       <a href="#top" class="logo-link"><img src="images/logo.png" alt="Sip &amp; Co." class="logo-img"></a>
-      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="site-nav">
         <span></span><span></span><span></span>
       </button>
-      <ul class="nav-links">
+      <ul class="nav-links" id="site-nav">
         <li><a href="#menu">Menu</a></li>
         <li><a href="#locations">Locations</a></li>
         <li><a href="#about">Our Story</a></li>
@@ -31,7 +127,7 @@
     <section class="hero">
       <div class="container hero-grid">
       <div class="hero-inner">
-        <p class="eyebrow">Now open in Richland</p>
+        <p class="eyebrow">Pasco · Richland · Tri&#8209;Cities, WA</p>
         <h1>Sealed fresh.<br>Made to go.</h1>
         <p class="lead">Iced coffee, Red Bull blends and matcha, made to order and sealed in a can so you can grab it and go. Visit us in Pasco and Richland.</p>
         <div class="hero-actions">
@@ -184,7 +280,6 @@
 
     <!-- Photo banner -->
     <section class="photo-banner">
-      <img class="photo-banner-bg" src="images/cans-lineup.jpg" alt="">
       <div class="container photo-banner-inner">
         <div>
           <p class="eyebrow">Every color, every mood</p>
@@ -193,74 +288,6 @@
           <a href="#picker" class="btn">Find out &darr;</a>
         </div>
         <img class="photo-banner-card" src="images/cans-lineup.jpg" alt="A rainbow row of sealed Sip &amp; Co. drinks">
-      </div>
-    </section>
-
-    <!-- Locations -->
-    <section id="locations" class="section">
-      <div class="container">
-        <p class="eyebrow">Visit us</p>
-        <h2>Two locations in the Tri-Cities</h2>
-        <div class="locations">
-          <article class="location-card">
-            <span class="tag">The original</span>
-            <h3>Sip &amp; Co. Pasco</h3>
-            <address>
-              8921 Sandifur Pkwy, Bldg B<br>
-              Pasco, WA 99301
-            </address>
-            <ul class="hours">
-              <li><span>Mon – Fri</span><span>5:00am – 7:00pm</span></li>
-              <li><span>Sat – Sun</span><span>7:00am – 6:00pm</span></li>
-            </ul>
-            <p class="open-status" data-open-status="pasco" hidden></p>
-            <p class="hours-note">Questions? Call our Richland shop at <a href="tel:+15092229090">(509) 222-9090</a>.</p>
-            <div class="card-actions">
-              <a class="btn btn-outline" href="https://www.google.com/maps/search/?api=1&query=Sip+%26+Co+8921+Sandifur+Pkwy+Pasco+WA" target="_blank" rel="noopener">Get directions</a>
-              <a class="btn btn-outline" href="https://www.doordash.com/store/sip&co---8921-sandifur-pkwy-pasco-35644571/" target="_blank" rel="noopener">Order on DoorDash</a>
-            </div>
-          </article>
-
-          <article class="location-card featured" id="richland">
-            <span class="tag tag-new">Now open</span>
-            <h3>Sip &amp; Co. Richland</h3>
-            <address>
-              2588 Queensgate Dr<br>
-              Richland, WA 99352
-            </address>
-            <ul class="hours">
-              <li><span>Mon – Fri</span><span>5:00am – 7:00pm</span></li>
-              <li><span>Sat – Sun</span><span>7:00am – 6:00pm</span></li>
-            </ul>
-            <p class="open-status" data-open-status="richland" hidden></p>
-            <p class="phone"><a href="tel:+15092229090">(509) 222-9090</a></p>
-            <div class="card-actions">
-              <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Sip+%26+Co+2588+Queensgate+Dr+Richland+WA" target="_blank" rel="noopener">Get directions</a>
-              <a class="btn btn-outline" href="tel:+15092229090">Call</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Story -->
-    <section id="about" class="section story">
-      <div class="container story-grid">
-        <figure class="story-photo">
-          <img src="images/storefront-pasco.jpg" alt="The Sip &amp; Co. shop on Sandifur Parkway in Pasco">
-          <figcaption>Getting ready to open on Sandifur Pkwy in Pasco</figcaption>
-        </figure>
-        <div>
-          <p class="eyebrow">Our story</p>
-          <h2>From one window in Pasco to two shops in the Tri-Cities</h2>
-          <p>Sip &amp; Co. is run by husband-and-wife team <strong>Emilio Avila</strong>, a Marine Corps Reserve veteran, and <strong>Veronica Gonzalez</strong>. They had a simple idea: drinks that look as good as they taste and travel as well as you do.</p>
-          <p>When we opened our order windows in Pasco, the cans flew out so fast we ran out. Now we've opened a second home on Queensgate Drive in Richland. We're still local, still family-run, and not a franchise.</p>
-          <div class="stats">
-            <div><strong>2</strong><span>Tri-Cities shops</span></div>
-            <div><strong>45+</strong><span>Drinks to try</span></div>
-            <div><strong>1</strong><span>Seal on every can</span></div>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -298,28 +325,100 @@
       </div>
     </section>
 
+    <!-- Locations -->
+    <section id="locations" class="section">
+      <div class="container">
+        <p class="eyebrow">Visit us</p>
+        <h2>Two locations in the Tri&#8209;Cities</h2>
+        <div class="locations">
+          <article class="location-card">
+            <span class="tag">The original</span>
+            <h3>Sip &amp; Co. Pasco</h3>
+            <address>
+              8921 Sandifur Pkwy, Bldg B<br>
+              Pasco, WA 99301
+            </address>
+            <ul class="hours">
+              <li><span>Mon – Fri</span><span>5:00am – 7:00pm</span></li>
+              <li><span>Sat – Sun</span><span>7:00am – 6:00pm</span></li>
+            </ul>
+            <p class="open-status" data-open-status="pasco" hidden></p>
+            <p class="hours-note">Questions? Call our Richland shop at <a href="tel:+15092229090">(509) 222-9090</a>.</p>
+            <div class="card-actions">
+              <a class="btn btn-outline" href="https://www.google.com/maps/search/?api=1&query=Sip+%26+Co+8921+Sandifur+Pkwy+Pasco+WA" target="_blank" rel="noopener">Get directions</a>
+              <a class="btn btn-outline" href="https://www.doordash.com/store/sip&co---8921-sandifur-pkwy-pasco-35644571/" target="_blank" rel="noopener">Order on DoorDash</a>
+            </div>
+          </article>
+
+          <article class="location-card featured" id="richland">
+            <span class="tag tag-new">Newest shop</span>
+            <h3>Sip &amp; Co. Richland</h3>
+            <address>
+              2588 Queensgate Dr<br>
+              Richland, WA 99352
+            </address>
+            <ul class="hours">
+              <li><span>Mon – Fri</span><span>5:00am – 7:00pm</span></li>
+              <li><span>Sat – Sun</span><span>7:00am – 6:00pm</span></li>
+            </ul>
+            <p class="open-status" data-open-status="richland" hidden></p>
+            <p class="phone"><a href="tel:+15092229090">(509) 222-9090</a></p>
+            <div class="card-actions">
+              <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Sip+%26+Co+2588+Queensgate+Dr+Richland+WA" target="_blank" rel="noopener">Get directions</a>
+              <a class="btn btn-outline" href="tel:+15092229090">Call</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Story -->
+    <section id="about" class="section story">
+      <div class="container story-grid">
+        <figure class="story-photo">
+          <img src="images/storefront-pasco.jpg" alt="The Sip &amp; Co. shop on Sandifur Parkway in Pasco">
+          <figcaption>Getting ready to open on Sandifur Pkwy in Pasco</figcaption>
+        </figure>
+        <div>
+          <p class="eyebrow">Our story</p>
+          <h2>From Pasco to two shops in the Tri&#8209;Cities</h2>
+          <p>We're <strong>Emilio Avila</strong>, a Marine Corps Reserve veteran, and <strong>Veronica Gonzalez</strong>, the husband-and-wife team behind Sip &amp; Co. Our idea was simple: drinks that look as good as they taste and travel as well as you do.</p>
+          <p>When we opened on Sandifur Parkway in Pasco, the cans flew out so fast we ran out. Now we've opened a second home on Queensgate Drive in Richland. We're still local, still family-run, and not a franchise.</p>
+          <div class="stats">
+            <div><strong>2</strong><span>Tri&#8209;Cities shops</span></div>
+            <div><strong>45+</strong><span>Drinks to try</span></div>
+            <div><strong>1</strong><span>Seal on every can</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Contact -->
     <section id="contact" class="section section-dark">
       <div class="container contact">
         <div>
           <p class="eyebrow">Get in touch</p>
-          <h2>Planning something big?</h2>
-          <p>Office mornings, team events, birthday parties: we'll seal up a whole tray. Send us a note about catering, big group orders or anything else.</p>
+          <h2>Say hello</h2>
+          <p>Questions, feedback or a big order? Send us a note and we'll get back to you.</p>
           <p class="contact-phone">Richland: <a href="tel:+15092229090">(509) 222-9090</a></p>
         </div>
         <form class="contact-form" id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
           <input type="hidden" name="form-name" value="contact">
           <p hidden><label>Leave blank<input name="bot-field"></label></p>
           <div class="form-row">
-            <label>Name<input type="text" name="name" required></label>
-            <label>Email<input type="email" name="email" required></label>
+            <label>Name<input type="text" name="name" autocomplete="name" required></label>
+            <label>Email<input type="email" name="email" autocomplete="email" required></label>
           </div>
-          <label>Location
-            <select name="location">
-              <option>Pasco</option>
-              <option>Richland</option>
-            </select>
-          </label>
+          <div class="form-row">
+            <label>Location
+              <select name="location" required>
+                <option value="">Choose a shop</option>
+                <option value="Pasco">Pasco</option>
+                <option value="Richland">Richland</option>
+              </select>
+            </label>
+            <label>Phone (optional)<input type="tel" name="phone" autocomplete="tel"></label>
+          </div>
           <label>Message<textarea name="message" rows="4" required></textarea></label>
           <button type="submit" class="btn">Send message</button>
           <p class="form-status" role="status" aria-live="polite"></p>
@@ -334,7 +433,7 @@
       <div class="footer-grid">
         <div>
           <img src="images/logo.png" alt="Sip &amp; Co." class="footer-logo">
-          <p>Iced coffee, energy blends and matcha, sealed in a can. Locally owned in the Tri-Cities.</p>
+          <p>Iced coffee, energy blends and matcha, sealed in a can. Locally owned in the Tri&#8209;Cities.</p>
         </div>
         <div>
           <h4>Pasco</h4>
@@ -352,7 +451,7 @@
             <li><a href="#menu">Menu</a></li>
             <li><a href="#picker">Drink picker</a></li>
             <li><a href="#locations">Locations</a></li>
-            <li><a href="#contact">Catering &amp; contact</a></li>
+            <li><a href="#contact">Contact</a></li>
           </ul>
         </div>
       </div>
@@ -364,9 +463,10 @@
   </footer>
 
   <nav class="mobile-bar" aria-label="Quick actions">
-    <a href="tel:+15092229090">Call</a>
+    <a href="tel:+15092229090" data-for-location="richland">Call</a>
     <a data-directions href="https://www.google.com/maps/search/?api=1&query=Sip+%26+Co+2588+Queensgate+Dr+Richland+WA" target="_blank" rel="noopener">Directions</a>
-    <a href="https://www.doordash.com/store/sip&co---8921-sandifur-pkwy-pasco-35644571/" target="_blank" rel="noopener">Order online</a>
+    <a href="https://www.doordash.com/store/sip&co---8921-sandifur-pkwy-pasco-35644571/" target="_blank" rel="noopener" data-for-location="pasco">Order online</a>
+    <a href="#menu">Menu</a>
   </nav>
 
   <script src="script.js"></script>
