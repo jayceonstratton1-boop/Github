@@ -419,3 +419,10 @@ a[href^="tel:"] { white-space: nowrap; }
 .fall .btn:hover { background: #f4a65a; border-color: #f4a65a; }
 .menu-dark .tab-fall { border-color: rgba(233, 139, 58, 0.7); }
 .menu-dark .tab-fall.active { background: #e98b3a; border-color: #e98b3a; color: #141414; }
+
+/* Instagram links */
+.ig-link { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 600; text-decoration: none; min-height: 44px; }
+.ig-link:hover span { text-decoration: underline; text-underline-offset: 3px; }
+.ig-icon { width: 22px; height: 22px; flex: none; }
+.ig-link-light, .ig-link-light:hover { color: #fff; }
+.fall-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.5rem; }

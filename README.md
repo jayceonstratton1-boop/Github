@@ -16,7 +16,7 @@ Static website for Sip & Co: a home page, fan favorites, menu, drink picker, bot
 - Photos in `site/images/` were cropped from screenshots and AI-upscaled 4x (Real-ESRGAN). Original files from Sip & Co. (same file names) would be sharper. A staff member is visible in `cans-counter.jpg`.
 - Prices: coffee, specialty coffee and most matcha prices come from the in-store menu board. Energy drinks, non-coffee drinks and a few matchas show no price because they were cut off in the board photo. Cup size for the prices is unknown.
 - Hours (both shops: Mon–Fri 5am–7pm, Sat–Sun 7am–6pm) come from Joe Coffee, Apple Maps and Yelp listings; confirm with the owners. The open/closed status uses these hours.
-- Pasco phone number, social media links, whether catering is offered.
+- Pasco phone number, whether catering is offered. (Instagram: @sip.co__, linked in the fall section, contact section and footer.)
 
 ## Before launch
 - The link-preview tags and Google business details in `site/index.html` use `https://sip-and-co-bcym.netlify.app/`. If the site gets its own domain, replace that URL.
