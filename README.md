@@ -14,7 +14,7 @@ Static website for Sip & Co: a home page, fan favorites, menu, drink picker, bot
 
 ## Still to confirm
 - Photos in `site/images/` were cropped from screenshots and AI-upscaled 4x (Real-ESRGAN). Original files from Sip & Co. (same file names) would be sharper. A staff member is visible in `cans-counter.jpg`.
-- Prices: coffee, specialty coffee and most matcha prices come from the in-store menu board; Pink Wave ($7.50) from the user. Other energy drinks, non-coffee drinks, Banana/Brown Sugar/Blueberry Matcha and The Veaa use online-menu prices (marked with *), which run higher than in store. Fall drinks have no price. Cup size for the prices is unknown.
+- Prices: the menu section shows no prices (the fall drinks had none, so all were removed for consistency). Known in-store prices: board photo for coffee/specialty/most matcha, Pink Wave $7.50; Fan favorites cards and the hero tag still show prices. Cup size unknown.
 - Hours (both shops: Mon–Fri 5am–7pm, Sat–Sun 7am–6pm) come from Joe Coffee, Apple Maps and Yelp listings; confirm with the owners. The open/closed status uses these hours.
 - Pasco phone number, whether catering is offered. (Instagram: @sip.co__, linked in the fall section, contact section and footer.)
 
