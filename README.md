@@ -20,7 +20,7 @@ It's plain HTML, CSS and JavaScript with no build step. To see it, open `index.h
 Search `index.html` for `TODO(owner)` to find each spot to fill in.
 
 - [ ] Real menu: item names, descriptions and prices (prices currently show `$ —`)
-- [ ] Full-size original photos. The ones in `/images` were cropped from Google listing screenshots, so most are small (about 155px wide). Some were posted by customers, so use the owners' own photos (or get permission) before the site goes live. Keep the same file names to swap them in.
+- [ ] Full-size original photos. The ones in `/images` were cropped from Google listing screenshots and enlarged 4x with an AI upscaler (Real-ESRGAN). They look sharper, but small text like signs and the cup logo comes out scrambled. Some were posted by customers, so use the owners' own photos (or get permission) before the site goes live. Keep the same file names to swap them in.
 - [ ] Photos of the Hot Cheeto Elote, the dessert cup and the fruit cup (these still use drawings)
 - [ ] Logo file, to replace the text logo
 - [ ] The owners' own story for the "Our Story" section
