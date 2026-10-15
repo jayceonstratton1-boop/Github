@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SnacExpress | Snack Your Way | Pasco, WA</title>
+  <meta name="description" content="SnacExpress is a snack bar in Pasco, WA serving loaded drinks, Cheetos con queso, Hot Cheeto elote and more. Open 2 PM daily (closed Tuesdays) at 3315 W Court St, Ste 101.">
+  <meta property="og:title" content="SnacExpress | Snack Your Way">
+  <meta property="og:description" content="Loaded drinks, Cheetos con queso and spicy snacks in Pasco, WA.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#f7a8c4">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Helps Google show hours, address and phone in search results -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "SnacExpress",
+    "slogan": "Snack Your Way",
+    "servesCuisine": ["Snacks", "Drinks", "Mexican-style snacks"],
+    "telephone": "+1-509-366-3244",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "3315 W Court St, Ste 101",
+      "addressLocality": "Pasco",
+      "addressRegion": "WA",
+      "postalCode": "99301",
+      "addressCountry": "US"
+    },
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Sunday", "Monday", "Wednesday", "Thursday"], "opens": "14:00", "closes": "21:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Friday", "Saturday"], "opens": "14:00", "closes": "22:00" }
+    ],
+    "sameAs": ["https://www.tiktok.com/@snacexpress"],
+    "acceptsReservations": false
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Reusable fruit decorations from the shop mural -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-watermelon" viewBox="0 0 64 64">
+      <path d="M4 20a28 28 0 0 0 56 0z" fill="#3fae49"/>
+      <path d="M8 20a24 24 0 0 0 48 0z" fill="#f2f7d0"/>
+      <path d="M11 20a21 21 0 0 0 42 0z" fill="#ef3b4f"/>
+      <g fill="#2b1b1b"><ellipse cx="22" cy="28" rx="1.6" ry="2.6"/><ellipse cx="32" cy="32" rx="1.6" ry="2.6"/><ellipse cx="42" cy="28" rx="1.6" ry="2.6"/><ellipse cx="27" cy="36" rx="1.4" ry="2.2"/><ellipse cx="37" cy="36" rx="1.4" ry="2.2"/></g>
+    </symbol>
+    <symbol id="i-strawberry" viewBox="0 0 64 64">
+      <path d="M32 58C16 46 10 34 14 24c3-7 11-9 18-6 7-3 15-1 18 6 4 10-2 22-18 34z" fill="#e8283c"/>
+      <path d="M20 18l6 4 6-8 6 8 6-4-2 8H22z" fill="#3fae49"/>
+      <g fill="#ffd84d"><circle cx="24" cy="32" r="1.4"/><circle cx="32" cy="30" r="1.4"/><circle cx="40" cy="32" r="1.4"/><circle cx="28" cy="40" r="1.4"/><circle cx="36" cy="40" r="1.4"/><circle cx="32" cy="48" r="1.4"/></g>
+    </symbol>
+    <symbol id="i-pineapple" viewBox="0 0 64 64">
+      <path d="M32 4l4 12 8-8-4 12 10-4-10 8H24L14 16l10 4-4-12 8 8z" fill="#3fae49"/>
+      <ellipse cx="32" cy="40" rx="15" ry="20" fill="#ffcf2e"/>
+      <g stroke="#d99a00" stroke-width="1.6" fill="none"><path d="M20 30l24 24M18 40l18 18M26 22l22 22M44 30L20 54M46 40L28 58M38 22L16 44"/></g>
+    </symbol>
+    <symbol id="i-gummy" viewBox="0 0 64 64">
+      <circle cx="32" cy="32" r="20" fill="none" stroke="#ffb020" stroke-width="12"/>
+      <circle cx="32" cy="32" r="20" fill="none" stroke="#ff5a7a" stroke-width="12" stroke-dasharray="21 21"/>
+    </symbol>
+    <symbol id="i-cucumber" viewBox="0 0 64 64">
+      <circle cx="32" cy="32" r="22" fill="#2f8f3a"/>
+      <circle cx="32" cy="32" r="18" fill="#b8e986"/>
+      <g fill="#f4ffe0"><circle cx="32" cy="24" r="2"/><circle cx="38" cy="30" r="2"/><circle cx="36" cy="38" r="2"/><circle cx="28" cy="38" r="2"/><circle cx="26" cy="30" r="2"/></g>
+    </symbol>
+  </svg>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Main">
+      <a class="brand" href="#top" aria-label="SnacExpress home">
+        <span class="brand-snac">Snac</span><span class="brand-express">Express</span>
+      </a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">
+        <span class="sr-only">Menu</span><span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#about">Our Story</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#catering">Catering</a></li>
+        <li><a href="#visit" class="btn btn-small">Visit Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="clouds" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <p class="status-pill" id="open-status" aria-live="polite">Pasco, WA</p>
+          <h1 class="hero-title">
+            <span>Snack</span>
+            <span>Your</span>
+            <span>Way</span>
+          </h1>
+          <p class="hero-sub">
+            Loaded drinks, Cheetos con queso, Hot Cheeto elote and spicy snacks
+            made just how you like them. Find us in Riverview Plaza on Court Street.
+          </p>
+          <div class="hero-actions">
+            <a href="#menu" class="btn">See the Menu</a>
+            <a href="tel:+15093663244" class="btn btn-ghost">Call (509) 366-3244</a>
+          </div>
+        </div>
+
+        <div class="hero-art" aria-hidden="true">
+          <div class="cup cup-hero">
+            <div class="cup-straw"></div>
+            <div class="cup-lid"></div>
+            <div class="cup-body">
+              <div class="layer l-pink"></div>
+              <div class="layer l-orange"></div>
+              <div class="layer l-yellow"></div>
+              <span class="cup-logo">SnacExpress</span>
+            </div>
+          </div>
+          <svg class="float f1"><use href="#i-strawberry"/></svg>
+          <svg class="float f2"><use href="#i-pineapple"/></svg>
+          <svg class="float f3"><use href="#i-watermelon"/></svg>
+          <svg class="float f4"><use href="#i-gummy"/></svg>
+          <svg class="float f5"><use href="#i-cucumber"/></svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUICK INFO STRIP -->
+    <section class="info-strip" aria-label="Quick info">
+      <div class="container info-grid">
+        <div>
+          <h2>Open Today</h2>
+          <p id="today-hours">2 PM – 9 PM</p>
+        </div>
+        <div>
+          <h2>Find Us</h2>
+          <p><a href="https://maps.google.com/?q=SnacExpress+3315+W+Court+St+Ste+101+Pasco+WA+99301" target="_blank" rel="noopener">3315 W Court St, Ste 101</a></p>
+        </div>
+        <div>
+          <h2>Catering</h2>
+          <p><a href="#catering">Parties &amp; events</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- MENU -->
+    <section class="section" id="menu">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow">The Menu</p>
+          <h2 class="section-title">Sip it. Crunch it. Snack your way.</h2>
+          <p class="section-lead">Here are some of our favorites. Ask about the full menu on our in-store screens.</p>
+        </header>
+
+        <div class="tabs" role="tablist" aria-label="Menu categories">
+          <button role="tab" aria-selected="true" aria-controls="tab-drinks" id="tabbtn-drinks">Drinks</button>
+          <button role="tab" aria-selected="false" aria-controls="tab-snacks" id="tabbtn-snacks" tabindex="-1">Snacks</button>
+          <button role="tab" aria-selected="false" aria-controls="tab-sweets" id="tabbtn-sweets" tabindex="-1">Sweets</button>
+        </div>
+
+        <!-- TODO(owner): replace names, descriptions and prices with the real menu -->
+        <div class="menu-grid" id="tab-drinks" role="tabpanel" aria-labelledby="tabbtn-drinks">
+          <article class="menu-card">
+            <div class="card-art art-blue"><div class="cup"><div class="cup-straw"></div><div class="cup-lid"></div><div class="cup-body"><div class="layer l-teal"></div><div class="layer l-blue"></div><div class="layer l-deep"></div></div></div></div>
+            <div class="card-body">
+              <h3>Blue Layered Refresher</h3>
+              <p>A bright layered drink in blue and green, served over ice.</p>
+              <p class="price">$ —</p>
+            </div>
+          </article>
+          <article class="menu-card">
+            <div class="card-art art-pink"><div class="cup"><div class="cup-straw"></div><div class="cup-lid gummies"></div><div class="cup-body"><div class="layer l-pinklight"></div><div class="layer l-pink"></div></div></div></div>
+            <div class="card-body">
+              <h3>Strawberry Gummy Cream</h3>
+              <p>A creamy strawberry drink topped with gummy rings.</p>
+              <p class="price">$ —</p>
+            </div>
+          </article>
+          <article class="menu-card">
+            <div class="card-art art-red"><div class="cup"><div class="cup-straw"></div><div class="cup-lid"></div><div class="cup-body"><div class="layer l-red"></div><div class="layer l-darkred"></div></div></div></div>
+            <div class="card-body">
+              <h3>Red Fruit Refresher</h3>
+              <p>A deep red, fruity cooler with a chamoy-and-chili rim.</p>
+              <p class="price">$ —</p>
+            </div>
+          </article>
+          <article class="menu-card">
+            <div class="card-art art-green"><div class="cup"><div class="cup-straw"></div><div class="cup-lid"></div><div class="cup-body"><div class="layer l-lime"></div><div class="layer l-green"></div></div></div></div>
+            <div class="card-body">
+              <h3>Lime Green Cooler</h3>
+              <p>A tangy green drink over crushed ice.</p>
+              <p class="price">$ —</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="menu-grid" id="tab-snacks" role="tabpanel" aria-labelledby="tabbtn-snacks" hidden>
+          <article class="menu-card featured">
+            <span class="badge">Fan Favorite</span>
+            <div class="card-art art-orange"><div class="bag"><span class="bag-label">Cheetos</span><span class="bag-topping queso"></span></div></div>
+            <div class="card-body">
+              <h3>Cheetos con Queso</h3>
+              <p>A bag of Cheetos smothered in warm nacho cheese.</p>
+              <p class="price">$ —</p>
+            </div>
+          </article>
+          <article class="menu-card featured">
+            <span class="badge">Spicy</span>
+            <div class="card-art art-yellow"><div class="elote"></div></div>
+            <div class="card-body">
+              <h3>Hot Cheeto Elote</h3>
+              <p>Street corn with mayo, cheese and crushed Flamin' Hot Cheetos.</p>
+              <p class="price">$ —</p>
+            </div>
+          </article>
+          <article class="menu-card">
+            <div class="card-art art-purple"><div class="bag bag-purple"><span class="bag-label">Loaded</span><span class="bag-topping chili"></span></div></div>
+            <div class="card-body">
+              <h3>Loaded Chip Bag</h3>
+              <p>Your pick of chips, sliced open and loaded with toppings and chili powder.</p>
+              <p class="price">$ —</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="menu-grid" id="tab-sweets" role="tabpanel" aria-labelledby="tabbtn-sweets" hidden>
+          <article class="menu-card">
+            <div class="card-art art-cream"><div class="cup cup-short"><div class="whip"></div><div class="cup-body"><div class="layer l-pinklight"></div><div class="layer l-cream"></div></div></div></div>
+            <div class="card-body">
+              <h3>Whipped Dessert Cup</h3>
+              <p>A sweet treat piled high with whipped cream.</p>
+              <p class="price">$ —</p>
+            </div>
+          </article>
+          <article class="menu-card">
+            <div class="card-art art-fruit">
+              <svg class="fruit-xl"><use href="#i-watermelon"/></svg>
+              <svg class="fruit-xl"><use href="#i-pineapple"/></svg>
+            </div>
+            <div class="card-body">
+              <h3>Fruit Cup</h3>
+              <p>Fresh fruit and cucumber with lime, Tajín and chamoy.</p>
+              <p class="price">$ —</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section section-pink" id="about">
+      <div class="container about-grid">
+        <div class="about-art" aria-hidden="true">
+          <div class="timeline">
+            <div class="step"><span class="step-dot">1</span><span>Snack cart</span></div>
+            <div class="step"><span class="step-dot">2</span><span>Local favorite</span></div>
+            <div class="step"><span class="step-dot">3</span><span>Our own storefront</span></div>
+          </div>
+        </div>
+        <div>
+          <p class="eyebrow">Our Story</p>
+          <h2 class="section-title">From a snack cart to Court Street</h2>
+          <!-- TODO(owner): replace with the owners' own story, in their words -->
+          <p>
+            SnacExpress started as a snack cart serving Pasco one drink and one bag of
+            chips at a time. When the lines kept growing, we opened our own storefront in Riverview Plaza.
+          </p>
+          <p>
+            Our pink shop has a <strong>"Snack Your Way"</strong> mural, comfy seats and plenty of
+            spots for photos. You can stop in after school, after work, or just because.
+          </p>
+          <a href="https://www.tiktok.com/@snacexpress" class="btn" target="_blank" rel="noopener">Follow us on TikTok</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="section" id="gallery">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow">Gallery</p>
+          <h2 class="section-title">Come see the pink</h2>
+        </header>
+        <!-- TODO(owner): put real photos in /images and swap each placeholder for an <img> -->
+        <div class="gallery">
+          <figure class="ph ph-tall ph-pink"><svg><use href="#i-strawberry"/></svg><figcaption>The "Snack Your Way" mural</figcaption></figure>
+          <figure class="ph ph-hex"><figcaption>Hexagon lights &amp; seating</figcaption></figure>
+          <figure class="ph ph-blue"><figcaption>Layered drinks</figcaption></figure>
+          <figure class="ph ph-orange"><figcaption>Cheetos con queso</figcaption></figure>
+          <figure class="ph ph-wide ph-balloon"><figcaption>Grand opening</figcaption></figure>
+          <figure class="ph ph-red"><figcaption>Spicy snacks</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATERING / EVENTS -->
+    <section class="section section-cream" id="catering">
+      <div class="container catering-grid">
+        <div>
+          <p class="eyebrow">Catering &amp; Events</p>
+          <h2 class="section-title">Bring the snacks to your party</h2>
+          <p>
+            Birthdays, quinceañeras, school events and office parties all go better with
+            SnacExpress. Tell us about your event and we'll get back to you with options.
+          </p>
+          <ul class="perks">
+            <li>Drink and snack bars for groups</li>
+            <li>Private events in our shop, like paint-and-sip nights</li>
+            <li>Custom orders for parties</li>
+          </ul>
+        </div>
+
+        <!-- Netlify picks this form up automatically when the site is hosted there -->
+        <form class="card form" name="catering" method="POST" data-netlify="true" netlify-honeypot="company">
+          <input type="hidden" name="form-name" value="catering">
+          <p class="hidden-field"><label>Leave this empty <input name="company"></label></p>
+          <label>Name<input name="name" required autocomplete="name"></label>
+          <label>Phone or email<input name="contact" required autocomplete="tel"></label>
+          <div class="form-row">
+            <label>Event date<input type="date" name="date"></label>
+            <label>Guests<input type="number" name="guests" min="1" inputmode="numeric"></label>
+          </div>
+          <label>Tell us about your event<textarea name="details" rows="4"></textarea></label>
+          <button class="btn" type="submit">Send Request</button>
+          <p class="form-note">Or call us at <a href="tel:+15093663244">(509) 366-3244</a>.</p>
+        </form>
+      </div>
+    </section>
+
+    <!-- VISIT -->
+    <section class="section" id="visit">
+      <div class="container visit-grid">
+        <div class="card">
+          <p class="eyebrow">Visit Us</p>
+          <h2 class="section-title small">SnacExpress</h2>
+          <address>
+            3315 W Court St, Ste 101<br>
+            Riverview Plaza<br>
+            Pasco, WA 99301
+          </address>
+          <p><a href="tel:+15093663244">(509) 366-3244</a></p>
+
+          <table class="hours" aria-label="Hours">
+            <tbody>
+              <tr data-day="0"><th>Sunday</th><td>2 PM – 9 PM</td></tr>
+              <tr data-day="1"><th>Monday</th><td>2 PM – 9 PM</td></tr>
+              <tr data-day="2"><th>Tuesday</th><td>Closed</td></tr>
+              <tr data-day="3"><th>Wednesday</th><td>2 PM – 9 PM</td></tr>
+              <tr data-day="4"><th>Thursday</th><td>2 PM – 9 PM</td></tr>
+              <tr data-day="5"><th>Friday</th><td>2 PM – 10 PM</td></tr>
+              <tr data-day="6"><th>Saturday</th><td>2 PM – 10 PM</td></tr>
+            </tbody>
+          </table>
+          <p class="pay-note">We accept cards, Apple Pay and contactless payments.</p>
+          <a class="btn" href="https://maps.google.com/?q=SnacExpress+3315+W+Court+St+Ste+101+Pasco+WA+99301" target="_blank" rel="noopener">Get Directions</a>
+        </div>
+        <div class="map">
+          <iframe
+            title="Map to SnacExpress"
+            src="https://www.google.com/maps?q=3315+W+Court+St+Ste+101,+Pasco,+WA+99301&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a class="brand" href="#top"><span class="brand-snac">Snac</span><span class="brand-express">Express</span></a>
+      <p>Snack Your Way · Pasco, WA</p>
+      <p class="footer-links">
+        <a href="https://www.tiktok.com/@snacexpress" target="_blank" rel="noopener">TikTok</a>
+        <a href="tel:+15093663244">Call</a>
+        <a href="#visit">Hours</a>
+      </p>
+      <p class="copy">© <span id="year"></span> SnacExpress</p>
+    </div>
+  </footer>
+
+  <!-- Sticky mobile call / directions bar -->
+  <div class="mobile-bar">
+    <a href="tel:+15093663244">Call</a>
+    <a href="https://maps.google.com/?q=SnacExpress+3315+W+Court+St+Ste+101+Pasco+WA+99301" target="_blank" rel="noopener">Directions</a>
+    <a href="#menu">Menu</a>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
