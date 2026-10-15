@@ -17,6 +17,7 @@
       --ink: #08080a;
       --ink-2: #121214;
       --ink-3: #1a1a1d;
+      --ink-4: #232327;
       --line: #27272b;
       --white: #f5f5f7;
       --muted: #9c9ca3;
@@ -46,50 +47,109 @@
     .clock { font-family: "Bebas Neue", Impact, sans-serif; font-size: 2rem; color: var(--chrome); }
 
     /* Layout */
-    main { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 0; min-height: 0; }
+    main { flex: 1; display: grid; grid-template-columns: 1.15fr .85fr; min-height: 0; }
     .pane { padding: 32px 28px; min-width: 0; }
     .pane + .pane { border-left: 1px solid var(--line); background: var(--ink-2); }
     .eyebrow { color: var(--chrome); text-transform: uppercase; letter-spacing: .22em; font-size: .75rem; font-weight: 600; }
-    .pane h2 { font-size: clamp(2.4rem, 5vw, 3.4rem); margin: .4rem 0 1.4rem; }
+    .pane h2 { font-size: clamp(2.3rem, 5vw, 3.2rem); margin: .4rem 0 1.2rem; }
+    .pane h3 { font-size: 1.5rem; letter-spacing: .08em; color: var(--chrome); margin: 1.6rem 0 .8rem; }
+    .lead { color: var(--muted); margin: -.4rem 0 1.4rem; }
+    .flow { max-width: 600px; }
 
-    /* Form */
-    form { display: grid; gap: 1.1rem; max-width: 520px; }
+    /* Step bar */
+    .steps { display: flex; gap: .4rem; margin-bottom: 1.4rem; }
+    .steps span { flex: 1; height: 4px; background: var(--line); border-radius: 2px; }
+    .steps span.on { background: var(--white); }
+    .view { display: none; }
+    .view.active { display: block; }
+
+    /* Form bits */
+    form { display: grid; gap: 1.05rem; }
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
     label { display: grid; gap: .45rem; font-size: .8rem; font-weight: 600; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); }
     label .opt { text-transform: none; letter-spacing: 0; font-weight: 400; }
-    input, select {
+    input {
       width: 100%; padding: 1rem 1.1rem; font-size: 1.15rem; border-radius: 4px;
       background: var(--ink-3); border: 1px solid var(--line); color: var(--white); outline: none;
     }
-    input:focus, select:focus { border-color: var(--chrome); box-shadow: 0 0 0 3px rgba(255,255,255,.08); }
-    select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--chrome) 50%), linear-gradient(135deg, var(--chrome) 50%, transparent 50%); background-position: calc(100% - 22px) 50%, calc(100% - 16px) 50%; background-size: 6px 6px; background-repeat: no-repeat; }
+    input:focus { border-color: var(--chrome); box-shadow: 0 0 0 3px rgba(255,255,255,.08); }
+    input.pin { letter-spacing: .5em; text-align: center; }
+    .err { color: #ff8a8f; font-size: .9rem; min-height: 1.3em; margin: 0; }
+    .hint { color: var(--muted); font-size: .9rem; margin: .8rem 0 0; min-height: 1.3em; }
+
+    /* Buttons */
     .btn {
       display: inline-flex; align-items: center; justify-content: center; gap: .5rem; cursor: pointer;
-      padding: 1.1rem 1.6rem; border-radius: 4px; border: 0; font-weight: 700; text-decoration: none;
-      text-transform: uppercase; letter-spacing: .12em; font-size: .9rem;
+      padding: 1.05rem 1.6rem; border-radius: 4px; border: 0; font-weight: 700; text-decoration: none;
+      text-transform: uppercase; letter-spacing: .12em; font-size: .88rem;
     }
+    .btn:disabled { opacity: .35; cursor: not-allowed; }
     .btn-primary { background: var(--white); color: var(--ink); }
-    .btn-primary:active { transform: scale(.99); }
     .btn-ghost { background: transparent; border: 1px solid var(--line); color: var(--white); }
     .btn-sm { padding: .55rem .8rem; font-size: .72rem; }
     .btn-go { background: var(--green); color: #04130b; }
     .btn-x { background: transparent; border: 1px solid #4a2326; color: #ff8a8f; }
-    .alt-book { margin-top: 1.6rem; padding-top: 1.4rem; border-top: 1px solid var(--line); max-width: 520px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; }
+    .nav-row { display: flex; gap: .8rem; margin-top: 1.6rem; }
+    .nav-row .btn-primary { flex: 1; }
+    .linkish { background: none; border: 0; color: var(--muted); text-decoration: underline; cursor: pointer; padding: .4rem 0; font-size: .85rem; }
+
+    /* Start choices */
+    .start-grid { display: grid; gap: .8rem; }
+    .start-btn {
+      display: flex; align-items: center; gap: 1rem; width: 100%; text-align: left; cursor: pointer;
+      background: var(--ink-3); border: 1px solid var(--line); border-radius: 6px; padding: 1.2rem 1.3rem;
+    }
+    .start-btn:hover, .start-btn:focus-visible { border-color: var(--chrome); outline: none; }
+    .start-btn.main { background: var(--white); color: var(--ink); border-color: var(--white); }
+    .start-btn .ic { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; flex: none; background: var(--ink-4); }
+    .start-btn.main .ic { background: var(--ink); }
+    .start-btn svg { width: 22px; height: 22px; stroke: var(--white); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .start-btn .t { font-weight: 700; font-size: 1.1rem; }
+    .start-btn .s { font-size: .88rem; color: var(--muted); }
+    .start-btn.main .s { color: #4a4a50; }
+    .alt-book { margin-top: 1.6rem; padding-top: 1.4rem; border-top: 1px solid var(--line); color: var(--muted); display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; }
+
+    /* Choice cards */
+    .choice-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: .7rem; }
+    .choice {
+      display: flex; align-items: center; gap: .8rem; text-align: left; cursor: pointer; min-height: 74px;
+      background: var(--ink-3); border: 1px solid var(--line); border-radius: 6px; padding: .9rem 1rem;
+    }
+    .choice:hover { border-color: #4a4a50; }
+    .choice.selected { border-color: var(--white); box-shadow: inset 0 0 0 1px var(--white); background: var(--ink-4); }
+    .choice .t { font-weight: 600; line-height: 1.25; }
+    .choice .s { color: var(--muted); font-size: .8rem; }
+    .avatar { width: 44px; height: 44px; border-radius: 50%; flex: none; display: grid; place-items: center; background: var(--ink-4); border: 1px solid var(--line); font-family: "Bebas Neue", Impact, sans-serif; font-size: 1.3rem; }
+    .choice.selected .avatar { background: var(--white); color: var(--ink); }
+    .tag { display: inline-block; font-size: .62rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; background: var(--green); color: #04130b; padding: .12rem .4rem; border-radius: 3px; vertical-align: middle; }
+    .chips { display: flex; flex-wrap: wrap; gap: .6rem; }
+    .chip { padding: .8rem 1.15rem; border-radius: 999px; border: 1px solid var(--line); background: var(--ink-3); cursor: pointer; font-weight: 500; }
+    .chip.on { background: var(--white); color: var(--ink); border-color: var(--white); }
+    .chip.on::before { content: "✓ "; font-weight: 700; }
+    .repeat { width: 100%; margin-bottom: 1.4rem; border-style: dashed; }
+    .repeat .avatar { font-size: 1.1rem; }
+
+    /* Review */
+    .summary { margin: 0; border: 1px solid var(--line); border-radius: 6px; background: var(--ink-3); }
+    .summary div { display: grid; grid-template-columns: 120px 1fr; gap: 1rem; padding: .95rem 1.1rem; border-bottom: 1px solid var(--line); }
+    .summary div:last-child { border-bottom: 0; }
+    .summary dt { color: var(--muted); font-size: .8rem; text-transform: uppercase; letter-spacing: .12em; padding-top: .15rem; }
+    .summary dd { margin: 0; font-weight: 600; }
 
     /* List */
-    .counts { display: flex; gap: .6rem; flex-wrap: wrap; margin: -0.4rem 0 1.4rem; }
+    .counts { display: flex; gap: .6rem; flex-wrap: wrap; margin: -0.4rem 0 1.2rem; }
     .pill { padding: .4rem .85rem; border: 1px solid var(--line); border-radius: 999px; font-size: .85rem; color: var(--muted); }
     .pill strong { color: var(--white); }
-    .group-title { font-family: "Bebas Neue", Impact, sans-serif; font-size: 1.3rem; letter-spacing: .1em; color: var(--muted); margin: 1.2rem 0 .5rem; }
+    .group-title { font-family: "Bebas Neue", Impact, sans-serif; font-size: 1.3rem; letter-spacing: .1em; color: var(--muted); margin: 1.1rem 0 .4rem; }
     ol.list { list-style: none; margin: 0; padding: 0; }
-    .row { display: grid; grid-template-columns: 52px 1fr auto; gap: 1rem; align-items: center; padding: .9rem 0; border-bottom: 1px solid var(--line); }
+    .row { display: grid; grid-template-columns: 48px 1fr auto; gap: .9rem; align-items: center; padding: .85rem 0; border-bottom: 1px solid var(--line); }
     .num { font-family: "Bebas Neue", Impact, sans-serif; font-size: 2rem; color: var(--chrome); text-align: center; }
     .row.serving .num { color: var(--green); font-size: 1.1rem; letter-spacing: .08em; }
-    .who { font-weight: 600; font-size: 1.1rem; }
-    .meta { color: var(--muted); font-size: .85rem; }
+    .who { font-weight: 600; font-size: 1.05rem; }
+    .meta { color: var(--muted); font-size: .84rem; }
     .actions { display: flex; gap: .4rem; flex-wrap: wrap; justify-content: flex-end; }
-    .empty { color: var(--muted); padding: 1.4rem 0; }
-    .staff-bar { display: flex; gap: .6rem; flex-wrap: wrap; align-items: center; justify-content: space-between; margin-top: 1.8rem; padding-top: 1rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; }
-    .linkish { background: none; border: 0; color: var(--muted); text-decoration: underline; cursor: pointer; padding: .4rem 0; font-size: .85rem; }
+    .empty { color: var(--muted); padding: 1.2rem 0; }
+    .staff-bar { display: flex; gap: .6rem; flex-wrap: wrap; align-items: center; justify-content: space-between; margin-top: 1.6rem; padding-top: 1rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; }
     .staff-only { display: none !important; }
     body.staff .staff-only { display: flex !important; }
     body.staff .hide-staff { display: none; }
@@ -102,10 +162,9 @@
     .card .big { font-family: "Bebas Neue", Impact, sans-serif; font-size: 6rem; line-height: 1; margin: .6rem 0; }
     .card h2 { font-size: 2.6rem; margin-bottom: .6rem; }
     .card p { color: var(--muted); margin: 0 0 1.6rem; font-size: 1.05rem; }
-    .card form { margin: 0 auto 1rem; }
-    .err { color: #ff8a8f; font-size: .85rem; min-height: 1.2em; margin: 0; }
+    .card form { max-width: 280px; margin: 0 auto; }
 
-    @media (max-width: 820px) {
+    @media (max-width: 900px) {
       main { grid-template-columns: 1fr; }
       .pane + .pane { border-left: 0; border-top: 1px solid var(--line); }
       .pane { padding: 24px 16px; }
@@ -113,8 +172,12 @@
       .brand h1 { font-size: 1.5rem; }
       .clock { font-size: 1.5rem; }
     }
-    @media (max-width: 420px) {
+    @media (max-width: 480px) {
       .brand .sub { display: none; }
+      .two { grid-template-columns: 1fr; }
+      .choice-grid { grid-template-columns: 1fr 1fr; }
+      .choice { flex-direction: column; align-items: flex-start; gap: .5rem; }
+      .summary div { grid-template-columns: 1fr; gap: .2rem; }
       .row { grid-template-columns: 40px 1fr; }
       .row .actions { grid-column: 1 / -1; justify-content: flex-start; }
     }
@@ -134,28 +197,138 @@
   </header>
 
   <main>
-    <!-- Check-in form -->
+    <!-- Check-in flow -->
     <section class="pane">
-      <div class="eyebrow">Welcome in</div>
-      <h2>Add your name to the list</h2>
-      <form id="checkinForm" autocomplete="off">
-        <label>Name
-          <input id="name" name="name" required maxlength="40" placeholder="First name &amp; last initial" autocapitalize="words">
-        </label>
-        <label>Phone <span class="opt">(optional, in case we need to reach you)</span>
-          <input id="phone" name="phone" type="tel" inputmode="tel" maxlength="20" placeholder="(509) 555-0123">
-        </label>
-        <label>Service
-          <select id="service" name="service" required></select>
-        </label>
-        <label id="barberField">Barber
-          <select id="barber" name="barber"></select>
-        </label>
-        <button class="btn btn-primary" type="submit">Check In</button>
-      </form>
-      <div class="alt-book">
-        <span>Rather pick a set time?</span>
-        <a class="btn btn-ghost btn-sm" href="https://booksy.com/en-us/1082357_the-new-era-barber-studio_barber-shop_39131_pasco" target="_blank" rel="noopener">Book on Booksy</a>
+      <div class="flow">
+        <div class="steps" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+
+        <!-- Step 1: who are you -->
+        <div class="view active" data-view="start">
+          <div class="eyebrow">Welcome in</div>
+          <h2>Check in for your cut</h2>
+          <div class="start-grid">
+            <button class="start-btn main" type="button" data-go="login">
+              <span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a7 7 0 0 1 14 0v1"/><path d="M17 11l2 2 4-4"/></svg></span>
+              <span><span class="t">Log In</span><br><span class="s">I already have an account</span></span>
+            </button>
+            <button class="start-btn" type="button" data-go="signup">
+              <span class="ic"><svg viewBox="0 0 24 24"><circle cx="10" cy="8" r="4"/><path d="M2 21v-1a7 7 0 0 1 12.5-4.3"/><path d="M19 14v6M16 17h6"/></svg></span>
+              <span><span class="t">Sign Up</span><br><span class="s">New here? Create an account so we remember you</span></span>
+            </button>
+            <button class="start-btn" type="button" data-go="guest">
+              <span class="ic"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              <span><span class="t">Continue as Guest</span><br><span class="s">Just add my name to the list</span></span>
+            </button>
+          </div>
+          <div class="alt-book">
+            <span>Rather pick a set time?</span>
+            <a class="btn btn-ghost btn-sm" href="https://booksy.com/en-us/1082357_the-new-era-barber-studio_barber-shop_39131_pasco" target="_blank" rel="noopener">Book on Booksy</a>
+          </div>
+        </div>
+
+        <!-- Log in -->
+        <div class="view" data-view="login">
+          <div class="eyebrow">Welcome back</div>
+          <h2>Log In</h2>
+          <form id="loginForm" autocomplete="off" novalidate>
+            <label>Phone number
+              <input id="loginPhone" type="tel" inputmode="tel" maxlength="20" placeholder="(509) 555-0123">
+            </label>
+            <label>4-digit PIN
+              <input id="loginPin" class="pin" type="password" inputmode="numeric" maxlength="4" placeholder="••••">
+            </label>
+            <p class="err" id="loginErr"></p>
+            <div class="nav-row" style="margin-top:0">
+              <button class="btn btn-ghost" type="button" data-go="start">Back</button>
+              <button class="btn btn-primary" type="submit">Log In</button>
+            </div>
+          </form>
+          <p class="hint">Forgot your PIN? Ask the front desk, or <button class="linkish" type="button" data-go="guest">continue as a guest</button>.</p>
+        </div>
+
+        <!-- Sign up -->
+        <div class="view" data-view="signup">
+          <div class="eyebrow">New customer</div>
+          <h2>Create Your Account</h2>
+          <form id="signupForm" autocomplete="off" novalidate>
+            <div class="two">
+              <label>First name <input id="suFirst" maxlength="24" autocapitalize="words"></label>
+              <label>Last name <input id="suLast" maxlength="24" autocapitalize="words"></label>
+            </div>
+            <label>Phone number
+              <input id="suPhone" type="tel" inputmode="tel" maxlength="20" placeholder="(509) 555-0123">
+            </label>
+            <div class="two">
+              <label>Choose a 4-digit PIN <input id="suPin" class="pin" type="password" inputmode="numeric" maxlength="4" placeholder="••••"></label>
+              <label>Confirm PIN <input id="suPin2" class="pin" type="password" inputmode="numeric" maxlength="4" placeholder="••••"></label>
+            </div>
+            <p class="err" id="signupErr"></p>
+            <div class="nav-row" style="margin-top:0">
+              <button class="btn btn-ghost" type="button" data-go="start">Back</button>
+              <button class="btn btn-primary" type="submit">Create Account</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Guest -->
+        <div class="view" data-view="guest">
+          <div class="eyebrow">Guest check-in</div>
+          <h2>Who's getting the cut?</h2>
+          <form id="guestForm" autocomplete="off" novalidate>
+            <label>Name
+              <input id="guestName" maxlength="40" placeholder="First name &amp; last initial" autocapitalize="words">
+            </label>
+            <label>Phone <span class="opt">(optional, in case we need to reach you)</span>
+              <input id="guestPhone" type="tel" inputmode="tel" maxlength="20" placeholder="(509) 555-0123">
+            </label>
+            <p class="err" id="guestErr"></p>
+            <div class="nav-row" style="margin-top:0">
+              <button class="btn btn-ghost" type="button" data-go="start">Back</button>
+              <button class="btn btn-primary" type="submit">Continue</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Step 2: barber -->
+        <div class="view" data-view="barber">
+          <div class="eyebrow" id="hello">Hi!</div>
+          <h2>Choose Your Barber</h2>
+          <button class="choice repeat" type="button" id="repeatBtn" hidden>
+            <span class="avatar">↺</span>
+            <span><span class="t">Same as last time</span><br><span class="s" id="repeatText"></span></span>
+          </button>
+          <div class="choice-grid" id="barberGrid"></div>
+          <div class="nav-row">
+            <button class="btn btn-ghost" type="button" id="barberBack">Back</button>
+            <button class="btn btn-primary" type="button" id="barberNext" disabled>Next</button>
+          </div>
+        </div>
+
+        <!-- Step 3: services -->
+        <div class="view" data-view="service">
+          <div class="eyebrow">Your service</div>
+          <h2>What are we doing today?</h2>
+          <h3>Haircut</h3>
+          <div class="choice-grid" id="cutGrid"></div>
+          <h3>Add extras <span style="font-family:Inter,sans-serif;font-size:.8rem;letter-spacing:0;color:var(--muted);text-transform:none">(pick as many as you want)</span></h3>
+          <div class="chips" id="addonChips"></div>
+          <p class="hint" id="serviceHint"></p>
+          <div class="nav-row">
+            <button class="btn btn-ghost" type="button" data-go="barber">Back</button>
+            <button class="btn btn-primary" type="button" id="serviceNext" disabled>Review</button>
+          </div>
+        </div>
+
+        <!-- Step 4: review -->
+        <div class="view" data-view="review">
+          <div class="eyebrow">Almost done</div>
+          <h2>Look Good?</h2>
+          <dl class="summary" id="summary"></dl>
+          <div class="nav-row">
+            <button class="btn btn-ghost" type="button" data-go="service">Back</button>
+            <button class="btn btn-primary" type="button" id="confirmBtn">Check In</button>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -177,9 +350,7 @@
       <div class="staff-bar">
         <span class="hide-staff">We'll call your name when it's your turn.</span>
         <button class="linkish hide-staff" id="staffBtn" type="button">Staff</button>
-        <span class="staff-only" style="gap:.6rem;align-items:center">
-          <span class="staff-badge">Staff mode</span>
-        </span>
+        <span class="staff-only" style="gap:.6rem;align-items:center"><span class="staff-badge">Staff mode</span></span>
         <span class="staff-only" style="gap:.6rem">
           <button class="btn btn-x btn-sm" id="clearBtn" type="button">Clear list</button>
           <button class="btn btn-ghost btn-sm" id="exitStaffBtn" type="button">Exit staff</button>
@@ -204,8 +375,8 @@
   <div class="overlay" id="pinOverlay" role="dialog" aria-modal="true" aria-labelledby="pinTitle">
     <div class="card">
       <h2 id="pinTitle">Staff PIN</h2>
-      <form id="pinForm" style="max-width:280px">
-        <input id="pin" type="password" inputmode="numeric" maxlength="8" aria-label="Staff PIN" style="text-align:center;letter-spacing:.4em">
+      <form id="pinForm">
+        <input id="staffPin" class="pin" type="password" inputmode="numeric" maxlength="8" aria-label="Staff PIN">
         <p class="err" id="pinErr"></p>
         <button class="btn btn-primary" type="submit">Unlock</button>
         <button class="btn btn-ghost" type="button" id="pinCancel">Cancel</button>
@@ -216,169 +387,382 @@
   <script>
     // ---- Shop settings: update these ----
     const CONFIG = {
-      // PLACEHOLDER: replace with the shop's real service menu
-      services: ['Haircut', 'Fade', 'Beard Trim', 'Haircut + Beard', 'Line-Up', 'Kids Cut', 'Not sure yet'],
-      // PLACEHOLDER: add barber names, e.g. ['Mike', 'Jay']. Leave empty to hide the barber field.
-      barbers: [],
+      // PLACEHOLDER: replace with the shop's real barbers
+      barbers: ['Barber 1', 'Barber 2', 'Barber 3'],
+      // PLACEHOLDER: replace with the shop's real haircut menu
+      haircuts: ['Classic Cut', 'Low Fade', 'Mid Fade', 'High Fade', 'Skin / Bald Fade', 'Taper', 'Buzz Cut', 'Kids Cut'],
+      // PLACEHOLDER: replace with the shop's real extras
+      extras: ['Beard Trim', 'Line-Up / Edge-Up', 'Eyebrows', 'Hot Towel', 'Hair Design', 'Shampoo'],
       // PLACEHOLDER: change this PIN before using the tablet in the shop
       staffPin: '2024',
       staffTimeoutMs: 2 * 60 * 1000,
       confirmTimeoutMs: 10 * 1000,
+      idleResetMs: 90 * 1000,
     };
 
-    const KEY = 'newera-walkins-v1';
-    let memory = [];
-    let staffTimer = null;
-    let doneTimer = null;
-
+    const FIRST = 'First available';
+    const NO_CUT = 'No haircut';
+    const QKEY = 'newera-walkins-v1';
+    const AKEY = 'newera-accounts-v1';
+    const mem = {};
     const $ = (id) => document.getElementById(id);
 
-    function load() {
-      let list = memory;
-      try { list = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) {}
-      // Start fresh each day
+    // ---- Storage ----
+    function read(key) {
+      try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : (mem[key] || []); }
+      catch (e) { return mem[key] || []; }
+    }
+    function write(key, val) {
+      mem[key] = val;
+      try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) {}
+    }
+    function loadQueue() {
       const today = new Date().toDateString();
-      return list.filter((x) => new Date(x.at).toDateString() === today);
+      return read(QKEY).filter((x) => new Date(x.at).toDateString() === today);
     }
-    function save(list) {
-      memory = list;
-      try { localStorage.setItem(KEY, JSON.stringify(list)); } catch (e) {}
-      render();
-    }
+    function saveQueue(list) { write(QKEY, list); render(); }
+    const loadAccounts = () => read(AKEY);
+    const saveAccounts = (list) => write(AKEY, list);
 
+    // ---- Helpers ----
+    const digits = (s) => s.replace(/\D/g, '').slice(-10);
+    const fmtPhone = (d) => d ? `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}` : '';
+    const firstName = (n) => n.trim().split(/\s+/)[0];
     function displayName(full) {
       const parts = full.trim().split(/\s+/);
       if (parts.length < 2) return parts[0];
       return parts[0] + ' ' + parts[parts.length - 1][0].toUpperCase() + '.';
     }
-    function minsSince(t) { return Math.max(0, Math.round((Date.now() - t) / 60000)); }
-    function timeStr(t) { return new Date(t).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }); }
-
+    const minsSince = (t) => Math.max(0, Math.round((Date.now() - t) / 60000));
+    const timeStr = (t) => new Date(t).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+    const initials = (n) => n.split(/\s+/).map((w) => w[0]).join('').slice(0, 2).toUpperCase();
+    function serviceText(cut, extras) {
+      return [cut === NO_CUT ? '' : cut, ...extras].filter(Boolean).join(' + ');
+    }
     function el(tag, cls, text) {
       const n = document.createElement(tag);
       if (cls) n.className = cls;
       if (text != null) n.textContent = text;
       return n;
     }
+    async function hashPin(phone, pin) {
+      const data = new TextEncoder().encode('newera:' + phone + ':' + pin);
+      if (window.crypto && crypto.subtle) {
+        const buf = await crypto.subtle.digest('SHA-256', data);
+        return Array.from(new Uint8Array(buf), (b) => b.toString(16).padStart(2, '0')).join('');
+      }
+      return 'p:' + phone + ':' + pin;
+    }
+
+    // ---- Check-in flow ----
+    const STEP = { start: 0, login: 0, signup: 0, guest: 0, barber: 1, service: 2, review: 3 };
+    let state, current = 'start', idleTimer = null;
+    function freshState() { return { account: null, name: '', phone: '', barber: null, cut: null, extras: [], cameFrom: 'start' }; }
+    state = freshState();
+
+    function show(view) {
+      current = view;
+      document.querySelectorAll('.view').forEach((v) => v.classList.toggle('active', v.dataset.view === view));
+      document.querySelectorAll('.steps span').forEach((s, i) => s.classList.toggle('on', i <= STEP[view]));
+      if (view === 'barber') renderBarbers();
+      if (view === 'service') renderService();
+      if (view === 'review') renderReview();
+      const first = document.querySelector(`.view[data-view="${view}"] input`);
+      if (first) setTimeout(() => first.focus(), 30);
+      window.scrollTo({ top: 0 });
+      bumpIdle();
+    }
+    document.querySelectorAll('[data-go]').forEach((b) => b.addEventListener('click', () => {
+      if (b.dataset.go === 'start') resetFlow(); else show(b.dataset.go);
+    }));
+
+    function resetFlow() {
+      state = freshState();
+      document.querySelectorAll('.view form').forEach((f) => f.reset());
+      document.querySelectorAll('.view .err').forEach((e) => { e.textContent = ''; });
+      show('start');
+    }
+    function bumpIdle() {
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(() => { if (current !== 'start') resetFlow(); }, CONFIG.idleResetMs);
+    }
+    document.addEventListener('pointerdown', bumpIdle);
+    document.addEventListener('keydown', bumpIdle);
+
+    // Log in
+    $('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const phone = digits($('loginPhone').value), pin = $('loginPin').value;
+      const err = $('loginErr');
+      if (phone.length !== 10) { err.textContent = 'Enter the 10-digit phone number on your account.'; return; }
+      if (!/^\d{4}$/.test(pin)) { err.textContent = 'Enter your 4-digit PIN.'; return; }
+      const acct = loadAccounts().find((a) => a.phone === phone);
+      if (!acct || acct.pinHash !== await hashPin(phone, pin)) {
+        err.textContent = "That phone number and PIN don't match. Try again.";
+        $('loginPin').value = '';
+        return;
+      }
+      if (loadQueue().some((x) => x.accountId === acct.id)) {
+        err.textContent = `You're already on today's list, ${acct.first}. Have a seat and we'll call you up.`;
+        $('loginPin').value = '';
+        return;
+      }
+      startAs(acct, 'login');
+    });
+
+    // Sign up
+    $('signupForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const first = $('suFirst').value.trim(), last = $('suLast').value.trim();
+      const phone = digits($('suPhone').value), pin = $('suPin').value, pin2 = $('suPin2').value;
+      const err = $('signupErr');
+      if (!first || !last) { err.textContent = 'Enter your first and last name.'; return; }
+      if (phone.length !== 10) { err.textContent = 'Enter a 10-digit phone number.'; return; }
+      if (!/^\d{4}$/.test(pin)) { err.textContent = 'Your PIN needs to be 4 digits.'; return; }
+      if (pin !== pin2) { err.textContent = "Those PINs don't match."; return; }
+      const accounts = loadAccounts();
+      if (accounts.some((a) => a.phone === phone)) { err.textContent = 'There is already an account with that number. Try logging in.'; return; }
+      const acct = {
+        id: 'a' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+        first, last, phone, pinHash: await hashPin(phone, pin),
+        favBarber: null, lastVisit: null, visits: 0, created: Date.now(),
+      };
+      accounts.push(acct);
+      saveAccounts(accounts);
+      startAs(acct, 'signup');
+    });
+
+    function startAs(acct, from) {
+      state.account = acct;
+      state.name = acct.first + ' ' + acct.last;
+      state.phone = acct.phone;
+      state.barber = acct.favBarber;
+      state.cameFrom = from;
+      show('barber');
+    }
+
+    // Guest
+    $('guestForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = $('guestName').value.trim(), raw = $('guestPhone').value.trim(), phone = digits(raw);
+      const err = $('guestErr');
+      if (!name) { err.textContent = 'Enter your name so we can call you up.'; return; }
+      if (raw && phone.length !== 10) { err.textContent = 'Enter a 10-digit phone number, or leave it blank.'; return; }
+      state.account = null;
+      state.name = name;
+      state.phone = phone;
+      state.cameFrom = 'guest';
+      show('barber');
+    });
+
+    // Barber step
+    function renderBarbers() {
+      const acct = state.account;
+      if (acct) $('hello').textContent = acct.visits ? `Welcome back, ${acct.first}!` : `Welcome, ${acct.first}! You're all set.`;
+      else $('hello').textContent = `Hi, ${firstName(state.name)}!`;
+
+      const lv = acct && acct.lastVisit;
+      const repeat = lv && (lv.barber === FIRST || CONFIG.barbers.includes(lv.barber));
+      $('repeatBtn').hidden = !repeat;
+      if (repeat) $('repeatText').textContent = `${serviceText(lv.cut, lv.extras)} with ${lv.barber}`;
+
+      const waiting = loadQueue().filter((x) => x.status === 'waiting');
+      const grid = $('barberGrid');
+      grid.replaceChildren(...[FIRST, ...CONFIG.barbers].map((name) => {
+        const n = name === FIRST ? waiting.length : waiting.filter((x) => x.barber === name).length;
+        const b = el('button', 'choice' + (state.barber === name ? ' selected' : ''));
+        b.type = 'button';
+        b.setAttribute('aria-pressed', state.barber === name);
+        b.append(el('span', 'avatar', name === FIRST ? '★' : initials(name)));
+        const txt = el('span');
+        const t = el('span', 't', name + ' ');
+        if (acct && acct.favBarber === name) t.append(el('span', 'tag', 'Your usual'));
+        txt.append(t, el('br'), el('span', 's', name === FIRST ? 'Quickest chair' : (n ? `${n} waiting` : 'No wait')));
+        b.append(txt);
+        b.addEventListener('click', () => { state.barber = name; renderBarbers(); });
+        return b;
+      }));
+      $('barberNext').disabled = !state.barber;
+    }
+    $('barberNext').addEventListener('click', () => show('service'));
+    $('barberBack').addEventListener('click', () => {
+      if (state.cameFrom === 'guest') show('guest'); else resetFlow();
+    });
+    $('repeatBtn').addEventListener('click', () => {
+      const l = state.account.lastVisit;
+      state.barber = l.barber;
+      state.cut = l.cut;
+      state.extras = l.extras.filter((x) => CONFIG.extras.includes(x));
+      show('review');
+    });
+
+    // Service step
+    function renderService() {
+      $('cutGrid').replaceChildren(...[...CONFIG.haircuts, NO_CUT].map((name) => {
+        const b = el('button', 'choice' + (state.cut === name ? ' selected' : ''));
+        b.type = 'button';
+        b.setAttribute('aria-pressed', state.cut === name);
+        b.append(el('span', 't', name === NO_CUT ? 'No haircut, just extras' : name));
+        b.addEventListener('click', () => { state.cut = name; renderService(); });
+        return b;
+      }));
+      $('addonChips').replaceChildren(...CONFIG.extras.map((name) => {
+        const on = state.extras.includes(name);
+        const c = el('button', 'chip' + (on ? ' on' : ''), name);
+        c.type = 'button';
+        c.setAttribute('aria-pressed', on);
+        c.addEventListener('click', () => {
+          state.extras = on ? state.extras.filter((x) => x !== name) : [...state.extras, name];
+          renderService();
+        });
+        return c;
+      }));
+      const ok = (state.cut && state.cut !== NO_CUT) || (state.cut === NO_CUT && state.extras.length);
+      $('serviceNext').disabled = !ok;
+      $('serviceHint').textContent = !state.cut ? 'Pick a haircut, then add any extras you want.'
+        : (state.cut === NO_CUT && !state.extras.length) ? 'Pick at least one extra.'
+        : 'Your service: ' + serviceText(state.cut, state.extras);
+    }
+    $('serviceNext').addEventListener('click', () => show('review'));
+
+    // Review step
+    function renderReview() {
+      const rows = [
+        ['Name', state.name],
+        ['Barber', state.barber],
+        ['Haircut', state.cut === NO_CUT ? 'None' : state.cut],
+        ['Extras', state.extras.length ? state.extras.join(', ') : 'None'],
+        ['Checking in as', state.account ? 'Member' : 'Guest'],
+      ];
+      $('summary').replaceChildren(...rows.map(([k, v]) => {
+        const d = el('div');
+        d.append(el('dt', null, k), el('dd', null, v));
+        return d;
+      }));
+    }
+    $('confirmBtn').addEventListener('click', () => {
+      const entry = {
+        id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+        name: state.name,
+        phone: state.phone,
+        accountId: state.account ? state.account.id : null,
+        barber: state.barber,
+        cut: state.cut,
+        extras: state.extras,
+        at: Date.now(),
+        status: 'waiting',
+      };
+      const list = loadQueue();
+      list.push(entry);
+      saveQueue(list);
+
+      if (state.account) {
+        const accounts = loadAccounts().map((a) => a.id !== state.account.id ? a : {
+          ...a,
+          visits: (a.visits || 0) + 1,
+          favBarber: state.barber === FIRST ? a.favBarber : state.barber,
+          lastVisit: { barber: state.barber, cut: state.cut, extras: state.extras },
+        });
+        saveAccounts(accounts);
+      }
+
+      const waiting = list.filter((x) => x.status === 'waiting');
+      const specific = entry.barber !== FIRST;
+      const ahead = specific ? waiting.filter((x) => x.id !== entry.id && x.barber === entry.barber).length : waiting.length - 1;
+      const forWho = specific ? ' for ' + entry.barber : '';
+      $('donePos').textContent = '#' + waiting.length;
+      $('doneTitle').textContent = 'Thanks, ' + firstName(entry.name) + '!';
+      $('doneMsg').textContent = (ahead === 0 ? "You're next up" + forWho + '.' : `${ahead} ${ahead === 1 ? 'person' : 'people'} ahead of you${forWho}.`)
+        + " Have a seat. We'll call your name when it's your turn.";
+      $('doneOverlay').classList.add('show');
+      resetFlow();
+      clearTimeout(doneTimer);
+      doneTimer = setTimeout(closeDone, CONFIG.confirmTimeoutMs);
+    });
+    let doneTimer = null;
+    function closeDone() { $('doneOverlay').classList.remove('show'); }
+    $('doneBtn').addEventListener('click', closeDone);
+
+    // ---- The list ----
     function actionBtn(label, cls, fn) {
       const b = el('button', 'btn btn-sm ' + cls, label);
       b.type = 'button';
       b.addEventListener('click', () => { fn(); bumpStaff(); });
       return b;
     }
-
     function row(entry, numText, isStaff) {
       const li = el('li', 'row' + (entry.status === 'serving' ? ' serving' : ''));
       li.append(el('div', 'num', numText));
       const info = el('div');
-      info.append(el('div', 'who', displayName(entry.name)));
-      const bits = [entry.service];
-      if (entry.barber) bits.push(entry.barber);
+      const who = el('div', 'who', displayName(entry.name) + ' ');
+      if (entry.accountId) who.append(el('span', 'tag', 'Member'));
+      info.append(who);
+      const bits = [serviceText(entry.cut, entry.extras || []), entry.barber];
       bits.push(entry.status === 'serving' ? 'started ' + timeStr(entry.started) : 'waiting ' + minsSince(entry.at) + ' min');
-      if (isStaff && entry.phone) bits.push(entry.phone);
-      info.append(el('div', 'meta', bits.join(' · ')));
+      if (isStaff && entry.phone) bits.push(fmtPhone(entry.phone));
+      info.append(el('div', 'meta', bits.filter(Boolean).join(' · ')));
       li.append(info);
       const actions = el('div', 'actions');
       if (isStaff) {
         if (entry.status === 'waiting') actions.append(actionBtn('Call up', 'btn-go', () => setStatus(entry.id, 'serving')));
-        actions.append(actionBtn(entry.status === 'serving' ? 'Done' : 'Remove', entry.status === 'serving' ? 'btn-ghost' : 'btn-x', () => remove(entry.id)));
+        actions.append(entry.status === 'serving'
+          ? actionBtn('Done', 'btn-ghost', () => remove(entry.id))
+          : actionBtn('Remove', 'btn-x', () => remove(entry.id)));
       }
       li.append(actions);
       return li;
     }
-
     function render() {
-      const list = load();
+      const list = loadQueue();
       const isStaff = document.body.classList.contains('staff');
       const serving = list.filter((x) => x.status === 'serving');
       const waiting = list.filter((x) => x.status === 'waiting');
       $('waitingCount').textContent = waiting.length;
       $('servingCount').textContent = serving.length;
-
       $('servingWrap').style.display = serving.length ? '' : 'none';
       $('servingList').replaceChildren(...serving.map((e) => row(e, 'NOW', isStaff)));
       $('waitingList').replaceChildren(...(waiting.length
         ? waiting.map((e, i) => row(e, String(i + 1), isStaff))
         : [el('li', 'empty', 'No one waiting. You could be next!')]));
+      if (current === 'barber') renderBarbers();
     }
+    function setStatus(id, status) { saveQueue(loadQueue().map((x) => x.id === id ? { ...x, status, started: Date.now() } : x)); }
+    function remove(id) { saveQueue(loadQueue().filter((x) => x.id !== id)); }
 
-    function setStatus(id, status) {
-      save(load().map((x) => x.id === id ? { ...x, status, started: Date.now() } : x));
-    }
-    function remove(id) {
-      save(load().filter((x) => x.id !== id));
-    }
-
-    // Check-in
-    $('checkinForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = $('name').value.trim();
-      if (!name) return;
-      const entry = {
-        id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
-        name,
-        phone: $('phone').value.trim(),
-        service: $('service').value,
-        barber: CONFIG.barbers.length ? $('barber').value : '',
-        at: Date.now(),
-        status: 'waiting',
-      };
-      const list = load();
-      list.push(entry);
-      save(list);
-      const pos = list.filter((x) => x.status === 'waiting').length;
-      $('donePos').textContent = '#' + pos;
-      $('doneTitle').textContent = 'Thanks, ' + name.split(/\s+/)[0] + '!';
-      $('doneMsg').textContent = (pos === 1 ? "You're next up." : (pos - 1) + (pos - 1 === 1 ? ' person' : ' people') + ' ahead of you.') + " Have a seat. We'll call your name when it's your turn.";
-      $('doneOverlay').classList.add('show');
-      e.target.reset();
-      clearTimeout(doneTimer);
-      doneTimer = setTimeout(closeDone, CONFIG.confirmTimeoutMs);
-    });
-    function closeDone() { $('doneOverlay').classList.remove('show'); }
-    $('doneBtn').addEventListener('click', closeDone);
-
-    // Staff mode
-    function bumpStaff() {
-      clearTimeout(staffTimer);
-      staffTimer = setTimeout(exitStaff, CONFIG.staffTimeoutMs);
-    }
+    // ---- Staff mode ----
+    let staffTimer = null;
+    function bumpStaff() { clearTimeout(staffTimer); staffTimer = setTimeout(exitStaff, CONFIG.staffTimeoutMs); }
     function exitStaff() { document.body.classList.remove('staff'); clearTimeout(staffTimer); render(); }
     $('staffBtn').addEventListener('click', () => {
-      $('pin').value = ''; $('pinErr').textContent = '';
+      $('staffPin').value = ''; $('pinErr').textContent = '';
       $('pinOverlay').classList.add('show');
-      setTimeout(() => $('pin').focus(), 50);
+      setTimeout(() => $('staffPin').focus(), 50);
     });
     $('pinCancel').addEventListener('click', () => $('pinOverlay').classList.remove('show'));
     $('pinForm').addEventListener('submit', (e) => {
       e.preventDefault();
-      if ($('pin').value === CONFIG.staffPin) {
+      if ($('staffPin').value === CONFIG.staffPin) {
         $('pinOverlay').classList.remove('show');
         document.body.classList.add('staff');
         bumpStaff();
         render();
       } else {
         $('pinErr').textContent = 'Wrong PIN';
-        $('pin').value = '';
+        $('staffPin').value = '';
       }
     });
     $('exitStaffBtn').addEventListener('click', exitStaff);
     $('clearBtn').addEventListener('click', () => {
-      if (confirm("Clear everyone from today's list?")) save([]);
+      if (confirm("Clear everyone from today's list?")) saveQueue([]);
       bumpStaff();
     });
 
-    // Setup
-    $('service').replaceChildren(...CONFIG.services.map((s) => { const o = el('option', null, s); o.value = s; return o; }));
-    if (CONFIG.barbers.length) {
-      $('barber').replaceChildren(...['First available', ...CONFIG.barbers].map((s) => { const o = el('option', null, s); o.value = s; return o; }));
-    } else {
-      $('barberField').style.display = 'none';
-    }
+    // ---- Start ----
     function tick() { $('clock').textContent = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }); }
     tick();
     setInterval(() => { tick(); render(); }, 30000);
-    window.addEventListener('storage', (e) => { if (e.key === KEY) render(); });
+    window.addEventListener('storage', (e) => { if (e.key === QKEY) render(); });
+    show('start');
     render();
   </script>
 </body>
