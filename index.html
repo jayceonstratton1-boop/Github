@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The New Era Barber Studio | Pasco, WA</title>
+  <meta name="description" content="The New Era Barber Studio — barbershop at 411 W Clark St, Pasco, WA. Book your cut online.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0f0f10;
+      --ink-2: #18181a;
+      --line: #2a2a2e;
+      --cream: #f4ede1;
+      --muted: #a9a49b;
+      --brass: #c9a45c;
+      --red: #b3262e;
+      --max: 1120px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--ink);
+      color: var(--cream);
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    img { max-width: 100%; display: block; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+    h1, h2, h3 { font-family: "Bebas Neue", Impact, sans-serif; font-weight: 400; letter-spacing: .02em; line-height: 1; margin: 0; }
+    .eyebrow { color: var(--brass); text-transform: uppercase; letter-spacing: .2em; font-size: .78rem; font-weight: 600; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+      padding: .95rem 1.6rem; border-radius: 2px; font-weight: 600; text-decoration: none;
+      text-transform: uppercase; letter-spacing: .1em; font-size: .85rem;
+      transition: transform .15s ease, background .15s ease, color .15s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { background: var(--brass); color: var(--ink); }
+    .btn-primary:hover { background: #d8b773; }
+    .btn-ghost { border: 1px solid var(--cream); color: var(--cream); }
+    .btn-ghost:hover { background: var(--cream); color: var(--ink); }
+
+    /* Nav */
+    header.nav {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(15,15,16,.92); backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo { font-family: "Bebas Neue", Impact, sans-serif; font-size: 1.6rem; letter-spacing: .06em; text-decoration: none; }
+    .logo span { color: var(--brass); }
+    .nav ul { list-style: none; display: flex; gap: 1.8rem; margin: 0; padding: 0; }
+    .nav ul a { text-decoration: none; font-size: .85rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+    .nav ul a:hover { color: var(--cream); }
+    .nav .btn { padding: .6rem 1.1rem; font-size: .75rem; }
+
+    /* Barber-pole stripe */
+    .pole { height: 6px; background: repeating-linear-gradient(-45deg, var(--red) 0 14px, var(--cream) 14px 28px, #1f3a8a 28px 42px, var(--cream) 42px 56px); }
+
+    /* Hero */
+    .hero {
+      position: relative; overflow: hidden;
+      padding: 120px 0 110px;
+      background:
+        radial-gradient(1000px 500px at 85% -10%, rgba(201,164,92,.18), transparent 60%),
+        radial-gradient(700px 400px at -10% 110%, rgba(179,38,46,.16), transparent 60%),
+        var(--ink);
+    }
+    .hero h1 { font-size: clamp(3.4rem, 11vw, 8.5rem); margin: .6rem 0 1rem; }
+    .hero h1 em { font-style: normal; color: var(--brass); }
+    .hero p.lead { font-size: clamp(1.05rem, 2.2vw, 1.25rem); color: var(--muted); max-width: 540px; margin: 0 0 2rem; }
+    .hero .actions { display: flex; flex-wrap: wrap; gap: 1rem; }
+    .rating {
+      display: inline-flex; align-items: center; gap: .6rem; margin-top: 2.4rem;
+      padding: .6rem 1rem; border: 1px solid var(--line); border-radius: 999px; font-size: .9rem; color: var(--muted);
+    }
+    .rating .stars { color: var(--brass); letter-spacing: .1em; }
+    .rating strong { color: var(--cream); }
+
+    /* Sections */
+    section { padding: 96px 0; }
+    section.alt { background: var(--ink-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .section-head { margin-bottom: 3rem; }
+    .section-head h2 { font-size: clamp(2.6rem, 6vw, 4rem); margin-top: .5rem; }
+    .section-head p { color: var(--muted); max-width: 560px; margin: .8rem 0 0; }
+
+    /* About */
+    .about-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 4rem; align-items: center; }
+    .about-grid p { color: var(--muted); font-size: 1.05rem; }
+    .about-card {
+      aspect-ratio: 4 / 5; border: 1px solid var(--line); border-radius: 4px;
+      background: linear-gradient(160deg, #222 0%, #111 100%);
+      display: grid; place-items: center; text-align: center; color: var(--muted); font-size: .9rem; padding: 2rem;
+    }
+    .about-card .big { font-family: "Bebas Neue", Impact, sans-serif; font-size: 5rem; color: var(--brass); line-height: 1; }
+
+    /* Services */
+    .menu { display: grid; grid-template-columns: 1fr 1fr; gap: 0 4rem; }
+    .item { display: flex; align-items: baseline; gap: 1rem; padding: 1.3rem 0; border-bottom: 1px dashed var(--line); }
+    .item h3 { font-size: 1.6rem; }
+    .item .desc { color: var(--muted); font-size: .9rem; margin-top: .2rem; }
+    .item .dots { flex: 1; }
+    .item .price { font-family: "Bebas Neue", Impact, sans-serif; font-size: 1.5rem; color: var(--brass); white-space: nowrap; }
+    .note { margin-top: 2rem; color: var(--muted); font-size: .9rem; }
+
+    /* Info grid */
+    .info-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 3rem; align-items: stretch; }
+    .info-block + .info-block { margin-top: 2.2rem; }
+    .info-block h3 { font-size: 1.7rem; color: var(--brass); margin-bottom: .6rem; }
+    .info-block p { margin: 0; color: var(--cream); }
+    .info-block .sub { color: var(--muted); font-size: .9rem; }
+    .hours { width: 100%; border-collapse: collapse; }
+    .hours td { padding: .45rem 0; border-bottom: 1px solid var(--line); }
+    .hours td:last-child { text-align: right; color: var(--muted); }
+    .map { border: 1px solid var(--line); border-radius: 4px; overflow: hidden; min-height: 360px; background: #1a1a1a; }
+    .map iframe { width: 100%; height: 100%; min-height: 360px; border: 0; filter: grayscale(.4) invert(.9) hue-rotate(180deg) contrast(.9); }
+
+    /* CTA */
+    .cta { text-align: center; padding: 110px 0; }
+    .cta h2 { font-size: clamp(2.8rem, 8vw, 5.5rem); margin: .6rem 0 1.6rem; }
+
+    footer { border-top: 1px solid var(--line); padding: 36px 0; color: var(--muted); font-size: .85rem; }
+    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+      .nav ul { display: none; }
+      .about-grid, .info-grid, .menu { grid-template-columns: 1fr; }
+      .about-grid { gap: 2.5rem; }
+      .about-card { aspect-ratio: 16 / 10; }
+      section { padding: 72px 0; }
+      .hero { padding: 84px 0 80px; }
+    }
+    @media (max-width: 420px) {
+      .wrap { padding: 0 16px; }
+      .hero .actions .btn { flex: 1 1 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="wrap">
+      <a href="#top" class="logo">New Era <span>Barber Studio</span></a>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#visit">Visit</a></li>
+      </ul>
+      <a class="btn btn-primary" href="https://booksy.com/en-us/1082357_the-new-era-barber-studio_barber-shop_39131_pasco" target="_blank" rel="noopener">Book</a>
+    </div>
+  </header>
+  <div class="pole" aria-hidden="true"></div>
+
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="wrap">
+        <div class="eyebrow">Pasco, Washington</div>
+        <h1>The <em>New Era</em><br>Barber Studio</h1>
+        <p class="lead">Clean fades, sharp line-ups and fresh cuts on West Clark Street. Book online in seconds.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="https://booksy.com/en-us/1082357_the-new-era-barber-studio_barber-shop_39131_pasco" target="_blank" rel="noopener">Book an Appointment</a>
+          <a class="btn btn-ghost" href="#visit">Find the Shop</a>
+        </div>
+        <div class="rating">
+          <span class="stars" aria-hidden="true">★★★★★</span>
+          <span><strong>4.9</strong> on Booksy &middot; 89 reviews</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="alt">
+      <div class="wrap about-grid">
+        <div>
+          <div class="eyebrow">About the shop</div>
+          <h2 style="font-size:clamp(2.6rem,6vw,4rem);margin:.5rem 0 1.2rem">A new era of cuts in the Tri-Cities</h2>
+          <!-- PLACEHOLDER: replace with the shop's real story (owner, opening date, what makes them different) -->
+          <p>The New Era Barber Studio is a barbershop in downtown Pasco at 411 W Clark St. Walk in looking right, walk out looking better.</p>
+          <p>Booking is handled online through Booksy, so you can pick your time and skip the wait.</p>
+        </div>
+        <!-- PLACEHOLDER: swap for a real photo of the shop or a recent cut -->
+        <div class="about-card">
+          <div>
+            <div class="big">4.9★</div>
+            <div>Rated by clients on Booksy</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Services</div>
+          <h2>The Menu</h2>
+          <p>See the full, up-to-date service list and prices on our booking page.</p>
+        </div>
+        <!-- PLACEHOLDER: services and prices below are not confirmed — replace with the shop's real menu -->
+        <div class="menu">
+          <div class="item"><div><h3>Haircut</h3><div class="desc">Classic cut, styled to finish</div></div><span class="dots"></span><span class="price">$—</span></div>
+          <div class="item"><div><h3>Fade</h3><div class="desc">Low, mid, high, skin or taper</div></div><span class="dots"></span><span class="price">$—</span></div>
+          <div class="item"><div><h3>Beard Trim</h3><div class="desc">Shape-up and line-up</div></div><span class="dots"></span><span class="price">$—</span></div>
+          <div class="item"><div><h3>Haircut + Beard</h3><div class="desc">The full refresh</div></div><span class="dots"></span><span class="price">$—</span></div>
+          <div class="item"><div><h3>Line-Up</h3><div class="desc">Edge-up between cuts</div></div><span class="dots"></span><span class="price">$—</span></div>
+          <div class="item"><div><h3>Kids Cut</h3><div class="desc">For the little ones</div></div><span class="dots"></span><span class="price">$—</span></div>
+        </div>
+        <p class="note">Prices shown on Booksy at time of booking.</p>
+      </div>
+    </section>
+
+    <!-- Visit -->
+    <section id="visit" class="alt">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Visit</div>
+          <h2>Find the Shop</h2>
+        </div>
+        <div class="info-grid">
+          <div>
+            <div class="info-block">
+              <h3>Address</h3>
+              <p>411 W Clark St<br>Pasco, WA 99301</p>
+              <p class="sub"><a href="https://www.google.com/maps/dir/?api=1&destination=411+W+Clark+St+Pasco+WA+99301" target="_blank" rel="noopener">Get directions &rarr;</a></p>
+            </div>
+            <div class="info-block">
+              <h3>Hours</h3>
+              <!-- PLACEHOLDER: real hours needed -->
+              <table class="hours">
+                <tr><td>Monday – Friday</td><td>TBD</td></tr>
+                <tr><td>Saturday</td><td>TBD</td></tr>
+                <tr><td>Sunday</td><td>TBD</td></tr>
+              </table>
+              <p class="sub" style="margin-top:.6rem">Check Booksy for open appointment times.</p>
+            </div>
+            <div class="info-block">
+              <h3>Book</h3>
+              <p><a href="https://booksy.com/en-us/1082357_the-new-era-barber-studio_barber-shop_39131_pasco" target="_blank" rel="noopener">booksy.com &mdash; The New Era Barber Studio</a></p>
+            </div>
+          </div>
+          <div class="map">
+            <iframe title="Map to The New Era Barber Studio" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+              src="https://maps.google.com/maps?q=411%20W%20Clark%20St%2C%20Pasco%2C%20WA%2099301&z=16&output=embed"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+      <div class="wrap">
+        <div class="eyebrow">Ready for a fresh cut?</div>
+        <h2>Book Your Chair</h2>
+        <a class="btn btn-primary" href="https://booksy.com/en-us/1082357_the-new-era-barber-studio_barber-shop_39131_pasco" target="_blank" rel="noopener">Book on Booksy</a>
+      </div>
+    </section>
+  </main>
+
+  <div class="pole" aria-hidden="true"></div>
+  <footer>
+    <div class="wrap">
+      <span>&copy; <span id="yr">2026</span> The New Era Barber Studio &middot; 411 W Clark St, Pasco, WA 99301</span>
+      <a href="#top">Back to top &uarr;</a>
+    </div>
+  </footer>
+
+  <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</body>
+</html>
