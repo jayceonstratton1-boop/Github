@@ -8,6 +8,7 @@
   <meta property="og:title" content="SnacExpress | Snack Your Way">
   <meta property="og:description" content="Loaded drinks, Cheetos con queso and spicy snacks in Pasco, WA.">
   <meta property="og:type" content="website">
+  <meta property="og:image" content="images/mural.jpg">
   <meta name="theme-color" content="#f7a8c4">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -112,22 +113,15 @@
           </div>
         </div>
 
-        <div class="hero-art" aria-hidden="true">
-          <div class="cup cup-hero">
-            <div class="cup-straw"></div>
-            <div class="cup-lid"></div>
-            <div class="cup-body">
-              <div class="layer l-pink"></div>
-              <div class="layer l-orange"></div>
-              <div class="layer l-yellow"></div>
-              <span class="cup-logo">SnacExpress</span>
-            </div>
-          </div>
-          <svg class="float f1"><use href="#i-strawberry"/></svg>
-          <svg class="float f2"><use href="#i-pineapple"/></svg>
-          <svg class="float f3"><use href="#i-watermelon"/></svg>
-          <svg class="float f4"><use href="#i-gummy"/></svg>
-          <svg class="float f5"><use href="#i-cucumber"/></svg>
+        <div class="hero-art">
+          <figure class="hero-photo">
+            <img src="images/mural.jpg" alt="The pink and white &quot;Snack Your Way&quot; mural inside SnacExpress, painted with strawberries, pineapple, watermelon and a cup of candy" width="540" height="676">
+          </figure>
+          <svg class="float f1" aria-hidden="true"><use href="#i-strawberry"/></svg>
+          <svg class="float f2" aria-hidden="true"><use href="#i-pineapple"/></svg>
+          <svg class="float f3" aria-hidden="true"><use href="#i-watermelon"/></svg>
+          <svg class="float f4" aria-hidden="true"><use href="#i-gummy"/></svg>
+          <svg class="float f5" aria-hidden="true"><use href="#i-cucumber"/></svg>
         </div>
       </div>
     </section>
@@ -168,15 +162,15 @@
         <!-- TODO(owner): replace names, descriptions and prices with the real menu -->
         <div class="menu-grid" id="tab-drinks" role="tabpanel" aria-labelledby="tabbtn-drinks">
           <article class="menu-card">
-            <div class="card-art art-blue"><div class="cup"><div class="cup-straw"></div><div class="cup-lid"></div><div class="cup-body"><div class="layer l-teal"></div><div class="layer l-blue"></div><div class="layer l-deep"></div></div></div></div>
+            <div class="card-art card-photo"><img src="images/drink-blue.jpg" alt="Layered drink fading from pale yellow to blue in a SnacExpress cup" loading="lazy"></div>
             <div class="card-body">
               <h3>Blue Layered Refresher</h3>
-              <p>A bright layered drink in blue and green, served over ice.</p>
+              <p>A bright layered drink that fades into blue, served over ice.</p>
               <p class="price">$ —</p>
             </div>
           </article>
           <article class="menu-card">
-            <div class="card-art art-pink"><div class="cup"><div class="cup-straw"></div><div class="cup-lid gummies"></div><div class="cup-body"><div class="layer l-pinklight"></div><div class="layer l-pink"></div></div></div></div>
+            <div class="card-art card-photo"><img src="images/drink-pink.jpg" alt="Creamy pink strawberry drink topped with gummy rings, held in front of the mural" loading="lazy"></div>
             <div class="card-body">
               <h3>Strawberry Gummy Cream</h3>
               <p>A creamy strawberry drink topped with gummy rings.</p>
@@ -184,7 +178,7 @@
             </div>
           </article>
           <article class="menu-card">
-            <div class="card-art art-red"><div class="cup"><div class="cup-straw"></div><div class="cup-lid"></div><div class="cup-body"><div class="layer l-red"></div><div class="layer l-darkred"></div></div></div></div>
+            <div class="card-art card-photo"><img src="images/drink-red.jpg" alt="Deep red drink in a SnacExpress cup in front of the Snack Your Way mural" loading="lazy"></div>
             <div class="card-body">
               <h3>Red Fruit Refresher</h3>
               <p>A deep red, fruity cooler with a chamoy-and-chili rim.</p>
@@ -192,10 +186,10 @@
             </div>
           </article>
           <article class="menu-card">
-            <div class="card-art art-green"><div class="cup"><div class="cup-straw"></div><div class="cup-lid"></div><div class="cup-body"><div class="layer l-lime"></div><div class="layer l-green"></div></div></div></div>
+            <div class="card-art card-photo"><img src="images/drink-green.jpg" alt="Sparkly green drink with a blue swirl in a SnacExpress cup" loading="lazy"></div>
             <div class="card-body">
-              <h3>Lime Green Cooler</h3>
-              <p>A tangy green drink over crushed ice.</p>
+              <h3>Green Sparkle Cooler</h3>
+              <p>A shimmery green drink with a swirl of blue, over ice.</p>
               <p class="price">$ —</p>
             </div>
           </article>
@@ -204,7 +198,7 @@
         <div class="menu-grid" id="tab-snacks" role="tabpanel" aria-labelledby="tabbtn-snacks" hidden>
           <article class="menu-card featured">
             <span class="badge">Fan Favorite</span>
-            <div class="card-art art-orange"><div class="bag"><span class="bag-label">Cheetos</span><span class="bag-topping queso"></span></div></div>
+            <div class="card-art card-photo"><img src="images/cheetos-con-queso.jpg" alt="Open chip bag filled with cheese and sprinkled with chili powder" loading="lazy"></div>
             <div class="card-body">
               <h3>Cheetos con Queso</h3>
               <p>A bag of Cheetos smothered in warm nacho cheese.</p>
@@ -221,7 +215,7 @@
             </div>
           </article>
           <article class="menu-card">
-            <div class="card-art art-purple"><div class="bag bag-purple"><span class="bag-label">Loaded</span><span class="bag-topping chili"></span></div></div>
+            <div class="card-art card-photo"><img src="images/loaded-bag.jpg" alt="Chip bag loaded with toppings, sauce and chili" loading="lazy"></div>
             <div class="card-body">
               <h3>Loaded Chip Bag</h3>
               <p>Your pick of chips, sliced open and loaded with toppings and chili powder.</p>
@@ -288,14 +282,13 @@
           <p class="eyebrow">Gallery</p>
           <h2 class="section-title">Come see the pink</h2>
         </header>
-        <!-- TODO(owner): put real photos in /images and swap each placeholder for an <img> -->
+        <!-- TODO(owner): the small photos were cut from Google listing screenshots; swap in full-size originals -->
         <div class="gallery">
-          <figure class="ph ph-tall ph-pink"><svg><use href="#i-strawberry"/></svg><figcaption>The "Snack Your Way" mural</figcaption></figure>
-          <figure class="ph ph-hex"><figcaption>Hexagon lights &amp; seating</figcaption></figure>
-          <figure class="ph ph-blue"><figcaption>Layered drinks</figcaption></figure>
-          <figure class="ph ph-orange"><figcaption>Cheetos con queso</figcaption></figure>
-          <figure class="ph ph-wide ph-balloon"><figcaption>Grand opening</figcaption></figure>
-          <figure class="ph ph-red"><figcaption>Spicy snacks</figcaption></figure>
+          <figure class="ph ph-big"><img src="images/interior.jpg" alt="Inside SnacExpress: pink walls, hexagon ceiling lights, pink woven chairs and the order counter" loading="lazy"><figcaption>Hexagon lights &amp; pink seats</figcaption></figure>
+          <figure class="ph"><img src="images/drinks-tray.jpg" alt="Tray with two drinks and a cup topped with chili" loading="lazy"><figcaption>Drinks &amp; snacks</figcaption></figure>
+          <figure class="ph"><img src="images/grand-opening.jpg" alt="Storefront window with a NOW OPEN banner and pink balloon arch" loading="lazy"><figcaption>Grand opening</figcaption></figure>
+          <figure class="ph"><img src="images/storefront.jpg" alt="SnacExpress front entrance in Riverview Plaza with a NOW OPEN sign" loading="lazy"><figcaption>Find us on Court St</figcaption></figure>
+          <figure class="ph"><img src="images/drink-red.jpg" alt="Red drink in front of the Snack Your Way mural" loading="lazy"><figcaption>Snack Your Way</figcaption></figure>
         </div>
       </div>
     </section>

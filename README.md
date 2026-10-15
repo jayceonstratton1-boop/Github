@@ -9,7 +9,7 @@ It's plain HTML, CSS and JavaScript with no build step. To see it, open `index.h
 - **Hero:** the "Snack Your Way" slogan from the shop mural, plus a live "Open now / Closed" badge based on Pasco time
 - **Menu:** tabs for Drinks, Snacks and Sweets
 - **Our Story:** the snack cart to storefront story
-- **Gallery:** a grid of placeholder tiles for real photos
+- **Gallery:** real photos of the shop, drinks and grand opening
 - **Catering & Events:** a request form (works automatically on Netlify)
 - **Visit:** address, phone, hours (with today highlighted), payment info and a Google Map
 - **Mobile:** a sticky Call / Directions / Menu bar on phones
@@ -20,7 +20,8 @@ It's plain HTML, CSS and JavaScript with no build step. To see it, open `index.h
 Search `index.html` for `TODO(owner)` to find each spot to fill in.
 
 - [ ] Real menu: item names, descriptions and prices (prices currently show `$ —`)
-- [ ] Photos of the drinks, snacks and shop interior. Put them in `/images` and swap the gallery and menu placeholders for `<img>` tags
+- [ ] Full-size original photos. The ones in `/images` were cropped from Google listing screenshots, so most are small (about 155px wide). Some were posted by customers, so use the owners' own photos (or get permission) before the site goes live. Keep the same file names to swap them in.
+- [ ] Photos of the Hot Cheeto Elote, the dessert cup and the fruit cup (these still use drawings)
 - [ ] Logo file, to replace the text logo
 - [ ] The owners' own story for the "Our Story" section
 - [ ] Catering details: minimum order, packages and how far ahead to book
