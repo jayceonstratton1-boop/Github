@@ -153,6 +153,12 @@
     .chip .mins { color: var(--muted); font-size: .8rem; font-weight: 400; }
     .chip.on .mins { color: #55555b; }
 
+    .check { display: flex; gap: .75rem; align-items: flex-start; text-transform: none; letter-spacing: 0; font-weight: 400; font-size: .95rem; color: var(--white); cursor: pointer; }
+    .check input { width: 22px; height: 22px; padding: 0; margin: .1rem 0 0; flex: none; accent-color: var(--white); }
+    .check .opt { color: var(--muted); }
+    .toast { position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); opacity: 0; pointer-events: none; z-index: 30; background: var(--white); color: var(--ink); font-weight: 600; padding: .85rem 1.2rem; border-radius: 6px; transition: opacity .2s ease, transform .2s ease; max-width: calc(100% - 32px); }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
     /* Barber board */
     .board { display: grid; gap: .5rem; }
     .brow { display: grid; grid-template-columns: 44px 1fr auto; gap: .8rem; align-items: center; padding: .7rem .85rem; background: var(--ink-3); border: 1px solid var(--line); border-radius: 6px; }
@@ -298,6 +304,9 @@
               <label>Choose a 4-digit PIN <input id="suPin" class="pin" type="password" inputmode="numeric" maxlength="4" placeholder="••••"></label>
               <label>Confirm PIN <input id="suPin2" class="pin" type="password" inputmode="numeric" maxlength="4" placeholder="••••"></label>
             </div>
+            <label class="check"><input type="checkbox" id="suSms">
+              <span>Text me a confirmation at this number. <span class="opt">Msg &amp; data rates may apply. Reply STOP to opt out.</span></span>
+            </label>
             <p class="err" id="signupErr"></p>
             <div class="nav-row" style="margin-top:0">
               <button class="btn btn-ghost" type="button" data-go="start">Back</button>
@@ -400,6 +409,8 @@
   </main>
   <div class="pole" aria-hidden="true"></div>
 
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
   <!-- Confirmation -->
   <div class="overlay" id="doneOverlay" role="dialog" aria-modal="true" aria-labelledby="doneTitle">
     <div class="card">
@@ -454,6 +465,8 @@
         { name: 'Shampoo', mins: 10 },
       ],
       defaultMins: 30,
+      // Welcome text on sign-up. Needs the sms-welcome function deployed with Twilio settings (see README).
+      sms: { enabled: true, endpoint: '/api/sms/welcome' },
       // PLACEHOLDER: change this PIN before using the tablet in the shop
       staffPin: '2024',
       staffTimeoutMs: 2 * 60 * 1000,
@@ -658,11 +671,16 @@
       const acct = {
         id: 'a' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
         first, last, phone, pinHash: await hashPin(phone, pin),
-        favBarber: null, lastVisit: null, visits: 0, created: Date.now(),
+        favBarber: null, lastVisit: null, visits: 0, created: Date.now(), smsOptIn: $('suSms').checked,
       };
       accounts.push(acct);
       saveAccounts(accounts);
       startAs(acct, 'signup');
+      if (acct.smsOptIn) {
+        sendWelcomeText(acct).then((ok) => {
+          if (ok) toast(`We texted a confirmation to ${fmtPhone(acct.phone)}`);
+        });
+      }
     });
 
     function startAs(acct, from) {
@@ -961,6 +979,38 @@
       if (confirm("Clear everyone from today's list?")) saveQueue([]);
       bumpStaff();
     });
+
+    // ---- Texts ----
+    // The tablet gets its key once by opening checkin.html?key=YOUR_KIOSK_KEY
+    const KKEY = 'newera-kiosk-key';
+    (function saveKioskKey() {
+      const key = new URLSearchParams(location.search).get('key');
+      if (!key) return;
+      try { localStorage.setItem(KKEY, key); } catch (e) {}
+      history.replaceState(null, '', location.pathname);
+    })();
+    async function sendWelcomeText(acct) {
+      if (!CONFIG.sms.enabled || location.protocol === 'file:') return false;
+      let key = '';
+      try { key = localStorage.getItem(KKEY) || ''; } catch (e) {}
+      try {
+        const res = await fetch(CONFIG.sms.endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'X-Kiosk-Key': key },
+          body: JSON.stringify({ phone: acct.phone, firstName: acct.first }),
+        });
+        return res.ok;
+      } catch (e) {
+        return false;
+      }
+    }
+    let toastTimer = null;
+    function toast(msg) {
+      $('toast').textContent = msg;
+      $('toast').classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => $('toast').classList.remove('show'), 5000);
+    }
 
     // ---- Start ----
     function tick() { $('clock').textContent = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }); }
