@@ -27,6 +27,7 @@
       --green: #3fbf7f;
     }
     * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
     html { height: 100%; }
     body {
       min-height: 100%; margin: 0; background: var(--ink); color: var(--white);
@@ -128,6 +129,41 @@
     .chip.on::before { content: "✓ "; font-weight: 700; }
     .repeat { width: 100%; margin-bottom: 1.4rem; border-style: dashed; }
     .repeat .avatar { font-size: 1.1rem; }
+
+    /* Barber cards */
+    .barber-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: .8rem; }
+    .bcard { display: grid; gap: .75rem; text-align: left; cursor: pointer; background: var(--ink-3); border: 1px solid var(--line); border-radius: 8px; padding: 1rem; }
+    .bcard:hover:not(:disabled) { border-color: #4a4a50; }
+    .bcard.selected { border-color: var(--white); box-shadow: inset 0 0 0 1px var(--white); background: var(--ink-4); }
+    .bcard.selected .avatar { background: var(--white); color: var(--ink); }
+    .bcard:disabled { opacity: .4; cursor: not-allowed; }
+    .bhead { display: flex; gap: .8rem; align-items: center; }
+    .bhead .t { font-weight: 700; font-size: 1.05rem; }
+    .bhead .s { color: var(--muted); font-size: .82rem; }
+    .status { display: flex; align-items: center; gap: .45rem; font-size: .84rem; color: var(--muted); }
+    .status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; flex: none; background: var(--muted); }
+    .status.free { color: var(--white); }
+    .status.free::before { background: var(--green); box-shadow: 0 0 8px var(--green); }
+    .status.busy::before { background: #e0b341; }
+    .status.break::before { background: #e07b41; }
+    .status.off::before { background: #55555b; }
+    .bstats { display: grid; grid-template-columns: repeat(3, 1fr); gap: .4rem; border-top: 1px solid var(--line); padding-top: .75rem; }
+    .stat .v { font-family: "Bebas Neue", Impact, sans-serif; font-size: 1.45rem; line-height: 1.1; }
+    .stat .k { font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+    .chip .mins { color: var(--muted); font-size: .8rem; font-weight: 400; }
+    .chip.on .mins { color: #55555b; }
+
+    /* Barber board */
+    .board { display: grid; gap: .5rem; }
+    .brow { display: grid; grid-template-columns: 44px 1fr auto; gap: .8rem; align-items: center; padding: .7rem .85rem; background: var(--ink-3); border: 1px solid var(--line); border-radius: 6px; }
+    .brow.off { opacity: .5; }
+    .brow .who { font-weight: 600; }
+    .bright { text-align: right; }
+    .bright .v { font-family: "Bebas Neue", Impact, sans-serif; font-size: 1.45rem; line-height: 1; }
+    .bright .k { font-size: .75rem; color: var(--muted); }
+    .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+    .seg button { background: none; border: 0; padding: .45rem .7rem; font-size: .75rem; font-weight: 600; color: var(--muted); cursor: pointer; }
+    .seg button.on { background: var(--white); color: var(--ink); }
 
     /* Review */
     .summary { margin: 0; border: 1px solid var(--line); border-radius: 6px; background: var(--ink-3); }
@@ -297,7 +333,8 @@
             <span class="avatar">↺</span>
             <span><span class="t">Same as last time</span><br><span class="s" id="repeatText"></span></span>
           </button>
-          <div class="choice-grid" id="barberGrid"></div>
+          <p class="lead">Wait times are estimates and can change.</p>
+          <div class="barber-grid" id="barberGrid"></div>
           <div class="nav-row">
             <button class="btn btn-ghost" type="button" id="barberBack">Back</button>
             <button class="btn btn-primary" type="button" id="barberNext" disabled>Next</button>
@@ -334,7 +371,10 @@
 
     <!-- The list -->
     <section class="pane">
-      <div class="eyebrow">Today</div>
+      <div class="eyebrow">Right now</div>
+      <h2>Barbers</h2>
+      <div class="board" id="board"></div>
+      <div class="eyebrow" style="margin-top:2.2rem">Today</div>
       <h2>The List</h2>
       <div class="counts">
         <span class="pill"><strong id="waitingCount">0</strong> waiting</span>
@@ -387,23 +427,46 @@
   <script>
     // ---- Shop settings: update these ----
     const CONFIG = {
-      // PLACEHOLDER: replace with the shop's real barbers
-      barbers: ['Barber 1', 'Barber 2', 'Barber 3'],
-      // PLACEHOLDER: replace with the shop's real haircut menu
-      haircuts: ['Classic Cut', 'Low Fade', 'Mid Fade', 'High Fade', 'Skin / Bald Fade', 'Taper', 'Buzz Cut', 'Kids Cut'],
-      // PLACEHOLDER: replace with the shop's real extras
-      extras: ['Beard Trim', 'Line-Up / Edge-Up', 'Eyebrows', 'Hot Towel', 'Hair Design', 'Shampoo'],
+      // PLACEHOLDER: replace with the shop's real barbers and what they're known for
+      barbers: [
+        { name: 'Barber 1', specialty: 'Fades & tapers' },
+        { name: 'Barber 2', specialty: 'Beards & line-ups' },
+        { name: 'Barber 3', specialty: 'Designs & kids cuts' },
+      ],
+      // PLACEHOLDER: replace with the real menu. mins = usual time in the chair (drives wait estimates).
+      // Add a price to show it, e.g. { name: 'Classic Cut', mins: 30, price: 30 }
+      haircuts: [
+        { name: 'Classic Cut', mins: 30 },
+        { name: 'Low Fade', mins: 35 },
+        { name: 'Mid Fade', mins: 35 },
+        { name: 'High Fade', mins: 35 },
+        { name: 'Skin / Bald Fade', mins: 40 },
+        { name: 'Taper', mins: 30 },
+        { name: 'Buzz Cut', mins: 20 },
+        { name: 'Kids Cut', mins: 25 },
+      ],
+      extras: [
+        { name: 'Beard Trim', mins: 15 },
+        { name: 'Line-Up / Edge-Up', mins: 10 },
+        { name: 'Eyebrows', mins: 5 },
+        { name: 'Hot Towel', mins: 10 },
+        { name: 'Hair Design', mins: 15 },
+        { name: 'Shampoo', mins: 10 },
+      ],
+      defaultMins: 30,
       // PLACEHOLDER: change this PIN before using the tablet in the shop
       staffPin: '2024',
       staffTimeoutMs: 2 * 60 * 1000,
-      confirmTimeoutMs: 10 * 1000,
+      confirmTimeoutMs: 12 * 1000,
       idleResetMs: 90 * 1000,
     };
 
     const FIRST = 'First available';
     const NO_CUT = 'No haircut';
+    const BARBERS = CONFIG.barbers.map((b) => b.name);
     const QKEY = 'newera-walkins-v1';
     const AKEY = 'newera-accounts-v1';
+    const SKEY = 'newera-barber-status-v1';
     const mem = {};
     const $ = (id) => document.getElementById(id);
 
@@ -416,13 +479,18 @@
       mem[key] = val;
       try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) {}
     }
-    function loadQueue() {
-      const today = new Date().toDateString();
-      return read(QKEY).filter((x) => new Date(x.at).toDateString() === today);
-    }
+    const today = () => new Date().toDateString();
+    function loadQueue() { return read(QKEY).filter((x) => new Date(x.at).toDateString() === today()); }
     function saveQueue(list) { write(QKEY, list); render(); }
     const loadAccounts = () => read(AKEY);
     const saveAccounts = (list) => write(AKEY, list);
+    // Barber in / break / off for today
+    function loadStatus() { const s = read(SKEY); return s && s.date === today() ? s.map : {}; }
+    function setBarberStatus(name, st) {
+      const map = { ...loadStatus(), [name]: st };
+      write(SKEY, { date: today(), map });
+      render();
+    }
 
     // ---- Helpers ----
     const digits = (s) => s.replace(/\D/g, '').slice(-10);
@@ -436,9 +504,23 @@
     const minsSince = (t) => Math.max(0, Math.round((Date.now() - t) / 60000));
     const timeStr = (t) => new Date(t).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
     const initials = (n) => n.split(/\s+/).map((w) => w[0]).join('').slice(0, 2).toUpperCase();
+    const cutInfo = (n) => CONFIG.haircuts.find((c) => c.name === n);
+    const extraInfo = (n) => CONFIG.extras.find((c) => c.name === n);
+    const specialty = (n) => (CONFIG.barbers.find((b) => b.name === n) || {}).specialty || '';
     function serviceText(cut, extras) {
       return [cut === NO_CUT ? '' : cut, ...extras].filter(Boolean).join(' + ');
     }
+    function serviceMins(cut, extras) {
+      const c = !cut || cut === NO_CUT ? 0 : ((cutInfo(cut) || {}).mins || CONFIG.defaultMins);
+      return c + extras.reduce((s, x) => s + ((extraInfo(x) || {}).mins || 10), 0);
+    }
+    const entryMins = (e) => serviceMins(e.cut, e.extras || []) || CONFIG.defaultMins;
+    function fmtWait(m) {
+      if (m <= 0) return 'No wait';
+      if (m < 60) return `~${m} min`;
+      return `~${Math.floor(m / 60)} hr${m % 60 ? ' ' + (m % 60) + ' min' : ''}`;
+    }
+    const priceTag = (item) => item && item.price != null ? ` · $${item.price}` : '';
     function el(tag, cls, text) {
       const n = document.createElement(tag);
       if (cls) n.className = cls;
@@ -454,9 +536,60 @@
       return 'p:' + phone + ':' + pin;
     }
 
+    // ---- Wait-time estimates ----
+    // Walks the list in order: each barber's chair frees up after their current cut,
+    // then after each person waiting for them. "First available" goes to whoever frees up first.
+    function schedule(queue) {
+      const now = Date.now();
+      const statuses = loadStatus();
+      const working = BARBERS.filter((n) => statuses[n] !== 'off');
+      const pool = working.length ? working : BARBERS;
+      const free = {}, current = {};
+      BARBERS.forEach((n) => { free[n] = now; });
+      queue.filter((e) => e.status === 'serving').forEach((e) => {
+        const b = e.servedBy || e.barber;
+        if (!(b in free)) return;
+        current[b] = e;
+        free[b] = Math.max(free[b], e.started + entryMins(e) * 60000);
+      });
+      queue.filter((e) => e.status === 'waiting').forEach((e) => {
+        let b = e.barber;
+        if (!(b in free) || statuses[b] === 'off') b = pool.reduce((a, c) => free[c] < free[a] ? c : a);
+        free[b] += entryMins(e) * 60000;
+      });
+      return { now, free, current, pool, statuses, firstFree: Math.min(...pool.map((n) => free[n])) };
+    }
+    function barberInfo(sched, queue, name) {
+      const waiting = queue.filter((x) => x.status === 'waiting');
+      if (name === FIRST) {
+        return { status: 'in', wait: Math.round((sched.firstFree - sched.now) / 60000), line: waiting.length, nextAt: sched.firstFree };
+      }
+      return {
+        status: sched.statuses[name] || 'in',
+        wait: Math.round((sched.free[name] - sched.now) / 60000),
+        line: waiting.filter((x) => x.barber === name).length,
+        nextAt: sched.free[name],
+        current: sched.current[name],
+      };
+    }
+    function statusLabel(info) {
+      if (info.status === 'off') return ['off', 'Off today'];
+      if (info.status === 'break') return ['break', 'On break'];
+      if (info.current) {
+        const end = info.current.started + entryMins(info.current) * 60000;
+        return ['busy', end > Date.now() ? 'In a cut · done ~' + timeStr(end) : 'Finishing up a cut'];
+      }
+      return info.wait <= 0 ? ['free', 'Available now'] : ['busy', 'Free at ~' + timeStr(info.nextAt)];
+    }
+    function stat(v, k) {
+      const d = el('div', 'stat');
+      d.append(el('div', 'v', v), el('div', 'k', k));
+      return d;
+    }
+
     // ---- Check-in flow ----
     const STEP = { start: 0, login: 0, signup: 0, guest: 0, barber: 1, service: 2, review: 3 };
-    let state, current = 'start', idleTimer = null;
+    let state, current = 'start', idleTimer = null, doneTimer = null;
     function freshState() { return { account: null, name: '', phone: '', barber: null, cut: null, extras: [], cameFrom: 'start' }; }
     state = freshState();
 
@@ -561,24 +694,42 @@
       if (acct) $('hello').textContent = acct.visits ? `Welcome back, ${acct.first}!` : `Welcome, ${acct.first}! You're all set.`;
       else $('hello').textContent = `Hi, ${firstName(state.name)}!`;
 
+      const queue = loadQueue();
+      const sched = schedule(queue);
+      if (state.barber && state.barber !== FIRST && sched.statuses[state.barber] === 'off') state.barber = null;
+
       const lv = acct && acct.lastVisit;
-      const repeat = lv && (lv.barber === FIRST || CONFIG.barbers.includes(lv.barber));
+      const repeat = lv && (lv.barber === FIRST || (BARBERS.includes(lv.barber) && sched.statuses[lv.barber] !== 'off'));
       $('repeatBtn').hidden = !repeat;
       if (repeat) $('repeatText').textContent = `${serviceText(lv.cut, lv.extras)} with ${lv.barber}`;
 
-      const waiting = loadQueue().filter((x) => x.status === 'waiting');
-      const grid = $('barberGrid');
-      grid.replaceChildren(...[FIRST, ...CONFIG.barbers].map((name) => {
-        const n = name === FIRST ? waiting.length : waiting.filter((x) => x.barber === name).length;
-        const b = el('button', 'choice' + (state.barber === name ? ' selected' : ''));
+      $('barberGrid').replaceChildren(...[FIRST, ...BARBERS].map((name) => {
+        const info = barberInfo(sched, queue, name);
+        const off = info.status === 'off';
+        const b = el('button', 'bcard' + (state.barber === name ? ' selected' : ''));
         b.type = 'button';
+        b.disabled = off;
         b.setAttribute('aria-pressed', state.barber === name);
-        b.append(el('span', 'avatar', name === FIRST ? '★' : initials(name)));
-        const txt = el('span');
-        const t = el('span', 't', name + ' ');
+
+        const head = el('div', 'bhead');
+        head.append(el('span', 'avatar', name === FIRST ? '★' : initials(name)));
+        const nm = el('div');
+        const t = el('div', 't', name + ' ');
         if (acct && acct.favBarber === name) t.append(el('span', 'tag', 'Your usual'));
-        txt.append(t, el('br'), el('span', 's', name === FIRST ? 'Quickest chair' : (n ? `${n} waiting` : 'No wait')));
-        b.append(txt);
+        nm.append(t, el('div', 's', name === FIRST ? 'Next barber to open up' : specialty(name)));
+        head.append(nm);
+
+        const [cls, label] = name === FIRST
+          ? (info.wait <= 0 ? ['free', 'A chair is open now'] : ['busy', 'Goes to whoever frees up first'])
+          : statusLabel(info);
+
+        const stats = el('div', 'bstats');
+        stats.append(
+          stat(off ? '—' : fmtWait(info.wait), 'Est. wait'),
+          stat(String(info.line), 'In line'),
+          stat(off ? '—' : (info.wait <= 0 ? 'Now' : timeStr(info.nextAt)), 'Next chair'),
+        );
+        b.append(head, el('div', 'status ' + cls, label), stats);
         b.addEventListener('click', () => { state.barber = name; renderBarbers(); });
         return b;
       }));
@@ -591,28 +742,33 @@
     $('repeatBtn').addEventListener('click', () => {
       const l = state.account.lastVisit;
       state.barber = l.barber;
-      state.cut = l.cut;
-      state.extras = l.extras.filter((x) => CONFIG.extras.includes(x));
-      show('review');
+      state.cut = l.cut === NO_CUT || cutInfo(l.cut) ? l.cut : null;
+      state.extras = l.extras.filter((x) => extraInfo(x));
+      show(state.cut ? 'review' : 'service');
     });
 
     // Service step
     function renderService() {
-      $('cutGrid').replaceChildren(...[...CONFIG.haircuts, NO_CUT].map((name) => {
+      $('cutGrid').replaceChildren(...[...CONFIG.haircuts, { name: NO_CUT }].map((item) => {
+        const name = item.name;
         const b = el('button', 'choice' + (state.cut === name ? ' selected' : ''));
         b.type = 'button';
         b.setAttribute('aria-pressed', state.cut === name);
-        b.append(el('span', 't', name === NO_CUT ? 'No haircut, just extras' : name));
+        const txt = el('span');
+        txt.append(el('span', 't', name === NO_CUT ? 'No haircut, just extras' : name));
+        if (item.mins) txt.append(el('br'), el('span', 's', `~${item.mins} min${priceTag(item)}`));
+        b.append(txt);
         b.addEventListener('click', () => { state.cut = name; renderService(); });
         return b;
       }));
-      $('addonChips').replaceChildren(...CONFIG.extras.map((name) => {
-        const on = state.extras.includes(name);
-        const c = el('button', 'chip' + (on ? ' on' : ''), name);
+      $('addonChips').replaceChildren(...CONFIG.extras.map((item) => {
+        const on = state.extras.includes(item.name);
+        const c = el('button', 'chip' + (on ? ' on' : ''), item.name);
+        c.append(el('span', 'mins', ` +${item.mins} min${priceTag(item)}`));
         c.type = 'button';
         c.setAttribute('aria-pressed', on);
         c.addEventListener('click', () => {
-          state.extras = on ? state.extras.filter((x) => x !== name) : [...state.extras, name];
+          state.extras = on ? state.extras.filter((x) => x !== item.name) : [...state.extras, item.name];
           renderService();
         });
         return c;
@@ -621,17 +777,23 @@
       $('serviceNext').disabled = !ok;
       $('serviceHint').textContent = !state.cut ? 'Pick a haircut, then add any extras you want.'
         : (state.cut === NO_CUT && !state.extras.length) ? 'Pick at least one extra.'
-        : 'Your service: ' + serviceText(state.cut, state.extras);
+        : `Your service: ${serviceText(state.cut, state.extras)} · about ${serviceMins(state.cut, state.extras)} min in the chair`;
     }
     $('serviceNext').addEventListener('click', () => show('review'));
 
     // Review step
+    function chosenWait() {
+      const queue = loadQueue();
+      return barberInfo(schedule(queue), queue, state.barber).wait;
+    }
     function renderReview() {
       const rows = [
         ['Name', state.name],
         ['Barber', state.barber],
         ['Haircut', state.cut === NO_CUT ? 'None' : state.cut],
         ['Extras', state.extras.length ? state.extras.join(', ') : 'None'],
+        ['Time in chair', `About ${serviceMins(state.cut, state.extras)} min`],
+        ['Est. wait', fmtWait(chosenWait())],
         ['Checking in as', state.account ? 'Member' : 'Guest'],
       ];
       $('summary').replaceChildren(...rows.map(([k, v]) => {
@@ -641,6 +803,7 @@
       }));
     }
     $('confirmBtn').addEventListener('click', () => {
+      const wait = chosenWait();
       const entry = {
         id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
         name: state.name,
@@ -657,13 +820,12 @@
       saveQueue(list);
 
       if (state.account) {
-        const accounts = loadAccounts().map((a) => a.id !== state.account.id ? a : {
+        saveAccounts(loadAccounts().map((a) => a.id !== state.account.id ? a : {
           ...a,
           visits: (a.visits || 0) + 1,
           favBarber: state.barber === FIRST ? a.favBarber : state.barber,
           lastVisit: { barber: state.barber, cut: state.cut, extras: state.extras },
-        });
-        saveAccounts(accounts);
+        }));
       }
 
       const waiting = list.filter((x) => x.status === 'waiting');
@@ -672,18 +834,45 @@
       const forWho = specific ? ' for ' + entry.barber : '';
       $('donePos').textContent = '#' + waiting.length;
       $('doneTitle').textContent = 'Thanks, ' + firstName(entry.name) + '!';
-      $('doneMsg').textContent = (ahead === 0 ? "You're next up" + forWho + '.' : `${ahead} ${ahead === 1 ? 'person' : 'people'} ahead of you${forWho}.`)
-        + " Have a seat. We'll call your name when it's your turn.";
+      $('doneMsg').textContent = (wait <= 0
+        ? `A chair is open now. You're up next${forWho}.`
+        : (ahead === 0 ? `You're next up${forWho}.` : `${ahead} ${ahead === 1 ? 'person' : 'people'} ahead of you${forWho}.`) + ` Estimated wait: about ${wait} min.`)
+        + " We'll call your name when it's your turn.";
       $('doneOverlay').classList.add('show');
       resetFlow();
       clearTimeout(doneTimer);
       doneTimer = setTimeout(closeDone, CONFIG.confirmTimeoutMs);
     });
-    let doneTimer = null;
     function closeDone() { $('doneOverlay').classList.remove('show'); }
     $('doneBtn').addEventListener('click', closeDone);
 
-    // ---- The list ----
+    // ---- Barber board + the list ----
+    function renderBoard(queue, sched, isStaff) {
+      $('board').replaceChildren(...BARBERS.map((name) => {
+        const info = barberInfo(sched, queue, name);
+        const [cls, label] = statusLabel(info);
+        const r = el('div', 'brow' + (info.status === 'off' ? ' off' : ''));
+        r.append(el('span', 'avatar', initials(name)));
+        const mid = el('div');
+        mid.append(el('div', 'who', name), el('div', 'status ' + cls, label));
+        r.append(mid);
+        const right = el('div', 'bright');
+        if (isStaff) {
+          const seg = el('div', 'seg');
+          [['in', 'In'], ['break', 'Break'], ['off', 'Off']].forEach(([k, l]) => {
+            const bt = el('button', k === info.status ? 'on' : '', l);
+            bt.type = 'button';
+            bt.addEventListener('click', () => { setBarberStatus(name, k); bumpStaff(); });
+            seg.append(bt);
+          });
+          right.append(seg);
+        } else {
+          right.append(el('div', 'v', info.status === 'off' ? '—' : fmtWait(info.wait)), el('div', 'k', info.line + ' in line'));
+        }
+        r.append(right);
+        return r;
+      }));
+    }
     function actionBtn(label, cls, fn) {
       const b = el('button', 'btn btn-sm ' + cls, label);
       b.type = 'button';
@@ -697,14 +886,15 @@
       const who = el('div', 'who', displayName(entry.name) + ' ');
       if (entry.accountId) who.append(el('span', 'tag', 'Member'));
       info.append(who);
-      const bits = [serviceText(entry.cut, entry.extras || []), entry.barber];
-      bits.push(entry.status === 'serving' ? 'started ' + timeStr(entry.started) : 'waiting ' + minsSince(entry.at) + ' min');
+      const bits = [serviceText(entry.cut, entry.extras || [])];
+      if (entry.status === 'serving') bits.push('with ' + (entry.servedBy || entry.barber), 'started ' + timeStr(entry.started));
+      else bits.push(entry.barber, 'waiting ' + minsSince(entry.at) + ' min');
       if (isStaff && entry.phone) bits.push(fmtPhone(entry.phone));
       info.append(el('div', 'meta', bits.filter(Boolean).join(' · ')));
       li.append(info);
       const actions = el('div', 'actions');
       if (isStaff) {
-        if (entry.status === 'waiting') actions.append(actionBtn('Call up', 'btn-go', () => setStatus(entry.id, 'serving')));
+        if (entry.status === 'waiting') actions.append(actionBtn('Call up', 'btn-go', () => callUp(entry.id)));
         actions.append(entry.status === 'serving'
           ? actionBtn('Done', 'btn-ghost', () => remove(entry.id))
           : actionBtn('Remove', 'btn-x', () => remove(entry.id)));
@@ -714,9 +904,11 @@
     }
     function render() {
       const list = loadQueue();
+      const sched = schedule(list);
       const isStaff = document.body.classList.contains('staff');
       const serving = list.filter((x) => x.status === 'serving');
       const waiting = list.filter((x) => x.status === 'waiting');
+      renderBoard(list, sched, isStaff);
       $('waitingCount').textContent = waiting.length;
       $('servingCount').textContent = serving.length;
       $('servingWrap').style.display = serving.length ? '' : 'none';
@@ -726,7 +918,20 @@
         : [el('li', 'empty', 'No one waiting. You could be next!')]));
       if (current === 'barber') renderBarbers();
     }
-    function setStatus(id, status) { saveQueue(loadQueue().map((x) => x.id === id ? { ...x, status, started: Date.now() } : x)); }
+    // "First available" goes to the working barber who frees up soonest
+    function callUp(id) {
+      const list = loadQueue();
+      const entry = list.find((x) => x.id === id);
+      if (!entry) return;
+      let barber = entry.barber;
+      if (!BARBERS.includes(barber)) {
+        const sched = schedule(list.filter((x) => x.id !== id));
+        const idle = sched.pool.filter((n) => !sched.current[n]);
+        const pick = idle.length ? idle : sched.pool;
+        barber = pick.reduce((a, c) => sched.free[c] < sched.free[a] ? c : a);
+      }
+      saveQueue(list.map((x) => x.id === id ? { ...x, status: 'serving', started: Date.now(), servedBy: barber } : x));
+    }
     function remove(id) { saveQueue(loadQueue().filter((x) => x.id !== id)); }
 
     // ---- Staff mode ----
@@ -761,7 +966,7 @@
     function tick() { $('clock').textContent = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }); }
     tick();
     setInterval(() => { tick(); render(); }, 30000);
-    window.addEventListener('storage', (e) => { if (e.key === QKEY) render(); });
+    window.addEventListener('storage', (e) => { if (e.key === QKEY || e.key === SKEY) render(); });
     show('start');
     render();
   </script>
