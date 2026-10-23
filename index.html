@@ -24,6 +24,7 @@
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+    section[id] { scroll-margin-top: 68px; }
     body {
       margin: 0;
       background: var(--ink);
@@ -156,6 +157,20 @@
     .map { border: 1px solid var(--line); border-radius: 4px; overflow: hidden; min-height: 360px; background: var(--ink-3); }
     .map iframe { width: 100%; height: 100%; min-height: 360px; border: 0; filter: grayscale(1) invert(.92) contrast(.9); }
 
+    /* Booking */
+    .steps-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.6rem; }
+    .step { display: flex; align-items: center; gap: .9rem; padding: 1rem 1.1rem; border: 1px solid var(--line); border-radius: 4px; background: var(--ink-3); }
+    .step b { font-family: "Bebas Neue", Impact, sans-serif; font-weight: 400; font-size: 1.9rem; color: var(--chrome); line-height: 1; }
+    .step span { font-weight: 600; }
+    .booking-frame { border: 1px solid var(--line); border-radius: 6px; background: var(--ink-2); min-height: 460px; overflow: hidden; }
+    .booking-placeholder {
+      min-height: 460px; display: grid; place-items: center; text-align: center; padding: 3rem 1.5rem;
+      border: 2px dashed var(--line); border-radius: 6px; margin: 12px;
+    }
+    .booking-placeholder svg { width: 56px; height: 56px; stroke: var(--chrome); fill: none; stroke-width: 1.4; margin: 0 auto 1.2rem; }
+    .booking-placeholder h3 { font-size: 2.2rem; margin-bottom: .6rem; }
+    .booking-placeholder p { color: var(--muted); max-width: 440px; margin: 0 auto 1.6rem; }
+
     /* CTA */
     .cta { text-align: center; padding: 110px 0; }
     .cta h2 { font-size: clamp(2.8rem, 8vw, 5.5rem); margin: .6rem 0 1.6rem; }
@@ -170,7 +185,7 @@
     @media (max-width: 860px) {
       .nav ul { display: none; }
       .brand span { display: none; }
-      .hero-grid, .about-grid, .info-grid, .menu, .ways, .hiring-grid { grid-template-columns: 1fr; }
+      .hero-grid, .about-grid, .info-grid, .menu, .ways, .hiring-grid, .steps-row { grid-template-columns: 1fr; }
       .hero-logo { display: none; }
       .hex { width: 440px; top: -20px; right: -140px; opacity: .35; }
       .about-grid, .hiring-grid { gap: 2.5rem; }
@@ -193,10 +208,11 @@
       <ul>
         <li><a href="#about">About</a></li>
         <li><a href="#services">Services</a></li>
+        <li><a href="#book">Book</a></li>
         <li><a href="#hiring">Careers</a></li>
         <li><a href="#visit">Visit</a></li>
       </ul>
-      <a class="btn btn-primary" href="https://booksy.com/en-us/1082357_the-new-era-barber-studio_barber-shop_39131_pasco" target="_blank" rel="noopener">Book</a>
+      <a class="btn btn-primary" href="#book">Book</a>
     </div>
   </header>
   <div class="pole" aria-hidden="true"></div>
@@ -224,7 +240,7 @@
           <h1>The <span class="chrome">New Era</span><br>Barber Studio</h1>
           <p class="lead"><strong>Walk-ins available.</strong> Or skip the wait and book your chair online.</p>
           <div class="actions">
-            <a class="btn btn-primary" href="https://booksy.com/en-us/1082357_the-new-era-barber-studio_barber-shop_39131_pasco" target="_blank" rel="noopener">Book an Appointment</a>
+            <a class="btn btn-primary" href="#book">Book an Appointment</a>
             <a class="btn btn-ghost" href="#visit">Find the Shop</a>
           </div>
           <div class="badges">
@@ -269,7 +285,7 @@
           <div class="way">
             <h3>Skip the Wait</h3>
             <p>Pick your barber, service and time online through Booksy, and walk straight into your chair.</p>
-            <a class="btn btn-primary" href="https://booksy.com/en-us/1082357_the-new-era-barber-studio_barber-shop_39131_pasco" target="_blank" rel="noopener">Book Online</a>
+            <a class="btn btn-primary" href="#book">Book Online</a>
           </div>
         </div>
       </div>
@@ -296,8 +312,36 @@
       </div>
     </section>
 
+    <!-- Book -->
+    <section id="book">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Book online</div>
+          <h2>Book Your Cut</h2>
+          <p>Pick your barber, your service and a time that works. Your chair will be ready when you walk in.</p>
+        </div>
+        <div class="steps-row">
+          <div class="step"><b>1</b><span>Choose your barber</span></div>
+          <div class="step"><b>2</b><span>Pick your service</span></div>
+          <div class="step"><b>3</b><span>Grab a time</span></div>
+        </div>
+        <div class="booking-frame" id="booksy-widget">
+          <!-- BOOKSY WIDGET: paste the code from Booksy Biz (Settings > Online Booking > "Your Website") here,
+               then delete the booking-placeholder div below. -->
+          <div class="booking-placeholder">
+            <div>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M8 14h3v3H8z"/></svg>
+              <h3>Online booking coming soon</h3>
+              <p>Booking right on this page is on the way. Until then, you can see open times and book through our Booksy page.</p>
+              <a class="btn btn-primary" href="https://booksy.com/en-us/1082357_the-new-era-barber-studio_barber-shop_39131_pasco" target="_blank" rel="noopener">Book on Booksy</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Hiring -->
-    <section id="hiring" class="hiring">
+    <section id="hiring" class="hiring alt">
       <div class="wrap hiring-grid">
         <div>
           <div class="eyebrow">Careers</div>
@@ -364,7 +408,7 @@
         <div class="eyebrow">Walk-ins available</div>
         <h2>Skip the Wait. <span class="chrome">Book Now.</span></h2>
         <div class="actions">
-          <a class="btn btn-primary" href="https://booksy.com/en-us/1082357_the-new-era-barber-studio_barber-shop_39131_pasco" target="_blank" rel="noopener">Book on Booksy</a>
+          <a class="btn btn-primary" href="#book">Book Now</a>
           <a class="btn btn-ghost" href="https://www.instagram.com/thenewerabarberstudio/" target="_blank" rel="noopener">Follow on Instagram</a>
         </div>
       </div>
