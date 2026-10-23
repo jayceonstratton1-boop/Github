@@ -134,6 +134,21 @@
     .viewer .v-prev { left: 16px; top: 50%; transform: translateY(-50%); }
     .viewer .v-next { right: 16px; top: 50%; transform: translateY(-50%); }
 
+    /* Booking policy */
+    .policy { border: 1px solid var(--line); border-left: 3px solid var(--red); border-radius: 6px; background: var(--ink-2); padding: 1.6rem; }
+    .policy-head { display: flex; align-items: center; gap: .8rem; flex-wrap: wrap; margin-bottom: 1.4rem; }
+    .policy-head h2 { font-size: 2.4rem; }
+    .must { font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #fff; background: var(--red); padding: .3rem .6rem; border-radius: 3px; }
+    .rules { display: grid; grid-template-columns: 1fr 1fr; gap: 1.3rem 2rem; }
+    .rule { display: flex; gap: 1rem; align-items: flex-start; }
+    .rule .ic { width: 46px; height: 46px; flex: none; border-radius: 50%; border: 1px solid var(--chrome); display: grid; place-items: center; }
+    .rule svg { width: 22px; height: 22px; stroke: var(--white); fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+    .rule b { display: block; font-family: "Bebas Neue", Impact, sans-serif; font-weight: 400; font-size: 1.45rem; letter-spacing: .06em; line-height: 1.1; }
+    .rule p { margin: .25rem 0 0; color: var(--muted); font-size: .9rem; }
+    .rule p strong { color: var(--white); }
+    .thanks { margin: 1.4rem 0 0; padding-top: 1.1rem; border-top: 1px solid var(--line); text-align: center; color: var(--muted); font-size: .9rem; }
+    .thanks b { display: block; font-family: "Bebas Neue", Impact, sans-serif; font-weight: 400; font-size: 1.3rem; letter-spacing: .2em; color: var(--white); }
+
     /* Sidebar */
     aside { position: sticky; top: 92px; display: grid; gap: 14px; }
     .card { border: 1px solid var(--line); border-radius: 6px; background: var(--ink-2); padding: 1.3rem; }
@@ -195,6 +210,11 @@
     .summary div:last-child { border-bottom: 0; }
     .summary dt { color: var(--muted); }
     .summary dd { margin: 0; font-weight: 600; text-align: right; }
+    .mini-policy { margin-top: 1.2rem; padding: 1rem; border: 1px solid var(--line); border-left: 3px solid var(--red); border-radius: 6px; background: var(--ink-3); font-size: .88rem; }
+    .mini-policy ul { margin: .5rem 0 .9rem; padding-left: 1.1rem; color: var(--muted); }
+    .mini-policy li + li { margin-top: .3rem; }
+    .agree { display: flex; gap: .7rem; align-items: flex-start; cursor: pointer; font-weight: 600; }
+    .agree input { width: 20px; height: 20px; margin: 0; flex: none; accent-color: var(--white); }
     .heads-up { margin-top: 1.2rem; padding: 1rem; border-radius: 6px; background: rgba(242,201,76,.08); border: 1px solid rgba(242,201,76,.35); font-size: .9rem; }
     .heads-up b { display: block; margin-bottom: .25rem; }
 
@@ -210,6 +230,8 @@
       .nav ul { display: none; }
     }
     @media (max-width: 640px) {
+      .rules { grid-template-columns: 1fr; }
+      .policy { padding: 1.2rem; }
       .wrap { padding: 0 16px; }
       .brand span { display: none; }
       .gallery { grid-template-columns: 1.3fr 1fr; grid-template-rows: 150px 150px; height: auto; }
@@ -267,6 +289,20 @@
           </div>
         </div>
 
+        <!-- Booking policy -->
+        <section class="block" id="policy">
+          <div class="policy">
+            <div class="policy-head"><h2>Booking Policy</h2><span class="must">Please read before booking</span></div>
+            <div class="rules">
+              <div class="rule"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="14" height="13" rx="2"/><path d="M3 9.5h14M7 3v4M13 3v4"/><circle cx="17.5" cy="17.5" r="4"/><path d="M14.7 20.3l5.6-5.6"/></svg></span><div><b>No-Shows</b><p>Failure to show up for your scheduled appointment will result in a cancellation fee.</p></div></div>
+              <div class="rule"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="14" height="13" rx="2"/><path d="M3 9.5h14M7 3v4M13 3v4"/><circle cx="17.5" cy="17.5" r="4"/><path d="M16 16l3 3M19 16l-3 3"/></svg></span><div><b>Late Cancellations</b><p>Last-minute cancellations will be subject to a cancellation fee.</p></div></div>
+              <div class="rule"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="12" r="8"/><path d="M11 8v4l2.5 2"/><path d="M20 4v5M20 12v.5"/></svg></span><div><b>Late Arrivals</b><p>Arriving <strong>10 minutes late</strong> to your scheduled appointment will result in automatic cancellation, and you will be charged.</p></div></div>
+              <div class="rule"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9z"/><path d="M9 14l2 2 4-4"/></svg></span><div><b>Booking Services</b><p>All appointments must be booked under the correct service you are requesting. Each service requires a specific amount of time, so booking the wrong service may result in your appointment being canceled or rescheduled.</p></div></div>
+            </div>
+            <p class="thanks"><b>Thank you</b>I appreciate everyone who respects my time and continues to support my business.</p>
+          </div>
+        </section>
+
         <!-- Services -->
         <section class="block" id="services">
           <div class="block-head">
@@ -308,6 +344,7 @@
         <div class="card">
           <button class="btn btn-primary btn-block" type="button" data-book>Book an Appointment</button>
           <p class="muted" style="font-size:.84rem;margin:.8rem 0 0;text-align:center">Pay at the shop, with Booksy Pay, or with Klarna</p>
+          <p style="font-size:.84rem;margin:.5rem 0 0;text-align:center"><a class="linkish" href="#policy">Read the booking policy before you book</a></p>
         </div>
         <div class="card">
           <div class="map"><iframe title="Map to The New Era Barber Studio" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=411%20W%20Clark%20St%2C%20Pasco%2C%20WA%2099301&z=16&output=embed"></iframe></div>
@@ -385,6 +422,12 @@
         { id: 'haircut-brows-design', name: 'Haircut, Eyebrows & Design', price: 55, mins: 55 },
       ],
     };
+    const POLICY = [
+      'No-shows will be charged a cancellation fee.',
+      'Last-minute cancellations are subject to a cancellation fee.',
+      'Arriving 10 minutes late cancels your appointment, and you will be charged.',
+      'Book the correct service. The wrong service may get your appointment canceled or rescheduled.',
+    ];
     const DAYS_AHEAD = 14;
     const SLOT_STEP = 15;
     const DOW = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -464,7 +507,7 @@
     }
 
     // ---- Booking flow: service -> time -> review ----
-    let state = { step: 'service', service: null, day: null, time: null };
+    let state = { step: 'service', service: null, day: null, time: null, agreed: false };
     function days() {
       const start = new Date(); start.setHours(0, 0, 0, 0);
       return Array.from({ length: DAYS_AHEAD }, (_, i) => new Date(start.getFullYear(), start.getMonth(), start.getDate() + i));
@@ -486,7 +529,7 @@
     }
 
     function openBooking(serviceId) {
-      state = { step: 'service', service: null, day: null, time: null };
+      state = { step: 'service', service: null, day: null, time: null, agreed: false };
       if (serviceId) { state.service = serviceId; state.step = 'time'; }
       $('overlay').classList.add('show');
       document.body.classList.add('locked');
@@ -602,12 +645,24 @@
         const heads = el('div', 'heads-up');
         heads.append(el('b', null, 'One last step'),
           el('span', null, `Online booking on this site isn't connected yet, so this time isn't held for you. Tap "Finish on Booksy" and pick ${fmtTime(state.time)} on ${day.toLocaleDateString([], { weekday: 'long' })} to lock it in.`));
-        body.replaceChildren(barberRow(), dl, heads);
+        // Policy must be accepted before finishing
+        const pol = el('div', 'mini-policy');
+        pol.append(el('b', null, 'Booking policy'));
+        const ul = el('ul');
+        POLICY.forEach((t) => ul.append(el('li', null, t)));
+        const agree = el('label', 'agree');
+        const box = el('input');
+        box.type = 'checkbox';
+        box.checked = state.agreed;
+        box.addEventListener('change', () => { state.agreed = box.checked; finish.disabled = !box.checked; });
+        agree.append(box, el('span', null, "I've read and agree to the booking policy"));
+        pol.append(ul, agree);
+        body.replaceChildren(barberRow(), dl, pol, heads);
 
-        const finish = el('a', 'btn btn-primary btn-block', 'Finish on Booksy');
-        finish.href = BARBER.booksyUrl;
-        finish.target = '_blank';
-        finish.rel = 'noopener';
+        const finish = el('button', 'btn btn-primary btn-block', 'Finish on Booksy');
+        finish.type = 'button';
+        finish.disabled = !state.agreed;
+        finish.addEventListener('click', () => window.open(BARBER.booksyUrl, '_blank', 'noopener'));
         foot.append(totalRow(svc), finish);
       }
     }
