@@ -438,31 +438,22 @@
   <script>
     // ---- Shop settings: update these ----
     const CONFIG = {
-      // PLACEHOLDER: replace with the shop's real barbers and what they're known for
+      // PLACEHOLDER: Barber 2 and 3 - replace with the shop's other barbers
       barbers: [
-        { name: 'Barber 1', specialty: 'Fades & tapers' },
+        { name: 'AngelTheBarber', specialty: 'Cuts, eyebrows, beards & designs' },
         { name: 'Barber 2', specialty: 'Beards & line-ups' },
         { name: 'Barber 3', specialty: 'Designs & kids cuts' },
       ],
-      // PLACEHOLDER: replace with the real menu. mins = usual time in the chair (drives wait estimates).
-      // Add a price to show it, e.g. { name: 'Classic Cut', mins: 30, price: 30 }
+      // Angel's Booksy menu. mins = usual time in the chair (drives wait estimates).
+      // Extras are the difference between his combo prices, e.g. Haircut w/ Beard $60 = $45 + $15.
       haircuts: [
-        { name: 'Classic Cut', mins: 30 },
-        { name: 'Low Fade', mins: 35 },
-        { name: 'Mid Fade', mins: 35 },
-        { name: 'High Fade', mins: 35 },
-        { name: 'Skin / Bald Fade', mins: 40 },
-        { name: 'Taper', mins: 30 },
-        { name: 'Buzz Cut', mins: 20 },
-        { name: 'Kids Cut', mins: 25 },
+        { name: 'Haircut', mins: 45, price: 45 },
+        { name: 'Sunday Haircut', mins: 45, price: 55, sundayOnly: true },
       ],
       extras: [
-        { name: 'Beard Trim', mins: 15 },
-        { name: 'Line-Up / Edge-Up', mins: 10 },
-        { name: 'Eyebrows', mins: 5 },
-        { name: 'Hot Towel', mins: 10 },
-        { name: 'Hair Design', mins: 15 },
-        { name: 'Shampoo', mins: 10 },
+        { name: 'Eyebrows', mins: 5, price: 5 },
+        { name: 'Beard', mins: 15, price: 15 },
+        { name: 'Design', mins: 5, price: 5 },
       ],
       defaultMins: 30,
       // Welcome text on sign-up. Needs the sms-welcome function deployed with Twilio settings (see README).
@@ -528,6 +519,16 @@
       return c + extras.reduce((s, x) => s + ((extraInfo(x) || {}).mins || 10), 0);
     }
     const entryMins = (e) => serviceMins(e.cut, e.extras || []) || CONFIG.defaultMins;
+    function servicePrice(cut, extras) {
+      const c = !cut || cut === NO_CUT ? 0 : ((cutInfo(cut) || {}).price || 0);
+      return c + extras.reduce((s, x) => s + ((extraInfo(x) || {}).price || 0), 0);
+    }
+    // The Sunday Haircut replaces the regular haircut on Sundays
+    function todaysHaircuts() {
+      const sunday = new Date().getDay() === 0;
+      const list = CONFIG.haircuts.filter((h) => Boolean(h.sundayOnly) === sunday);
+      return list.length ? list : CONFIG.haircuts;
+    }
     function fmtWait(m) {
       if (m <= 0) return 'No wait';
       if (m < 60) return `~${m} min`;
@@ -760,14 +761,16 @@
     $('repeatBtn').addEventListener('click', () => {
       const l = state.account.lastVisit;
       state.barber = l.barber;
-      state.cut = l.cut === NO_CUT || cutInfo(l.cut) ? l.cut : null;
+      const cuts = todaysHaircuts();
+      state.cut = l.cut === NO_CUT || cuts.some((c) => c.name === l.cut) ? l.cut
+        : (cutInfo(l.cut) ? cuts[0].name : null);
       state.extras = l.extras.filter((x) => extraInfo(x));
       show(state.cut ? 'review' : 'service');
     });
 
     // Service step
     function renderService() {
-      $('cutGrid').replaceChildren(...[...CONFIG.haircuts, { name: NO_CUT }].map((item) => {
+      $('cutGrid').replaceChildren(...[...todaysHaircuts(), { name: NO_CUT }].map((item) => {
         const name = item.name;
         const b = el('button', 'choice' + (state.cut === name ? ' selected' : ''));
         b.type = 'button';
@@ -782,7 +785,7 @@
       $('addonChips').replaceChildren(...CONFIG.extras.map((item) => {
         const on = state.extras.includes(item.name);
         const c = el('button', 'chip' + (on ? ' on' : ''), item.name);
-        c.append(el('span', 'mins', ` +${item.mins} min${priceTag(item)}`));
+        c.append(el('span', 'mins', item.price != null ? ` +$${item.price} · ${item.mins} min` : ` +${item.mins} min`));
         c.type = 'button';
         c.setAttribute('aria-pressed', on);
         c.addEventListener('click', () => {
@@ -795,7 +798,7 @@
       $('serviceNext').disabled = !ok;
       $('serviceHint').textContent = !state.cut ? 'Pick a haircut, then add any extras you want.'
         : (state.cut === NO_CUT && !state.extras.length) ? 'Pick at least one extra.'
-        : `Your service: ${serviceText(state.cut, state.extras)} · about ${serviceMins(state.cut, state.extras)} min in the chair`;
+        : `Your service: ${serviceText(state.cut, state.extras)} · $${servicePrice(state.cut, state.extras)} · about ${serviceMins(state.cut, state.extras)} min in the chair`;
     }
     $('serviceNext').addEventListener('click', () => show('review'));
 
@@ -810,6 +813,7 @@
         ['Barber', state.barber],
         ['Haircut', state.cut === NO_CUT ? 'None' : state.cut],
         ['Extras', state.extras.length ? state.extras.join(', ') : 'None'],
+        ['Price', `$${servicePrice(state.cut, state.extras)}`],
         ['Time in chair', `About ${serviceMins(state.cut, state.extras)} min`],
         ['Est. wait', fmtWait(chosenWait())],
         ['Checking in as', state.account ? 'Member' : 'Guest'],
