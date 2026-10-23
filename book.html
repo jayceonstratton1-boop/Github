@@ -69,15 +69,12 @@
     .pole { height: 6px; background: repeating-linear-gradient(-45deg, var(--red) 0 14px, var(--white) 14px 28px, var(--blue) 28px 42px, var(--white) 42px 56px); }
 
     /* Gallery */
-    .gallery { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; gap: 10px; height: 340px; margin-top: 28px; }
-    .ph {
-      position: relative; border: 1px solid var(--line); border-radius: 6px; overflow: hidden;
-      background: radial-gradient(500px 220px at 30% 0%, rgba(255,255,255,.07), transparent 70%), var(--ink-3);
-      display: grid; place-items: center; color: var(--muted); font-size: .82rem; text-align: center;
-    }
-    .ph.big { grid-row: span 2; }
-    .ph svg { width: 34px; height: 34px; stroke: var(--chrome); fill: none; stroke-width: 1.4; display: block; margin: 0 auto .5rem; }
-    .ph .count { position: absolute; right: 12px; bottom: 12px; background: rgba(0,0,0,.7); border: 1px solid var(--line); border-radius: 999px; padding: .35rem .8rem; font-size: .75rem; color: var(--white); }
+    .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; height: 400px; margin-top: 28px; }
+    .shot { position: relative; display: block; padding: 0; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: var(--ink-3); cursor: zoom-in; }
+    .shot img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; display: block; transition: transform .3s ease; }
+    .shot:hover img { transform: scale(1.03); }
+    .shot .count { position: absolute; right: 12px; bottom: 12px; background: rgba(0,0,0,.75); border: 1px solid var(--line); border-radius: 999px; padding: .4rem .85rem; font-size: .75rem; font-weight: 600; color: var(--white); }
+    .shot .cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 1.4rem .8rem .7rem; font-size: .78rem; text-align: left; color: var(--white); background: linear-gradient(transparent, rgba(0,0,0,.8)); }
 
     /* Profile */
     .layout { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 40px; align-items: start; padding: 28px 0 80px; }
@@ -124,8 +121,18 @@
     .source { margin-top: .8rem; font-size: .82rem; color: var(--muted); }
 
     /* Portfolio */
-    .portfolio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-    .portfolio .ph { aspect-ratio: 4 / 5; }
+    .portfolio { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .portfolio .shot { aspect-ratio: 3 / 4; }
+
+    /* Photo viewer */
+    .viewer { position: fixed; inset: 0; z-index: 45; background: rgba(0,0,0,.92); display: none; align-items: center; justify-content: center; padding: 20px; }
+    .viewer.show { display: flex; }
+    .viewer img { max-width: min(92vw, 720px); max-height: 82vh; border-radius: 6px; }
+    .viewer .cap { position: absolute; left: 0; right: 0; bottom: 18px; text-align: center; color: var(--muted); font-size: .9rem; }
+    .viewer .icon-btn { position: absolute; }
+    .viewer .v-close { top: 16px; right: 16px; }
+    .viewer .v-prev { left: 16px; top: 50%; transform: translateY(-50%); }
+    .viewer .v-next { right: 16px; top: 50%; transform: translateY(-50%); }
 
     /* Sidebar */
     aside { position: sticky; top: 92px; display: grid; gap: 14px; }
@@ -205,10 +212,11 @@
     @media (max-width: 640px) {
       .wrap { padding: 0 16px; }
       .brand span { display: none; }
-      .gallery { grid-template-columns: 1fr 1fr; grid-template-rows: 180px 110px; height: auto; }
-      .ph.big { grid-column: span 2; grid-row: auto; }
+      .gallery { grid-template-columns: 1.3fr 1fr; grid-template-rows: 150px 150px; height: auto; }
+      .gallery .shot:first-child { grid-row: span 2; }
       .reviews { grid-template-columns: 1fr; gap: 1rem; }
       .portfolio { grid-template-columns: 1fr 1fr; }
+      .viewer .v-prev, .viewer .v-next { top: auto; bottom: 56px; transform: none; }
       .svc .right { gap: .6rem; }
       .head-actions { width: 100%; }
       .mbar { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); background: rgba(8,8,10,.95); border-top: 1px solid var(--line); gap: 1rem; align-items: center; justify-content: space-between; }
@@ -236,11 +244,10 @@
   <div class="pole" aria-hidden="true"></div>
 
   <main class="wrap">
-    <!-- PLACEHOLDER: swap these tiles for Angel's portfolio photos -->
-    <div class="gallery" aria-label="Photos">
-      <div class="ph big"><div><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/><path d="M8 5l1.5-2h5L16 5"/></svg>Angel's work<br>Photos coming soon</div></div>
-      <div class="ph"><div><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/></svg>Portfolio</div></div>
-      <div class="ph"><div><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/></svg>Portfolio</div><span class="count">6 photos on Booksy</span></div>
+    <div class="gallery" aria-label="Photos of Angel's work">
+      <button class="shot" type="button" data-photo="0"><img src="assets/angel/cut-1.jpg" alt="Fade with a textured top, cut by AngelTheBarber"></button>
+      <button class="shot" type="button" data-photo="3"><img src="assets/angel/cut-4.jpg" alt="Curly fringe with a low taper, cut by AngelTheBarber"></button>
+      <button class="shot" type="button" data-photo="1"><img src="assets/angel/cut-2.jpg" alt="Textured fringe with a taper, cut by AngelTheBarber"><span class="count">Show all photos</span></button>
     </div>
 
     <div class="layout">
@@ -286,11 +293,13 @@
         <!-- Portfolio -->
         <section class="block" id="portfolio">
           <div class="block-head"><h2>Portfolio</h2></div>
-          <!-- PLACEHOLDER: replace with Angel's portfolio photos -->
           <div class="portfolio">
-            <div class="ph">Photo coming soon</div><div class="ph">Photo coming soon</div><div class="ph">Photo coming soon</div>
-            <div class="ph">Photo coming soon</div><div class="ph">Photo coming soon</div><div class="ph">Photo coming soon</div>
+            <button class="shot" type="button" data-photo="0"><img src="assets/angel/cut-1.jpg" alt="Fade with a textured top, cut by AngelTheBarber"><span class="cap">Fade · textured top</span></button>
+            <button class="shot" type="button" data-photo="1"><img src="assets/angel/cut-2.jpg" alt="Textured fringe with a taper, cut by AngelTheBarber"><span class="cap">Textured fringe · taper</span></button>
+            <button class="shot" type="button" data-photo="2"><img src="assets/angel/cut-3.jpg" alt="Curly top with a taper fade, cut by AngelTheBarber"><span class="cap">Curly top · taper fade</span></button>
+            <button class="shot" type="button" data-photo="3"><img src="assets/angel/cut-4.jpg" alt="Curly fringe with a low taper, cut by AngelTheBarber"><span class="cap">Curly fringe · low taper</span></button>
           </div>
+          <p class="source"><a href="https://booksy.com/en-us/750587_angelthebarber_barber-shop_39131_pasco" target="_blank" rel="noopener">See all of Angel's photos on Booksy</a></p>
         </section>
       </div>
 
@@ -339,6 +348,13 @@
       <div class="sheet-body" id="sheetBody"></div>
       <div class="sheet-foot" id="sheetFoot"></div>
     </div>
+  </div>
+  <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button class="icon-btn v-close" type="button" id="vClose" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <button class="icon-btn v-prev" type="button" id="vPrev" aria-label="Previous photo"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+    <img id="vImg" alt="">
+    <button class="icon-btn v-next" type="button" id="vNext" aria-label="Next photo"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+    <div class="cap" id="vCap"></div>
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -626,6 +642,32 @@
         await navigator.clipboard.writeText(location.href);
         toast('Link copied');
       } catch (e) { /* share sheet closed */ }
+    });
+
+    // Photo viewer
+    const PHOTOS = Array.from(document.querySelectorAll('.portfolio .shot img')).map((img) => ({ src: img.getAttribute('src'), alt: img.alt }));
+    let photoIndex = 0;
+    function showPhoto(i) {
+      photoIndex = (i + PHOTOS.length) % PHOTOS.length;
+      $('vImg').src = PHOTOS[photoIndex].src;
+      $('vImg').alt = PHOTOS[photoIndex].alt;
+      $('vCap').textContent = `${photoIndex + 1} / ${PHOTOS.length}`;
+    }
+    document.querySelectorAll('[data-photo]').forEach((b) => b.addEventListener('click', () => {
+      showPhoto(Number(b.dataset.photo));
+      $('viewer').classList.add('show');
+      document.body.classList.add('locked');
+    }));
+    function closeViewer() { $('viewer').classList.remove('show'); document.body.classList.remove('locked'); }
+    $('vClose').addEventListener('click', closeViewer);
+    $('vPrev').addEventListener('click', () => showPhoto(photoIndex - 1));
+    $('vNext').addEventListener('click', () => showPhoto(photoIndex + 1));
+    $('viewer').addEventListener('click', (e) => { if (e.target === $('viewer')) closeViewer(); });
+    document.addEventListener('keydown', (e) => {
+      if (!$('viewer').classList.contains('show')) return;
+      if (e.key === 'Escape') closeViewer();
+      if (e.key === 'ArrowLeft') showPhoto(photoIndex - 1);
+      if (e.key === 'ArrowRight') showPhoto(photoIndex + 1);
     });
 
     $('yr').textContent = new Date().getFullYear();
