@@ -1,0 +1,637 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book with AngelTheBarber | The New Era Barber Studio</title>
+  <meta name="description" content="Book a haircut with AngelTheBarber at The New Era Barber Studio, 411 W Clark St, Suite H, Pasco, WA.">
+  <link rel="icon" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #08080a;
+      --ink-2: #121214;
+      --ink-3: #1a1a1d;
+      --ink-4: #232327;
+      --line: #27272b;
+      --white: #f5f5f7;
+      --muted: #9c9ca3;
+      --chrome: #c9c9cf;
+      --red: #b3262e;
+      --blue: #1f3a8a;
+      --green: #3fbf7f;
+      --star: #f2c94c;
+      --max: 1180px;
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--ink); color: var(--white);
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      line-height: 1.55; -webkit-font-smoothing: antialiased;
+    }
+    body.locked { overflow: hidden; }
+    a { color: inherit; }
+    button, input { font: inherit; color: inherit; }
+    h1, h2, h3 { font-family: "Bebas Neue", Impact, sans-serif; font-weight: 400; letter-spacing: .03em; line-height: 1; margin: 0; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+    .eyebrow { color: var(--chrome); text-transform: uppercase; letter-spacing: .22em; font-size: .74rem; font-weight: 600; }
+    .muted { color: var(--muted); }
+    .stars { color: var(--star); letter-spacing: .08em; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: .5rem; cursor: pointer;
+      padding: .9rem 1.4rem; border-radius: 4px; border: 0; font-weight: 700; text-decoration: none;
+      text-transform: uppercase; letter-spacing: .12em; font-size: .8rem;
+    }
+    .btn:disabled { opacity: .35; cursor: not-allowed; }
+    .btn-primary { background: var(--white); color: var(--ink); }
+    .btn-primary:hover:not(:disabled) { box-shadow: 0 0 22px rgba(255,255,255,.3); }
+    .btn-ghost { background: transparent; border: 1px solid var(--line); color: var(--white); }
+    .btn-ghost:hover { border-color: var(--chrome); }
+    .btn-sm { padding: .55rem .95rem; font-size: .72rem; }
+    .btn-block { width: 100%; }
+    .linkish { background: none; border: 0; padding: 0; color: var(--chrome); text-decoration: underline; cursor: pointer; font-size: .85rem; }
+
+    /* Nav */
+    header.nav { position: sticky; top: 0; z-index: 10; background: rgba(8,8,10,.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+    .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 1rem; }
+    .brand { display: flex; align-items: center; gap: .7rem; text-decoration: none; }
+    .brand img { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); }
+    .brand span { font-family: "Bebas Neue", Impact, sans-serif; font-size: 1.35rem; letter-spacing: .08em; }
+    .nav ul { list-style: none; display: flex; gap: 1.6rem; margin: 0; padding: 0; }
+    .nav ul a { text-decoration: none; font-size: .78rem; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); }
+    .nav ul a:hover { color: var(--white); }
+    .pole { height: 6px; background: repeating-linear-gradient(-45deg, var(--red) 0 14px, var(--white) 14px 28px, var(--blue) 28px 42px, var(--white) 42px 56px); }
+
+    /* Gallery */
+    .gallery { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; gap: 10px; height: 340px; margin-top: 28px; }
+    .ph {
+      position: relative; border: 1px solid var(--line); border-radius: 6px; overflow: hidden;
+      background: radial-gradient(500px 220px at 30% 0%, rgba(255,255,255,.07), transparent 70%), var(--ink-3);
+      display: grid; place-items: center; color: var(--muted); font-size: .82rem; text-align: center;
+    }
+    .ph.big { grid-row: span 2; }
+    .ph svg { width: 34px; height: 34px; stroke: var(--chrome); fill: none; stroke-width: 1.4; display: block; margin: 0 auto .5rem; }
+    .ph .count { position: absolute; right: 12px; bottom: 12px; background: rgba(0,0,0,.7); border: 1px solid var(--line); border-radius: 999px; padding: .35rem .8rem; font-size: .75rem; color: var(--white); }
+
+    /* Profile */
+    .layout { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 40px; align-items: start; padding: 28px 0 80px; }
+    .profile-head { display: flex; gap: 1.2rem; align-items: center; flex-wrap: wrap; padding-bottom: 1.6rem; border-bottom: 1px solid var(--line); }
+    .avatar { width: 76px; height: 76px; border-radius: 50%; display: grid; place-items: center; flex: none; background: var(--white); color: var(--ink); font-family: "Bebas Neue", Impact, sans-serif; font-size: 2.4rem; }
+    .who { flex: 1; min-width: 220px; }
+    .who h1 { font-size: clamp(2.4rem, 5vw, 3.4rem); }
+    .who .addr { color: var(--muted); margin: .25rem 0 .5rem; font-size: .95rem; }
+    .rating-line { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; font-size: .95rem; }
+    .rating-line a { color: var(--chrome); }
+    .chips { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .8rem; }
+    .chip { font-size: .75rem; padding: .3rem .7rem; border: 1px solid var(--line); border-radius: 999px; color: var(--chrome); background: var(--ink-2); }
+    .head-actions { display: flex; gap: .5rem; }
+
+    /* Services */
+    .block { padding-top: 2.4rem; }
+    .block-head { display: flex; align-items: end; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
+    .block-head h2 { font-size: 2.6rem; }
+    .search { position: relative; width: min(320px, 100%); }
+    .search input { width: 100%; padding: .75rem 1rem .75rem 2.4rem; border-radius: 4px; border: 1px solid var(--line); background: var(--ink-3); outline: none; }
+    .search input:focus { border-color: var(--chrome); }
+    .search svg { position: absolute; left: .8rem; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; stroke: var(--muted); fill: none; stroke-width: 2; }
+    .group-title { font-size: .78rem; text-transform: uppercase; letter-spacing: .18em; color: var(--muted); font-weight: 600; margin: 1.6rem 0 .3rem; }
+    .svc { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: center; padding: 1.15rem 0; border-bottom: 1px solid var(--line); }
+    .svc .name { font-weight: 600; font-size: 1.05rem; }
+    .svc .desc { color: var(--muted); font-size: .88rem; margin-top: .2rem; max-width: 520px; }
+    .svc .tag { display: inline-block; font-size: .62rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; background: var(--ink-4); border: 1px solid var(--line); color: var(--chrome); padding: .1rem .45rem; border-radius: 3px; margin-left: .4rem; vertical-align: middle; }
+    .svc .right { display: flex; align-items: center; gap: 1rem; }
+    .svc .price { text-align: right; }
+    .svc .price b { display: block; font-size: 1.05rem; }
+    .svc .price span { color: var(--muted); font-size: .8rem; }
+    .empty { color: var(--muted); padding: 1.2rem 0; }
+
+    /* Reviews */
+    .reviews { display: grid; grid-template-columns: 180px 1fr; gap: 2rem; align-items: center; padding: 1.6rem; border: 1px solid var(--line); border-radius: 6px; background: var(--ink-2); }
+    .score { text-align: center; }
+    .score .big { font-family: "Bebas Neue", Impact, sans-serif; font-size: 4.4rem; line-height: 1; }
+    .score .muted { font-size: .82rem; }
+    .bars { display: grid; gap: .45rem; }
+    .bar { display: grid; grid-template-columns: 28px 1fr 36px; gap: .7rem; align-items: center; font-size: .85rem; color: var(--muted); }
+    .bar .track { height: 8px; border-radius: 999px; background: var(--ink-4); overflow: hidden; }
+    .bar .fill { height: 100%; background: var(--star); border-radius: 999px; }
+    .bar .n { text-align: right; }
+    .source { margin-top: .8rem; font-size: .82rem; color: var(--muted); }
+
+    /* Portfolio */
+    .portfolio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .portfolio .ph { aspect-ratio: 4 / 5; }
+
+    /* Sidebar */
+    aside { position: sticky; top: 92px; display: grid; gap: 14px; }
+    .card { border: 1px solid var(--line); border-radius: 6px; background: var(--ink-2); padding: 1.3rem; }
+    .card h3 { font-size: 1.5rem; letter-spacing: .08em; margin-bottom: .8rem; color: var(--chrome); }
+    .map { height: 180px; border-radius: 4px; overflow: hidden; border: 1px solid var(--line); background: var(--ink-3); margin: 0 0 .9rem; }
+    .map iframe { width: 100%; height: 100%; border: 0; filter: grayscale(1) invert(.92) contrast(.9); }
+    .hours { width: 100%; border-collapse: collapse; font-size: .9rem; }
+    .hours td { padding: .5rem 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+    .hours td:last-child { text-align: right; color: var(--muted); }
+    .hours tr.today td { color: var(--white); font-weight: 600; }
+    .hours tr.today td:first-child::after { content: " · Today"; color: var(--green); font-weight: 500; font-size: .78rem; }
+    .note { font-size: .84rem; color: var(--muted); margin: .9rem 0 0; padding: .8rem .9rem; border-left: 2px solid var(--chrome); background: var(--ink-3); border-radius: 0 4px 4px 0; }
+    .pay { display: flex; gap: .5rem; flex-wrap: wrap; }
+
+    footer { border-top: 1px solid var(--line); padding: 32px 0; color: var(--muted); font-size: .85rem; }
+    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; }
+
+    /* Booking sheet */
+    .overlay { position: fixed; inset: 0; z-index: 40; background: rgba(0,0,0,.72); display: none; justify-content: flex-end; }
+    .overlay.show { display: flex; }
+    .sheet { width: min(520px, 100%); height: 100%; background: var(--ink-2); border-left: 1px solid var(--line); display: flex; flex-direction: column; animation: slide .22s ease; }
+    @keyframes slide { from { transform: translateX(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+    .sheet-head { display: grid; grid-template-columns: 40px 1fr 40px; align-items: center; padding: 14px 16px; border-bottom: 1px solid var(--line); }
+    .sheet-head h2 { font-size: 1.7rem; text-align: center; }
+    .icon-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: var(--ink-3); cursor: pointer; display: grid; place-items: center; }
+    .icon-btn svg { width: 18px; height: 18px; stroke: var(--white); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .icon-btn.ghost { visibility: hidden; }
+    .sheet-body { flex: 1; overflow-y: auto; padding: 20px; }
+    .sheet-foot { padding: 16px 20px; border-top: 1px solid var(--line); display: grid; gap: .7rem; }
+    .sheet-foot .total { display: flex; justify-content: space-between; color: var(--muted); font-size: .9rem; }
+    .sheet-foot .total b { color: var(--white); }
+    .barber-row { display: flex; gap: .8rem; align-items: center; margin-bottom: 1.2rem; }
+    .barber-row .avatar { width: 44px; height: 44px; font-size: 1.4rem; }
+    .opt { width: 100%; display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: center; text-align: left; cursor: pointer; background: var(--ink-3); border: 1px solid var(--line); border-radius: 6px; padding: 1rem; margin-bottom: .6rem; }
+    .opt:hover { border-color: #4a4a50; }
+    .opt.selected { border-color: var(--white); box-shadow: inset 0 0 0 1px var(--white); }
+    .opt .name { font-weight: 600; }
+    .opt .sub { color: var(--muted); font-size: .82rem; }
+    .opt b { white-space: nowrap; }
+    .picked { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: .9rem 1rem; border: 1px solid var(--line); border-radius: 6px; background: var(--ink-3); margin-bottom: 1.2rem; }
+    .picked .sub { color: var(--muted); font-size: .82rem; }
+    .month { font-weight: 600; margin-bottom: .6rem; }
+    .days { display: flex; gap: .5rem; overflow-x: auto; padding-bottom: .5rem; scroll-snap-type: x mandatory; }
+    .day { flex: none; width: 58px; padding: .6rem 0; border-radius: 6px; border: 1px solid var(--line); background: var(--ink-3); cursor: pointer; text-align: center; scroll-snap-align: start; }
+    .day .dow { font-size: .7rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+    .day .num { font-family: "Bebas Neue", Impact, sans-serif; font-size: 1.6rem; line-height: 1.1; }
+    .day.selected { background: var(--white); color: var(--ink); border-color: var(--white); }
+    .day.selected .dow { color: #4a4a50; }
+    .day:disabled { opacity: .3; cursor: not-allowed; }
+    .slot-group { margin-top: 1.2rem; }
+    .slot-group .label { font-size: .75rem; text-transform: uppercase; letter-spacing: .16em; color: var(--muted); font-weight: 600; margin-bottom: .55rem; }
+    .slots { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: .5rem; }
+    .slot { padding: .7rem 0; border-radius: 4px; border: 1px solid var(--line); background: var(--ink-3); cursor: pointer; font-weight: 600; font-size: .9rem; }
+    .slot:hover { border-color: #4a4a50; }
+    .slot.selected { background: var(--white); color: var(--ink); border-color: var(--white); }
+    .info { font-size: .84rem; color: var(--muted); padding: .75rem .9rem; border: 1px dashed var(--line); border-radius: 4px; margin: 1rem 0 0; }
+    .summary { margin: 0; border: 1px solid var(--line); border-radius: 6px; background: var(--ink-3); }
+    .summary div { display: flex; justify-content: space-between; gap: 1rem; padding: .9rem 1rem; border-bottom: 1px solid var(--line); }
+    .summary div:last-child { border-bottom: 0; }
+    .summary dt { color: var(--muted); }
+    .summary dd { margin: 0; font-weight: 600; text-align: right; }
+    .heads-up { margin-top: 1.2rem; padding: 1rem; border-radius: 6px; background: rgba(242,201,76,.08); border: 1px solid rgba(242,201,76,.35); font-size: .9rem; }
+    .heads-up b { display: block; margin-bottom: .25rem; }
+
+    .toast { position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); opacity: 0; pointer-events: none; z-index: 50; background: var(--white); color: var(--ink); font-weight: 600; padding: .8rem 1.2rem; border-radius: 6px; transition: opacity .2s, transform .2s; }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+    /* Mobile book bar */
+    .mbar { display: none; }
+
+    @media (max-width: 960px) {
+      .layout { grid-template-columns: 1fr; }
+      aside { position: static; }
+      .nav ul { display: none; }
+    }
+    @media (max-width: 640px) {
+      .wrap { padding: 0 16px; }
+      .brand span { display: none; }
+      .gallery { grid-template-columns: 1fr 1fr; grid-template-rows: 180px 110px; height: auto; }
+      .ph.big { grid-column: span 2; grid-row: auto; }
+      .reviews { grid-template-columns: 1fr; gap: 1rem; }
+      .portfolio { grid-template-columns: 1fr 1fr; }
+      .svc .right { gap: .6rem; }
+      .head-actions { width: 100%; }
+      .mbar { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); background: rgba(8,8,10,.95); border-top: 1px solid var(--line); gap: 1rem; align-items: center; justify-content: space-between; }
+      .mbar .from { font-size: .85rem; color: var(--muted); }
+      .mbar .from b { color: var(--white); font-size: 1rem; }
+      body { padding-bottom: 80px; }
+      .sheet { border-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="wrap">
+      <a href="index.html" class="brand"><img src="assets/logo.png" alt="The New Era Barber Studio logo"><span>The New Era Barber Studio</span></a>
+      <ul>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="index.html#book">Barbers</a></li>
+        <li><a href="index.html#visit">Visit</a></li>
+      </ul>
+      <button class="btn btn-primary btn-sm" type="button" data-book>Book</button>
+    </div>
+  </header>
+  <div class="pole" aria-hidden="true"></div>
+
+  <main class="wrap">
+    <!-- PLACEHOLDER: swap these tiles for Angel's portfolio photos -->
+    <div class="gallery" aria-label="Photos">
+      <div class="ph big"><div><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/><path d="M8 5l1.5-2h5L16 5"/></svg>Angel's work<br>Photos coming soon</div></div>
+      <div class="ph"><div><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/></svg>Portfolio</div></div>
+      <div class="ph"><div><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/></svg>Portfolio</div><span class="count">6 photos on Booksy</span></div>
+    </div>
+
+    <div class="layout">
+      <div>
+        <div class="profile-head">
+          <div class="avatar" aria-hidden="true">A</div>
+          <div class="who">
+            <div class="eyebrow">Barber at The New Era Barber Studio</div>
+            <h1>AngelTheBarber</h1>
+            <div class="addr">411 W Clark St, Suite H · Pasco, WA 99301</div>
+            <div class="rating-line"><span class="stars" aria-hidden="true">★★★★★</span><b>5.0</b><a href="#reviews">197 reviews</a></div>
+            <div class="chips"><span class="chip">Booksy Pay</span><span class="chip">Klarna</span><span class="chip">Walk-ins welcome at the shop</span></div>
+          </div>
+          <div class="head-actions">
+            <button class="btn btn-ghost btn-sm" type="button" id="shareBtn">Share</button>
+            <button class="btn btn-primary btn-sm" type="button" data-book>Book</button>
+          </div>
+        </div>
+
+        <!-- Services -->
+        <section class="block" id="services">
+          <div class="block-head">
+            <h2>Services</h2>
+            <label class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="search" type="search" placeholder="Search for service" aria-label="Search for service"></label>
+          </div>
+          <div id="serviceList"></div>
+        </section>
+
+        <!-- Reviews -->
+        <section class="block" id="reviews">
+          <div class="block-head"><h2>Reviews</h2></div>
+          <div class="reviews">
+            <div class="score">
+              <div class="big">5.0</div>
+              <div class="stars" aria-hidden="true">★★★★★</div>
+              <div class="muted">Based on 197 reviews</div>
+            </div>
+            <div class="bars" id="bars"></div>
+          </div>
+          <p class="source">Ratings from Angel's Booksy profile. <a href="https://booksy.com/en-us/750587_angelthebarber_barber-shop_39131_pasco" target="_blank" rel="noopener">Read the reviews on Booksy</a></p>
+        </section>
+
+        <!-- Portfolio -->
+        <section class="block" id="portfolio">
+          <div class="block-head"><h2>Portfolio</h2></div>
+          <!-- PLACEHOLDER: replace with Angel's portfolio photos -->
+          <div class="portfolio">
+            <div class="ph">Photo coming soon</div><div class="ph">Photo coming soon</div><div class="ph">Photo coming soon</div>
+            <div class="ph">Photo coming soon</div><div class="ph">Photo coming soon</div><div class="ph">Photo coming soon</div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Sidebar -->
+      <aside>
+        <div class="card">
+          <button class="btn btn-primary btn-block" type="button" data-book>Book an Appointment</button>
+          <p class="muted" style="font-size:.84rem;margin:.8rem 0 0;text-align:center">Pay at the shop, with Booksy Pay, or with Klarna</p>
+        </div>
+        <div class="card">
+          <div class="map"><iframe title="Map to The New Era Barber Studio" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=411%20W%20Clark%20St%2C%20Pasco%2C%20WA%2099301&z=16&output=embed"></iframe></div>
+          <b>The New Era Barber Studio</b>
+          <div class="muted" style="font-size:.9rem">411 W Clark St, Suite H, Pasco, WA 99301</div>
+          <a class="linkish" href="https://www.google.com/maps/dir/?api=1&destination=411+W+Clark+St+Pasco+WA+99301" target="_blank" rel="noopener">Get directions</a>
+        </div>
+        <div class="card">
+          <h3>Business Hours</h3>
+          <table class="hours" id="hours"></table>
+          <p class="note">If you're booking for Sunday, it must be under the "Sunday Haircut" service. Thank you!</p>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <div class="mbar">
+    <div class="from">Haircuts from <b>$45</b></div>
+    <button class="btn btn-primary" type="button" data-book>Book</button>
+  </div>
+
+  <div class="pole" aria-hidden="true"></div>
+  <footer>
+    <div class="wrap">
+      <span>&copy; <span id="yr">2026</span> The New Era Barber Studio &middot; 411 W Clark St, Pasco, WA 99301</span>
+      <a href="index.html">Back to the main site &rarr;</a>
+    </div>
+  </footer>
+
+  <!-- Booking sheet -->
+  <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+    <div class="sheet">
+      <div class="sheet-head">
+        <button class="icon-btn" type="button" id="backBtn" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+        <h2 id="sheetTitle">Book</h2>
+        <button class="icon-btn" type="button" id="closeBtn" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="sheet-body" id="sheetBody"></div>
+      <div class="sheet-foot" id="sheetFoot"></div>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    // ---- Angel's Booksy profile (as shown on booksy.com, Oct 2026) ----
+    const BARBER = {
+      name: 'AngelTheBarber',
+      booksyUrl: 'https://booksy.com/en-us/750587_angelthebarber_barber-shop_39131_pasco',
+      // 0 = Sunday. Each day is a list of [start, end] blocks.
+      hours: {
+        0: [['07:00', '13:00']],
+        1: [['09:00', '13:00'], ['14:00', '18:00']],
+        2: [],
+        3: [['09:00', '13:00'], ['14:00', '18:00']],
+        4: [['09:00', '13:00'], ['14:00', '18:00']],
+        5: [['09:00', '13:00'], ['14:00', '18:00']],
+        6: [['07:00', '13:00']],
+      },
+      reviews: { 5: 196, 4: 0, 3: 1, 2: 0, 1: 0 },
+      // Durations were hard to read in the video. Check them against Booksy.
+      services: [
+        { id: 'haircut', name: 'Haircut', price: 45, mins: 45, popular: true },
+        { id: 'haircut-brows', name: 'Haircut w/ Eyebrows', price: 50, mins: 50, popular: true },
+        { id: 'haircut-beard', name: 'Haircut w/ Beard', price: 60, mins: 60, popular: true },
+        { id: 'sunday', name: 'Sunday Haircut', price: 55, mins: 45, sundayOnly: true,
+          desc: 'Sundays only. Haircuts start at $50 and any add-ons are charged at your appointment.' },
+        { id: 'haircut-design', name: 'Haircut w/ Design', price: 50, mins: 50 },
+        { id: 'haircut-brows-design', name: 'Haircut, Eyebrows & Design', price: 55, mins: 55 },
+      ],
+    };
+    const DAYS_AHEAD = 14;
+    const SLOT_STEP = 15;
+    const DOW = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+    const $ = (id) => document.getElementById(id);
+    function el(tag, cls, text) {
+      const n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (text != null) n.textContent = text;
+      return n;
+    }
+    const money = (n) => '$' + n.toFixed(2);
+    const fmtMins = (m) => m >= 60 ? `${Math.floor(m / 60)}h${m % 60 ? ' ' + (m % 60) + 'min' : ''}` : `${m}min`;
+    const toMin = (hhmm) => { const [h, m] = hhmm.split(':').map(Number); return h * 60 + m; };
+    function fmtTime(mins) {
+      const d = new Date(2000, 0, 1, Math.floor(mins / 60), mins % 60);
+      return d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+    }
+    const blockText = (b) => `${fmtTime(toMin(b[0]))} – ${fmtTime(toMin(b[1]))}`;
+    const svcById = (id) => BARBER.services.find((s) => s.id === id);
+
+    // ---- Page ----
+    function serviceRow(s) {
+      const row = el('div', 'svc');
+      const left = el('div');
+      const name = el('div', 'name', s.name);
+      if (s.sundayOnly) name.append(el('span', 'tag', 'Sundays'));
+      left.append(name);
+      if (s.desc) left.append(el('div', 'desc', s.desc));
+      const right = el('div', 'right');
+      const price = el('div', 'price');
+      price.append(el('b', null, money(s.price)), el('span', null, fmtMins(s.mins)));
+      const btn = el('button', 'btn btn-primary btn-sm', 'Book');
+      btn.type = 'button';
+      btn.addEventListener('click', () => openBooking(s.id));
+      right.append(price, btn);
+      row.append(left, right);
+      return row;
+    }
+    function renderServices() {
+      const q = $('search').value.trim().toLowerCase();
+      const match = (s) => !q || s.name.toLowerCase().includes(q) || (s.desc || '').toLowerCase().includes(q);
+      const groups = [['Popular Services', BARBER.services.filter((s) => s.popular && match(s))],
+                      ['Other Services', BARBER.services.filter((s) => !s.popular && match(s))]];
+      const out = [];
+      groups.forEach(([title, list]) => {
+        if (!list.length) return;
+        out.push(el('div', 'group-title', title), ...list.map(serviceRow));
+      });
+      if (!out.length) out.push(el('div', 'empty', 'No services match your search.'));
+      $('serviceList').replaceChildren(...out);
+    }
+    function renderHours() {
+      const today = new Date().getDay();
+      const order = [0, 1, 2, 3, 4, 5, 6];
+      $('hours').replaceChildren(...order.map((d) => {
+        const tr = el('tr', d === today ? 'today' : '');
+        const blocks = BARBER.hours[d];
+        const right = el('td');
+        if (!blocks.length) right.textContent = 'Closed';
+        else blocks.forEach((b, i) => { if (i) right.append(el('br')); right.append(blockText(b)); });
+        tr.append(el('td', null, DOW[d]), right);
+        return tr;
+      }));
+    }
+    function renderBars() {
+      const total = Object.values(BARBER.reviews).reduce((a, b) => a + b, 0);
+      $('bars').replaceChildren(...[5, 4, 3, 2, 1].map((n) => {
+        const r = el('div', 'bar');
+        const track = el('div', 'track');
+        const fill = el('div', 'fill');
+        fill.style.width = (total ? (BARBER.reviews[n] / total) * 100 : 0) + '%';
+        track.append(fill);
+        r.append(el('span', null, n + ' ★'), track, el('span', 'n', String(BARBER.reviews[n])));
+        return r;
+      }));
+    }
+
+    // ---- Booking flow: service -> time -> review ----
+    let state = { step: 'service', service: null, day: null, time: null };
+    function days() {
+      const start = new Date(); start.setHours(0, 0, 0, 0);
+      return Array.from({ length: DAYS_AHEAD }, (_, i) => new Date(start.getFullYear(), start.getMonth(), start.getDate() + i));
+    }
+    function slotsFor(date, svc) {
+      const dow = date.getDay();
+      // Sundays only take the Sunday service, and the Sunday service only runs on Sundays
+      if (Boolean(svc.sundayOnly) !== (dow === 0)) return [];
+      const now = new Date();
+      const isToday = date.toDateString() === now.toDateString();
+      const earliest = now.getHours() * 60 + now.getMinutes() + 30;
+      const out = [];
+      BARBER.hours[dow].forEach(([a, b]) => {
+        for (let t = toMin(a); t + svc.mins <= toMin(b); t += SLOT_STEP) {
+          if (!isToday || t >= earliest) out.push(t);
+        }
+      });
+      return out;
+    }
+
+    function openBooking(serviceId) {
+      state = { step: 'service', service: null, day: null, time: null };
+      if (serviceId) { state.service = serviceId; state.step = 'time'; }
+      $('overlay').classList.add('show');
+      document.body.classList.add('locked');
+      render();
+    }
+    function closeBooking() {
+      $('overlay').classList.remove('show');
+      document.body.classList.remove('locked');
+    }
+    function go(step) { state.step = step; render(); $('sheetBody').scrollTop = 0; }
+
+    function barberRow() {
+      const r = el('div', 'barber-row');
+      const who = el('div');
+      who.append(el('b', null, BARBER.name), el('div', 'muted', 'The New Era Barber Studio'));
+      r.append(el('div', 'avatar', 'A'), who);
+      return r;
+    }
+
+    function render() {
+      const body = $('sheetBody'), foot = $('sheetFoot');
+      const svc = state.service && svcById(state.service);
+      $('backBtn').classList.toggle('ghost', state.step === 'service');
+      foot.replaceChildren();
+
+      if (state.step === 'service') {
+        $('sheetTitle').textContent = 'Choose a Service';
+        body.replaceChildren(barberRow(), ...BARBER.services.map((s) => {
+          const b = el('button', 'opt' + (state.service === s.id ? ' selected' : ''));
+          b.type = 'button';
+          const left = el('div');
+          left.append(el('div', 'name', s.name), el('div', 'sub', fmtMins(s.mins) + (s.sundayOnly ? ' · Sundays only' : '')));
+          b.append(left, el('b', null, money(s.price)));
+          b.addEventListener('click', () => { state.service = s.id; state.day = null; state.time = null; go('time'); });
+          return b;
+        }));
+        foot.hidden = true;
+        return;
+      }
+      foot.hidden = false;
+
+      if (state.step === 'time') {
+        $('sheetTitle').textContent = 'Pick a Time';
+        const picked = el('div', 'picked');
+        const info = el('div');
+        info.append(el('b', null, svc.name), el('div', 'sub', `${money(svc.price)} · ${fmtMins(svc.mins)} · with ${BARBER.name}`));
+        const change = el('button', 'linkish', 'Change');
+        change.type = 'button';
+        change.addEventListener('click', () => go('service'));
+        picked.append(info, change);
+
+        const list = days();
+        if (state.day === null) {
+          const first = list.findIndex((d) => slotsFor(d, svc).length);
+          state.day = first === -1 ? 0 : first;
+        }
+        const day = list[state.day];
+        const month = el('div', 'month', day.toLocaleDateString([], { month: 'long', year: 'numeric' }));
+        const strip = el('div', 'days');
+        list.forEach((d, i) => {
+          const b = el('button', 'day' + (i === state.day ? ' selected' : ''));
+          b.type = 'button';
+          b.disabled = !slotsFor(d, svc).length;
+          b.setAttribute('aria-label', d.toLocaleDateString([], { weekday: 'long', month: 'long', day: 'numeric' }));
+          b.append(el('div', 'dow', i === 0 ? 'Today' : d.toLocaleDateString([], { weekday: 'short' })), el('div', 'num', String(d.getDate())));
+          b.addEventListener('click', () => { state.day = i; state.time = null; render(); });
+          strip.append(b);
+        });
+
+        const slots = slotsFor(day, svc);
+        const groups = [['Morning', (t) => t < 720], ['Afternoon', (t) => t >= 720 && t < 1020], ['Evening', (t) => t >= 1020]];
+        const slotEls = [];
+        groups.forEach(([label, test]) => {
+          const ts = slots.filter(test);
+          if (!ts.length) return;
+          const g = el('div', 'slot-group');
+          const grid = el('div', 'slots');
+          ts.forEach((t) => {
+            const b = el('button', 'slot' + (state.time === t ? ' selected' : ''), fmtTime(t));
+            b.type = 'button';
+            b.addEventListener('click', () => { state.time = t; render(); });
+            grid.append(b);
+          });
+          g.append(el('div', 'label', label), grid);
+          slotEls.push(g);
+        });
+        if (!slotEls.length) slotEls.push(el('p', 'info', 'No open times this day. Try another day.'));
+
+        const notes = [el('p', 'info', `Times shown are ${BARBER.name}'s working hours. Open spots are confirmed when you finish booking on Booksy.`)];
+        if (!svc.sundayOnly) notes.push(el('p', 'info', 'Booking a Sunday? Choose the Sunday Haircut service.'));
+        body.replaceChildren(picked, month, strip, ...slotEls, ...notes);
+
+        const next = el('button', 'btn btn-primary btn-block', 'Continue');
+        next.type = 'button';
+        next.disabled = state.time === null;
+        next.addEventListener('click', () => go('review'));
+        foot.append(totalRow(svc), next);
+        return;
+      }
+
+      if (state.step === 'review') {
+        $('sheetTitle').textContent = 'Review';
+        const day = days()[state.day];
+        const rows = [
+          ['Barber', BARBER.name],
+          ['Service', svc.name],
+          ['Date', day.toLocaleDateString([], { weekday: 'long', month: 'long', day: 'numeric' })],
+          ['Time', `${fmtTime(state.time)} – ${fmtTime(state.time + svc.mins)}`],
+          ['Where', '411 W Clark St, Suite H'],
+        ];
+        const dl = el('dl', 'summary');
+        rows.forEach(([k, v]) => { const d = el('div'); d.append(el('dt', null, k), el('dd', null, v)); dl.append(d); });
+        const heads = el('div', 'heads-up');
+        heads.append(el('b', null, 'One last step'),
+          el('span', null, `Online booking on this site isn't connected yet, so this time isn't held for you. Tap "Finish on Booksy" and pick ${fmtTime(state.time)} on ${day.toLocaleDateString([], { weekday: 'long' })} to lock it in.`));
+        body.replaceChildren(barberRow(), dl, heads);
+
+        const finish = el('a', 'btn btn-primary btn-block', 'Finish on Booksy');
+        finish.href = BARBER.booksyUrl;
+        finish.target = '_blank';
+        finish.rel = 'noopener';
+        foot.append(totalRow(svc), finish);
+      }
+    }
+    function totalRow(svc) {
+      const t = el('div', 'total');
+      t.append(el('span', null, `${svc.name} · ${fmtMins(svc.mins)}`), el('b', null, money(svc.price)));
+      return t;
+    }
+
+    $('backBtn').addEventListener('click', () => {
+      if (state.step === 'review') go('time');
+      else if (state.step === 'time') go('service');
+    });
+    $('closeBtn').addEventListener('click', closeBooking);
+    $('overlay').addEventListener('click', (e) => { if (e.target === $('overlay')) closeBooking(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && $('overlay').classList.contains('show')) closeBooking(); });
+    document.querySelectorAll('[data-book]').forEach((b) => b.addEventListener('click', () => openBooking()));
+    $('search').addEventListener('input', renderServices);
+
+    // Share
+    let toastTimer = null;
+    function toast(msg) {
+      $('toast').textContent = msg;
+      $('toast').classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => $('toast').classList.remove('show'), 2500);
+    }
+    $('shareBtn').addEventListener('click', async () => {
+      const data = { title: 'Book with AngelTheBarber', url: location.href };
+      try {
+        if (navigator.share) { await navigator.share(data); return; }
+        await navigator.clipboard.writeText(location.href);
+        toast('Link copied');
+      } catch (e) { /* share sheet closed */ }
+    });
+
+    $('yr').textContent = new Date().getFullYear();
+    renderServices();
+    renderHours();
+    renderBars();
+  </script>
+</body>
+</html>
