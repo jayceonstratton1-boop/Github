@@ -83,7 +83,9 @@
 
     /* Service list (radio rows) */
     .options { display: grid; gap: 10px; }
+    @media (min-width: 961px) { .options { grid-template-columns: 1fr 1fr; } }
     .option { display: grid; grid-template-columns: 34px 1fr auto; gap: 1rem; align-items: center; width: 100%; text-align: left; padding: 1.05rem 1.2rem; border-radius: 8px; border: 1px solid var(--line); background: var(--ink-3); }
+    .option:disabled { opacity: .4; cursor: not-allowed; }
     .option .radio { width: 28px; height: 28px; border-radius: 50%; border: 2px solid #55555b; display: grid; place-items: center; }
     .option.selected { border-color: var(--white); box-shadow: inset 0 0 0 1px var(--white); background: var(--ink-4); }
     .option.selected .radio { border-color: var(--white); background: var(--white); }
@@ -300,10 +302,7 @@
       return c + (e.extras || []).reduce((s, x) => s + (CONFIG.extraMins[x] || 10), 0) || CONFIG.defaultMins;
     }
     const serviceText = (e) => [e.cut === 'No haircut' ? '' : e.cut, ...(e.extras || [])].filter(Boolean).join(' + ');
-    function todaysServices() {
-      const sunday = new Date().getDay() === 0;
-      return CONFIG.services.filter((s) => Boolean(s.sundayOnly) === sunday);
-    }
+    const isSunday = () => new Date().getDay() === 0;
 
     // ---- Wait estimates (same approach as checkin.html) ----
     function schedule(queue) {
@@ -420,12 +419,15 @@
         $('question').textContent = 'What are you getting?';
         $('help').textContent = 'Pick the service that matches what you want so we save the right amount of time.';
         const list = el('div', 'options');
-        todaysServices().forEach((s) => {
+        // Every service is listed; the Sunday Haircut can only be picked on Sundays
+        CONFIG.services.forEach((s) => {
           const b = el('button', 'option' + (state.service === s.name ? ' selected' : ''));
           b.type = 'button';
+          b.disabled = Boolean(s.sundayOnly) && !isSunday();
           b.setAttribute('aria-pressed', state.service === s.name);
           const mid = el('div');
-          mid.append(el('div', 'name', s.name), el('div', 'sub', `${s.mins} min${s.note ? ' · ' + s.note : ''}`));
+          const sub = [`${s.mins} min`, s.sundayOnly ? 'Sundays only' : '', s.note || ''].filter(Boolean).join(' · ');
+          mid.append(el('div', 'name', s.name), el('div', 'sub', sub));
           b.append(el('span', 'radio'), mid, el('span', 'price', '$' + s.price));
           b.addEventListener('click', () => { state.service = s.name; render(); });
           list.append(b);
