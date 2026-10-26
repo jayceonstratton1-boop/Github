@@ -1,7 +1,9 @@
 # The New Era Barber Studio website
 
 - `index.html`: the public website
-- `checkin.html`: the walk-in check-in screen for the front-desk tablet
+- `book.html`: Angel's booking page, for booking from your phone
+- `kiosk.html`: the walk-in kiosk for a tablet on a stand at the front desk (name, phone, service, barber, live list)
+- `checkin.html`: the check-in screen with customer accounts and staff tools (call up, barber in/break/off); shares the kiosk's walk-in list
 - `netlify/functions/sms-welcome.mjs`: sends the welcome text when a customer signs up with "Text me a confirmation" ticked
 
 ## Turning on sign-up texts

@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <title>Walk-In Kiosk | The New Era Barber Studio</title>
+  <link rel="icon" href="assets/logo.png">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #08080a;
+      --ink-2: #121214;
+      --ink-3: #1a1a1d;
+      --ink-4: #232327;
+      --line: #27272b;
+      --white: #f5f5f7;
+      --muted: #9c9ca3;
+      --chrome: #c9c9cf;
+      --red: #b3262e;
+      --blue: #1f3a8a;
+      --green: #3fbf7f;
+    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    [hidden] { display: none !important; }
+    html { height: 100%; }
+    body {
+      height: 100%; margin: 0; background: var(--ink); color: var(--white);
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      line-height: 1.45; -webkit-font-smoothing: antialiased; user-select: none;
+      display: flex; flex-direction: column;
+    }
+    h1, h2, h3 { font-family: "Bebas Neue", Impact, sans-serif; font-weight: 400; letter-spacing: .03em; line-height: 1; margin: 0; }
+    button, input { font: inherit; color: inherit; }
+    button { cursor: pointer; }
+    .pole { height: 6px; flex: none; background: repeating-linear-gradient(-45deg, var(--red) 0 14px, var(--white) 14px 28px, var(--blue) 28px 42px, var(--white) 42px 56px); }
+
+    /* Header */
+    .top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 12px 24px; border-bottom: 1px solid var(--line); background: #0d0d0f; }
+    .brand { display: flex; align-items: center; gap: .9rem; }
+    .brand img { width: 50px; height: 50px; border-radius: 50%; border: 1px solid var(--line); }
+    .brand h1 { font-size: 1.8rem; }
+    .brand .sub { color: var(--muted); font-size: .8rem; }
+    .clock { font-family: "Bebas Neue", Impact, sans-serif; font-size: 2rem; color: var(--chrome); }
+
+    /* Layout */
+    main { flex: 1; display: grid; grid-template-columns: minmax(0, 1fr) 380px; min-height: 0; overflow: hidden; }
+    .stage { display: flex; flex-direction: column; padding: 28px 36px; min-width: 0; min-height: 0; }
+    .side { border-left: 1px solid var(--line); background: var(--ink-2); padding: 24px; overflow-y: auto; }
+
+    /* Steps */
+    .progress { display: flex; gap: 6px; margin-bottom: 1.4rem; }
+    .progress span { flex: 1; height: 5px; border-radius: 3px; background: var(--line); transition: background .2s; }
+    .progress span.on { background: var(--white); }
+    .step-label { color: var(--chrome); text-transform: uppercase; letter-spacing: .22em; font-size: .78rem; font-weight: 600; }
+    .question { font-size: clamp(2.6rem, 5vw, 3.8rem); margin: .4rem 0 .5rem; }
+    .help { color: var(--muted); margin: 0 0 1.4rem; font-size: 1.05rem; }
+    .panel { flex: 1; min-height: 0; overflow-y: auto; padding: 2px; }
+    .bottom { display: flex; gap: 12px; padding-top: 18px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; padding: 1.15rem 1.6rem; border-radius: 6px; border: 0; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; font-size: .95rem; }
+    .btn:disabled { opacity: .3; cursor: not-allowed; }
+    .btn-primary { background: var(--white); color: var(--ink); flex: 1; }
+    .btn-ghost { background: transparent; border: 1px solid var(--line); color: var(--white); min-width: 130px; }
+    .btn-link { background: none; border: 0; color: var(--muted); text-decoration: underline; padding: .6rem; }
+
+    /* Name */
+    .big-input { width: 100%; padding: 1.2rem 1.4rem; font-size: 2.2rem; font-weight: 600; border-radius: 8px; background: var(--ink-3); border: 2px solid var(--line); outline: none; color: var(--white); user-select: text; }
+    .big-input:focus { border-color: var(--white); }
+    .big-input::placeholder { color: #55555b; font-weight: 500; }
+
+    /* Phone keypad */
+    .phone-display { font-size: 2.6rem; font-weight: 600; letter-spacing: .04em; padding: 1rem 1.4rem; border-radius: 8px; background: var(--ink-3); border: 2px solid var(--white); min-height: 84px; display: flex; align-items: center; font-variant-numeric: tabular-nums; }
+    .phone-display .ph { color: #55555b; }
+    .keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; max-width: 520px; }
+    .key { height: 72px; border-radius: 8px; border: 1px solid var(--line); background: var(--ink-3); font-size: 1.9rem; font-weight: 600; }
+    .key:active { background: var(--white); color: var(--ink); }
+    .key.fn { font-size: .95rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+
+    /* Service list (radio rows) */
+    .options { display: grid; gap: 10px; }
+    .option { display: grid; grid-template-columns: 34px 1fr auto; gap: 1rem; align-items: center; width: 100%; text-align: left; padding: 1.05rem 1.2rem; border-radius: 8px; border: 1px solid var(--line); background: var(--ink-3); }
+    .option .radio { width: 28px; height: 28px; border-radius: 50%; border: 2px solid #55555b; display: grid; place-items: center; }
+    .option.selected { border-color: var(--white); box-shadow: inset 0 0 0 1px var(--white); background: var(--ink-4); }
+    .option.selected .radio { border-color: var(--white); background: var(--white); }
+    .option.selected .radio::after { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--ink); }
+    .option .name { font-weight: 600; font-size: 1.15rem; }
+    .option .sub { color: var(--muted); font-size: .88rem; }
+    .option .price { font-family: "Bebas Neue", Impact, sans-serif; font-size: 1.8rem; }
+
+    /* Barber cards */
+    .barbers { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px; }
+    .barber { text-align: left; padding: 1.1rem; border-radius: 8px; border: 1px solid var(--line); background: var(--ink-3); display: grid; gap: .6rem; }
+    .barber.selected { border-color: var(--white); box-shadow: inset 0 0 0 1px var(--white); background: var(--ink-4); }
+    .barber:disabled { opacity: .35; cursor: not-allowed; }
+    .barber .row { display: flex; align-items: center; gap: .8rem; }
+    .avatar { width: 46px; height: 46px; border-radius: 50%; flex: none; display: grid; place-items: center; background: var(--ink-4); border: 1px solid var(--line); font-family: "Bebas Neue", Impact, sans-serif; font-size: 1.4rem; }
+    .barber.selected .avatar { background: var(--white); color: var(--ink); }
+    .barber .n { font-weight: 700; font-size: 1.05rem; }
+    .barber .wait { font-family: "Bebas Neue", Impact, sans-serif; font-size: 1.7rem; line-height: 1; }
+    .status { display: flex; align-items: center; gap: .45rem; font-size: .84rem; color: var(--muted); }
+    .status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; flex: none; background: var(--muted); }
+    .status.free::before { background: var(--green); box-shadow: 0 0 8px var(--green); }
+    .status.busy::before { background: #e0b341; }
+    .status.break::before { background: #e07b41; }
+    .status.off::before { background: #55555b; }
+
+    /* Review */
+    .summary { margin: 0; border: 1px solid var(--line); border-radius: 8px; background: var(--ink-3); max-width: 620px; }
+    .summary div { display: flex; justify-content: space-between; gap: 1rem; padding: 1rem 1.2rem; border-bottom: 1px solid var(--line); font-size: 1.1rem; }
+    .summary div:last-child { border-bottom: 0; }
+    .summary dt { color: var(--muted); }
+    .summary dd { margin: 0; font-weight: 600; text-align: right; }
+
+    /* Sidebar */
+    .side h2 { font-size: 2.2rem; }
+    .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 1rem 0 1.4rem; }
+    .stat { border: 1px solid var(--line); border-radius: 8px; padding: .8rem 1rem; background: var(--ink-3); }
+    .stat .v { font-family: "Bebas Neue", Impact, sans-serif; font-size: 2.2rem; line-height: 1; }
+    .stat .k { color: var(--muted); font-size: .72rem; text-transform: uppercase; letter-spacing: .14em; }
+    .group { font-family: "Bebas Neue", Impact, sans-serif; font-size: 1.2rem; letter-spacing: .12em; color: var(--muted); margin: 1rem 0 .3rem; }
+    .q { list-style: none; margin: 0; padding: 0; }
+    .q li { display: grid; grid-template-columns: 36px 1fr; gap: .7rem; align-items: center; padding: .7rem 0; border-bottom: 1px solid var(--line); }
+    .q .num { font-family: "Bebas Neue", Impact, sans-serif; font-size: 1.6rem; color: var(--chrome); text-align: center; }
+    .q .now { color: var(--green); font-size: .9rem; letter-spacing: .08em; }
+    .q .who { font-weight: 600; }
+    .q .meta { color: var(--muted); font-size: .8rem; }
+    .q li.empty { display: block; color: var(--muted); padding: .8rem 0; border-bottom: 0; }
+    .side-foot { margin-top: 1.4rem; padding-top: 1rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; display: flex; justify-content: space-between; gap: 1rem; }
+    .side-foot a { color: var(--muted); }
+
+    /* Done screen */
+    .done { position: fixed; inset: 0; z-index: 30; background: radial-gradient(800px 500px at 50% 30%, #1d1d22, var(--ink)); display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 24px; }
+    .done.show { display: flex; animation: pop .25s ease; }
+    @keyframes pop { from { opacity: 0; transform: scale(.98); } to { opacity: 1; transform: none; } }
+    .check { width: 110px; height: 110px; border-radius: 50%; background: var(--white); display: grid; place-items: center; margin-bottom: 1.4rem; box-shadow: 0 0 60px rgba(255,255,255,.25); }
+    .check svg { width: 56px; height: 56px; stroke: var(--ink); fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+    .done h2 { font-size: clamp(3rem, 7vw, 5rem); }
+    .done .pos { font-family: "Bebas Neue", Impact, sans-serif; font-size: clamp(5rem, 12vw, 8rem); line-height: 1; margin: .6rem 0 .2rem; }
+    .done p { color: var(--muted); font-size: 1.2rem; max-width: 560px; margin: .4rem auto 1.8rem; }
+    .done .btn { flex: none; min-width: 260px; }
+    .countdown { width: 260px; height: 4px; border-radius: 2px; background: var(--line); margin-top: 1.2rem; overflow: hidden; }
+    .countdown span { display: block; height: 100%; background: var(--chrome); width: 100%; }
+    .countdown span.run { animation: drain linear forwards; }
+    @keyframes drain { to { width: 0; } }
+
+    /* Sideways tablets around 800px tall */
+    @media (max-height: 860px) and (min-width: 961px) {
+      .stage { padding: 18px 32px; }
+      .progress { margin-bottom: 1rem; }
+      .question { font-size: 3rem; }
+      .help { margin-bottom: 1rem; }
+      .phone-display { min-height: 70px; padding: .6rem 1.2rem; font-size: 2.3rem; }
+      .keypad { gap: 8px; margin-top: 10px; }
+      .key { height: 58px; }
+      .option { padding: .8rem 1.1rem; }
+      .bottom { padding-top: 14px; }
+      .btn { padding: 1rem 1.5rem; }
+    }
+    @media (max-width: 960px) {
+      body { height: auto; min-height: 100%; }
+      main { grid-template-columns: 1fr; overflow: visible; }
+      .panel { overflow: visible; }
+      .phone-display { font-size: 1.9rem; min-height: 68px; }
+      .side { border-left: 0; border-top: 1px solid var(--line); }
+      .stage { padding: 22px 16px; }
+      .top { padding: 10px 16px; }
+      .brand h1 { font-size: 1.4rem; }
+      .brand .sub { display: none; }
+      .clock { font-size: 1.5rem; }
+      .key { height: 64px; }
+      .keypad { max-width: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="pole" aria-hidden="true"></div>
+  <header class="top">
+    <div class="brand">
+      <img src="assets/logo.png" alt="The New Era Barber Studio logo">
+      <div>
+        <h1>The New Era Barber Studio</h1>
+        <div class="sub">Walk-in check-in · 411 W Clark St, Pasco</div>
+      </div>
+    </div>
+    <div class="clock" id="clock"></div>
+  </header>
+
+  <main>
+    <section class="stage">
+      <div class="progress" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="step-label" id="stepLabel">Step 1 of 5</div>
+      <h2 class="question" id="question">What's your name?</h2>
+      <p class="help" id="help"></p>
+      <div class="panel" id="panel"></div>
+      <div class="bottom">
+        <button class="btn btn-ghost" type="button" id="backBtn">Back</button>
+        <button class="btn btn-primary" type="button" id="nextBtn">Next</button>
+      </div>
+    </section>
+
+    <aside class="side">
+      <h2>Walk-In List</h2>
+      <div class="stats">
+        <div class="stat"><div class="v" id="waitingCount">0</div><div class="k">Waiting</div></div>
+        <div class="stat"><div class="v" id="firstWait">—</div><div class="k">Est. wait</div></div>
+      </div>
+      <div id="servingWrap">
+        <div class="group">In the chair</div>
+        <ol class="q" id="servingList"></ol>
+      </div>
+      <div class="group">Up next</div>
+      <ol class="q" id="waitingList"></ol>
+      <div class="side-foot">
+        <span>Rather book a set time? Book online from your phone.</span>
+        <a href="checkin.html">Staff</a>
+      </div>
+    </aside>
+  </main>
+  <div class="pole" aria-hidden="true"></div>
+
+  <div class="done" id="done" role="dialog" aria-modal="true" aria-labelledby="doneTitle">
+    <div class="check"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+    <h2 id="doneTitle">You're checked in!</h2>
+    <div class="pos" id="donePos">#1</div>
+    <p id="doneMsg">Have a seat. We'll call your name when it's your turn.</p>
+    <button class="btn btn-primary" type="button" id="doneBtn">Done</button>
+    <div class="countdown"><span id="countdown"></span></div>
+  </div>
+
+  <script>
+    // ---- Shop settings: keep in sync with checkin.html ----
+    const CONFIG = {
+      // PLACEHOLDER: Barber 2 and 3 - replace with the shop's other barbers
+      barbers: ['AngelTheBarber', 'Barber 2', 'Barber 3'],
+      // Angel's menu, written as a haircut plus extras so the check-in tablet and staff list read it the same way
+      services: [
+        { name: 'Haircut', cut: 'Haircut', extras: [], price: 45, mins: 45 },
+        { name: 'Haircut w/ Eyebrows', cut: 'Haircut', extras: ['Eyebrows'], price: 50, mins: 50 },
+        { name: 'Haircut w/ Beard', cut: 'Haircut', extras: ['Beard'], price: 60, mins: 60 },
+        { name: 'Haircut w/ Design', cut: 'Haircut', extras: ['Design'], price: 50, mins: 50 },
+        { name: 'Haircut, Eyebrows & Design', cut: 'Haircut', extras: ['Eyebrows', 'Design'], price: 55, mins: 55 },
+        { name: 'Sunday Haircut', cut: 'Sunday Haircut', extras: [], price: 55, mins: 45, sundayOnly: true, note: 'Add-ons are charged at the chair' },
+      ],
+      // Minutes per part, used to estimate waits for anyone on the list
+      cutMins: { 'Haircut': 45, 'Sunday Haircut': 45 },
+      extraMins: { 'Eyebrows': 5, 'Beard': 15, 'Design': 5 },
+      defaultMins: 30,
+      idleResetMs: 60 * 1000,
+      doneResetMs: 10 * 1000,
+    };
+
+    const FIRST = 'First available';
+    const QKEY = 'newera-walkins-v1';        // same list as checkin.html
+    const SKEY = 'newera-barber-status-v1';  // barbers marked in / break / off by staff
+    const STEPS = ['name', 'phone', 'service', 'barber', 'review'];
+    const mem = {};
+    const $ = (id) => document.getElementById(id);
+
+    // ---- Storage ----
+    function read(key) {
+      try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : (mem[key] || []); }
+      catch (e) { return mem[key] || []; }
+    }
+    function write(key, val) {
+      mem[key] = val;
+      try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) {}
+    }
+    const today = () => new Date().toDateString();
+    const loadQueue = () => read(QKEY).filter((x) => new Date(x.at).toDateString() === today());
+    function loadStatus() { const s = read(SKEY); return s && s.date === today() ? s.map : {}; }
+
+    // ---- Helpers ----
+    function el(tag, cls, text) {
+      const n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (text != null) n.textContent = text;
+      return n;
+    }
+    const firstName = (n) => n.trim().split(/\s+/)[0];
+    function displayName(full) {
+      const p = full.trim().split(/\s+/);
+      return p.length < 2 ? p[0] : p[0] + ' ' + p[p.length - 1][0].toUpperCase() + '.';
+    }
+    const initials = (n) => n.split(/\s+/).map((w) => w[0]).join('').slice(0, 2).toUpperCase();
+    const fmtPhone = (d) => d.length <= 3 ? d : d.length <= 6 ? `(${d.slice(0, 3)}) ${d.slice(3)}` : `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}`;
+    const timeStr = (t) => new Date(t).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+    function fmtWait(m) {
+      if (m <= 0) return 'No wait';
+      if (m < 60) return `~${m} min`;
+      return `~${Math.floor(m / 60)}h ${m % 60 ? (m % 60) + 'm' : ''}`.trim();
+    }
+    function entryMins(e) {
+      if (!e.cut && !(e.extras || []).length) return CONFIG.defaultMins;
+      const c = e.cut && e.cut !== 'No haircut' ? (CONFIG.cutMins[e.cut] || CONFIG.defaultMins) : 0;
+      return c + (e.extras || []).reduce((s, x) => s + (CONFIG.extraMins[x] || 10), 0) || CONFIG.defaultMins;
+    }
+    const serviceText = (e) => [e.cut === 'No haircut' ? '' : e.cut, ...(e.extras || [])].filter(Boolean).join(' + ');
+    function todaysServices() {
+      const sunday = new Date().getDay() === 0;
+      return CONFIG.services.filter((s) => Boolean(s.sundayOnly) === sunday);
+    }
+
+    // ---- Wait estimates (same approach as checkin.html) ----
+    function schedule(queue) {
+      const now = Date.now();
+      const statuses = loadStatus();
+      const working = CONFIG.barbers.filter((n) => statuses[n] !== 'off');
+      const pool = working.length ? working : CONFIG.barbers;
+      const free = {}, current = {};
+      CONFIG.barbers.forEach((n) => { free[n] = now; });
+      queue.filter((e) => e.status === 'serving').forEach((e) => {
+        const b = e.servedBy || e.barber;
+        if (!(b in free)) return;
+        current[b] = e;
+        free[b] = Math.max(free[b], e.started + entryMins(e) * 60000);
+      });
+      queue.filter((e) => e.status === 'waiting').forEach((e) => {
+        let b = e.barber;
+        if (!(b in free) || statuses[b] === 'off') b = pool.reduce((a, c) => free[c] < free[a] ? c : a);
+        free[b] += entryMins(e) * 60000;
+      });
+      return { now, free, current, statuses, firstFree: Math.min(...pool.map((n) => free[n])) };
+    }
+    function waitFor(sched, barber) {
+      const t = barber === FIRST ? sched.firstFree : sched.free[barber];
+      return Math.max(0, Math.round((t - sched.now) / 60000));
+    }
+    function statusOf(sched, name) {
+      const st = sched.statuses[name];
+      if (st === 'off') return ['off', 'Off today'];
+      if (st === 'break') return ['break', 'On break'];
+      if (sched.current[name]) return ['busy', 'With a client'];
+      return waitFor(sched, name) <= 0 ? ['free', 'Available now'] : ['busy', 'Free at ~' + timeStr(sched.free[name])];
+    }
+
+    // ---- Flow ----
+    let state, idleTimer = null, doneTimer = null;
+    const fresh = () => ({ step: 'name', name: '', phone: '', service: null, barber: null });
+    state = fresh();
+
+    function go(step) { state.step = step; render(); bumpIdle(); }
+    function reset() { state = fresh(); render(); }
+    function bumpIdle() {
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(() => { if (state.step !== 'name' || state.name) reset(); }, CONFIG.idleResetMs);
+    }
+    document.addEventListener('pointerdown', bumpIdle);
+    document.addEventListener('keydown', bumpIdle);
+
+    function canNext() {
+      switch (state.step) {
+        case 'name': return state.name.trim().length >= 2;
+        case 'phone': return state.phone.length === 10;
+        case 'service': return !!state.service;
+        case 'barber': return !!state.barber;
+        default: return true;
+      }
+    }
+    function updateNav() {
+      $('nextBtn').disabled = !canNext();
+      $('nextBtn').textContent = state.step === 'review' ? 'Check In' : 'Next';
+      $('backBtn').style.visibility = state.step === 'name' ? 'hidden' : 'visible';
+    }
+
+    function render() {
+      const idx = STEPS.indexOf(state.step);
+      document.querySelectorAll('.progress span').forEach((s, i) => s.classList.toggle('on', i <= idx));
+      $('stepLabel').textContent = `Step ${idx + 1} of ${STEPS.length}`;
+      const panel = $('panel');
+
+      if (state.step === 'name') {
+        $('question').textContent = "What's your name?";
+        $('help').textContent = 'First name and last initial is fine.';
+        const input = el('input', 'big-input');
+        input.placeholder = 'Your name';
+        input.maxLength = 40;
+        input.autocapitalize = 'words';
+        input.autocomplete = 'off';
+        input.value = state.name;
+        input.addEventListener('input', () => { state.name = input.value; updateNav(); });
+        input.addEventListener('keydown', (e) => { if (e.key === 'Enter' && canNext()) next(); });
+        panel.replaceChildren(input);
+        setTimeout(() => input.focus(), 30);
+      }
+
+      if (state.step === 'phone') {
+        $('question').textContent = "What's your phone number?";
+        $('help').textContent = "Only used if we need to reach you. You can skip this.";
+        const display = el('div', 'phone-display');
+        const paint = () => {
+          display.replaceChildren(state.phone ? document.createTextNode(fmtPhone(state.phone)) : el('span', 'ph', '(509) 555-0123'));
+          updateNav();
+        };
+        const pad = el('div', 'keypad');
+        ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'Clear', '0', '⌫'].forEach((k) => {
+          const b = el('button', 'key' + (k.length > 1 ? ' fn' : ''), k);
+          b.type = 'button';
+          b.setAttribute('aria-label', k === '⌫' ? 'Delete' : k);
+          b.addEventListener('click', () => {
+            if (k === 'Clear') state.phone = '';
+            else if (k === '⌫') state.phone = state.phone.slice(0, -1);
+            else if (state.phone.length < 10) state.phone += k;
+            paint();
+          });
+          pad.append(b);
+        });
+        const skip = el('button', 'btn-link', 'Skip, no phone number');
+        skip.type = 'button';
+        skip.addEventListener('click', () => { state.phone = ''; go('service'); });
+        panel.replaceChildren(display, pad, skip);
+        paint();
+      }
+
+      if (state.step === 'service') {
+        $('question').textContent = 'What are you getting?';
+        $('help').textContent = 'Pick the service that matches what you want so we save the right amount of time.';
+        const list = el('div', 'options');
+        todaysServices().forEach((s) => {
+          const b = el('button', 'option' + (state.service === s.name ? ' selected' : ''));
+          b.type = 'button';
+          b.setAttribute('aria-pressed', state.service === s.name);
+          const mid = el('div');
+          mid.append(el('div', 'name', s.name), el('div', 'sub', `${s.mins} min${s.note ? ' · ' + s.note : ''}`));
+          b.append(el('span', 'radio'), mid, el('span', 'price', '$' + s.price));
+          b.addEventListener('click', () => { state.service = s.name; render(); });
+          list.append(b);
+        });
+        panel.replaceChildren(list);
+      }
+
+      if (state.step === 'barber') {
+        $('question').textContent = 'Who do you want?';
+        $('help').textContent = 'Wait times are estimates and can change.';
+        const queue = loadQueue();
+        const sched = schedule(queue);
+        if (state.barber && state.barber !== FIRST && sched.statuses[state.barber] === 'off') state.barber = null;
+        const grid = el('div', 'barbers');
+        [FIRST, ...CONFIG.barbers].forEach((name) => {
+          const off = name !== FIRST && sched.statuses[name] === 'off';
+          const b = el('button', 'barber' + (state.barber === name ? ' selected' : ''));
+          b.type = 'button';
+          b.disabled = off;
+          b.setAttribute('aria-pressed', state.barber === name);
+          const row = el('div', 'row');
+          const who = el('div');
+          const line = queue.filter((x) => x.status === 'waiting' && (name === FIRST || x.barber === name)).length;
+          who.append(el('div', 'n', name), el('div', 'status ' + (name === FIRST ? (waitFor(sched, FIRST) <= 0 ? 'free' : 'busy') : statusOf(sched, name)[0]),
+            name === FIRST ? 'Next open chair' : statusOf(sched, name)[1]));
+          row.append(el('span', 'avatar', name === FIRST ? '★' : initials(name)), who);
+          b.append(row, el('div', 'wait', off ? '—' : fmtWait(waitFor(sched, name))), el('div', 'status', `${line} in line`));
+          b.addEventListener('click', () => { state.barber = name; render(); });
+          grid.append(b);
+        });
+        panel.replaceChildren(grid);
+      }
+
+      if (state.step === 'review') {
+        const svc = CONFIG.services.find((s) => s.name === state.service);
+        const sched = schedule(loadQueue());
+        $('question').textContent = 'Look good?';
+        $('help').textContent = 'Tap Check In to add your name to the list.';
+        const dl = el('dl', 'summary');
+        [
+          ['Name', state.name.trim()],
+          ['Phone', state.phone ? fmtPhone(state.phone) : 'Skipped'],
+          ['Service', svc.name],
+          ['Barber', state.barber],
+          ['Price', '$' + svc.price],
+          ['Est. wait', fmtWait(waitFor(sched, state.barber))],
+        ].forEach(([k, v]) => { const d = el('div'); d.append(el('dt', null, k), el('dd', null, v)); dl.append(d); });
+        panel.replaceChildren(dl);
+      }
+      updateNav();
+    }
+
+    function next() {
+      if (!canNext()) return;
+      const i = STEPS.indexOf(state.step);
+      if (state.step === 'review') return checkIn();
+      go(STEPS[i + 1]);
+    }
+    $('nextBtn').addEventListener('click', next);
+    $('backBtn').addEventListener('click', () => {
+      const i = STEPS.indexOf(state.step);
+      if (i > 0) go(STEPS[i - 1]);
+    });
+
+    function checkIn() {
+      const svc = CONFIG.services.find((s) => s.name === state.service);
+      const wait = waitFor(schedule(loadQueue()), state.barber);
+      const entry = {
+        id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+        name: state.name.trim(),
+        phone: state.phone,
+        accountId: null,
+        barber: state.barber,
+        cut: svc.cut,
+        extras: svc.extras,
+        at: Date.now(),
+        status: 'waiting',
+        source: 'kiosk',
+      };
+      const list = loadQueue();
+      list.push(entry);
+      write(QKEY, list);
+      const waiting = list.filter((x) => x.status === 'waiting');
+      const forWho = entry.barber !== FIRST ? ` with ${entry.barber}` : '';
+
+      $('doneTitle').textContent = `You're checked in, ${firstName(entry.name)}!`;
+      $('donePos').textContent = '#' + waiting.length;
+      $('doneMsg').textContent = (wait <= 0 ? `A chair is open now${forWho}.` : `Estimated wait: about ${wait} min${forWho}.`)
+        + " Have a seat and we'll call your name when it's your turn.";
+      $('done').classList.add('show');
+      const bar = $('countdown');
+      bar.classList.remove('run');
+      void bar.offsetWidth;
+      bar.style.animationDuration = CONFIG.doneResetMs + 'ms';
+      bar.classList.add('run');
+      clearTimeout(doneTimer);
+      doneTimer = setTimeout(closeDone, CONFIG.doneResetMs);
+      reset();
+      renderList();
+    }
+    function closeDone() { $('done').classList.remove('show'); clearTimeout(doneTimer); }
+    $('doneBtn').addEventListener('click', closeDone);
+
+    // ---- Live list ----
+    function renderList() {
+      const queue = loadQueue();
+      const sched = schedule(queue);
+      const serving = queue.filter((x) => x.status === 'serving');
+      const waiting = queue.filter((x) => x.status === 'waiting');
+      $('waitingCount').textContent = waiting.length;
+      $('firstWait').textContent = fmtWait(waitFor(sched, FIRST));
+      $('servingWrap').hidden = !serving.length;
+      const item = (e, num, cls) => {
+        const li = el('li');
+        const info = el('div');
+        info.append(el('div', 'who', displayName(e.name)),
+          el('div', 'meta', [serviceText(e), e.status === 'serving' ? 'with ' + (e.servedBy || e.barber) : e.barber].filter(Boolean).join(' · ')));
+        li.append(el('div', 'num' + (cls ? ' ' + cls : ''), num), info);
+        return li;
+      };
+      $('servingList').replaceChildren(...serving.map((e) => item(e, 'NOW', 'now')));
+      $('waitingList').replaceChildren(...(waiting.length ? waiting.map((e, i) => item(e, String(i + 1))) : [el('li', 'empty', 'No one waiting. You could be next!')]));
+      if (state.step === 'barber') render();
+    }
+
+    function tick() { $('clock').textContent = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }); }
+    tick();
+    setInterval(() => { tick(); renderList(); }, 30000);
+    window.addEventListener('storage', (e) => { if (e.key === QKEY || e.key === SKEY) renderList(); });
+    render();
+    renderList();
+  </script>
+</body>
+</html>
