@@ -210,13 +210,28 @@
     .summary div:last-child { border-bottom: 0; }
     .summary dt { color: var(--muted); }
     .summary dd { margin: 0; font-weight: 600; text-align: right; }
+    .preview-note { margin: 0 0 1rem; padding: .7rem .9rem; border-radius: 6px; font-size: .84rem; background: rgba(242,201,76,.08); border: 1px solid rgba(242,201,76,.35); }
+    .form-error { margin: 1rem 0 0; padding: .75rem .9rem; border-radius: 6px; font-size: .9rem; color: #ffb3b6; background: rgba(179,38,46,.15); border: 1px solid rgba(179,38,46,.5); }
+    .field { display: grid; gap: .4rem; margin-bottom: 1rem; }
+    .field span { font-size: .78rem; font-weight: 600; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); }
+    .field small { color: var(--muted); font-size: .8rem; }
+    .field input, .field textarea { width: 100%; padding: .9rem 1rem; font-size: 1.05rem; border-radius: 6px; border: 1px solid var(--line); background: var(--ink-3); color: var(--white); outline: none; resize: vertical; font-family: inherit; }
+    .field input:focus, .field textarea:focus { border-color: var(--chrome); }
+    .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+    .done-head { text-align: center; margin: .4rem 0 1.2rem; }
+    .done-check { width: 64px; height: 64px; margin: 0 auto .8rem; border-radius: 50%; background: var(--white); color: var(--ink); display: grid; place-items: center; font-size: 2rem; font-weight: 700; }
+    .done-head h3 { font-size: 2.4rem; }
+    .done-head p { margin: .3rem 0 0; }
+    .sheet-body > .btn-block { margin-top: 1rem; }
+    .manage-link { display: grid; gap: .45rem; margin-top: 1rem; padding: 1rem; border: 1px solid var(--line); border-radius: 6px; background: var(--ink-3); font-size: .88rem; }
+    .manage-link input { width: 100%; padding: .6rem .7rem; border-radius: 4px; border: 1px solid var(--line); background: var(--ink-2); color: var(--chrome); font-size: .8rem; }
+    .manage-link .linkish { justify-self: start; }
+    .btn.danger { border-color: rgba(179,38,46,.7); color: #ffb3b6; }
     .mini-policy { margin-top: 1.2rem; padding: 1rem; border: 1px solid var(--line); border-left: 3px solid var(--red); border-radius: 6px; background: var(--ink-3); font-size: .88rem; }
     .mini-policy ul { margin: .5rem 0 .9rem; padding-left: 1.1rem; color: var(--muted); }
     .mini-policy li + li { margin-top: .3rem; }
     .agree { display: flex; gap: .7rem; align-items: flex-start; cursor: pointer; font-weight: 600; }
     .agree input { width: 20px; height: 20px; margin: 0; flex: none; accent-color: var(--white); }
-    .heads-up { margin-top: 1.2rem; padding: 1rem; border-radius: 6px; background: rgba(242,201,76,.08); border: 1px solid rgba(242,201,76,.35); font-size: .9rem; }
-    .heads-up b { display: block; margin-bottom: .25rem; }
 
     .toast { position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); opacity: 0; pointer-events: none; z-index: 50; background: var(--white); color: var(--ink); font-weight: 600; padding: .8rem 1.2rem; border-radius: 6px; transition: opacity .2s, transform .2s; }
     .toast.show { opacity: 1; transform: translate(-50%, 0); }
@@ -395,11 +410,13 @@
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+  <script src="assets/booking-client.js"></script>
   <script>
-    // ---- Angel's Booksy profile (as shown on booksy.com, Oct 2026) ----
+    // ---- Angel's profile, from his Booksy page (Oct 2026) ----
+    // Hours and services must match netlify/lib/shop.mjs, which the booking server uses.
     const BARBER = {
+      id: 'angel',
       name: 'AngelTheBarber',
-      booksyUrl: 'https://booksy.com/en-us/750587_angelthebarber_barber-shop_39131_pasco',
       // 0 = Sunday. Each day is a list of [start, end] blocks.
       hours: {
         0: [['07:00', '13:00']],
@@ -428,8 +445,6 @@
       'Arriving 10 minutes late cancels your appointment, and you will be charged.',
       'Book the correct service. The wrong service may get your appointment canceled or rescheduled.',
     ];
-    const DAYS_AHEAD = 14;
-    const SLOT_STEP = 15;
     const DOW = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
     const $ = (id) => document.getElementById(id);
@@ -506,30 +521,23 @@
       }));
     }
 
-    // ---- Booking flow: service -> time -> review ----
-    let state = { step: 'service', service: null, day: null, time: null, agreed: false };
-    function days() {
-      const start = new Date(); start.setHours(0, 0, 0, 0);
-      return Array.from({ length: DAYS_AHEAD }, (_, i) => new Date(start.getFullYear(), start.getMonth(), start.getDate() + i));
-    }
-    function slotsFor(date, svc) {
-      const dow = date.getDay();
-      // Sundays only take the Sunday service, and the Sunday service only runs on Sundays
-      if (Boolean(svc.sundayOnly) !== (dow === 0)) return [];
-      const now = new Date();
-      const isToday = date.toDateString() === now.toDateString();
-      const earliest = now.getHours() * 60 + now.getMinutes() + 30;
-      const out = [];
-      BARBER.hours[dow].forEach(([a, b]) => {
-        for (let t = toMin(a); t + svc.mins <= toMin(b); t += SLOT_STEP) {
-          if (!isToday || t >= earliest) out.push(t);
-        }
-      });
-      return out;
-    }
+    // ---- Booking flow: service -> time -> details -> review -> done ----
+    const api = window.BookingClient;
+    const ORDER = ['service', 'time', 'details', 'review'];
+    const fresh = () => ({
+      step: 'service', service: null, avail: null, loading: false, error: '', notice: '',
+      day: null, time: null, name: '', phone: '', notes: '', sms: false, website: '', agreed: false, submitting: false, result: null,
+    });
+    let state = fresh();
+    const digitsOnly = (s) => s.replace(/\D/g, '').slice(-10);
+    const fmtPhone = (d) => d.length < 4 ? d : d.length < 7 ? `(${d.slice(0, 3)}) ${d.slice(3)}` : `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6, 10)}`;
+    // Drop ?booking=...&code=... from the address bar (not allowed inside previews)
+    const clearAddress = () => { try { history.replaceState(null, '', location.pathname); } catch (e) { /* preview */ } };
+    const dateObj = (date) => new Date(date + 'T12:00:00');
+    const longDate = (date) => dateObj(date).toLocaleDateString([], { weekday: 'long', month: 'long', day: 'numeric' });
 
     function openBooking(serviceId) {
-      state = { step: 'service', service: null, day: null, time: null, agreed: false };
+      state = fresh();
       if (serviceId) { state.service = serviceId; state.step = 'time'; }
       $('overlay').classList.add('show');
       document.body.classList.add('locked');
@@ -538,8 +546,50 @@
     function closeBooking() {
       $('overlay').classList.remove('show');
       document.body.classList.remove('locked');
+      if (state.step === 'done' || state.step === 'manage') {
+        state = fresh();
+        clearAddress();
+      }
     }
     function go(step) { state.step = step; render(); $('sheetBody').scrollTop = 0; }
+
+    async function loadTimes() {
+      state.loading = true; state.error = ''; state.avail = null;
+      render();
+      try {
+        state.avail = await api.availability(BARBER.id, state.service, BARBER);
+        if (state.day === null || !state.avail.days[state.day] || !state.avail.days[state.day].slots.length) {
+          const first = state.avail.days.findIndex((d) => d.slots.length);
+          state.day = first === -1 ? 0 : first;
+        }
+      } catch (e) {
+        state.error = e.message;
+      }
+      state.loading = false;
+      if (state.step === 'time') render();
+    }
+
+    async function submit() {
+      state.submitting = true; state.error = '';
+      render();
+      try {
+        state.result = await api.book({
+          barber: BARBER.id, service: state.service, date: state.avail.days[state.day].date, start: state.time,
+          name: state.name.trim(), phone: state.phone, notes: state.notes.trim(), sms: state.sms, agreed: state.agreed, website: state.website,
+        }, BARBER);
+        state.submitting = false;
+        go('done');
+      } catch (e) {
+        state.submitting = false;
+        if (e.status === 409 && /taken/.test(e.message)) {
+          state.notice = e.message; state.time = null; state.avail = null;
+          go('time');
+        } else {
+          state.error = e.message;
+          render();
+        }
+      }
+    }
 
     function barberRow() {
       const r = el('div', 'barber-row');
@@ -548,12 +598,56 @@
       r.append(el('div', 'avatar', 'A'), who);
       return r;
     }
+    function previewBanner() {
+      return api.live ? [] : [el('p', 'preview-note', "Preview mode: bookings made here stay on this device and aren't sent to the shop.")];
+    }
+    function summary(rows) {
+      const dl = el('dl', 'summary');
+      rows.forEach(([k, v]) => { const d = el('div'); d.append(el('dt', null, k), el('dd', null, v)); dl.append(d); });
+      return dl;
+    }
+    function errorBox(msg) { return msg ? [el('p', 'form-error', msg)] : []; }
+    function field(label, input, hint) {
+      const l = el('label', 'field');
+      l.append(el('span', null, label), input);
+      if (hint) l.append(el('small', null, hint));
+      return l;
+    }
+    function icsHref(b) {
+      const stamp = (date, mins) => date.replace(/-/g, '') + 'T' + String(Math.floor(mins / 60)).padStart(2, '0') + String(mins % 60).padStart(2, '0') + '00';
+      const lines = [
+        'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//The New Era Barber Studio//Booking//EN', 'BEGIN:VEVENT',
+        `UID:${b.id}@thenewerabarberstudio`,
+        'DTSTAMP:' + new Date().toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z',
+        `DTSTART;TZID=America/Los_Angeles:${stamp(b.date, b.start)}`,
+        `DTEND;TZID=America/Los_Angeles:${stamp(b.date, b.start + b.mins)}`,
+        `SUMMARY:${b.service} with ${b.barber}`,
+        'LOCATION:The New Era Barber Studio\\, 411 W Clark St Suite H\\, Pasco\\, WA 99301',
+        'END:VEVENT', 'END:VCALENDAR',
+      ];
+      return 'data:text/calendar;charset=utf-8,' + encodeURIComponent(lines.join('\r\n'));
+    }
+    function policyBox() {
+      const pol = el('div', 'mini-policy');
+      pol.append(el('b', null, 'Booking policy'));
+      const ul = el('ul');
+      POLICY.forEach((t) => ul.append(el('li', null, t)));
+      const agree = el('label', 'agree');
+      const box = el('input');
+      box.type = 'checkbox';
+      box.checked = state.agreed;
+      box.addEventListener('change', () => { state.agreed = box.checked; render(); });
+      agree.append(box, el('span', null, "I've read and agree to the booking policy"));
+      pol.append(ul, agree);
+      return pol;
+    }
 
     function render() {
       const body = $('sheetBody'), foot = $('sheetFoot');
       const svc = state.service && svcById(state.service);
-      $('backBtn').classList.toggle('ghost', state.step === 'service');
+      $('backBtn').classList.toggle('ghost', !ORDER.includes(state.step) || state.step === 'service');
       foot.replaceChildren();
+      foot.hidden = false;
 
       if (state.step === 'service') {
         $('sheetTitle').textContent = 'Choose a Service';
@@ -563,16 +657,19 @@
           const left = el('div');
           left.append(el('div', 'name', s.name), el('div', 'sub', fmtMins(s.mins) + (s.sundayOnly ? ' · Sundays only' : '')));
           b.append(left, el('b', null, money(s.price)));
-          b.addEventListener('click', () => { state.service = s.id; state.day = null; state.time = null; go('time'); });
+          b.addEventListener('click', () => {
+            if (state.service !== s.id) { state.service = s.id; state.avail = null; state.day = null; state.time = null; }
+            go('time');
+          });
           return b;
         }));
         foot.hidden = true;
         return;
       }
-      foot.hidden = false;
 
       if (state.step === 'time') {
         $('sheetTitle').textContent = 'Pick a Time';
+        if (!state.avail && !state.loading && !state.error) { loadTimes(); return; }
         const picked = el('div', 'picked');
         const info = el('div');
         info.append(el('b', null, svc.name), el('div', 'sub', `${money(svc.price)} · ${fmtMins(svc.mins)} · with ${BARBER.name}`));
@@ -580,90 +677,178 @@
         change.type = 'button';
         change.addEventListener('click', () => go('service'));
         picked.append(info, change);
+        const top = [...previewBanner(), picked];
+        if (state.notice) top.push(el('p', 'form-error', state.notice));
 
-        const list = days();
-        if (state.day === null) {
-          const first = list.findIndex((d) => slotsFor(d, svc).length);
-          state.day = first === -1 ? 0 : first;
+        if (state.loading) { body.replaceChildren(...top, el('p', 'info', 'Loading open times…')); foot.hidden = true; return; }
+        if (state.error) {
+          const retry = el('button', 'btn btn-ghost btn-sm', 'Try again');
+          retry.type = 'button';
+          retry.addEventListener('click', loadTimes);
+          body.replaceChildren(...top, el('p', 'form-error', state.error), retry);
+          foot.hidden = true;
+          return;
         }
-        const day = list[state.day];
-        const month = el('div', 'month', day.toLocaleDateString([], { month: 'long', year: 'numeric' }));
+
+        const days = state.avail.days;
+        const day = days[state.day];
         const strip = el('div', 'days');
-        list.forEach((d, i) => {
+        days.forEach((d, i) => {
+          const date = dateObj(d.date);
           const b = el('button', 'day' + (i === state.day ? ' selected' : ''));
           b.type = 'button';
-          b.disabled = !slotsFor(d, svc).length;
-          b.setAttribute('aria-label', d.toLocaleDateString([], { weekday: 'long', month: 'long', day: 'numeric' }));
-          b.append(el('div', 'dow', i === 0 ? 'Today' : d.toLocaleDateString([], { weekday: 'short' })), el('div', 'num', String(d.getDate())));
-          b.addEventListener('click', () => { state.day = i; state.time = null; render(); });
+          b.disabled = !d.slots.length;
+          b.setAttribute('aria-label', longDate(d.date));
+          b.append(el('div', 'dow', d.date === state.avail.today ? 'Today' : date.toLocaleDateString([], { weekday: 'short' })), el('div', 'num', String(date.getDate())));
+          b.addEventListener('click', () => { state.day = i; state.time = null; state.notice = ''; render(); });
           strip.append(b);
         });
-
-        const slots = slotsFor(day, svc);
         const groups = [['Morning', (t) => t < 720], ['Afternoon', (t) => t >= 720 && t < 1020], ['Evening', (t) => t >= 1020]];
         const slotEls = [];
         groups.forEach(([label, test]) => {
-          const ts = slots.filter(test);
+          const ts = day.slots.filter(test);
           if (!ts.length) return;
           const g = el('div', 'slot-group');
           const grid = el('div', 'slots');
           ts.forEach((t) => {
             const b = el('button', 'slot' + (state.time === t ? ' selected' : ''), fmtTime(t));
             b.type = 'button';
-            b.addEventListener('click', () => { state.time = t; render(); });
+            b.addEventListener('click', () => { state.time = t; state.notice = ''; render(); });
             grid.append(b);
           });
           g.append(el('div', 'label', label), grid);
           slotEls.push(g);
         });
-        if (!slotEls.length) slotEls.push(el('p', 'info', 'No open times this day. Try another day.'));
-
-        const notes = [el('p', 'info', `Times shown are ${BARBER.name}'s working hours. Open spots are confirmed when you finish booking on Booksy.`)];
-        if (!svc.sundayOnly) notes.push(el('p', 'info', 'Booking a Sunday? Choose the Sunday Haircut service.'));
-        body.replaceChildren(picked, month, strip, ...slotEls, ...notes);
+        if (!slotEls.length) slotEls.push(el('p', 'info', days.some((d) => d.slots.length) ? 'No open times this day. Try another day.' : 'No open times in the next two weeks. Please walk in or check back soon.'));
+        const notes = svc.sundayOnly ? [] : [el('p', 'info', 'Booking a Sunday? Choose the Sunday Haircut service.')];
+        body.replaceChildren(...top, el('div', 'month', dateObj(day.date).toLocaleDateString([], { month: 'long', year: 'numeric' })), strip, ...slotEls, ...notes);
 
         const next = el('button', 'btn btn-primary btn-block', 'Continue');
         next.type = 'button';
         next.disabled = state.time === null;
-        next.addEventListener('click', () => go('review'));
+        next.addEventListener('click', () => go('details'));
         foot.append(totalRow(svc), next);
+        return;
+      }
+
+      if (state.step === 'details') {
+        $('sheetTitle').textContent = 'Your Details';
+        const name = el('input');
+        name.autocomplete = 'name'; name.maxLength = 40; name.value = state.name; name.placeholder = 'First and last name';
+        const phone = el('input');
+        phone.type = 'tel'; phone.inputMode = 'tel'; phone.autocomplete = 'tel'; phone.maxLength = 16; phone.value = fmtPhone(state.phone); phone.placeholder = '(509) 555-0123';
+        const notes = el('textarea');
+        notes.rows = 2; notes.maxLength = 200; notes.value = state.notes; notes.placeholder = 'Anything Angel should know (optional)';
+        const hp = el('input', 'hp');
+        hp.tabIndex = -1; hp.autocomplete = 'off'; hp.setAttribute('aria-hidden', 'true');
+        hp.addEventListener('input', () => { state.website = hp.value; });
+        const sms = el('label', 'agree');
+        const smsBox = el('input');
+        smsBox.type = 'checkbox'; smsBox.checked = state.sms;
+        smsBox.addEventListener('change', () => { state.sms = smsBox.checked; });
+        sms.append(smsBox, el('span', null, 'Text me my confirmation and cancel link. Msg & data rates may apply. Reply STOP to opt out.'));
+
+        const next = el('button', 'btn btn-primary btn-block', 'Continue');
+        next.type = 'button';
+        const ok = () => state.name.trim().length >= 2 && state.phone.length === 10;
+        next.disabled = !ok();
+        name.addEventListener('input', () => { state.name = name.value; next.disabled = !ok(); });
+        phone.addEventListener('input', () => { state.phone = digitsOnly(phone.value); next.disabled = !ok(); });
+        phone.addEventListener('blur', () => { phone.value = fmtPhone(state.phone); });
+        notes.addEventListener('input', () => { state.notes = notes.value; });
+        next.addEventListener('click', () => go('review'));
+
+        body.replaceChildren(...previewBanner(), barberRow(), field('Name', name), field('Phone number', phone, 'So the shop can reach you about your appointment.'), field('Notes', notes), hp, sms);
+        foot.append(totalRow(svc), next);
+        setTimeout(() => { if (!state.name) name.focus(); }, 50);
         return;
       }
 
       if (state.step === 'review') {
         $('sheetTitle').textContent = 'Review';
-        const day = days()[state.day];
-        const rows = [
-          ['Barber', BARBER.name],
+        const day = state.avail.days[state.day];
+        body.replaceChildren(...previewBanner(), barberRow(), summary([
           ['Service', svc.name],
-          ['Date', day.toLocaleDateString([], { weekday: 'long', month: 'long', day: 'numeric' })],
+          ['Date', longDate(day.date)],
           ['Time', `${fmtTime(state.time)} – ${fmtTime(state.time + svc.mins)}`],
+          ['Name', state.name.trim()],
+          ['Phone', fmtPhone(state.phone)],
           ['Where', '411 W Clark St, Suite H'],
-        ];
-        const dl = el('dl', 'summary');
-        rows.forEach(([k, v]) => { const d = el('div'); d.append(el('dt', null, k), el('dd', null, v)); dl.append(d); });
-        const heads = el('div', 'heads-up');
-        heads.append(el('b', null, 'One last step'),
-          el('span', null, `Online booking on this site isn't connected yet, so this time isn't held for you. Tap "Finish on Booksy" and pick ${fmtTime(state.time)} on ${day.toLocaleDateString([], { weekday: 'long' })} to lock it in.`));
-        // Policy must be accepted before finishing
-        const pol = el('div', 'mini-policy');
-        pol.append(el('b', null, 'Booking policy'));
-        const ul = el('ul');
-        POLICY.forEach((t) => ul.append(el('li', null, t)));
-        const agree = el('label', 'agree');
-        const box = el('input');
-        box.type = 'checkbox';
-        box.checked = state.agreed;
-        box.addEventListener('change', () => { state.agreed = box.checked; finish.disabled = !box.checked; });
-        agree.append(box, el('span', null, "I've read and agree to the booking policy"));
-        pol.append(ul, agree);
-        body.replaceChildren(barberRow(), dl, pol, heads);
+        ]), policyBox(), ...errorBox(state.error));
+        const confirm = el('button', 'btn btn-primary btn-block', state.submitting ? 'Booking…' : 'Confirm Booking');
+        confirm.type = 'button';
+        confirm.disabled = !state.agreed || state.submitting;
+        confirm.addEventListener('click', submit);
+        foot.append(totalRow(svc), confirm);
+        return;
+      }
 
-        const finish = el('button', 'btn btn-primary btn-block', 'Finish on Booksy');
-        finish.type = 'button';
-        finish.disabled = !state.agreed;
-        finish.addEventListener('click', () => window.open(BARBER.booksyUrl, '_blank', 'noopener'));
-        foot.append(totalRow(svc), finish);
+      if (state.step === 'done') {
+        const b = state.result;
+        $('sheetTitle').textContent = 'Booked';
+        const head = el('div', 'done-head');
+        head.append(el('div', 'done-check', '✓'), el('h3', null, "You're booked!"), el('p', 'muted', `See you ${dateObj(b.date).toLocaleDateString([], { weekday: 'long' })}, ${b.name.split(' ')[0]}.`));
+        const cal = el('a', 'btn btn-ghost btn-block', 'Add to Calendar');
+        cal.href = icsHref(b);
+        cal.download = 'new-era-appointment.ics';
+        let link = b.manageUrl;
+        try { link = new URL(b.manageUrl, location.href).href; } catch (e) { /* previews have no usable base address */ }
+        const manage = el('div', 'manage-link');
+        const copy = el('button', 'linkish', 'Copy link');
+        copy.type = 'button';
+        copy.addEventListener('click', async () => {
+          try { await navigator.clipboard.writeText(link); toast('Link copied'); } catch (e) { toast('Copy the link from the box'); }
+        });
+        const linkBox = el('input');
+        linkBox.readOnly = true; linkBox.value = link;
+        manage.append(el('b', null, 'Need to cancel?'), el('span', 'muted', 'Save this link. You can use it to cancel your appointment.'), linkBox, copy);
+        body.replaceChildren(...previewBanner(), head, summary([
+          ['Barber', b.barber],
+          ['Service', b.service],
+          ['Date', longDate(b.date)],
+          ['Time', `${fmtTime(b.start)} – ${fmtTime(b.start + b.mins)}`],
+          ['Price', money(b.price)],
+          ['Where', '411 W Clark St, Suite H, Pasco'],
+        ]), cal, manage, el('p', 'info', 'Please arrive a few minutes early. Arriving 10 minutes late cancels your appointment.'));
+        const done = el('button', 'btn btn-primary btn-block', 'Done');
+        done.type = 'button';
+        done.addEventListener('click', closeBooking);
+        foot.append(done);
+        return;
+      }
+
+      if (state.step === 'manage') {
+        $('sheetTitle').textContent = 'Your Appointment';
+        const m = state.manage;
+        if (!m || m.loading) { body.replaceChildren(el('p', 'info', 'Loading your appointment…')); foot.hidden = true; return; }
+        if (m.error && !m.booking) { body.replaceChildren(el('p', 'form-error', m.error)); foot.hidden = true; return; }
+        const b = m.booking;
+        const status = b.status === 'cancelled' ? 'Cancelled' : 'Booked';
+        body.replaceChildren(...previewBanner(), barberRow(), summary([
+          ['Status', status],
+          ['Service', b.service],
+          ['Date', longDate(b.date)],
+          ['Time', `${fmtTime(b.start)} – ${fmtTime(b.start + b.mins)}`],
+          ['Name', b.name],
+        ]), ...errorBox(m.error));
+        if (b.status === 'booked') {
+          body.append(el('p', 'info', 'Last-minute cancellations may be charged a cancellation fee, per the booking policy.'));
+          const cancel = el('button', 'btn btn-ghost btn-block danger', m.confirming ? 'Tap again to cancel your appointment' : 'Cancel Appointment');
+          cancel.type = 'button';
+          cancel.disabled = m.working;
+          cancel.addEventListener('click', async () => {
+            if (!m.confirming) { m.confirming = true; render(); return; }
+            m.working = true; render();
+            try { m.booking = await api.cancelBooking(m.id, m.code); m.error = ''; } catch (e) { m.error = e.message; }
+            m.working = false; m.confirming = false; render();
+          });
+          foot.append(cancel);
+        } else {
+          const again = el('button', 'btn btn-primary btn-block', 'Book a New Time');
+          again.type = 'button';
+          again.addEventListener('click', () => { clearAddress(); openBooking(); });
+          foot.append(again);
+        }
       }
     }
     function totalRow(svc) {
@@ -672,9 +857,22 @@
       return t;
     }
 
+    // Cancel link: book.html?booking=ID&code=CODE
+    async function openManage(id, code) {
+      state = fresh();
+      state.step = 'manage';
+      state.manage = { id, code, loading: true };
+      $('overlay').classList.add('show');
+      document.body.classList.add('locked');
+      render();
+      try { state.manage.booking = await api.getBooking(id, code); } catch (e) { state.manage.error = e.message; }
+      state.manage.loading = false;
+      render();
+    }
+
     $('backBtn').addEventListener('click', () => {
-      if (state.step === 'review') go('time');
-      else if (state.step === 'time') go('service');
+      const i = ORDER.indexOf(state.step);
+      if (i > 0) { state.error = ''; go(ORDER[i - 1]); }
     });
     $('closeBtn').addEventListener('click', closeBooking);
     $('overlay').addEventListener('click', (e) => { if (e.target === $('overlay')) closeBooking(); });
@@ -726,6 +924,8 @@
     });
 
     $('yr').textContent = new Date().getFullYear();
+    const params = new URLSearchParams(location.search);
+    if (params.get('booking') && params.get('code')) openManage(params.get('booking'), params.get('code'));
     renderServices();
     renderHours();
     renderBars();

@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Staff Schedule | The New Era Barber Studio</title>
+  <link rel="icon" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #08080a;
+      --ink-2: #121214;
+      --ink-3: #1a1a1d;
+      --line: #27272b;
+      --white: #f5f5f7;
+      --muted: #9c9ca3;
+      --chrome: #c9c9cf;
+      --red: #b3262e;
+      --blue: #1f3a8a;
+      --green: #3fbf7f;
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    body { margin: 0; background: var(--ink); color: var(--white); font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+    button, input, select { font: inherit; color: inherit; }
+    h1, h2, h3 { font-family: "Bebas Neue", Impact, sans-serif; font-weight: 400; letter-spacing: .03em; line-height: 1; margin: 0; }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+    .pole { height: 6px; background: repeating-linear-gradient(-45deg, var(--red) 0 14px, var(--white) 14px 28px, var(--blue) 28px 42px, var(--white) 42px 56px); }
+    header { border-bottom: 1px solid var(--line); }
+    header .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 1rem; }
+    .brand { display: flex; align-items: center; gap: .7rem; text-decoration: none; }
+    .brand img { width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--line); }
+    .brand span { font-family: "Bebas Neue", Impact, sans-serif; font-size: 1.35rem; letter-spacing: .08em; }
+    .muted { color: var(--muted); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: .75rem 1.1rem; border-radius: 4px; border: 0; cursor: pointer; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; font-size: .75rem; text-decoration: none; }
+    .btn:disabled { opacity: .4; cursor: not-allowed; }
+    .btn-primary { background: var(--white); color: var(--ink); }
+    .btn-ghost { background: transparent; border: 1px solid var(--line); color: var(--white); }
+    .btn-danger { background: transparent; border: 1px solid rgba(179,38,46,.7); color: #ffb3b6; }
+    input, select { padding: .7rem .8rem; border-radius: 4px; border: 1px solid var(--line); background: var(--ink-3); color: var(--white); outline: none; }
+    input:focus, select:focus { border-color: var(--chrome); }
+    main { padding: 32px 0 80px; }
+    .card { border: 1px solid var(--line); border-radius: 6px; background: var(--ink-2); padding: 1.4rem; }
+    .note { padding: .7rem .9rem; border-radius: 6px; font-size: .85rem; background: rgba(242,201,76,.08); border: 1px solid rgba(242,201,76,.35); margin: 0 0 1.2rem; }
+    .err { color: #ffb3b6; font-size: .9rem; min-height: 1.3em; margin: .6rem 0 0; }
+
+    /* PIN gate */
+    .gate { max-width: 380px; margin: 40px auto; text-align: center; }
+    .gate h1 { font-size: 2.6rem; margin-bottom: .4rem; }
+    .gate form { display: grid; gap: .8rem; margin-top: 1.2rem; }
+    .gate input { text-align: center; font-size: 1.4rem; letter-spacing: .4em; }
+
+    /* Schedule */
+    .toolbar { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; justify-content: space-between; margin-bottom: 1.2rem; }
+    .toolbar h1 { font-size: 2.6rem; }
+    .daynav { display: flex; gap: .4rem; align-items: center; flex-wrap: wrap; }
+    .chips { display: flex; gap: .5rem; flex-wrap: wrap; margin: 0 0 1rem; }
+    .chip { font-size: .8rem; padding: .3rem .75rem; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+    .chip b { color: var(--white); }
+    h2 { font-size: 1.8rem; margin: 1.8rem 0 .8rem; }
+    .appt { display: grid; grid-template-columns: 130px 1fr auto; gap: 1rem; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--line); }
+    .appt .time { font-family: "Bebas Neue", Impact, sans-serif; font-size: 1.5rem; line-height: 1.1; }
+    .appt .time small { display: block; font-family: "Inter", sans-serif; font-size: .78rem; color: var(--muted); letter-spacing: 0; }
+    .appt .who { font-weight: 700; }
+    .appt .meta { color: var(--muted); font-size: .88rem; }
+    .appt .notes { font-size: .88rem; margin-top: .25rem; color: var(--chrome); }
+    .appt.cancelled { opacity: .45; }
+    .appt.cancelled .who::after { content: " · Cancelled"; color: #ffb3b6; font-weight: 600; }
+    .empty { color: var(--muted); padding: 1rem 0; }
+    .block-row { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: .8rem 0; border-bottom: 1px solid var(--line); }
+    .block-form { display: grid; grid-template-columns: auto auto 1fr auto; gap: .6rem; align-items: end; margin-top: 1rem; }
+    .block-form label { display: grid; gap: .3rem; font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .12em; font-weight: 600; }
+    @media (max-width: 640px) {
+      .appt { grid-template-columns: 1fr; gap: .4rem; }
+      .block-form { grid-template-columns: 1fr 1fr; }
+      .block-form .grow, .block-form button { grid-column: 1 / -1; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <a class="brand" href="index.html"><img src="assets/logo.png" alt="The New Era Barber Studio logo"><span>Staff Schedule</span></a>
+      <button class="btn btn-ghost" type="button" id="lockBtn" hidden>Lock</button>
+    </div>
+  </header>
+  <div class="pole" aria-hidden="true"></div>
+
+  <main class="wrap">
+    <p class="note" id="previewNote" hidden>Preview mode: this shows bookings made in this browser's preview. On the live site, appointments come from the booking server and need the staff PIN.</p>
+
+    <section class="gate card" id="gate">
+      <h1>Staff Only</h1>
+      <p class="muted">Enter the staff PIN to see appointments.</p>
+      <form id="pinForm">
+        <input id="pin" type="password" inputmode="numeric" autocomplete="current-password" aria-label="Staff PIN" required>
+        <button class="btn btn-primary" type="submit">Open Schedule</button>
+      </form>
+      <p class="err" id="pinErr"></p>
+    </section>
+
+    <section id="schedule" hidden>
+      <div class="toolbar">
+        <h1 id="dayTitle">Today</h1>
+        <div class="daynav">
+          <select id="barber" aria-label="Barber"></select>
+          <button class="btn btn-ghost" type="button" id="prevDay" aria-label="Previous day">‹</button>
+          <input type="date" id="date" aria-label="Date">
+          <button class="btn btn-ghost" type="button" id="nextDay" aria-label="Next day">›</button>
+          <button class="btn btn-ghost" type="button" id="todayBtn">Today</button>
+        </div>
+      </div>
+      <div class="chips" id="chips"></div>
+      <p class="err" id="schedErr"></p>
+
+      <div class="card">
+        <h2 style="margin-top:0">Appointments</h2>
+        <div id="appts"></div>
+      </div>
+
+      <div class="card" style="margin-top:16px">
+        <h2 style="margin-top:0">Blocked Time</h2>
+        <p class="muted" style="margin:0 0 .4rem;font-size:.9rem">Block time that's already taken elsewhere (like a Booksy appointment), a break, or a day off. Online booking won't offer those times.</p>
+        <div id="blocks"></div>
+        <form class="block-form" id="blockForm">
+          <label>From <input type="time" id="bFrom" required value="09:00" step="900"></label>
+          <label>To <input type="time" id="bTo" required value="10:00" step="900"></label>
+          <label class="grow">Note <input type="text" id="bNote" maxlength="80" placeholder="e.g. Booksy appointment"></label>
+          <button class="btn btn-primary" type="submit">Block Time</button>
+        </form>
+        <button class="btn btn-ghost" type="button" id="blockDay" style="margin-top:.8rem">Block Whole Day</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/booking-client.js"></script>
+  <script>
+    // Barbers who take online bookings (ids match netlify/lib/shop.mjs)
+    const BARBERS = [{ id: 'angel', name: 'AngelTheBarber' }];
+    const api = window.BookingClient;
+    const PIN_KEY = 'newera-staff-pin';
+    const $ = (id) => document.getElementById(id);
+    let pin = '';
+    let refreshTimer = null;
+
+    function el(tag, cls, text) {
+      const n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (text != null) n.textContent = text;
+      return n;
+    }
+    const pad = (n) => String(n).padStart(2, '0');
+    const isoDate = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+    const fmtTime = (m) => `${Math.floor(m / 60) % 12 || 12}:${pad(m % 60)} ${m < 720 ? 'AM' : 'PM'}`;
+    const fmtPhone = (d) => d && d.length === 10 ? `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}` : d || '';
+    const toMin = (v) => { const [h, m] = v.split(':').map(Number); return h * 60 + m; };
+    function shiftDate(date, n) { const d = new Date(date + 'T12:00:00'); d.setDate(d.getDate() + n); return isoDate(d); }
+
+    // ---- PIN ----
+    function unlock(p) {
+      pin = p;
+      try { sessionStorage.setItem(PIN_KEY, p); } catch (e) {}
+      $('gate').hidden = true;
+      $('schedule').hidden = false;
+      $('lockBtn').hidden = false;
+      load();
+      clearInterval(refreshTimer);
+      refreshTimer = setInterval(load, 60000);
+    }
+    function lock(message) {
+      pin = '';
+      try { sessionStorage.removeItem(PIN_KEY); } catch (e) {}
+      clearInterval(refreshTimer);
+      $('schedule').hidden = true;
+      $('lockBtn').hidden = true;
+      $('gate').hidden = false;
+      $('pinErr').textContent = message || '';
+      $('pin').value = '';
+    }
+    $('pinForm').addEventListener('submit', (e) => { e.preventDefault(); if ($('pin').value) unlock($('pin').value); });
+    $('lockBtn').addEventListener('click', () => lock());
+
+    // ---- Schedule ----
+    const barber = () => $('barber').value;
+    const date = () => $('date').value;
+
+    async function load() {
+      $('schedErr').textContent = '';
+      const d = new Date(date() + 'T12:00:00');
+      $('dayTitle').textContent = date() === isoDate(new Date()) ? 'Today' : d.toLocaleDateString([], { weekday: 'long', month: 'short', day: 'numeric' });
+      try {
+        render(await api.adminDay(pin, barber(), date()));
+      } catch (e) {
+        if (e.status === 401) lock('Wrong PIN. Try again.');
+        else if (e.status === 503) lock(e.message);
+        else $('schedErr').textContent = e.message;
+      }
+    }
+
+    function render(day) {
+      const booked = day.bookings.filter((b) => b.status === 'booked');
+      const cancelled = day.bookings.length - booked.length;
+      const total = booked.reduce((s, b) => s + (b.price || 0), 0);
+      $('chips').replaceChildren(
+        ...[[booked.length, 'booked'], [cancelled, 'cancelled'], ['$' + total, 'expected']].map(([v, k]) => {
+          const c = el('span', 'chip'); c.append(el('b', null, String(v)), ' ' + k); return c;
+        }));
+
+      $('appts').replaceChildren(...(day.bookings.length ? day.bookings.map((b) => {
+        const row = el('div', 'appt' + (b.status === 'cancelled' ? ' cancelled' : ''));
+        const time = el('div', 'time', fmtTime(b.start));
+        time.append(el('small', null, `to ${fmtTime(b.start + b.mins)}`));
+        const info = el('div');
+        info.append(el('div', 'who', b.name));
+        const meta = el('div', 'meta');
+        const tel = el('a', null, fmtPhone(b.phone));
+        tel.href = 'tel:+1' + b.phone;
+        meta.append(`${b.service} · $${b.price} · `, tel);
+        info.append(meta);
+        if (b.notes) info.append(el('div', 'notes', '“' + b.notes + '”'));
+        row.append(time, info);
+        if (b.status === 'booked') {
+          const cancel = el('button', 'btn btn-danger', 'Cancel');
+          cancel.type = 'button';
+          cancel.addEventListener('click', async () => {
+            if (cancel.dataset.confirm !== '1') { cancel.dataset.confirm = '1'; cancel.textContent = 'Tap to confirm'; return; }
+            cancel.disabled = true;
+            try { await api.adminCancel(pin, barber(), date(), b.id); } catch (e) { $('schedErr').textContent = e.message; }
+            load();
+          });
+          row.append(cancel);
+        } else {
+          row.append(el('span'));
+        }
+        return row;
+      }) : [el('p', 'empty', 'No appointments this day.')]));
+
+      $('blocks').replaceChildren(...(day.blocks.length ? day.blocks.map((b) => {
+        const row = el('div', 'block-row');
+        const label = el('div');
+        label.append(el('b', null, b.start === 0 && b.end >= 1440 ? 'Whole day' : `${fmtTime(b.start)} – ${fmtTime(b.end)}`));
+        if (b.note) label.append(el('span', 'muted', ' · ' + b.note));
+        const rm = el('button', 'btn btn-ghost', 'Remove');
+        rm.type = 'button';
+        rm.addEventListener('click', async () => {
+          rm.disabled = true;
+          try { await api.adminRemoveBlock(pin, barber(), date(), b.id); } catch (e) { $('schedErr').textContent = e.message; }
+          load();
+        });
+        row.append(label, rm);
+        return row;
+      }) : [el('p', 'empty', 'Nothing blocked this day.')]));
+    }
+
+    async function addBlock(start, end, note) {
+      $('schedErr').textContent = '';
+      try {
+        await api.adminAddBlock(pin, { barber: barber(), date: date(), start, end, note });
+        $('bNote').value = '';
+      } catch (e) { $('schedErr').textContent = e.message; }
+      load();
+    }
+    $('blockForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      addBlock(toMin($('bFrom').value), toMin($('bTo').value), $('bNote').value.trim());
+    });
+    $('blockDay').addEventListener('click', () => addBlock(0, 1440, $('bNote').value.trim() || 'Day off'));
+
+    $('prevDay').addEventListener('click', () => { $('date').value = shiftDate(date(), -1); load(); });
+    $('nextDay').addEventListener('click', () => { $('date').value = shiftDate(date(), 1); load(); });
+    $('todayBtn').addEventListener('click', () => { $('date').value = isoDate(new Date()); load(); });
+    $('date').addEventListener('change', load);
+    $('barber').addEventListener('change', load);
+
+    // ---- Start ----
+    BARBERS.forEach((b) => { const o = el('option', null, b.name); o.value = b.id; $('barber').append(o); });
+    $('date').value = isoDate(new Date());
+    $('previewNote').hidden = api.live;
+    let saved = '';
+    try { saved = sessionStorage.getItem(PIN_KEY) || ''; } catch (e) {}
+    if (saved) unlock(saved);
+  </script>
+</body>
+</html>
