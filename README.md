@@ -3,7 +3,7 @@
 - `index.html`: the public website
 - `book.html`: Angel's booking page. Customers pick a service, time and details and book right on the site
 - `admin.html`: staff schedule (PIN protected): see and cancel appointments, block off time
-- `kiosk.html`: the walk-in kiosk for a tablet on a stand at the front desk (name, phone, service, barber, live list)
+- `kiosk.html`: the walk-in kiosk for a tablet on a stand at the front desk. Two steps (name, service) puts a customer in one walk-in line; the barber who's free next taps Take Next in the PIN-protected staff controls
 - `checkin.html`: the check-in screen with customer accounts and staff tools (call up, barber in/break/off); shares the kiosk's walk-in list
 - `netlify/functions/`: the booking server (`availability`, `bookings`, `admin`) and the sign-up welcome text (`sms-welcome`)
 - `netlify/lib/shop.mjs`: barbers, hours and services for online booking. Keep it in sync with `BARBER` in `book.html`

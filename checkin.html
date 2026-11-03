@@ -940,17 +940,18 @@
         : [el('li', 'empty', 'No one waiting. You could be next!')]));
       if (current === 'barber') renderBarbers();
     }
-    // "First available" goes to the working barber who frees up soonest
+    // "First available" goes to a working barber who isn't with a client right now
+    // (or, if everyone is busy, whoever finishes their current cut first)
     function callUp(id) {
       const list = loadQueue();
       const entry = list.find((x) => x.id === id);
       if (!entry) return;
       let barber = entry.barber;
       if (!BARBERS.includes(barber)) {
-        const sched = schedule(list.filter((x) => x.id !== id));
-        const idle = sched.pool.filter((n) => !sched.current[n]);
-        const pick = idle.length ? idle : sched.pool;
-        barber = pick.reduce((a, c) => sched.free[c] < sched.free[a] ? c : a);
+        const sched = schedule([]);
+        const busyUntil = (n) => { const c = list.find((x) => x.status === 'serving' && (x.servedBy || x.barber) === n); return c ? c.started + entryMins(c) * 60000 : 0; };
+        const idle = sched.pool.filter((n) => !busyUntil(n) && sched.statuses[n] !== 'break');
+        barber = idle.length ? idle[0] : sched.pool.reduce((a, c) => busyUntil(c) < busyUntil(a) ? c : a);
       }
       saveQueue(list.map((x) => x.id === id ? { ...x, status: 'serving', started: Date.now(), servedBy: barber } : x));
     }
